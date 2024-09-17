@@ -1,0 +1,5 @@
+nombrecompleto=Alcibiades Garay Moreno
+correo=chivale18@gmail.com
+descripcion=este es un correo de prueba 
+ubicacion=Gerente de operaciones
+urgencia=Urgente

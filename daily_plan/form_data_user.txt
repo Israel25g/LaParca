@@ -1,0 +1,3 @@
+cliente=Dahixy
+meta_despacho=30
+listo_para_despachar=20

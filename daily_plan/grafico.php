@@ -1,0 +1,315 @@
+<?php
+include '../daily_plan/funcionalidades/config_DP.php';
+
+$config = include './funcionalidades/funciones.php';
+
+    $consultaSQL = "UPDATE import SET
+    cumplimiento_im = :cumplimiento_im,
+    WHERE id = :id";
+
+    $consultaSQL = "UPDATE export SET
+    cumplimiento_ex = :cumplimiento_ex,
+    WHERE id = :id";
+
+    $consultaSQL = "UPDATE picking SET
+    cumplimiento_pk = :cumplimiento_pk,
+    WHERE id = :id";
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Datos - Daily Plan</title>
+    <!-- Incluir Bootstrap desde el CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="shortcut icon" href="../images/ICO.png">
+    <!-- Incluir ECharts desde el CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+
+    <style>
+  /* Estilo general para pantallas grandes */
+  .bloquess {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+  }
+
+  /* Consulta de medios para pantallas de 1488px de ancho y 740px de alto o más pequeñas */
+  @media (max-width: 1488px) and (max-height: 740px) {
+    .bloquess {
+      display: grid;
+      grid-template-columns: 2fr; /* Una sola columna para apilar los gráficos verticalmente */
+      gap: 0px; /* Espacio entre los gráficos */
+    }
+
+    /* Ajustar el tamaño de los gráficos */
+    .bloquee {
+      width: 700px !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
+      height: 250px !important; /* Ajustar la altura automáticamente */
+    }
+
+    #grafico-pastel1{
+        width: 200% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 250px !important; /* Ajustar la altura del gráfico */
+      margin-left: 0px;
+    }
+    #grafico-pastel2{
+        width: 200% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 260px !important; /* Ajustar la altura del gráfico */
+      margin-left: 0px !important;
+      padding-top: 0px !important ;
+    }
+
+    #grafico-barras{
+        width: 200% !important;
+        height: 250px !important ;
+        margin-top:0% !important ;
+        margin-left :0px !important;
+    }
+
+    /* Ajustar el tamaño de los gráficos individuales */
+    #grafico-gauge {
+        width: 130% !important;
+        height: 330px !important ;
+        margin-top:-30% !important ;
+        margin-left :200px !important;
+    }
+  }
+</style>
+
+
+</head>
+<body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; overflow:hidden">
+  <div style="margin-top: 90px;" >
+     <!-- Header -->
+     <div class="headerr" style="width: 100%;background-color: var(--color1);display: flex;justify-content: space-between;align-items: center;padding: 1.5%;position: fixed;top: 0;left: 0;z-index: 1000;border-radius: 0 0 0px 50px;">
+        <div class="logo-container">
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
+        </div>
+        <h1><a style="color: #fff; text-decoration:none" href="../daily_plan/index_DP.php">Daily plan</a></h1>
+        <div class="cuadroFecha">
+            <p id="fecha-actual"></p>
+            <p id="hora-actual"></p>
+        </div>
+    </div>
+    <!-- Fin del Header -->
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"> 
+  <div class="carousel-inner">
+    <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
+    <div class="carousel-item active "data-bs-interval="50000" style="height: 50%; height: 100%;position: fixed;">
+    <div class="container" style="margin-top: 0%">
+
+        <div class="bloquess"style="margin: 20px;padding: 15px;display: grid;grid-template-columns: auto auto;gap: 30px;">
+            <div class="bloquee border border-5 border-danger" id="export" style="position:relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
+                
+            <!-- Gráfico 1 en el cuadrante superior izquierdo -->
+                <div class="col-md-6 ">
+                    <div id="grafico-pastel1" style="width: 210%; height: 300%;  background-color: #fff;"></div>
+                </div>   
+            </div>
+                <!-- grafico 2 -->
+            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
+                <div class="col-md-6">
+                    <div id="grafico-pastel2" style="width: 210%; height: 300%; background-color: #fff;"></div>
+                    </div>
+            </div>   
+            <!-- grafico de barras -->
+            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:5%" >
+                <div class="col-md-6 " >
+                    <div id="grafico-barras" style="width: 200%; height: 400%; background-color: #fff; "></div>
+                </div>
+            </div>
+        
+             <!-- porcentaje de cumplimiento -->
+             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
+                <div class="col-md-6 " >
+                    <p style="font-family: montserrat; font-size:200%">Porcentaje de cumplimiento.</p>
+                    <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+    <!-- data-bs-interval ajusta el tiempo de las imagenes en pantalla -->
+    <div class="carousel-item" data-bs-interval="7000">
+      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7000">
+      <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7000">
+      <img src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7000">
+      <img src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;;margin-top:1%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7000">
+      <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7000">
+      <img src="../daily_plan/imagenes/4.png"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
+    </div>
+  </div>
+</div>
+    <?php
+    ?>
+
+    <script>
+        // Inicializar los gráficos de ECharts
+        var chart1 = echarts.init(document.getElementById('grafico-pastel1'));
+        var chart2 = echarts.init(document.getElementById('grafico-pastel2'));
+        var barChart = echarts.init(document.getElementById('grafico-barras'));
+        var gaugeChart = echarts.init(document.getElementById('grafico-gauge'));
+        
+
+        // Función para obtener los datos del servidor y actualizar los gráficos
+        function fetchData() {
+            fetch('get_data_ex.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Configurar el grafico de export
+                    chart1.setOption(
+                        option = {
+                            color:['#CFFFB3', '#2E8B57', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
+                            title: {text: 'Export',subtext: '',left: 'center'},
+                            tooltip: {trigger: 'item'},
+                            legend: {orient: 'vertical',left: 'left'},
+                        series: [{
+                            name: 'Export',
+                            type: 'pie',
+                            radius: ['30%', '80%'],
+                            label: {formatter: '{c}',position: 'inside',fontSize: 25},
+                            data: data,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 3
+                        },
+                        }]
+                    });
+        });
+                    fetch('get_data_pk.php')
+            .then(response => response.json())
+            .then(data => {
+                    // Configurar el grafico de picking
+                    chart2.setOption(
+                        option = {
+                            color:['#63E2C6', '#FFBA08 ', '#FF8552', '#CA6680', '#AFDEDC', '#33FFA1', '#FF8C33', '#33A1FF', '#A1FF33'],
+                            title: {text: 'Picking',subtext: '',left: 'center'},
+                            tooltip: {trigger: 'item' },
+                            legend: {orient: 'vertical',left: 'left'},
+                        
+                        series: [{
+                            name: 'Picking',
+                            type: 'pie',
+                            radius: ['30%','60%'],
+                            label: {formatter: '{c}',position: 'outside',fontSize: 20, },
+                            data: data,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 3
+                        },
+                            
+                        }]
+                    });
+                });
+                fetch('get_data_im.php')
+    .then(response => response.json())
+    .then(data => {
+        // Configurar el gráfico de import
+        barChart.setOption({
+            color: ['#00CED1 ', '#4682B4'],
+            title: {text: 'Import',subtext: '',left: 'center',fontSize: 20},
+            tooltip: {trigger: 'item'},
+            legend: {orient: 'vertical',left: 'left'},
+            yAxis: {type: 'category',data: [""], fontSize: 20},
+            xAxis: {type: 'value'},
+            series: [
+                {
+                    name: 'Recibido',
+                    type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: {
+                    color: 'rgba(220, 220, 220, 0.8)',
+                    borderRadius: [1,30,30,1],},
+                    data: data.map(item => item.total_meta), // Los valores de meta_despacho
+                    category:["Recibido"],
+                    itemStyle: {
+                        borderRadius: [1,30,30,1],
+                        },
+                    label: {
+                        show: true,
+                        position: 'insideRight',
+                        fontSize: 35
+                    },
+                },
+                {
+                    name: 'En espera',
+                    type: 'bar',
+                    showBackground: true,
+                    backgroundStyle: {
+                    color: 'rgba(220, 220, 220, 0.8)',
+                    borderRadius: [1,30,30,1],},
+                    data: data.map(item => item.total_grafico), // Los valores de grafica_dp
+                    itemStyle: {
+                            borderRadius: [1,30,30,1],
+                        },
+                    label: {
+                        show: true,
+                        position: 'insideRight',
+                        fontSize: 35
+                    }
+                }
+            ]
+            
+        });
+    });
+
+
+                fetch('get_data_porcen.php')
+        .then(response => response.json())
+        .then(gaugeData => {
+          // Configuración del gráfico de porcentaje de cumplimiento
+          gaugeChart.setOption({
+            series: [{
+              name:'Porcentaje',
+              type: 'gauge',
+              startAngle: 180,
+              endAngle: 0,
+              color:['#00CED1', '#DC143C ', ' #FFA500'],
+              pointer: { show: false },
+              progress: { show: true, clip: true ,overlap: false, roundCap: true, itemStyle: { borderWidth: 0, borderColor: '#fff',borderRadius: [1,50,50,1], } },
+              axisLine: { lineStyle: { width: 30 } },
+              splitLine: { show: false },
+              axisTick: {show: false},
+              axisLabel: { show: true },
+              data: gaugeData,
+              title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
+              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,1000,10], borderWidth: 1,},
+            }]
+          });
+        });
+    }
+        // Llamar a la función fetchData para obtener los datos al cargar la página
+        fetchData();
+
+        // Opcional: Actualizar los gráficos cada 5 segundos
+        setInterval(fetchData, 5000);
+
+    </script>
+
+    <!-- Incluir Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../host_virtual_TI/js/script.js"></script>
+</body>
+</html>

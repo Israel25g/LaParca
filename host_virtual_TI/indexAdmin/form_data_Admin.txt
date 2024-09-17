@@ -1,0 +1,5 @@
+id=4
+respuesta=fvjdfgkajhsdgv
+estado=En cotización
+correo=alcibiades@iplgsc.com
+nombrecompleto=Alcibiades Garay

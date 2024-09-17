@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    --montserrat: 'Montserrat', sans-serif;
+    --azul: #050e44;
+    --verde: #00a329;
+}
+
+body, html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.fondo img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url();
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(3px);
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 92, 182, 0);
+    z-index: -1;
+}
+
+.overlay_2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(16, 80, 0, 0.473);
+    z-index: -1;
+}
+
+h1{
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    font-family: var(--montserrat);
+    font-weight: 800;
+    margin-top: -10%;
+    text-shadow: 0px 7px 5px rgba(0, 0, 0, 0.555);
+}
+
+.disclaimer{
+    font-family: var(--montserrat);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    margin-top: 5%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(3, 92, 182, 0.336);
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.63);
+}
+
+.disclaimer p{
+    margin: 0;
+    max-width: 700px;
+    border-radius: 50px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.form-container{
+    display: inline-block;
+    margin-top: 5%;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.63);
+}
+
+.form-container label{
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 20px;
+    font-family: var(--montserrat);
+}
+
+.form-container input{
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--verde);
+    display: block;
+    font-family: var(--montserrat);
+    font-weight: 600;
+    color: #fff;
+    border: solid 1px rgba(0, 0, 0, 0.226);
+}
+
+.form-container input:focus{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: solid 1px var(--verde);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.336);
+    transition: all 0.3s;
+}
+
+.form-container button{
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.226);
+    background-color: rgb(255, 255, 255);
+    font-family: var(--montserrat);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.336);
+    transition: all 0.3s;
+}
+
+.form-container button{
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px rgba(0, 0, 0, 0.226);
+    background-color: rgb(255, 255, 255);
+    font-family: var(--montserrat);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.336);
+    transition: all 0.3s;
+}
+
+
+.form-container button:hover{
+    background-color: var(--azul);
+    color: rgb(255, 255, 255);
+    transform: scale(1.1);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.336);
+}
+
+.btn-recover{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    font-family: var(--montserrat);
+    font-weight: 500;
+    width: 60%;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.336);
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.btn-recover:hover{
+    background-color: var(--azul);
+    color: rgb(255, 255, 255);
+    transform: scale(1.5);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.336);
+}
+
+/* reset pass */
+.disclaimer{
+    max-width: fit-content;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+}
