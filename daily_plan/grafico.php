@@ -101,7 +101,7 @@ $config = include './funcionalidades/funciones.php';
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"> 
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="50000" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="5000" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
         <div class="bloquess"style="margin: 20px;padding: 15px;display: grid;grid-template-columns: auto auto;gap: 30px;">
