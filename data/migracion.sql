@@ -1,8 +1,8 @@
 -- codigo para cargar la base de datos correctamente --
 
-CREATE DATABASE dbtemporal;
+CREATE DATABASE db_mainbase;
 
-use dbtemporal;
+use db_mainbase;
 
 CREATE TABLE tickets (
   id INT(100) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
