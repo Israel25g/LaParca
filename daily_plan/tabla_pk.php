@@ -75,7 +75,7 @@
       <?php endif; ?>
 
            <!-- Tabla 'datos' -->
-          <!-- <div class="carousel-item active"  id="export">-->
+ 
           <div class="container">
               <div class="row">
                 <div class="col-md-12">
@@ -114,6 +114,7 @@
                 </div>
               </div>
             </div> 
+
             <?php include "../daily_plan/datatable.php"?>
   <script src="../host_virtual_TI/js/script.js"></script>
 <script>

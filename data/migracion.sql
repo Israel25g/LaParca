@@ -193,8 +193,6 @@ CREATE TABLE datos (
   valor INT NOT NULL
 );
 
-
-
 CREATE TABLE `db_dashboards`.`imports` 
 (`id` INT NOT NULL AUTO_INCREMENT ,
 `fecha_descarga` DATE NOT NULL ,
