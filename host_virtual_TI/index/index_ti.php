@@ -64,15 +64,6 @@
           </div>
         </div>
 
-        <!-- Filtro general -->
-        <div class="container mb-3">
-          <div class="row">
-            <div class="col-md-12">
-              <label for="generalFilter">Filtro general:</label>
-              <input type="text" id="generalFilter" class="form-control" placeholder="Filtrar datos...">
-            </div>
-          </div>
-        </div>
 
         <table class="table shadow-sm p-3 mb-5 bg-body-tertiary rounded table-striped" id="myTable" class="display">
           <thead>
@@ -118,16 +109,6 @@
 
   <?php include "../templates/footer.php"; ?>
 
-  <script>
-    $(document).ready(function() {
-      // Inicializa DataTables
-      var table = $('#myTable').DataTable();
 
-      // Filtro general
-      $('#generalFilter').on('keyup', function() {
-        table.search(this.value).draw();
-      });
-    });
-  </script>
 </body>
 </html>
