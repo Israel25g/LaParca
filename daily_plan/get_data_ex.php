@@ -1,6 +1,6 @@
 <?php
 // Archivo para extraer los datos de la base de datos (get_data.php)
-include '../daily_plan/funcionalidades/config_G.php';
+include 'C:\xampp\htdocs\sistema_de_tickets\sistema_de_tickets\daily_plan\config_G.php';
 
 // Consulta a la base de datos
 $query = "SELECT cliente, grafica_dp FROM export WHERE fecha_objetivo = CURDATE()";

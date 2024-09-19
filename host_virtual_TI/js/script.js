@@ -25,3 +25,28 @@ document.addEventListener("DOMContentLoaded", function() {
     updateDateTime();
     setInterval(updateDateTime, 1000);
 });
+
+
+        // temporizador
+
+        let registrarInactividad = function() {
+            var temporizador;
+            window.onload = resetTimer;
+            // DOM Events
+            document.onmousemove = resetTimer;
+            document.onkeypress = resetTimer;
+            document.onmousedown = resetTimer;
+            document.ontouchstart = resetTimer;
+            document.onclick = resetTimer;
+            document.onscroll = resetTimer;
+
+            
+
+            function resetTimer() {
+                clearTimeout(temporizador);
+                temporizador = setTimeout(cerrarSesion, 1000); // 1000 milisegundos = 1 segundo
+            }
+            console.log(temporizador);
+        }
+
+        registrarInactividad();
