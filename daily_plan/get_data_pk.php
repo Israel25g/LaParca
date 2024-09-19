@@ -3,7 +3,7 @@
 include '../daily_plan/funcionalidades/config_G.php';
 
 // Consulta a la base de datos
-$query = "SELECT cliente, grafica_dp FROM picking";
+$query = "SELECT cliente, grafica_dp FROM picking WHERE fecha_objetivo = CURDATE()";
 $result = $conn->query($query);
 
 // Inicializar un array para los datos

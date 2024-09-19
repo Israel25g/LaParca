@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
       <div class="row">
         <div class="col-md-12">
           <h3 class="mt-4">Ingrese los datos para crear el Daily plan de Export</h3>
-          <a class="btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla</a>
+          <a class="btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla </a>
           <hr>
           <form method="post">
     <div class="form-row">

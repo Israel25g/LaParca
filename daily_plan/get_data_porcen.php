@@ -38,7 +38,7 @@ function obtenerCumplimiento($tabla, $conn) {
         }
 
         // Redondear el porcentaje a dos decimales
-        return round($porcentaje, 2);
+        return round($porcentaje, 0);
     } else {
         return 0;
     }

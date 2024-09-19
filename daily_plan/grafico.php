@@ -34,18 +34,20 @@
           $consultaSQL_e = "SELECT * FROM export";
           $sentencia_e = $conexion->prepare($consultaSQL_e);
           $sentencia_e->execute();
-          $datos = $sentencia_e->fetchAll();
+          $export = $sentencia_e->fetchAll();
 
           // Consulta para la tabla 'datos'
           $consultaSQL_pk = "SELECT * FROM picking";
-          $sentencia_pk = $conexion->prepare($consultaSQL);
+          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
           $sentencia_pk->execute();
-          $datos = $sentencia->fetchAll();
+          $picking = $sentencia_pk->fetchAll();
         } catch (PDOException $error) {
             $error = $error->getMessage();
         }
         ?>
-
+      <?php
+      header("Refresh:72");
+      ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +62,8 @@
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <link rel="shortcut icon" href="../images/ICO.png">
+
 
     <style>
   /* Estilo general para pantallas grandes */
@@ -131,7 +135,7 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"> 
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="5000" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
         <div class="bloquess"style="margin: 20px;padding: 15px;display: grid;grid-template-columns: auto auto;gap: 30px;">
@@ -139,13 +143,13 @@
                 
             <!-- Gráfico export -->
                 <div class="col-md-6 ">
-                    <div id="grafico-pastel1" class="bg-white "  style="width: 210%; height: 300%;"></div>
+                    <div id="grafico-pastel1" class="bg-white "  style="width: 200%; height: 300%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
             <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
                 <div class="col-md-6">
-                    <div id="grafico-pastel2" class="bg-white " style="width: 210%; height: 300%;"></div>
+                    <div id="grafico-pastel2" class="bg-white " style="width: 200%; height: 300%;"></div>
                     </div>
             </div>   
             <!-- grafico de import -->
@@ -158,7 +162,7 @@
              <!-- porcentaje de cumplimiento -->
              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
                 <div class="col-md-6 " >
-                    <p style="font-family: montserrat; font-size:200%">Porcentaje de cumplimiento.</p>
+                    <p style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
                     <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
@@ -168,121 +172,121 @@
     </div>
     </div>
     <!-- data-bs-interval ajusta el tiempo de las imagenes en pantalla -->
-    <div class="carousel-item" data-bs-interval="50000">
-    <div class="container" style="margin-top: 0%">
+            <div class="carousel-item" data-bs-interval="15000">
+            <div class="container" style="margin-top: 0%">
+            <div class="bloquess"style="margin: 10px;padding: 1px;display: grid;grid-template-columns: auto auto;gap: 10px;">
 
-<div class="bloquess"style="margin: 10px;padding: 1px;display: grid;grid-template-columns: auto auto;gap: 10px;">
-
-  <!-- tabla export-->
-    <div class="bloquee " id="export" style="position:relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
-        <div class="col-md-6 ">
-        <div class="container">
-    <div class="row">
-      <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
-        <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Export</h2>
-        <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
-          <thead>
-            <tr style="font-family: montserrat; font-size: 15px">
-              <th class="border end" style="background-color: #dc3545">Cliente</th>
-              <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
-              <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php if ($datos && $sentencia_e->rowCount() > 0): ?>
-              <?php foreach ($datos as $fila): ?>
-                <tr style="font-family: montserrat; font-size: 14px">
-                  <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                  <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                  <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                </tr>
-              <?php endforeach; ?>
-            <?php endif; ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-        </div>   
-    </div>
-        <!-- grafico picking -->
-    <div class="bloquee " id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >
-        <div class="col-md-6">
-        <div class="container">
-              <div class="row">
-                <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
-                  <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Picking</h2>
-                  <table   id="tablaPicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
-                    <thead>
-                      <tr style="font-family: montserrat; font-size: 14px">
-                        <th class="border end" style="background-color: #ffc107">Cliente</th>
-                        <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
-                        <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
-                        <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <?php if ($datos && $sentencia_pk->rowCount() > 0): ?>
-                        <?php foreach ($datos as $fila): ?>
-                          <tr>
-                            <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                            <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                            <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                            <td class="border end"><?php echo escapar($fila["division_dp"]); ?>%</td>
-                          </tr>
-                        <?php endforeach; ?>
-                      <?php endif; ?>
-                    </tbody>
-                  </table>
+              <!-- tabla export-->
+                <div class="bloquee " id="export" style="position:relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
+                    <div class="col-md-6 ">
+                    <div class="container">
+                <div class="row">
+                  <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
+                    <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Export</h2>
+                    <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
+                      <thead>
+                        <tr style="font-family: montserrat; font-size: 15px">
+                          <th class="border end" style="background-color: #dc3545">Cliente</th>
+                          <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
+                          <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
+                          <?php foreach ($export as $fila): ?>
+                            <tr style="font-family: montserrat; font-size: 14px">
+                              <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div> 
 
-        </div>
-    </div>   
-    <!-- grafico de import -->
-    <div class="bloquee " id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:5%" >
-        <div class="col-md-6 " >
-        <div class="container">
-        <div class="row">
-          <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
-            <h2 class="mt-2" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Import</h2>
-            <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
-              <thead>
-                <tr  style="font-family: montserrat; font-size: 15px">
-                  <th class="border end" style="background-color: #0dcaf0">Cliente</th>
-                  <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
-                  <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <?php if ($import && $sentencia_i->rowCount() > 0): ?>
-                        <?php foreach ($import as $fila): ?>
-                          <tr style="font-family: montserrat; font-size: 14px">
-                            <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                            <td class="border end"><?php echo escapar($fila["contenedor_recibido"]); ?></td>
-                            <td class="border end"><?php echo escapar($fila["contenedor_cerrado"]); ?></td>
-                          </tr>
-                        <?php endforeach; ?>
-                      <?php endif; ?>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-        </div>
-    </div>
+                    </div>   
+                </div>
+                    <!-- tabla picking -->
+                <div class="bloquee " id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >
+                    <div class="col-md-6">
+                    <div class="container">
+                          <div class="row">
+                            <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
+                              <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Import</h2>
+                              <table id="tablaPicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
+                          <thead>
+                            <tr  style="font-family: montserrat; font-size: 15px">
+                              <th class="border end" style="background-color: #0dcaf0">Cliente</th>
+                              <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
+                              <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
+                                    <?php foreach ($import as $fila): ?>
+                                      <tr style="font-family: montserrat; font-size: 14px">
+                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["contenedor_recibido"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["contenedor_cerrado"]); ?></td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  <?php endif; ?>
+                          </tbody>
+                        </table>
 
-     <!-- porcentaje de cumplimiento -->
-     <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
-        <div class="col-md-6" >
-            <p style="font-family: montserrat; font-size:180%; margin-top: 50px;font-weight: bold;">Porcentaje de cumplimiento.</p>
-            <div id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:0px"></div>
-        </div>
-    </div>
-</div>
-</div>
+                            </div>
+                          </div>
+                        </div> 
+
+                    </div>
+                </div>   
+                <!-- tabla de import -->
+                <div class="bloquee " id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:5%" >
+                    <div class="col-md-6 " >
+                    <div class="container">
+                    <div class="row">
+                      <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
+                        <h2 class="mt-2" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Picking</h2>
+                        <table   id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
+                                <thead>
+                                  <tr style="font-family: montserrat; font-size: 14px">
+                                    <th class="border end" style="background-color: #ffc107">Cliente</th>
+                                    <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
+                                    <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
+                                    <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
+                                    <?php foreach ($picking as $fila): ?>
+                                      <tr>
+                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["division_dp"])*100.00; ?>%</td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  <?php endif; ?>
+                                </tbody>
+                              </table>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                </div>
+
+                <!-- porcentaje de cumplimiento -->
+                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
+                    <div class="col-md-6" >
+                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px;font-weight: bold;">Porcentaje de cumplimiento</p>
+                        <div id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:0px"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
 
     </div>
     <div class="carousel-item" data-bs-interval="7000">
@@ -325,7 +329,7 @@
                     // Configurar el grafico de export
                     chart1.setOption(
                         option = {
-                            color:['#2E8B57', '#2E8B57', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
+                            color:['#2E8B57', '#FF8C33', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
                             title: {text: 'Export',subtext: '',left: 'center'},
                             tooltip: {trigger: 'item'},
                             legend: {orient: 'vertical',left: 'left'},
@@ -476,6 +480,7 @@
         setInterval(fetchData, 5000);
 
     </script>
+
 
     <!-- Incluir Bootstrap JS y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
