@@ -17,7 +17,7 @@
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
         </div>
-        <h1>Daily plan</h1>
+        <h1 href="../daily_plan/index_DP.php">Daily plan</h1>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
@@ -27,17 +27,17 @@
 
     <!-- Navbar -->
     
-    <div class="container-nav" style="margin-top: -60px; margin-left: 33% ;position:fixed; z-index: 999">
+    <!-- <div class="container-nav" style="margin-top: -60px; margin-left: 33% ;position:fixed; z-index: 999">
          <div class="navbarr">
              <ul class="nav" id="detallesOps">
                  <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
-                 <li class="nav-li"><a href="../daily_plan/grafico.php">Gráficas</a></li>
-                 <li class="nav-li"><a href="../daily_plan/index_DP.php">Daily Plan</a></li>
-                 <li class="nav-li"><a href="../Dashboards/dashboards.html">Dashboards</a></li>
-                 <!-- <li class="nav-li"><a class="cierre" href="../CerrarSesion.php">Cerrar Sesión</a></li> -->
+                 <li class="nav-li"><a href="../daily_plan/grafico.php">Gráficas</a></li>-->
+                  <div class="nav-li"><a href="../daily_plan/index_DP.php">Daily Plan</a></div>             
+                  <!--<li class="nav-li"><a href="../Dashboards/dashboards.html">Dashboards</a></li>
+                  <li class="nav-li"><a class="cierre" href="../CerrarSesion.php">Cerrar Sesión</a></li>
              </ul>
          </div>
-     </div>
+     </div> -->
      <?php
 include '../daily_plan/funcionalidades/funciones.php';
 
@@ -87,11 +87,11 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-    <div class="container" style="margin-top: 150px">
+    <div class="container " style="margin-top: 120px !important; margin-left: 400px !important">
       <div class="row">
         <div class="col-md-12">
           <h3 class="mt-4">Ingrese los datos para crear el Daily plan de Export</h3>
-          <a class="btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla </a>
+          <a class="btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2% !important; margin-bottom:2% !important">Volver a la tabla </a>
           <hr>
           <form method="post">
     <div class="form-row">

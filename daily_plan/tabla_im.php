@@ -47,8 +47,6 @@
         <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
         <link rel="stylesheet" href="../estilos.css">
         <link rel="shortcut icon" href="../images/ICO.png">
-
-
       </head>
 
       <body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; font-family:montserrat;">
@@ -67,7 +65,7 @@
           <!-- Fin del Header -->
 
           <!-- Navbar -->
-          <div class="container-nav" style="margin-top: 90px; margin-left:0%; display: fixed; z-index: 999;">
+          <!-- <div class="container-nav" style="margin-top: 90px; margin-left:0%; display: fixed; z-index: 999;">
             <div class="navbarr">
               <ul class="nav" id="detallesOps">
                 <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
@@ -76,7 +74,7 @@
                 <li class="nav-li"><a href="#">logout</a></li>
               </ul>
             </div>
-          </div>
+          </div> -->
 
           <!-- Tabla 'import' -->
           <div class="tabla-container">
