@@ -103,7 +103,40 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="cliente">Cliente</label>
-                                <input type="text" name="cliente" id="cliente" class="form-control" required>
+                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                                    <datalist id="datalistOptions">
+                                    <option value="Brapan Optical">
+                                    <option value="Delta Fshion">
+                                    <option value="Go Outdoors">
+                                    <option value="Master Retail">
+                                    <option value="Owl">
+                                    <option value="Bensherman">
+                                    <option value="Miniso">
+                                    <option value="AMPS Middle East">
+                                    <option value="AP GROUP">
+                                    <option value="Cps">  
+                                    <option value="Cesa">
+                                    <option value="Gulf">
+                                    <option value="Incaso">
+                                    <option value="Adiplatinum">
+                                    <option value="Cool Hunter">
+                                    <option value="Juki">
+                                    <option value="Kashima">                                        
+                                    <option value="Parawa">
+                                    <option value="Promocean">
+                                    <option value="Saint Gobain">
+                                    <option value="Tania">
+                                    <option value="USOphanthalic">
+                                    <option value="Energy Brands">
+                                    <option value="Knipex">
+                                    <option value="Pentel">
+                                    <option value="IMSA">
+                                    <option value="Gudico">
+                                    <option value="Senker">
+                                    <option value="Maersk">
+                                    <option value="Itochu">
+                                    <option value="Walmart">
+                                    </datalist>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="vehiculo">Vehículo</label>
