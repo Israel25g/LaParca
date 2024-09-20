@@ -82,6 +82,7 @@
         <div class="col-md-13">
           <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
           <a class="btn btn-success ingreso-data"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</a>
+          <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border">
             <thead>
               <tr>
