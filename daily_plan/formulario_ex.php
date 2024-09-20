@@ -18,7 +18,7 @@
             <div class="logo-container">
                 <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
             </div>
-            <h1>Daily plan</h1>
+            <h1 href="../daily_plan/index_DP.php">Daily plan</h1>
             <div class="cuadroFecha">
                 <p id="fecha-actual"></p>
                 <p id="hora-actual">prueba</p>

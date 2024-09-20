@@ -68,17 +68,20 @@
     <style>
   /* Estilo general para pantallas grandes */
   .bloquess {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 0px;
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    gap: 10px!important;
+    margin-top: 10% !important;
+    margin-left: 45% !important;
   }
 
   /* Consulta de medios para pantallas de 1488px de ancho y 740px de alto o más pequeñas */
   @media (max-width: 1488px) and (max-height: 740px) {
     .bloquess {
-      display: grid;
-      grid-template-columns: 2fr; /* Una sola columna para apilar los gráficos verticalmente */
-      gap: 0px; /* Espacio entre los gráficos */
+      display: grid !important;
+      margin-top: 10% !important;
+      grid-template-columns: 2fr !important; /* Una sola columna para apilar los gráficos verticalmente */
+      gap: 10px !important ; /* Espacio entre los gráficos */
     }
 
     /* Ajustar el tamaño de los gráficos */
@@ -138,29 +141,28 @@
     <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
-        <div class="bloquess"style="margin: 20px;padding: 15px;display: grid;grid-template-columns: auto auto;gap: 30px;">
-            <div class="bloquee border border-5 border-danger" id="export" style="position:relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
-                
+        <div class="bloquess">
+            <div class="bloquee border border-5 border-danger" id="export"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico export -->
                 <div class="col-md-6 ">
                     <div id="grafico-pastel1" class="bg-white "  style="width: 200%; height: 300%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
-            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
+            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                 <div class="col-md-6">
                     <div id="grafico-pastel2" class="bg-white " style="width: 200%; height: 300%;"></div>
                     </div>
             </div>   
             <!-- grafico de import -->
-            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:5%" >
+            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                 <div class="col-md-6 " >
                     <div id="grafico-barras" class="bg-white " style="width: 200%; height: 400%;"></div>
                 </div>
             </div>
         
              <!-- porcentaje de cumplimiento -->
-             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
+             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
                     <p style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
                     <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
