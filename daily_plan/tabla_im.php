@@ -82,7 +82,7 @@
           <div class="tabla-container">
             <div class="row">
               <div class="col-md-12">
-                <h2 class="mt-3 nombre-tabla">Import</h2>
+                <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
                 <a class="btn btn-success ingreso-data" href="../daily_plan/formulario_im.php">Ingresar datos de Import</a>
                 <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color: #fff;  margin-top: 1%">
                   <thead>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Datos - Daily Plan</title>
+    <title>Picking - Daily Plan</title>
     <link rel="stylesheet" href="../estilos.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -27,18 +27,18 @@
         <!-- Fin del Header -->
 
         <!-- Navbar -->
-        <div class="container-nav">
+        <!-- <div class="container-nav">
             <div class="navbar">
                 <ul class="nav" id="detallesOps">
-                    <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
-                    <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
-                    <li class="nav-li"><a href="#">Mesa de Ayuda (Tickets)</a></li>
-                    <li class="nav-li"><a class="active" href="#">Daily Plan</a></li>
+                    <li class="nav-li"><a href="Index.html">Inicio</a></li>
+                    <li class="nav-li"><a href="#">Capacitaciones</a></li>
+                    <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
+                    <li class="nav-li"><a class="active" href="../daily_plan/index_DP.php">Daily Plan</a></li>
                     <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li>
                     <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <!-- Fin Navbar -->
         
         <?php
@@ -89,11 +89,11 @@
             }
         }
         ?>
-        <div class="container" style="margin-top: 10%">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="mb-2">Ingrese los datos para crear Daily plan de Picking</h3>
-                    <a class="mb-2 btn btn-success btn-md" href="../daily_plan/tabla_pk.php" style="margin-top: 2%">Volver a la tabla</a>
+                    <h3 class="mb-2"><a href="../daily_plan/tabla_pk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear Daily plan de Picking</h3>
+                    <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_pk.php">Volver a la tabla</a>
                     <hr>
                     <form method="post">
                         <div class="form-row">

@@ -73,6 +73,7 @@
               </div>
             </a>
             <!-- Fin de export -->
+            
              <!-- import -->
             
               <a href="../daily_plan/tabla_im.php"  rel="noopener noreferrer" style="color:black">
@@ -84,6 +85,7 @@
                   </div>
                 </div>
               </a>
+            <!-- Fin de import -->
              <!-- picking -->
             <a href="../daily_plan/tabla_pk.php"  rel="noopener noreferrer" style="color:black">
               <div class="bloque" id="bloque_cotización">
