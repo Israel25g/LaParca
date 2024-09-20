@@ -84,6 +84,7 @@
           <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Picking</h2>
 
           <a class="btn btn-success ingreso-data" href="../daily_plan/formulario_pk.php">Ingresar datos a Piking</a>
+          <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <table id="tablaPicking" class="table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color:#fff;  margin-top: 1%">
             <thead>
               <tr>
