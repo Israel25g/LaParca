@@ -80,7 +80,7 @@
     <div class="tabla-container">
       <div class="row">
         <div class="col-md-13">
-          <h2 class="mt-3 nombre-tabla">Export</h2>
+          <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
           <a class="btn btn-success ingreso-data"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</a>
           <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border">
             <thead>
