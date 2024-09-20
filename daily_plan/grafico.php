@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      header("Refresh:72");
+      header("Refresh:720");
       ?>
 
 <!DOCTYPE html>
@@ -138,7 +138,7 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"> 
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="1500" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
         <div class="bloquess">
@@ -174,7 +174,7 @@
     </div>
     </div>
     <!-- data-bs-interval ajusta el tiempo de las imagenes en pantalla -->
-            <div class="carousel-item" data-bs-interval="15000">
+            <div class="carousel-item" data-bs-interval="1500">
             <div class="container" style="margin-top: 0%">
             <div class="bloquess"style="margin: 10px;padding: 1px;display: grid;grid-template-columns: auto auto;gap: 10px;">
 
@@ -184,8 +184,8 @@
                     <div class="container">
                 <div class="row">
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
-                    <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Export</h2>
-                    <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
+                    <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px; margin-left: 20% !important">Export</h2>
+                    <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 20% !important">
                       <thead>
                         <tr style="font-family: montserrat; font-size: 15px">
                           <th class="border end" style="background-color: #dc3545">Cliente</th>
@@ -217,8 +217,8 @@
                     <div class="container">
                           <div class="row">
                             <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
-                              <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Import</h2>
-                              <table id="tablaPicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
+                              <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px; margin-left: 20% !important">Import</h2>
+                              <table id="tablaPicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 20% !important">
                           <thead>
                             <tr  style="font-family: montserrat; font-size: 15px">
                               <th class="border end" style="background-color: #0dcaf0">Cliente</th>
@@ -251,8 +251,8 @@
                     <div class="container">
                     <div class="row">
                       <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
-                        <h2 class="mt-2" style="margin-bottom: 10px; margin-left: 70px; font-size:30px">Picking</h2>
-                        <table   id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 10%">
+                        <h2 class="mt-2" style="margin-bottom: 10px; margin-left: 70px; font-size:30px ; margin-left: 20% !important">Picking</h2>
+                        <table   id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 20% !important">
                                 <thead>
                                   <tr style="font-family: montserrat; font-size: 14px">
                                     <th class="border end" style="background-color: #ffc107">Cliente</th>
@@ -282,9 +282,9 @@
 
                 <!-- porcentaje de cumplimiento -->
                 <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
-                    <div class="col-md-6" >
-                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:0px"></div>
+                    <div class="col-md-6 bg-black bg-opacity-10" >
+                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+                        <div  id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:-10% !important"></div>
                     </div>
                 </div>
             </div>
@@ -292,7 +292,7 @@
 
     </div>
     <div class="carousel-item" data-bs-interval="7000">
-      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
+      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%; height: 100%;position: flex;margin-top:2%;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7000">
       <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
