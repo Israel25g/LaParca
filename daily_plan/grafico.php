@@ -24,20 +24,20 @@
           $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
           // Consulta para la tabla 'import'
-          $consultaSQL_i = "SELECT * FROM import";
+          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE()";
           $sentencia_i = $conexion->prepare($consultaSQL_i);
           $sentencia_i->execute();
           $import = $sentencia_i->fetchAll();
 
 
           // Consulta para la tabla 'export'
-          $consultaSQL_e = "SELECT * FROM export";
+          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE()";
           $sentencia_e = $conexion->prepare($consultaSQL_e);
           $sentencia_e->execute();
           $export = $sentencia_e->fetchAll();
 
           // Consulta para la tabla 'datos'
-          $consultaSQL_pk = "SELECT * FROM picking";
+          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE()";
           $sentencia_pk = $conexion->prepare($consultaSQL_pk);
           $sentencia_pk->execute();
           $picking = $sentencia_pk->fetchAll();
@@ -58,7 +58,7 @@
     <!-- Incluir Bootstrap desde el CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="../daily_plan/css/estilos.css">
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
@@ -141,7 +141,7 @@
     <div class="carousel-item active "data-bs-interval="1500" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
-        <div class="bloquess">
+        <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
             <div class="bloquee border border-5 border-danger" id="export"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico export -->
                 <div class="col-md-6 ">
@@ -174,17 +174,17 @@
     </div>
     </div>
     <!-- data-bs-interval ajusta el tiempo de las imagenes en pantalla -->
-            <div class="carousel-item" data-bs-interval="1500">
+            <div class="carousel-item" data-bs-interval="15000">
             <div class="container" style="margin-top: 0%">
-            <div class="bloquess"style="margin: 10px;padding: 1px;display: grid;grid-template-columns: auto auto;gap: 10px;">
+            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
 
               <!-- tabla export-->
-                <div class="bloquee " id="export" style="position:relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
+                <div class="bloquee " id="export" style="position:relative;width: 900px; height: 350px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
                     <div class="col-md-6 ">
                     <div class="container">
                 <div class="row">
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
-                    <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px; margin-left: 25% !important">Export</h2>
+                    <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
                     <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                       <thead>
                         <tr style="font-family: montserrat; font-size: 15px">
@@ -212,12 +212,12 @@
                     </div>   
                 </div>
                     <!-- tabla picking -->
-                <div class="bloquee " id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >
+                <div class="bloquee " id="picking" style="position: relative;width: 900px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >
                     <div class="col-md-6">
                     <div class="container">
                           <div class="row">
                             <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
-                              <h2 class="mt-3" style="margin-bottom: 10px; margin-left: 70px; font-size:30px; margin-left: 25% !important">Import</h2>
+                              <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
                               <table id="tablaPicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                           <thead>
                             <tr  style="font-family: montserrat; font-size: 15px">
@@ -246,12 +246,12 @@
                     </div>
                 </div>   
                 <!-- tabla de import -->
-                <div class="bloquee " id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:5%" >
+                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:5%" >
                     <div class="col-md-6 " >
                     <div class="container">
                     <div class="row">
                       <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
-                        <h2 class="mt-2" style="margin-bottom: 10px; margin-left: 70px; font-size:30px ; margin-left: 25% !important">Picking</h2>
+                        <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
                         <table   id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
                                 <thead>
                                   <tr style="font-family: montserrat; font-size: 14px">
@@ -283,8 +283,8 @@
                 <!-- porcentaje de cumplimiento -->
                 <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
                     <div class="col-md-6 " >
-                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div  id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:-10% !important"></div>
+                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+                        <div  id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:5% !important"></div>
                     </div>
                 </div>
             </div>
