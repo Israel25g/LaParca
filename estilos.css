@@ -512,3 +512,7 @@ form #btn:hover{
 .link_h1:hover{
     color:#26214b;
 }
+
+.dashboards-container{
+    margin: 150px !important;
+}

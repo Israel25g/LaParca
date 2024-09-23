@@ -59,15 +59,20 @@
     Fin Navbar -->
 
     <!-- detalles -->
-     <div class="margin_top">
+    <div class="margin_top">
         <span style="margin-top: 30px;"></span>
-     </div>
-
-    <div class="card mt-5" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <div class="dashboards-container">
+        <div class="dasboards-header">
+            <h3>Dashboard de Tickets</h3>
         </div>
+        <button type="button" class="btn btn-primary position-relative">
+            Inbox
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                10
+                <span class="visually-hidden">unread messages</span>
+            </span>
+        </button>
     </div>
 
     <!-- fin de detalles -->
