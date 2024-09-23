@@ -15,7 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 </head>
-<body style=" background-image: url('../sistema_de_tickets/host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0;">
 
 <body>
     <style>
@@ -30,7 +29,7 @@
     <!-- Header -->
     <div class="header">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="images/IPL.png" alt="Logo_IPL_Group" ></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
         <h1>Helpdesk</h1>
         <div class="cuadroFecha">
@@ -40,7 +39,6 @@
     </div>
     <!-- Fin del Header -->
 
-
     <!-- Navbar -->
     <div class="container-nav">
         <div class="navbar">
@@ -48,13 +46,12 @@
                 <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
                 <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
                 <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
-                <li class="nav-li"><a href="../sistema_de_tickets/daily_plan/index_DP.php">Daily Plan</a></li>
+                <li class="nav-li"><a href="./daily_plan/index_DP.php">Daily Plan</a></li>
                 <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li>
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
         </div>
     </div>
-
     <!-- Fin Navbar -->
 
     <!-- Links -->
@@ -69,7 +66,6 @@
     <div class="container">
         <div class="bloques ">
             <a href="host_virtual_M\index\index_m.php" rel="noopener noreferrer">
-
                 <div class="bloque" id="bloque_mantenimiento">
                     <img loading="lazy" class="img_helpdesk" id="img_mantenimiento" src="images\Mantenimiento.webp" alt="">
                     <div class="text-overlay">
@@ -79,6 +75,7 @@
                 </div>
             </a>
     <!-- Fin de Mantenimiento -->
+
             <!-- IT -->
             <a href="host_virtual_TI/index/index_ti.php">
                 <div class="bloque" id="bloque_IT">
@@ -117,8 +114,8 @@
             <!-- Fin de Compras -->
         </div>
     </div>
-    <script src="../sistema_de_tickets/host_virtual_TI/js/script.js"></script>
-    <script src="js/script.js"></script>
+
+    <script src="host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>
@@ -135,11 +132,14 @@
             document.onclick = resetTimer;
             document.onscroll = resetTimer;
 
-            
+            function cerrarSesion() {
+                toastr.warning("Sesión cerrada por inactividad.");
+                window.location.href = "login/index.php";
+            }
 
             function resetTimer() {
                 clearTimeout(temporizador);
-                temporizador = setTimeout(cerrarSesion, 1000000); // 1000 milisegundos = 1 segundo
+                temporizador = setTimeout(cerrarSesion, 100000); // 1000 milisegundos = 1 segundo
             }
             console.log(temporizador);
         }

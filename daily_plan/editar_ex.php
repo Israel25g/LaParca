@@ -142,9 +142,9 @@
     if (isset($export) && $export) {
       ?>
       <form method="POST">
-      <div class="container" style="margin-top: 0%;">
+      <div class="container" style="margin-top: 10%;">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12" style="margin-top: 10% !important; margin-left: 30% !important;">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Export, del cliente <?= escapar($export['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_ex.php">Regresar a la tabla Export</a>
             <hr>

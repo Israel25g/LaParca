@@ -1,7 +1,9 @@
 <?php
-include '../daily_plan/funcionalidades/config_DP.php';
+      session_start();
+      include '../daily_plan/funcionalidades/funciones.php';
+      $error = false;
+      $config = include '../daily_plan/funcionalidades/config_DP.php';
 
-$config = include './funcionalidades/funciones.php';
 
     $consultaSQL = "UPDATE import SET
     cumplimiento_im = :cumplimiento_im,
@@ -16,6 +18,36 @@ $config = include './funcionalidades/funciones.php';
     WHERE id = :id";
 ?>
 
+<?php
+      try {
+          $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+          $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+          // Consulta para la tabla 'import'
+          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE()";
+          $sentencia_i = $conexion->prepare($consultaSQL_i);
+          $sentencia_i->execute();
+          $import = $sentencia_i->fetchAll();
+
+
+          // Consulta para la tabla 'export'
+          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE()";
+          $sentencia_e = $conexion->prepare($consultaSQL_e);
+          $sentencia_e->execute();
+          $export = $sentencia_e->fetchAll();
+
+          // Consulta para la tabla 'datos'
+          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE()";
+          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
+          $sentencia_pk->execute();
+          $picking = $sentencia_pk->fetchAll();
+        } catch (PDOException $error) {
+            $error = $error->getMessage();
+        }
+        ?>
+      <?php
+      header("Refresh:720");
+      ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,25 +58,29 @@ $config = include './funcionalidades/funciones.php';
     <!-- Incluir Bootstrap desde el CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../estilos.css">
+    <link rel="stylesheet" href="../daily_plan/css/estilos.css">
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <link rel="shortcut icon" href="../images/ICO.png">
+
 
     <style>
   /* Estilo general para pantallas grandes */
   .bloquess {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 30px;
+    display: grid !important;
+    grid-template-columns: auto auto !important;
+    gap: 10px!important;
+    margin-top: 10% !important;
+    margin-left: 45% !important;
   }
 
   /* Consulta de medios para pantallas de 1488px de ancho y 740px de alto o más pequeñas */
   @media (max-width: 1488px) and (max-height: 740px) {
     .bloquess {
-      display: grid;
-      grid-template-columns: 2fr; /* Una sola columna para apilar los gráficos verticalmente */
-      gap: 0px; /* Espacio entre los gráficos */
+      display: grid !important;
+      grid-template-columns: 2fr !important; /* Una sola columna para apilar los gráficos verticalmente */
+      gap: 10px !important ; /* Espacio entre los gráficos */
     }
 
     /* Ajustar el tamaño de los gráficos */
@@ -98,37 +134,37 @@ $config = include './funcionalidades/funciones.php';
         </div>
     </div>
     <!-- Fin del Header -->
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"> 
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="display: block-inline;"> 
+
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="50000" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="1500" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
-        <div class="bloquess"style="margin: 20px;padding: 15px;display: grid;grid-template-columns: auto auto;gap: 30px;">
-            <div class="bloquee border border-5 border-danger" id="export" style="position:relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
-                
-            <!-- Gráfico 1 en el cuadrante superior izquierdo -->
+        <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
+            <div class="bloquee border border-5 border-danger" id="export"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <!-- Gráfico export -->
                 <div class="col-md-6 ">
-                    <div id="grafico-pastel1" style="width: 210%; height: 300%;  background-color: #fff;"></div>
+                    <div id="grafico-pastel1" class="bg-white "  style="width: 200%; height: 300%;"></div>
                 </div>   
             </div>
-                <!-- grafico 2 -->
-            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top:5%" >
+                <!-- grafico piking -->
+            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                 <div class="col-md-6">
-                    <div id="grafico-pastel2" style="width: 210%; height: 300%; background-color: #fff;"></div>
+                    <div id="grafico-pastel2" class="bg-white " style="width: 200%; height: 300%;"></div>
                     </div>
             </div>   
-            <!-- grafico de barras -->
-            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top:5%" >
+            <!-- grafico de import -->
+            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                 <div class="col-md-6 " >
-                    <div id="grafico-barras" style="width: 200%; height: 400%; background-color: #fff; "></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 400%;"></div>
                 </div>
             </div>
         
              <!-- porcentaje de cumplimiento -->
-             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
+             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
-                    <p style="font-family: montserrat; font-size:200%">Porcentaje de cumplimiento.</p>
+                    <p style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
                     <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
@@ -138,25 +174,150 @@ $config = include './funcionalidades/funciones.php';
     </div>
     </div>
     <!-- data-bs-interval ajusta el tiempo de las imagenes en pantalla -->
-    <div class="carousel-item" data-bs-interval="7000">
-      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
+            <div class="carousel-item" data-bs-interval="15000">
+            <div class="container" style="margin-top: 0%">
+            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
+
+              <!-- tabla export-->
+                <div class="bloquee " id="export" style="position:relative;width: 900px; height: 350px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
+                    <div class="col-md-6 ">
+                    <div class="container">
+                <div class="row">
+                  <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
+                    <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
+                    <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                      <thead>
+                        <tr style="font-family: montserrat; font-size: 15px">
+                          <th class="border end" style="background-color: #dc3545">Cliente</th>
+                          <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
+                          <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
+                          <?php foreach ($export as $fila): ?>
+                            <tr style="font-family: montserrat; font-size: 14px">
+                              <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+                    </div>   
+                </div>
+                    <!-- tabla picking -->
+                <div class="bloquee " id="picking" style="position: relative;width: 900px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >
+                    <div class="col-md-6">
+                    <div class="container">
+                          <div class="row">
+                            <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
+                              <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
+                              <table id="tablaPicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                          <thead>
+                            <tr  style="font-family: montserrat; font-size: 15px">
+                              <th class="border end" style="background-color: #0dcaf0">Cliente</th>
+                              <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
+                              <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
+                                    <?php foreach ($import as $fila): ?>
+                                      <tr style="font-family: montserrat; font-size: 14px">
+                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["contenedor_recibido"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["contenedor_cerrado"]); ?></td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  <?php endif; ?>
+                          </tbody>
+                        </table>
+
+                            </div>
+                          </div>
+                        </div> 
+
+                    </div>
+                </div>   
+                <!-- tabla de import -->
+                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:5%" >
+                    <div class="col-md-6 " >
+                    <div class="container">
+                    <div class="row">
+                      <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
+                        <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
+                        <table   id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
+                                <thead>
+                                  <tr style="font-family: montserrat; font-size: 14px">
+                                    <th class="border end" style="background-color: #ffc107">Cliente</th>
+                                    <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
+                                    <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
+                                    <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
+                                    <?php foreach ($picking as $fila): ?>
+                                      <tr>
+                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["division_dp"])*100.00; ?>%</td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  <?php endif; ?>
+                                </tbody>
+                              </table>
+                      </div>
+                    </div>
+                  </div>
+                    </div>
+                </div>
+
+                <!-- porcentaje de cumplimiento -->
+                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
+                    <div class="col-md-6 " >
+                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+                        <div  id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:5% !important"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
     </div>
-    <div class="carousel-item" data-bs-interval="7000">
+    <div class="carousel-item" data-bs-interval="3000">
+      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%; height: 100%;position: flex;margin-top:2%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="3000">
       <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="7000">
+    <div class="carousel-item" data-bs-interval="3000">
       <img src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="7000">
+    <div class="carousel-item" data-bs-interval="3000">
       <img src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="7000">
+    <div class="carousel-item" data-bs-interval="3000">
       <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="7000">
+    <div class="carousel-item" data-bs-interval="3000">
       <img src="../daily_plan/imagenes/4.png"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
     </div>
   </div>
+  <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
     <?php
     ?>
@@ -167,6 +328,7 @@ $config = include './funcionalidades/funciones.php';
         var chart2 = echarts.init(document.getElementById('grafico-pastel2'));
         var barChart = echarts.init(document.getElementById('grafico-barras'));
         var gaugeChart = echarts.init(document.getElementById('grafico-gauge'));
+        var gaugeChart_d = echarts.init(document.getElementById('grafico-gauge_d'));
         
 
         // Función para obtener los datos del servidor y actualizar los gráficos
@@ -177,7 +339,7 @@ $config = include './funcionalidades/funciones.php';
                     // Configurar el grafico de export
                     chart1.setOption(
                         option = {
-                            color:['#CFFFB3', '#2E8B57', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
+                            color:['#2E8B57', '#FF8C33', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
                             title: {text: 'Export',subtext: '',left: 'center'},
                             tooltip: {trigger: 'item'},
                             legend: {orient: 'vertical',left: 'left'},
@@ -189,7 +351,7 @@ $config = include './funcionalidades/funciones.php';
                             data: data,
                         itemStyle: {
                             borderRadius: 10,
-                            borderColor: '#fff',
+                            borderColor:  '#fff',
                             borderWidth: 3
                         },
                         }]
@@ -210,11 +372,11 @@ $config = include './funcionalidades/funciones.php';
                             name: 'Picking',
                             type: 'pie',
                             radius: ['30%','60%'],
-                            label: {formatter: '{c}',position: 'outside',fontSize: 20, },
+                            label: {formatter: '{c}',position: 'outside',fontSize: 20,},
                             data: data,
                         itemStyle: {
                             borderRadius: 10,
-                            borderColor: '#fff',
+                            borderColor:  '#fff',
                             borderWidth: 3
                         },
                             
@@ -284,7 +446,30 @@ $config = include './funcionalidades/funciones.php';
               type: 'gauge',
               startAngle: 180,
               endAngle: 0,
-              color:['#00CED1', '#DC143C ', ' #FFA500'],
+              color:['#0dcaf0', '#DC143C ', ' #FFA500'],
+              pointer: { show: false },
+              progress: { show: true, clip: true ,overlap: false, roundCap: true, itemStyle: { borderWidth: 0, borderColor: '#fff',borderRadius: [1,50,50,1], } },
+              axisLine: { lineStyle: { width: 30 } },
+              splitLine: { show: false },
+              axisTick: {show: false},
+              axisLabel: { show: true },
+              data: gaugeData,
+              title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
+              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,1000,10], borderWidth: 1,},
+            }]
+          });
+        });
+        fetch('get_data_porcen.php')
+        .then(response => response.json())
+        .then(gaugeData => {
+          // Configuración del gráfico de porcentaje de cumplimiento
+          gaugeChart_d.setOption({
+            series: [{
+              name:'Porcentaje',
+              type: 'gauge',
+              startAngle: 180,
+              endAngle: 0,
+              color:['#0dcaf0', '#DC143C ', ' #FFA500'],
               pointer: { show: false },
               progress: { show: true, clip: true ,overlap: false, roundCap: true, itemStyle: { borderWidth: 0, borderColor: '#fff',borderRadius: [1,50,50,1], } },
               axisLine: { lineStyle: { width: 30 } },
@@ -305,6 +490,7 @@ $config = include './funcionalidades/funciones.php';
         setInterval(fetchData, 5000);
 
     </script>
+
 
     <!-- Incluir Bootstrap JS y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

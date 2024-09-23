@@ -1,8 +1,8 @@
 -- codigo para cargar la base de datos correctamente --
 
-CREATE DATABASE dbtemporal;
+CREATE DATABASE db_mainbase;
 
-use dbtemporal;
+use db_mainbase;
 
 CREATE TABLE tickets (
   id INT(100) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -29,7 +29,11 @@ CREATE TABLE tickets_m (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- tabla de datos para el daly plan--
+
+
+
+-- ==================================== TABLA DE DATOS PARA EL DAILY PLAN ==================================== --	
+
 
 CREATE DATABASE daily_plan;
 
@@ -187,13 +191,13 @@ CREATE TABLE picking_r (
 );
 
 
+-- ==================================== FIN DE TABLA DE DATOS PARA EL DAILY PLAN ==================================== --	
+
 CREATE TABLE datos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(255) NOT NULL,
   valor INT NOT NULL
 );
-
-
 
 CREATE TABLE `db_dashboards`.`imports` 
 (`id` INT NOT NULL AUTO_INCREMENT ,

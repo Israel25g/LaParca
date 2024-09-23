@@ -64,7 +64,7 @@
     <!-- Dashboard STG -->
     <div class="container">
         <div class="bloques ">
-            <a href="host_virtual_M\index\index_m.php" rel="noopener noreferrer">
+            <a href="./Dashboards/dashboardStg.php" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                     <img loading="lazy" class="img_helpdesk" id="logo-stg" src="https://lobbymap.org/site//data/001/361/1361877.png" alt="">
                     <div class="text-overlay">
@@ -116,7 +116,7 @@
 
 
 
-    <script src="../js/script.js"></script>
+    <script src="../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/danfojs@1.1.2/lib/bundle.min.js"></script>

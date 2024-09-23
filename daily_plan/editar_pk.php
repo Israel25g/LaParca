@@ -129,7 +129,7 @@
       <form method="POST">
       <div class="container" style="margin-top: 2%;">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12" style="margin-top: 10% !important; margin-left: 30% !important;">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Picking, del cliente <?= escapar($export['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_pk.php">Regresar a la tabla Picking</a>
             <hr>

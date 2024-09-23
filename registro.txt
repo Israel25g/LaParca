@@ -3,3 +3,14 @@ primer commit en git
 prueba 
 
 Se creó el branch de Dashboards 09/17/24
+
+Se creó el branch de Dashboards 09/17/24
+
+primer commit de main
+
+prueba 2 09/18/24
+prueba 
+
+Se creó el branch de Dashboards 09/17/24
+
+creacion de la tabkla de datos masivos 09/20/2024

@@ -1,29 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-:root{
-    font-family: 'Montserrat', 'Roboto', sans-serif;
-    --color1 : #00A52C;
-    --color2 : #26214b;
+:root, html, *, body{
+    font-family: 'Montserrat', 'Roboto', sans-serif !important;
+    --color1 : #00A52C !important;
+    --color2 : #26214b !important;
+    /* margin: 0px !important; */
 } 
-
-*{
-    margin: 0px;
-}
 
 
 /* puse un nuevo mensaje */
 
 
 body{
-    background-image: url('../sistema_de_tickets/host_virtual_TI/images/Motivo2.png');
-    margin: 0;
-    padding: 0;
+    background-image: url('../sistema_de_tickets/host_virtual_TI/images/Motivo2.png') !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* fondo */
 .fondo{
-    position: relative;
-    padding: 16px;
+    position: relative !important;
+    padding: 16px !important;
 }
 
 .fondo img{
@@ -42,40 +39,40 @@ body{
 
 
 .header{
-    width: 100%;
-    background-color: var(--color1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    border-radius: 0 0 50px 50px;
-    padding: 10px;
+    width: 100% !important;
+    background-color: var(--color1) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000 !important;
+    border-radius: 0 0 50px 50px !important;
+    padding: 10px !important;
 }
 
 .background-container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../sistema_de_tickets/host_virtual_TI/images/Motivo2.png'); /* Reemplaza con la ruta de tu imagen */
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0!important;
+    width: 100%!important;
+    height: 100%!important;
+    background-image: url('../sistema_de_tickets/host_virtual_TI/images/Motivo2.png')!important; /* Reemplaza con la ruta de tu imagen */
     /* background-image: url('./images/Motivo2.png'); Reemplaza con la ruta de tu imagen */
-    background-size: cover;
-    background-position: center;
-    opacity: 0.5; /* Ajusta la opacidad según sea necesario */
-    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+    background-size: cover!important;
+    background-position: center!important;
+    opacity: 0.5!important; /* Ajusta la opacidad según sea necesario */
+    z-index: -1!important; /* Asegura que el fondo esté detrás del contenido */
 }
 
 h1{
-    color: #fff;
-    font-weight: 800;
-    font-size: 60px;
-    margin: auto;
+    color: #fff!important;
+    font-weight: 800!important;
+    font-size: 60px!important;
+    margin: auto!important;
 }
 
 h2{
@@ -83,7 +80,7 @@ h2{
     font-size: 50PX;
 }
 
-h3{
+h3.mb-2{
     font-size: 30px;
     font-weight: 700;
 }
@@ -94,30 +91,30 @@ h4{
 }
 
 .logo-container{
-    position: absolute;
-    top: 8px;
-    left: 20px;
-    background-color: #fff;
-    padding: 5px;
-    border-radius: 10px 10px 10px 40px;
+    position: absolute !important;
+    top: 8px !important;
+    left: 20px !important;
+    background-color: #fff !important;
+    padding: 5px !important;
+    border-radius: 10px 10px 10px 40px !important;
 }
 
 .logo{
     
-    max-width: 200px;
-    height: auto;
-    width: auto;
-    padding: 10px;
+    max-width: 200px!important;
+    height: auto!important;
+    width: auto!important;
+    padding: 10px!important;
 }
 
 
 .cuadroFecha{
-    position: absolute;
-    top: 8px;
-    right: 20px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px 10px 50px 10px;
+    position: absolute!important;
+    top: 8px!important;
+    right: 20px!important;
+    background-color: #fff!important;
+    padding: 10px!important;
+    border-radius: 10px 10px 50px 10px!important;
 }
 
 .cuadroFecha p {
@@ -156,6 +153,7 @@ ul.detallesOps{
 }
 
 .navbar{
+    padding: 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -311,8 +309,43 @@ table, td,th{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px !important;
 
+}
+
+.tabla-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 100px !important;
+}
+
+.ingreso-data{
+    margin-bottom: 20px !important;
+}
+
+.nombre-tabla{
+    font-size: 50px;
+    font-weight: 700;
+    margin: 20px;
+}
+
+.tablaPicking{
+    margin-bottom: 10px !important;
+}
+
+.form-table{
+    margin: 150px !important;
+    display: flex;
+    justify-content: center;
+}
+
+.form-control{
+    margin: 10px !important;
+}
+
+.h3-form-control{
+    margin: 0 0 0 10px !important;
 }
 
 .bloques{
@@ -467,4 +500,19 @@ form #btn:hover{
     width: 50%;
     height: 50%;
     object-fit: cover;
+}
+
+.link_h1{
+    text-decoration:none; 
+    font-family: 'Montserrat', sans-serif;
+    color:#fff;
+    transition: all .3s;
+}
+
+.link_h1:hover{
+    color:#26214b;
+}
+
+.dashboards-container{
+    margin: 150px !important;
 }
