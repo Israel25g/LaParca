@@ -3,8 +3,7 @@
 include '../daily_plan/funcionalidades/config_G.php';
 
 // Consulta a la base de datos
-$query = "SELECT cliente, grafica_dp FROM export WHERE fecha_objetivo = CURDATE()";
-
+$query = "SELECT cliente, SUM(grafica_dp) as total_grafica_dp FROM export WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
 $result = $conn->query($query);
 
 // Inicializar un array para los datos
@@ -15,7 +14,7 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $data[] = array(
             'name' => $row['cliente'],
-            'value' => (int)$row['grafica_dp']
+            'value' => (int)$row['total_grafica_dp']
         );
     }
 } else {

@@ -104,7 +104,7 @@
                     <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["division_dp"]); ?>%</td>
+                    <td class="border end"><?php echo escapar($fila["division_dp"]*100); ?>%</td>
                     <td class="border end">
                       <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_pk.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
                       <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
