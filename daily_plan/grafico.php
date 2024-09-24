@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      header("Refresh:720");
+      header("Refresh:74");
       ?>
 
 <!DOCTYPE html>
@@ -138,7 +138,7 @@
 
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="1500" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
         <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
