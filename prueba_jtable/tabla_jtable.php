@@ -17,7 +17,7 @@
             const container = document.getElementById('tablaExcel');
             
             // Columnas de tu tabla
-            const colHeaders = ['Aid/Oid', 'Cliente', 'Vehículo', 'Tipo de Vehículo', 'BL', 'Destino', 'Paletas', 'Cajas', 'Unidades', 'Pedidos en Proceso', 'Pedidos Despachados', 'Fecha Objetivo', 'Comentario Bodega', 'Comentario Oficina'];
+            const colHeaders = ['Aid/Oid', 'Cliente', 'Vehículo', 'Tipo de Vehículo', 'BL', 'Destino', 'Paletas', 'Cajas', 'Unidades', 'Pedidos en Proceso', 'Fecha Objetivo', 'Comentario Bodega', 'Comentario Oficina'];
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
@@ -30,10 +30,9 @@
                 { data: 7, type: 'numeric' }, // cajas
                 { data: 8, type: 'numeric' }, // unidades
                 { data: 9, type: 'numeric' }, // pedidos en proceso
-                { data: 10, type: 'numeric' }, // pedidos despachados
-                { data: 11, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
-                { data: 12, type: 'text' }, // comentario bodega
-                { data: 13, type: 'text' }  // comentario oficina
+                { data: 10, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
+                { data: 11, type: 'text' }, // comentario bodega
+                { data: 12, type: 'text' }  // comentario oficina
             ];
 
             // Configuración de Handsontable
@@ -42,7 +41,7 @@
                 rowHeaders: true,
                 colHeaders: colHeaders,
                 columns: columns,
-                minSpareRows: 1,
+                minSpareRows: 0,
                 contextMenu: true,
                 manualColumnResize: true,
                 manualRowResize: true,
