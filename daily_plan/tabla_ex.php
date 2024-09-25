@@ -82,7 +82,7 @@
         <div class="col-md-13">
           <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
           <a class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu bg-success">
               <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_ex.php">Formulario singular</a></li>
               <li><a class="dropdown-item bg-success text-light" href="../daily_plan/bloque_de_formularios_ex.php">Bloque de formularios</a></li>
             </ul>
@@ -91,10 +91,14 @@
             <thead>
               <tr>
                 <th class="border end">ID</th>
+                <th class="border end">OID</th>
                 <th class="border end">Cliente</th>
+                <th class="border end">Número Vehículo o Contenedor</th>
                 <th class="border end">Pedidos en proceso</th>
                 <th class="border end">Pedidos despachados</th>
-                <th class="border end">Fecha objetivo</th>
+                <th class="border end">Fecha estimada de llegada</th>
+                <th class="border end">Fecha de llegada a rampa</th>
+                <th class="border end">Fecha de salida de rampa</th>
                 <th class="border end">Acciones</th>
               </tr>
             </thead>
@@ -103,10 +107,14 @@
                 <?php foreach ($datos as $fila): ?>
                   <tr>
                     <td class="border end"><?php echo escapar($fila["id"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
                     <td class="border end">
                       <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_ex.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
                       <a class="btn btn-outline-danger fs-6 bi bi-trash3-fill border end" href="<?= './funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
@@ -128,7 +136,8 @@
         new DataTable('#tablaExport', {
           paging: false,
           scrollCollapse: true,
-          scrollY: '200px',
+          scrollY: '400px',
+          scrollX: '1500px',
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
           dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
           info: false,

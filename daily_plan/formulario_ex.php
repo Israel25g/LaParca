@@ -106,12 +106,19 @@
                                 <input type="text" name="cliente" id="cliente" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="vehiculo">Vehículo</label>
+                                <label for="vehiculo">Vehículo/Placa</label>
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="t_vehiculo">Tipo de Vehículo</label>
-                                <input type="text" name="t_vehiculo" id="t_vehiculo" class="form-control">
+                                <select type="text" name="t_vehiculo" list="datalistOptions" id="t_vehiculo" class="form-control">
+                                    <option value="N/A">...</option>    
+                                    <option value="Contenedor 20">Contenedor 20</option>
+                                    <option value="Contenedor 40">Contenedor 40</option>
+                                    <option value="Contenedor 45">Contenedor 45</option>
+                                    <option value="Camion">Camion</option>
+                                    <option value="furgon">furgon</option>
+                                </select>
                             </div>
                         </div>
                         <hr>
@@ -140,14 +147,14 @@
                                 <input type="number" name="unidades" id="unidades" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="pedidos_en_proceso">Pedidos en Proceso</label>
+                                <label for="pedidos_en_proceso">Pedidos por despachar</label>
                                 <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" required>
                             </div>
                         </div>
                         <hr>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="fecha_objetivo">Fecha Objetivo</label>
+                                <label for="fecha_objetivo">Fecha estimada de salida</label>
                                 <input type="date" id="fecha_objetivo" name="fecha_objetivo" class="form-control" required>
                             </div>
                         </div>

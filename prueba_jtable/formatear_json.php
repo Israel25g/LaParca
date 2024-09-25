@@ -1,3 +1,4 @@
+
 <?php
 // Nombre del archivo JSON que deseas leer
 $jsonFile = 'datos_guardados.json'; // Cambia esto al nombre real de tu archivo JSON

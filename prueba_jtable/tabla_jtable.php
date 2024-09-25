@@ -37,11 +37,11 @@
 
             // Configuración de Handsontable
             const hot = new Handsontable(container, {
-                data: Handsontable.helper.createEmptySpreadsheetData(15, 14), // 15 filas, 14 columnas
+                data: Handsontable.helper.createEmptySpreadsheetData(1, 14), // 15 filas, 14 columnas
                 rowHeaders: true,
                 colHeaders: colHeaders,
                 columns: columns,
-                minSpareRows: 0,
+                minSpareRows: 1,
                 contextMenu: true,
                 manualColumnResize: true,
                 manualRowResize: true,

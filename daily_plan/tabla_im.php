@@ -86,11 +86,15 @@
                 <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color: #fff;  margin-top: 1%">
                   <thead>
                     <tr>
-                      <th class="border end">ID</th>
+                      <th class="border end">#</th>
+                      <th class="border end">AID</th>
                       <th class="border end">Cliente</th>
+                      <th class="border end">Vehículo/Contenedor</th>
                       <th class="border end">Contenedor por recibir</th>
                       <th class="border end">Contenedor recibido</th>
-                      <th class="border end">Fecha objetivo</th>
+                      <th class="border end">Fecha estimada</th>
+                      <th class="border end">Fecha de llegada a rampa</th>
+                      <th class="border end">Fecha de salida de rampa</th>
                       <th class="border end">Acciones</th>
                     </tr>
                   </thead>
@@ -99,10 +103,14 @@
                       <?php foreach ($import as $fila): ?>
                         <tr>
                           <td class="border end"><?php echo escapar($fila["id"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["t_vehiculo"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["contenedor_recibido"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["contenedor_cerrado"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
                           <td class="border end">
                             <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_im.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
                             <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
@@ -124,7 +132,8 @@
               new DataTable('#tablaImport', {
                 paging: false,
                 scrollCollapse: true,
-                scrollY: '200px',
+                scrollY: '500px',
+                scrollX: '1500px',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
                 info: false,

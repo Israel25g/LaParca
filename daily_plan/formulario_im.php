@@ -62,6 +62,7 @@
                     "t_vehiculo" => $_POST['t_vehiculo'],
                     "bl" => $_POST['bl'],
                     "destino" => $_POST['destino'],
+                    "t_carga" => $_POST['t_carga'],
                     "paletas" => $_POST['paletas'],
                     "cajas" => $_POST['cajas'],
                     "unidades" => $_POST['unidades'],
@@ -72,14 +73,14 @@
 
                 );
 
-                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina, comentario_bodega) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($import);
 
-                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina, comentario_bodega) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($import);
@@ -98,7 +99,7 @@
                     <form method="post">
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="aid_oid">OID</label>
+                                <label for="aid_oid">AID</label>
                                 <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
@@ -106,23 +107,38 @@
                                 <input type="text" name="cliente" id="cliente" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="vehiculo">Vehículo</label>
+                                <label for="vehiculo">Vehículo/Placa</label>
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="t_vehiculo">Tipo de Vehículo</label>
-                                <input type="text" name="t_vehiculo" id="t_vehiculo" class="form-control">
+                                <select type="text" name="t_vehiculo" list="datalistOptions" id="t_vehiculo" class="form-control">
+                                    <option value="N/A">...</option>  
+                                    <option value="Contenedor 20">Contenedor 20</option>
+                                    <option value="Contenedor 40">Contenedor 40</option>
+                                    <option value="Contenedor 45">Contenedor 45</option>
+                                    <option value="Camion">Camion</option>
+                                    <option value="furgon">furgon</option>
+                                </select>
                             </div>
                         </div>
                         <hr>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="bl">BL</label>
+                                <label for="bl">HBL</label>
                                 <input type="text" name="bl" id="bl" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="destino">Destino</label>
+                                <label for="destino">Origen</label>
                                 <input type="text" name="destino" id="destino" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="t_carga">Tipo de carga</label>
+                                <select type="text" name="t_carga" id="t_carga" class="form-control">
+                                <option value="N/A">...</option>
+                                <option value="carga suelta">Carga suelta</option>
+                                <option value="contenerizada">Contenerizada</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="paletas">Paletas</label>
@@ -148,7 +164,7 @@
                         <hr>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="fecha_objetivo">Fecha Objetivo</label>
+                                <label for="fecha_objetivo">Fecha estimada de llegada</label>
                                 <input type="date" id="fecha_objetivo" name="fecha_objetivo" class="form-control" required>
                             </div>
                         </div>
