@@ -63,6 +63,7 @@
               "t_vehiculo"=> $_POST['t_vehiculo'],
               "bl"=> $_POST['bl'],
               "destino"=> $_POST['destino'],
+              "fecha_objetivo"=> $_POST['fecha_objetivo'],
           ];
 
           $consultaSQL = "UPDATE import SET
@@ -71,7 +72,8 @@
               vehiculo = :vehiculo,
               t_vehiculo = :t_vehiculo,
               bl = :bl,
-              destino = :destino
+              destino = :destino,
+              fecha_objetivo = :fecha_objetivo
               WHERE id = :id";
 
           $consulta = $conexion->prepare($consultaSQL);
@@ -127,7 +129,7 @@
       <div class="container mt-2">
         <div class="row">
           <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="margin-top: 150px; position:fixed">
+            <div class="alert alert-success" role="alert" style="margin-top: 140px; position:absolute">
               <?= $resultado['mensaje'] ?>
             </div>
           </div>
@@ -143,7 +145,7 @@
       <form method="POST">
       <div class="container" style="margin-top: 0%;">
         <div class="row">
-          <div class="col-md-12" style="margin-top: 10% !important; margin-left: 30% !important;">
+          <div class="col-md-12">
             <h2 class="mt-4">Editando el campo  #<?= escapar($import['id'])?> de la tabla Import, del cliente <?= escapar($import['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_im.php">Regresar a la tabla Import</a>
             <hr>
@@ -170,6 +172,10 @@
               <div class="form-group">
                 <label for="destino">Destino</label>
                 <textarea type="text" name="destino" id="destino" rows="1" class="form-control" placeholder="Anterior destino: <?= escapar($import['destino']) ?>"><?= escapar($import['destino']) ?></textarea>
+              </div>
+              <div class="form-group">
+                <label for="fecha_objetivo">Fecha objetivo</label>
+                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($import['fecha_objetivo']) ?>"></input>
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" id="submit" value="Editar">

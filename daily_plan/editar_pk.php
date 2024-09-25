@@ -64,6 +64,7 @@
               "t_vehiculo"=> $_POST['t_vehiculo'],
               "bl"=> $_POST['bl'],
               "destino"=> $_POST['destino'],
+              "fecha_objetivo"=> $_POST['fecha_objetivo'],
           ];
 
           $consultaSQL = "UPDATE picking SET
@@ -72,7 +73,8 @@
             vehiculo = :vehiculo,
             t_vehiculo = :t_vehiculo,
             bl = :bl,
-            destino = :destino
+            destino = :destino,
+            fecha_objetivo = :fecha_objetivo
             WHERE id = :id";
 
 
@@ -95,9 +97,9 @@
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute(['id' => $id]);
 
-        $export = $sentencia->fetch(PDO::FETCH_ASSOC);
+        $picking = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-        if (!$export) {
+        if (!$picking) {
             $resultado['error'] = true;
             $resultado['mensaje'] = 'No se ha encontrado el registro';
         }
@@ -122,40 +124,58 @@
       <?php
     }
     ?>
-
+<?php
+    if (isset($_POST['submit']) && !$resultado['error']) {
+      ?>
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-success" role="alert" style="margin-top: 140px; position: absolute">
+              <?= $resultado['mensaje'] ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php
+    }
+    ?>
     <?php
-    if (isset($export) && $export) {
+    if (isset($picking) && $picking) {
       ?>
       <form method="POST">
       <div class="container" style="margin-top: 2%;">
         <div class="row">
-          <div class="col-md-12" style="margin-top: 10% !important; margin-left: 30% !important;">
-            <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Picking, del cliente <?= escapar($export['cliente'])?>.</h2>
+          <div class="col-md-12">
+            <h2 class="mt-4">Editando el campo  #<?= escapar($picking['id'])?> de la tabla Picking, del cliente <?= escapar($picking['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_pk.php">Regresar a la tabla Picking</a>
             <hr>
-            <div class="form-group">
+              <div class="form-group">
                 <label for="pedidos_en_proceso">Nueva cantidad de pedidos en proceso (modificar solo de ser necesario).</label>
-                <textarea type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos en proceso: <?= escapar($export['pedidos_en_proceso']) ?>" ><?= escapar($export['pedidos_en_proceso']) ?></textarea>
+                <textarea type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos en proceso: <?= escapar($picking['pedidos_en_proceso']) ?>" ><?= escapar($picking['pedidos_en_proceso']) ?></textarea>
               </div>
               <div class="form-group">
                 <label for="pedidos_despachados">Pedidos ya despachados</label>
-                <textarea type="number" name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos despachados: <?= escapar($export['pedidos_despachados']) ?>" ><?= escapar($export['pedidos_despachados']) ?></textarea>
+                <textarea type="number" name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos despachados: <?= escapar($picking['pedidos_despachados']) ?>" ><?= escapar($picking['pedidos_despachados']) ?></textarea>
               </div>
               <div class="form-group">
                 <label for="vehiculo">vehículo</label>
-                <textarea type="text" name="vehiculo" id="vehiculo" rows="1" class="form-control" placeholder=" Anterior vehículo: <?= escapar($export['vehiculo']) ?>" ><?= escapar($export['vehiculo']) ?></textarea>
+                <textarea type="text" name="vehiculo" id="vehiculo" rows="1" class="form-control" placeholder=" Anterior vehículo: <?= escapar($picking['vehiculo']) ?>" ><?= escapar($picking['vehiculo']) ?></textarea>
               </div>
               <div class="form-group">
                 <label for="t_vehiculo">Tipo de vehículo</label>
-                <textarea type="text" name="t_vehiculo" id="t_vehiculo" rows="1" class="form-control" placeholder="Anterior tipo de vehículo: <?= escapar($export['t_vehiculo']) ?>" ><?= escapar($export['t_vehiculo']) ?></textarea>
+                <textarea type="text" name="t_vehiculo" id="t_vehiculo" rows="1" class="form-control" placeholder="Anterior tipo de vehículo: <?= escapar($picking['t_vehiculo']) ?>" ><?= escapar($picking['t_vehiculo']) ?></textarea>
               </div>
               <div class="form-group">
                 <label for="bl">BL</label>
-                <textarea type="text" name="bl" id="bl" rows="1" class="form-control" placeholder="Anterior BL: <?= escapar($export['bl']) ?>" ><?= escapar($export['bl']) ?></textarea>
+                <textarea type="text" name="bl" id="bl" rows="1" class="form-control" placeholder="Anterior BL: <?= escapar($picking['bl']) ?>" ><?= escapar($picking['bl']) ?></textarea>
               </div>
               <div class="form-group">
                 <label for="destino">Destino</label>
-                <textarea type="text" name="destino" id="destino" rows="1" class="form-control" placeholder="Anterior destino: <?= escapar($export['destino']) ?>" ><?= escapar($export['destino']) ?></textarea>
+                <textarea type="text" name="destino" id="destino" rows="1" class="form-control" placeholder="Anterior destino: <?= escapar($picking['destino']) ?>" ><?= escapar($picking['destino']) ?></textarea>
+              </div>
+              <div class="form-group">
+                <label for="fecha_objetivo">Fecha objetivo</label>
+                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($picking['fecha_objetivo']) ?>"></input>
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" id="submit" value="Editar">
@@ -165,21 +185,6 @@
         </div>
       </div>
     </div>
-      <?php
-    }
-    ?>
-<?php
-    if (isset($_POST['submit']) && !$resultado['error']) {
-      ?>
-      <div class="container mt-2">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="margin-top: -715px;margin-left:40px">
-              <?= $resultado['mensaje'] ?>
-            </div>
-          </div>
-        </div>
-      </div>
       <?php
     }
     ?>

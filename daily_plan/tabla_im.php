@@ -88,8 +88,8 @@
                     <tr>
                       <th class="border end">ID</th>
                       <th class="border end">Cliente</th>
+                      <th class="border end">Contenedor por recibir</th>
                       <th class="border end">Contenedor recibido</th>
-                      <th class="border end">Contenedor cerrado</th>
                       <th class="border end">Fecha objetivo</th>
                       <th class="border end">Acciones</th>
                     </tr>

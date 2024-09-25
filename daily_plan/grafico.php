@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      header("Refresh:720");
+      header("Refresh:74");
       ?>
 
 <!DOCTYPE html>
@@ -138,7 +138,7 @@
 
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="1500" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
         <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
@@ -291,22 +291,22 @@
             </div>
 
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%; height: 100%;position: flex;margin-top:2%;z-index: 999;">
+    <div class="carousel-item" data-bs-interval="7500">
+      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%;position: flex;margin-top:1.9%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
+    <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
+    <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
+    <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
+    <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
+    <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/4.png"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
     </div>
   </div>
