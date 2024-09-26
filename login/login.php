@@ -13,25 +13,30 @@
         }
 
         $user = validate($_POST['user']);
-        // $password = $_POST['password'];
         $password = $_POST['password'];
         
 
-        $sql = "SELECT * FROM users WHERE user='$user'";
+        // $sql = "SELECT * FROM users WHERE user='$user'";
+        $sql = "SELECT u.id, r.nombre_rol AS role, pass FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
         $result = mysqli_query($conexion, $sql);
         
-        // if(password_verify($_POST['password'], $password_hash)){
 
             if(mysqli_num_rows($result) === 1){
                 $row = mysqli_fetch_assoc($result);
                 $password_hash = $row['pass'];
 
                 if(password_verify($password, $password_hash)){
-                    $_SESSION['user'] = $row['usuario'];
-                    $_SESSION['pass'] = $row['pass'];
-                    $_SESSION['id_user'] = $row['id_user'];
-                    header("Location: ../helpdesk.php");
-                    exit();
+                    // $_SESSION['user'] = $row['usuario'];
+                    // $_SESSION['pass'] = $row['pass'];
+                    // $_SESSION['id_user'] = $row['id_user'];
+                    $startingPage = [
+                        "Admin" => "../helpdesk.php",
+                        "EEMP" => header("Location: ../helpdesk.php"),
+                    ];
+
+
+                    // header("Location: ../helpdesk.php");
+                    // exit();
                 }
                 else{
                     header("Location: index.php?error=Usuario o contraseña incorrectos");
@@ -42,10 +47,7 @@
                 header("Location: index.php?error=Usuario y/o contraseña incorrectos");
                 exit();
             }
-        // }
-        
     }
-
 ?>
 
 <script src="../js/alertas.js"></script>
