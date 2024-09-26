@@ -5,7 +5,10 @@ $jsonFile = 'datos_guardados.json'; // Cambia esto al nombre real de tu archivo 
 
 // Comprobar si el archivo JSON existe
 if (!file_exists($jsonFile)) {
-    die('El archivo JSON no se encontró.');
+    echo 'El archivo JSON no se encontró. Serás redirigido en 5 segundos...'; // Mensaje informativo para el usuario
+    sleep(50); // Espera de 5 segundos
+    header("Location: ../hoja_ex/hoja_ex.php"); // Redirección
+    exit(); // Finaliza el script
 }
 
 // Leer el contenido del archivo JSON
@@ -17,7 +20,7 @@ $data = json_decode($jsonString, true); // true para obtener un array asociativo
 $result = [];
 
 // Suponiendo que tienes un conjunto de encabezados para tu base de datos
-$headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_bodega', 'comentario_oficina'];
+$headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_oficina'];
 
 // Procesar cada fila y combinar con los encabezados
 foreach ($data as $row) {
@@ -25,7 +28,7 @@ foreach ($data as $row) {
 }
 
 // Ahora $result contiene tus datos en formato de diccionario
-print_r($result); // Para mostrar el resultado en la pantalla, o puedes guardar a la base de datos aquí
+// Para mostrar el resultado en la pantalla, o puedes guardar a la base de datos aquí
 
 // Aquí puedes agregar la lógica para insertar los datos en la base de datos
 // Configuración de la base de datos
@@ -47,8 +50,11 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     // Ahora que tienes el array $result, puedes insertar los datos
-    $insertSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_bodega, comentario_oficina) 
-                  VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_bodega, :comentario_oficina)";
+    $insertSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo,  comentario_oficina) 
+                  VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo,  :comentario_oficina)";
+
+    $insertSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo,  comentario_oficina) 
+                    VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo,  :comentario_oficina)";
 
     // Preparar la consulta
     $stmt = $pdo->prepare($insertSQL);
@@ -67,7 +73,6 @@ try {
             ':unidades' => $row['unidades'],
             ':pedidos_en_proceso' => $row['pedidos_en_proceso'],
             ':fecha_objetivo' => $row['fecha_objetivo'],
-            ':comentario_bodega' => $row['comentario_bodega'],
             ':comentario_oficina' => $row['comentario_oficina'],
         ]);
     }
@@ -78,3 +83,9 @@ try {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 ?>
+<script>
+  // Redirigir
+  setTimeout(function() {
+    window.location.href = '../hoja_ex/hoja_ex.php';
+  });
+</script>

@@ -68,19 +68,18 @@
                     "unidades" => $_POST['unidades'],
                     "contenedor_recibido" => $_POST['contenedor_recibido'],
                     "fecha_objetivo" => $_POST['fecha_objetivo'],
-                    "comentario_oficina" => $_POST['comentario_oficina'],
-                    "comentario_bodega" => $_POST['comentario_bodega']
+                    "comentario_oficina" => $_POST['comentario_oficina']
 
                 );
 
-                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina,) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina,)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($import);
 
-                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina,) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina,)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($import);
@@ -172,12 +171,6 @@
                             <div class="form-group col-md-12">
                                 <label for="comentario_oficina">Comentario Oficina</label>
                                 <textarea name="comentario_oficina" id="comentario_oficina" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="comentario_bodega">Comentario Bodega</label>
-                                <textarea name="comentario_bodega" id="comentario_bodega" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <!-- <div class="form-row">
