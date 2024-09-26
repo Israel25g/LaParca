@@ -97,8 +97,8 @@
                 <th class="border end">Pedidos en proceso</th>
                 <th class="border end">Pedidos despachados</th>
                 <th class="border end">Fecha estimada de llegada</th>
-                <th class="border end">Fecha de llegada a rampa</th>
-                <th class="border end">Fecha de salida de rampa</th>
+                <th class="border end">Llegada a rampa</th>
+                <th class="border end">Salida de rampa</th>
                 <th class="border end">Acciones</th>
               </tr>
             </thead>
@@ -145,6 +145,7 @@
             "lengthMenu": "Mostrar _MENU_ registros por página",
             "zeroRecords": "No se encontraron resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
+            "No data available in table":"No hay datos en esta tabla",
             "infoEmpty": "No hay registros disponibles",
             "infoFiltered": "(filtrado de _MAX_ registros totales)",
             "search": "Buscar:",
