@@ -33,7 +33,7 @@
     <!-- Fin del Header -->
 
     <!-- Navbar -->
-    <div class="container-nav" style="margin-top: 90px; margin-left:0%; display: fixed; z-index: 999;">
+    <!-- <div class="container-nav" style="margin-top: 90px; margin-left:0%; display: fixed; z-index: 999;">
       <div class="navbarr">
         <ul class="nav" id="detallesOps">
           <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
@@ -42,7 +42,7 @@
           <li class="nav-li"><a href="#">logout</a></li>
         </ul>
       </div>
-    </div>
+    </div> -->
 
     <?php
     session_start();

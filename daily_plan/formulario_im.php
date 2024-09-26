@@ -72,14 +72,14 @@
 
                 );
 
-                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina,) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina,)";
+                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($import);
 
-                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina,) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina,)";
+                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, contenedor_recibido, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :contenedor_recibido, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($import);

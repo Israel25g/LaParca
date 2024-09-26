@@ -16,7 +16,7 @@ $data = json_decode($jsonString, true); // true para obtener un array asociativo
 $result = [];
 
 // Suponiendo que tienes un conjunto de encabezados para tu base de datos
-$headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_oficina'];
+$headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino','t_carga', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_oficina'];
 
 // Procesar cada fila y combinar con los encabezados
 foreach ($data as $row) {
@@ -43,12 +43,12 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     // SQL para insertar en la tabla 'export'
-    $insertSQL_export = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
-                         VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+    $insertSQL_export = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
+                         VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
     // SQL para insertar en la tabla 'export_r'
-    $insertSQL_export_r = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
-                           VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+    $insertSQL_export_r = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
+                           VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
     // Preparar la consulta para 'export'
     $stmt_export = $pdo->prepare($insertSQL_export);
@@ -69,6 +69,7 @@ try {
             ':t_vehiculo' => $row['t_vehiculo'],
             ':bl' => $row['bl'],
             ':destino' => $row['destino'],
+            ':t_carga' => $row['t_carga'],
             ':paletas' => $row['paletas'],
             ':cajas' => $row['cajas'],
             ':unidades' => $row['unidades'],
@@ -85,6 +86,7 @@ try {
             ':t_vehiculo' => $row['t_vehiculo'],
             ':bl' => $row['bl'],
             ':destino' => $row['destino'],
+            ':t_carga' => $row['t_carga'],
             ':paletas' => $row['paletas'],
             ':cajas' => $row['cajas'],
             ':unidades' => $row['unidades'],

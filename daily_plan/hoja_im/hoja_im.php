@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardar Datos: Export</title>
+    <title>Guardar Datos: Import</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../estilos.css">
@@ -27,7 +27,7 @@
         <!-- Fin del Header -->
     </div>
     <div style="margin-top: -150px; margin-left: 60px">
-        <h3 class="mb-2"><a href="../tabla_ex.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Export</h3>
+        <h3 class="mb-2"><a href="../tabla_im.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Import</h3>
         <button class="btn btn-success" id="guardarDatos">Guardar datos</button>
     </div>
 
@@ -38,7 +38,7 @@
             const container = document.getElementById('tablaExcel');
 
             // Columnas de tu tabla
-            const colHeaders = ['Oid*', 'Cliente*', 'Vehículo/Placa*', 'Tipo de Vehículo', 'BL', 'Destino', 'Paletas', 'Cajas', 'Unidades', 'Pedidos por despachar*', 'Fecha estimada de salida*', 'Comentario Oficina'];
+            const colHeaders = ['Aid*', 'Cliente*', 'Vehículo/Placa*', 'Tipo de Vehículo', 'BL', 'Origen', 'Paletas', 'Cajas', 'Unidades', 'Pedidos por recibir*', 'Fecha estimada de llegada*', 'Comentario Oficina'];
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
@@ -106,7 +106,7 @@
                     alert(result.message); // Mensaje del servidor
                     // Redirigir
                     setTimeout(function() {
-                        window.location.href = '../hoja_ex/formatear_json.php';
+                        window.location.href = '../hoja_im/formatear_json.php';
                     });
 
                 })

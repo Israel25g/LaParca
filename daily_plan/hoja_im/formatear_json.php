@@ -1,10 +1,10 @@
 <?php
 // Nombre del archivo JSON que deseas leer
-$jsonFile = 'arreglo_ex.json'; // Cambia esto al nombre real de tu archivo JSON
+$jsonFile = 'arreglo_im.json'; 
 
 // Comprobar si el archivo JSON existe
 if (!file_exists($jsonFile)) {
-    die('El archivo JSON no se encontró.');
+    die('Los datos no se encontraron.');
 }
 
 // Leer el contenido del archivo JSON
@@ -15,7 +15,7 @@ $data = json_decode($jsonString, true); // true para obtener un array asociativo
 
 $result = [];
 
-// Suponiendo que tienes un conjunto de encabezados para tu base de datos
+//  conjunto de encabezados para tu base de datos
 $headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_oficina'];
 
 // Procesar cada fila y combinar con los encabezados
@@ -42,27 +42,27 @@ try {
     // Crear la conexión PDO
     $pdo = new PDO($dsn, $user, $pass, $options);
 
-    // SQL para insertar en la tabla 'export'
-    $insertSQL_export = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
+    // SQL para insertar en la tabla 'import'
+    $insertSQL_import = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
                          VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
-    // SQL para insertar en la tabla 'export_r'
-    $insertSQL_export_r = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
+    // SQL para insertar en la tabla 'import_r'
+    $insertSQL_import_r = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
                            VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
-    // Preparar la consulta para 'export'
-    $stmt_export = $pdo->prepare($insertSQL_export);
+    // Preparar la consulta para 'import'
+    $stmt_import = $pdo->prepare($insertSQL_import);
 
-    // Preparar la consulta para 'export_r'
-    $stmt_export_r = $pdo->prepare($insertSQL_export_r);
+    // Preparar la consulta para 'import_r'
+    $stmt_import_r = $pdo->prepare($insertSQL_import_r);
 
     // Iniciar transacción para garantizar la consistencia de las inserciones
     $pdo->beginTransaction();
 
     // Iterar sobre el array y ejecutar las inserciones
     foreach ($result as $row) {
-        // Inserción en la tabla 'export'
-        $stmt_export->execute([
+        // Inserción en la tabla 'import'
+        $stmt_import->execute([
             ':aid_oid' => $row['aid_oid'],
             ':cliente' => $row['cliente'],
             ':vehiculo' => $row['vehiculo'],
@@ -77,8 +77,8 @@ try {
             ':comentario_oficina' => $row['comentario_oficina']
         ]);
 
-        // Inserción en la tabla 'export_r'
-        $stmt_export_r->execute([
+        // Inserción en la tabla 'import_r'
+        $stmt_import_r->execute([
             ':aid_oid' => $row['aid_oid'],
             ':cliente' => $row['cliente'],
             ':vehiculo' => $row['vehiculo'],
@@ -108,6 +108,6 @@ try {
 <script>
   // Redirigir a la pagina de datos
   setTimeout(function() {
-    window.location.href = '../hoja_ex/hoja_ex.php';
+    window.location.href = '../hoja_im/hoja_im.php';
   },);
 </script>

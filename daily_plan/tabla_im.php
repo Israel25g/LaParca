@@ -81,7 +81,11 @@
             <div class="row">
               <div class="col-md-12">
                 <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
-                <a class="btn btn-success ingreso-data" href="../daily_plan/formulario_im.php">Ingresar datos de Import</a>
+                <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Import</button>
+                  <ul class="dropdown-menu bg-success">
+                    <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_im.php">Formulario singular</a></li>
+                    <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_im/hoja_im.php">Hoja de datos</a></li>
+                  </ul>
                 <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                 <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color: #fff;  margin-top: 1%">
                   <thead>
@@ -89,12 +93,15 @@
                       <th class="border end">#</th>
                       <th class="border end">AID</th>
                       <th class="border end">Cliente</th>
-                      <th class="border end">Vehículo/Contenedor</th>
-                      <th class="border end">Contenedor por recibir</th>
+                      <th class="border end">vehículo / Placa</th>
+                      <th class="border end">Contenedor a recibir</th>
                       <th class="border end">Contenedor recibido</th>
+                      <th class="border end">Paletas</th>
+                      <th class="border end">Cajas</th>
+                      <th class="border end">Unidades</th>
                       <th class="border end">Fecha estimada</th>
-                      <th class="border end">Fecha de llegada a rampa</th>
-                      <th class="border end">Fecha de salida de rampa</th>
+                      <th class="border end">Llegada a rampa</th>
+                      <th class="border end">Salida de rampa</th>
                       <th class="border end">Acciones</th>
                     </tr>
                   </thead>
@@ -105,9 +112,12 @@
                           <td class="border end"><?php echo escapar($fila["id"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                          <td class="border end"><?php echo escapar($fila["t_vehiculo"]); ?></td>
-                          <td class="border end"><?php echo escapar($fila["contenedor_recibido"]); ?></td>
-                          <td class="border end"><?php echo escapar($fila["contenedor_cerrado"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["paletas"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["cajas"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["unidades"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
@@ -133,7 +143,7 @@
                 paging: false,
                 scrollCollapse: true,
                 scrollY: '500px',
-                scrollX: '1500px',
+                scrollX: '1600px',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
                 info: false,

@@ -38,7 +38,7 @@
             const container = document.getElementById('tablaExcel');
 
             // Columnas de tu tabla
-            const colHeaders = ['Oid*', 'Cliente*', 'Vehículo/Placa*', 'Tipo de Vehículo', 'BL', 'Destino', 'Paletas', 'Cajas', 'Unidades', 'Pedidos por despachar*', 'Fecha estimada de salida*', 'Comentario Oficina'];
+            const colHeaders = ['Oid*', 'Cliente*', 'Vehículo/Placa*', 'Tipo de Vehículo', 'BL', 'Destino','Tipo de carga', 'Paletas', 'Cajas', 'Unidades', 'Pedidos por despachar*', 'Fecha estimada de salida*', 'Comentario Oficina'];
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
@@ -47,12 +47,13 @@
                 { data: 3, type: 'text' }, // tipo de vehículo
                 { data: 4, type: 'text' }, // bl
                 { data: 5, type: 'text' }, // destino
-                { data: 6, type: 'numeric' }, // paletas
-                { data: 7, type: 'numeric' }, // cajas
-                { data: 8, type: 'numeric' }, // unidades
-                { data: 9, type: 'numeric' }, // pedidos en proceso
-                { data: 10, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
-                { data: 11, type: 'text' }  // comentario oficina
+                { data: 6, type: 'text' }, // tipo de carga
+                { data: 7, type: 'numeric' }, // paletas
+                { data: 8, type: 'numeric' }, // cajas
+                { data: 9, type: 'numeric' }, // unidades
+                { data: 10, type: 'numeric' }, // pedidos en proceso
+                { data: 11, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
+                { data: 12, type: 'text' }  // comentario oficina
             ];
 
             // Configuración de Handsontable
