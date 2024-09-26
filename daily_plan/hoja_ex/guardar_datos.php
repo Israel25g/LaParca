@@ -7,13 +7,13 @@ if ($data) {
     $json_data = json_encode($data['data'], JSON_PRETTY_PRINT);
 
     // Escribir los datos en un archivo JSON
-    $archivo = 'datos_guardados.json'; // Nombre del archivo
+    $archivo = 'arreglo_ex.json'; // Nombre del archivo
     if (file_put_contents($archivo, $json_data)) {
         // Respuesta exitosa
-        echo json_encode(['message' => 'Datos guardados exitosamente en archivo JSON']);
+        echo json_encode(['message' => 'Datos de Export seran guardados']);
     } else {
         // Error al guardar los datos
-        echo json_encode(['message' => 'Error al guardar los datos en el archivo JSON']);
+        echo json_encode(['message' => 'Error al guardar los datos ']);
     }
 } else {
     // Error al recibir los datos

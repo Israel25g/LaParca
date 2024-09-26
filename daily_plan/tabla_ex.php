@@ -84,7 +84,7 @@
           <a class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</a>
             <ul class="dropdown-menu bg-success">
               <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_ex.php">Formulario singular</a></li>
-              <li><a class="dropdown-item bg-success text-light" href="../daily_plan/bloque_de_formularios_ex.php">Bloque de formularios</a></li>
+              <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_ex/hoja_ex.php">Hoja de datos</a></li>
             </ul>
           <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border">
@@ -97,8 +97,8 @@
                 <th class="border end">Pedidos en proceso</th>
                 <th class="border end">Pedidos despachados</th>
                 <th class="border end">Fecha estimada de llegada</th>
-                <th class="border end">Fecha de llegada a rampa</th>
-                <th class="border end">Fecha de salida de rampa</th>
+                <th class="border end">Llegada a rampa</th>
+                <th class="border end">Salida de rampa</th>
                 <th class="border end">Acciones</th>
               </tr>
             </thead>
@@ -145,6 +145,7 @@
             "lengthMenu": "Mostrar _MENU_ registros por página",
             "zeroRecords": "No se encontraron resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
+            "No data available in table":"No hay datos en esta tabla",
             "infoEmpty": "No hay registros disponibles",
             "infoFiltered": "(filtrado de _MAX_ registros totales)",
             "search": "Buscar:",

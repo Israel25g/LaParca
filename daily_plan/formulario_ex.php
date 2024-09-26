@@ -67,18 +67,17 @@
                     "unidades" => $_POST['unidades'],
                     "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
                     "fecha_objetivo" => $_POST['fecha_objetivo'],
-                    "comentario_oficina" => $_POST['comentario_oficina'],
-                    "comentario_bodega" => $_POST['comentario_bodega']
+                    "comentario_oficina" => $_POST['comentario_oficina']
                 );
 
-                $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($datos);
 
-                $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($datos);
@@ -162,12 +161,6 @@
                             <div class="form-group col-md-12">
                                 <label for="comentario_oficina">Comentario Oficina</label>
                                 <textarea name="comentario_oficina" id="comentario_oficina" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="comentario_bodega">Comentario Bodega</label>
-                                <textarea name="comentario_bodega" id="comentario_bodega" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
                         <!-- <div class="form-row">
