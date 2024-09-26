@@ -1,14 +1,12 @@
 
 <?php
 // Nombre del archivo JSON que deseas leer
-$jsonFile = 'datos_guardados.json'; // Cambia esto al nombre real de tu archivo JSON
+$jsonFile = 'arreglo_ex.json'; // Cambia esto al nombre real de tu archivo JSON
 
 // Comprobar si el archivo JSON existe
 if (!file_exists($jsonFile)) {
-    echo 'El archivo JSON no se encontró. Serás redirigido en 5 segundos...'; // Mensaje informativo para el usuario
-    sleep(50); // Espera de 5 segundos
-    header("Location: ../hoja_ex/hoja_ex.php"); // Redirección
-    exit(); // Finaliza el script
+    die('El archivo JSON no se encontró.');
+    
 }
 
 // Leer el contenido del archivo JSON
@@ -53,11 +51,12 @@ try {
     $insertSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo,  comentario_oficina) 
                   VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo,  :comentario_oficina)";
 
-    $insertSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo,  comentario_oficina) 
+    $insert_rSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo,  comentario_oficina) 
                     VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo,  :comentario_oficina)";
 
     // Preparar la consulta
     $stmt = $pdo->prepare($insertSQL);
+    $stmt = $pdo->prepare($insert_rSQL);
 
     // Iterar sobre el array y ejecutar la inserción
     foreach ($result as $row) {
