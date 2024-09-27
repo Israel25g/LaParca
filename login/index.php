@@ -54,6 +54,6 @@
         </form>
         <a class="recuperar" href="index_registro.php"><button class="btn-recover">Registrar un usuario (solo Admin)</button></a>
     </div>
-    <script src="../js/alertas.js"></script>
+
 </body>
 </html>

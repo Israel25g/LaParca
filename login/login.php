@@ -1,6 +1,5 @@
 <?php
-
-    session_start();
+session_start();
 
     include("Conexion.php");
 
@@ -17,26 +16,24 @@
         
 
         // $sql = "SELECT * FROM users WHERE user='$user'";
-        $sql = "SELECT u.id, r.nombre_rol AS role, pass FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
+        $sql = "SELECT u.id, r.nombre_rol, pass FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
         $result = mysqli_query($conexion, $sql);
         
 
             if(mysqli_num_rows($result) === 1){
-                $row = mysqli_fetch_assoc($result);
+                $row = mysqli_fetch_array($result);
                 $password_hash = $row['pass'];
 
                 if(password_verify($password, $password_hash)){
-                    // $_SESSION['user'] = $row['usuario'];
-                    // $_SESSION['pass'] = $row['pass'];
-                    // $_SESSION['id_user'] = $row['id_user'];
-                    $startingPage = [
-                        "Admin" => "../helpdesk.php",
-                        "EEMP" => header("Location: ../helpdesk.php"),
-                    ];
-
-
-                    // header("Location: ../helpdesk.php");
-                    // exit();
+                    if ($row['nombre_rol'] == 'Admin'){
+                        $_SESSION['user'] = $user;
+                        $_SESSION['rol'] = $row['nombre_rol'];
+                        $_SESSION['id'] = $row['id'];
+                        header("Location: ../helpdesk.php?error=Inicio de sesión con ". $_SESSION['user']);
+                    }
+                    else{
+                        header("Location: index.php?error=ha iniciado sesion con el rol ". $row['nombre_rol']);
+                    }
                 }
                 else{
                     header("Location: index.php?error=Usuario o contraseña incorrectos");
@@ -44,11 +41,9 @@
                 }
             }
             else{
-                header("Location: index.php?error=Usuario y/o contraseña incorrectos");
+                header("Location: index.php?error=Usuario no existe");
                 exit();
             }
     }
+    
 ?>
-
-<script src="../js/alertas.js"></script>
-<script src="../js/script.js"></script>

@@ -12,12 +12,13 @@
             return $data;
         }
         $user = validate($_POST['user']);
-        $password = $_POST['password'];	
+        $password = $_POST['password'];
+        $departamento = $_POST['departamento'];	
         $password_hash = password_hash($_POST['password2'], PASSWORD_DEFAULT);
         
 
         if(password_verify($password, $password_hash)){
-            $sql = "INSERT INTO users(user, pass) VALUES('$user', '$password_hash')";
+            $sql = "INSERT INTO users(user, pass, rol_id)  VALUES('$user', '$password_hash', '$departamento')";
             $result = mysqli_query($conexion, $sql);
 
             if($result){
