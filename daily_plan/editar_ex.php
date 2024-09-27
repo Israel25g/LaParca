@@ -130,7 +130,7 @@
       <div class="container mt-2" >
         <div class="row">
           <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="margin-top:100 px">
+            <div class="alert alert-success" role="alert" style="position: absolute ; margin-top:500% !important">
               <?= $resultado['mensaje'] ?>
             </div>
           </div>
@@ -176,7 +176,7 @@
               </div>
               <div class="form-group">
                 <label for="destino">Fecha objetivo</label>
-                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($export['destino']) ?>" ><?= escapar($export['destino']) ?></input>
+                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($export['destino']) ?>" ></input>
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" id="submit" value="Editar">

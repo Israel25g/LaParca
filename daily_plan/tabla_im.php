@@ -96,6 +96,7 @@
                       <th class="border end">vehículo / Placa</th>
                       <th class="border end">Contenedor a recibir</th>
                       <th class="border end">Contenedor recibido</th>
+                      <th class="border end">Tipo de carga</th>
                       <th class="border end">Paletas</th>
                       <th class="border end">Cajas</th>
                       <th class="border end">Unidades</th>
@@ -115,6 +116,7 @@
                           <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                          <td class="border end"><?php echo escapar($fila["t_carga"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["paletas"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["cajas"]); ?></td>
                           <td class="border end"><?php echo escapar($fila["unidades"]); ?></td>

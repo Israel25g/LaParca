@@ -24,20 +24,20 @@
           $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
           // Consulta para la tabla 'import'
-          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE()";
+          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
           $sentencia_i = $conexion->prepare($consultaSQL_i);
           $sentencia_i->execute();
           $import = $sentencia_i->fetchAll();
 
 
           // Consulta para la tabla 'export'
-          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE()";
+          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
           $sentencia_e = $conexion->prepare($consultaSQL_e);
           $sentencia_e->execute();
           $export = $sentencia_e->fetchAll();
 
           // Consulta para la tabla 'datos'
-          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE()";
+          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
           $sentencia_pk = $conexion->prepare($consultaSQL_pk);
           $sentencia_pk->execute();
           $picking = $sentencia_pk->fetchAll();
@@ -155,7 +155,7 @@
                     </div>
             </div>   
             <!-- grafico de import -->
-            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 60%px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
+            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                 <div class="col-md-6 " >
                     <div id="grafico-barras" class="bg-white " style="width: 200%; height: 400%;"></div>
                 </div>
@@ -231,8 +231,8 @@
                                     <?php foreach ($import as $fila): ?>
                                       <tr style="font-family: montserrat; font-size: 14px">
                                         <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["contenedor_recibido"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["contenedor_cerrado"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
                                       </tr>
                                     <?php endforeach; ?>
                                   <?php endif; ?>

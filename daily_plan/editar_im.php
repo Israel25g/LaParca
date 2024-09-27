@@ -37,7 +37,6 @@
       </div>
     <?php
     include './funcionalidades/funciones.php';
-
     $config = include './funcionalidades/config_DP.php';
 
     $resultado = [
@@ -57,8 +56,8 @@
 
           $import = [
               "id"=> $_GET['id'],
-              "contenedor_recibido" => $_POST['contenedor_recibido'],
-              "contenedor_cerrado"=> $_POST['contenedor_cerrado'],
+              "pedidos_despachados" => $_POST['pedidos_despachados'],
+              "pedidos_en_proceso"=> $_POST['pedidos_en_proceso'],
               "vehiculo"=> $_POST['vehiculo'],
               "t_vehiculo"=> $_POST['t_vehiculo'],
               "bl"=> $_POST['bl'],
@@ -67,8 +66,8 @@
           ];
 
           $consultaSQL = "UPDATE import SET
-              contenedor_recibido = :contenedor_recibido,
-              contenedor_cerrado = :contenedor_cerrado,
+              pedidos_en_proceso = :pedidos_en_proceso,
+              pedidos_despachados = :pedidos_despachados,
               vehiculo = :vehiculo,
               t_vehiculo = :t_vehiculo,
               bl = :bl,
@@ -114,7 +113,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-danger" role="alert">
-              <?= $resultado['mensaje'] ?>
+              <?= escapar($resultado['mensaje']) ?>
             </div>
           </div>
         </div>
@@ -130,7 +129,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="alert alert-success" role="alert" style="margin-top: 140px; position:absolute">
-              <?= $resultado['mensaje'] ?>
+              <?= escapar($resultado['mensaje']) ?>
             </div>
           </div>
         </div>
@@ -150,44 +149,58 @@
             <a class="btn btn-success" href="../daily_plan/tabla_im.php">Regresar a la tabla Import</a>
             <hr>
             <div class="form-group">
-                <label for="contenedor_recibido">Nueva cantidad de contenedores recibidos (modificar solo de ser necesario).</label>
-                <textarea type="number" name="contenedor_recibido" id="contenedor_recibido" rows="1" class="form-control" placeholder="Anterior cantidad de contenedores recibidos: <?= escapar($import['contenedor_recibido']) ?>"> <?= escapar($import['contenedor_recibido']) ?></textarea>
+                <label for="pedidos_en_proceso">Nueva cantidad de contenedores recibidos (modificar solo de ser necesario).</label>
+                <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" placeholder="Anterior cantidad de contenedores recibidos: <?= escapar($import['pedidos_en_proceso']) ?>" value="<?= escapar($import['pedidos_en_proceso']) ?>">
               </div>
               <div class="form-group">
-                <label for="contenedor_cerrado">Contenedores ya despachados</label>
-                <textarea type="number" name="contenedor_cerrado" id="contenedor_cerrado" rows="1" class="form-control" placeholder="Anterior cantidad de contenedores ya cerrados: <?= escapar($import['contenedor_cerrado']) ?>"><?= escapar($import['contenedor_cerrado']) ?></textarea>
+                <label for="pedidos_despachados">Contenedores ya despachados</label>
+                <input type="number" name="pedidos_despachados" id="pedidos_despachados" class="form-control" placeholder="Anterior cantidad de contenedores ya cerrados: <?= escapar($import['pedidos_despachados']) ?>" value="<?= escapar($import['pedidos_despachados']) ?>">
               </div>
               <div class="form-group">
-                <label for="vehiculo">vehículo</label>
-                <textarea type="text" name="vehiculo" id="vehiculo" rows="1" class="form-control" placeholder=" Anterior vehículo: <?= escapar($import['vehiculo']) ?>" ><?= escapar($import['vehiculo']) ?></textarea>
+                <label for="vehiculo">Vehículo</label>
+                <input type="text" name="vehiculo" id="vehiculo" class="form-control" placeholder=" Anterior vehículo: <?= escapar($import['vehiculo']) ?>" value="<?= escapar($import['vehiculo']) ?>">
               </div>
               <div class="form-group">
                 <label for="t_vehiculo">Tipo de vehículo</label>
-                <textarea type="text" name="t_vehiculo" id="t_vehiculo" rows="1" class="form-control" placeholder="Anterior tipo de vehículo: <?= escapar($import['t_vehiculo']) ?>" ><?= escapar($import['t_vehiculo']) ?></textarea>
+                <input type="text" name="t_vehiculo" id="t_vehiculo" class="form-control" placeholder="Anterior tipo de vehículo: <?= escapar($import['t_vehiculo']) ?>" value="<?= escapar($import['t_vehiculo']) ?>">
               </div>
               <div class="form-group">
                 <label for="bl">BL</label>
-                <textarea type="text" name="bl" id="bl" rows="1" class="form-control" placeholder="Anterior BL: <?= escapar($import['bl']) ?>"><?= escapar($import['bl']) ?></textarea>
+                <input type="text" name="bl" id="bl" class="form-control" placeholder="Anterior BL: <?= escapar($import['bl']) ?>" value="<?= escapar($import['bl']) ?>">
               </div>
               <div class="form-group">
                 <label for="destino">Destino</label>
-                <textarea type="text" name="destino" id="destino" rows="1" class="form-control" placeholder="Anterior destino: <?= escapar($import['destino']) ?>"><?= escapar($import['destino']) ?></textarea>
+                <input type="text" name="destino" id="destino" class="form-control" placeholder="Anterior destino: <?= escapar($import['destino']) ?>" value="<?= escapar($import['destino']) ?>">
               </div>
               <div class="form-group">
-                <label for="fecha_objetivo">Fecha objetivo</label>
-                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($import['fecha_objetivo']) ?>"></input>
+                <label for="fecha_objetivo">Fecha Objetivo</label>
+                <input type="date" name="fecha_objetivo" id="fecha_objetivo" class="form-control" placeholder="Anterior fecha objetivo: <?= escapar($import['fecha_objetivo']) ?>" value="<?= escapar($import['fecha_objetivo']) ?>">
               </div>
               <div class="form-group">
-                <input type="submit" name="submit" class="btn btn-primary" id="submit" value="Editar">
+                <input type="submit" name="submit" class="btn btn-primary" value="Actualizar">
               </div>
-            </form>
           </div>
         </div>
       </div>
-    </div>
+      </form>
       <?php
     }
     ?>
-    <script src="../host_virtual_TI/js/script.js"></script>
   </body>
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">IPL Group S.A.S &copy; 2023</span>
+    </div>
+  </footer>
+  <script>
+    function actualizarFechaYHora() {
+        const fechaActual = new Date();
+        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
+
+        document.getElementById('fecha-actual').textContent = fechaActual.toLocaleDateString('es-ES', opcionesFecha);
+        document.getElementById('hora-actual').textContent = fechaActual.toLocaleTimeString('es-ES', opcionesHora);
+    }
+    setInterval(actualizarFechaYHora, 1000);
+  </script>
 </html>
