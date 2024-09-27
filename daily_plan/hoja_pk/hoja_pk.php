@@ -27,7 +27,7 @@
         <!-- Fin del Header -->
     </div>
     <div style="margin-top: -150px; margin-left: 60px">
-        <h3 class="mb-2"><a href="../tabla_ex.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Export</h3>
+        <h3 class="mb-2"><a href="../tabla_pk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Picking</h3>
         <button class="btn btn-success" id="guardarDatos">Guardar datos</button>
     </div>
 
@@ -106,7 +106,7 @@
                     alert(result.message); // Mensaje del servidor
                     // Redirigir
                     setTimeout(function() {
-                        window.location.href = '../hoja_ex/formatear_json.php';
+                        window.location.href = '../hoja_pk/formatear_json.php';
                     });
 
                 })

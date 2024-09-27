@@ -1,10 +1,10 @@
 <?php
 // Nombre del archivo JSON que deseas leer
-$jsonFile = 'arreglo_ex.json'; // Cambia esto al nombre real de tu archivo JSON
+$jsonFile = 'arreglo_pk.json'; // Cambia esto al nombre real de tu archivo JSON
 
 // Comprobar si el archivo JSON existe
 if (!file_exists($jsonFile)) {
-    die('El archivo JSON no se encontró.');
+    die('El archivo no se encontró.');
 }
 
 // Leer el contenido del archivo JSON
@@ -42,27 +42,27 @@ try {
     // Crear la conexión PDO
     $pdo = new PDO($dsn, $user, $pass, $options);
 
-    // SQL para insertar en la tabla 'export'
-    $insertSQL_export = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
+    // SQL para insertar en la tabla 'picking'
+    $insertSQL_picking = "INSERT INTO picking (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
                          VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
-    // SQL para insertar en la tabla 'export_r'
-    $insertSQL_export_r = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
+    // SQL para insertar en la tabla 'picking_r'
+    $insertSQL_picking_r = "INSERT INTO picking_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
                            VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
-    // Preparar la consulta para 'export'
-    $stmt_export = $pdo->prepare($insertSQL_export);
+    // Preparar la consulta para 'picking'
+    $stmt_picking = $pdo->prepare($insertSQL_picking);
 
-    // Preparar la consulta para 'export_r'
-    $stmt_export_r = $pdo->prepare($insertSQL_export_r);
+    // Preparar la consulta para 'picking_r'
+    $stmt_picking_r = $pdo->prepare($insertSQL_picking_r);
 
     // Iniciar transacción para garantizar la consistencia de las inserciones
     $pdo->beginTransaction();
 
     // Iterar sobre el array y ejecutar las inserciones
     foreach ($result as $row) {
-        // Inserción en la tabla 'export'
-        $stmt_export->execute([
+        // Inserción en la tabla 'picking'
+        $stmt_picking->execute([
             ':aid_oid' => $row['aid_oid'],
             ':cliente' => $row['cliente'],
             ':vehiculo' => $row['vehiculo'],
@@ -78,7 +78,7 @@ try {
         ]);
 
         // Inserción en la tabla 'export_r'
-        $stmt_export_r->execute([
+        $stmt_picking_r->execute([
             ':aid_oid' => $row['aid_oid'],
             ':cliente' => $row['cliente'],
             ':vehiculo' => $row['vehiculo'],
@@ -108,6 +108,6 @@ try {
 <script>
   // Redirigir a la pagina de datos
   setTimeout(function() {
-    window.location.href = '../hoja_ex/hoja_ex.php';
+    window.location.href = '../hoja_pk/hoja_pk.php';
   },);
 </script>
