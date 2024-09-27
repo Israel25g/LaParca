@@ -92,7 +92,7 @@
           <table id="tablaPicking" class="table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color:#fff;  margin-top: 1%">
             <thead>
               <tr>
-                <th class="border end">ID</th>
+                <th class="border end">#</th>
                 <th class="border end">Cliente</th>
                 <th class="border end">Unidades por pickear</th>
                 <th class="border end">Unidades pickeadas</th>

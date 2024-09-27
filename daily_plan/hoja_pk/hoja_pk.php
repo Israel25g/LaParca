@@ -36,6 +36,26 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const container = document.getElementById('tablaExcel');
+            const customContextMenu = {
+        items: {
+            'row_above': {name: 'Insertar fila arriba'},
+            'row_below': {name: 'Insertar fila abajo'},
+            'col_left': {name: 'Insertar columna a la izquierda'},
+            'col_right': {name: 'Insertar columna a la derecha'},
+            'remove_row': {name: 'Eliminar fila'},
+            'remove_col': {name: 'Eliminar columna'},
+            'undo': {name: 'Deshacer'},
+            'redo': {name: 'Rehacer'},
+            'make_read_only': {name: 'Hacer solo lectura'},
+            'alignment': {name: 'Alineación'},
+            'copy': {name: 'Copiar'},
+            'cut': {name: 'Cortar'},
+            'clear_column': {name: 'Limpiar columna'},
+            'filter_by_condition': {name: 'Filtrar por condición'},
+            'filter_by_value': {name: 'Filtrar por valor'},
+            'filter_action_bar': {name: 'Barra de acción de filtro'}
+        }
+    };
 
             // Columnas de tu tabla
             const colHeaders = ['Oid*', 'Cliente*', 'Vehículo/Placa*', 'Tipo de Vehículo', 'BL', 'Destino', 'Paletas', 'Cajas', 'Unidades', 'Pedidos por despachar*', 'Fecha estimada de salida*', 'Comentario Oficina'];
@@ -61,8 +81,10 @@
                 rowHeaders: true,
                 colHeaders: colHeaders,
                 columns: columns,
+                filters: true,
+                dropdownMenu: true,
                 minSpareRows: 0,
-                contextMenu: true,
+                contextMenu: false,
                 manualColumnResize: true,
                 manualRowResize: true,
                 stretchH: 'all',

@@ -145,7 +145,7 @@
             <div class="bloquee border border-5 border-danger" id="export"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico export -->
                 <div class="col-md-6 ">
-                    <div id="grafico-pastel1" class="bg-white "  style="width: 200%; height: 300%;"></div>
+                    <div id="grafico-pastel1" class="bg-white " href="../daily_plan/tabla_ex.php" style="width: 200%; height: 300%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
@@ -155,9 +155,9 @@
                     </div>
             </div>   
             <!-- grafico de import -->
-            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
+            <div class="bloquee border border-5 border-info" id="barras" style="position: relative;width: 800px; height: 350px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
                 <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 400%;"></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 350%;"></div>
                 </div>
             </div>
         
@@ -246,7 +246,7 @@
                     </div>
                 </div>   
                 <!-- tabla de import -->
-                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:5%" >
+                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
                     <div class="col-md-6 " >
                     <div class="container">
                     <div class="row">
@@ -281,10 +281,10 @@
                 </div>
 
                 <!-- porcentaje de cumplimiento -->
-                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:5%" >
+                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
                     <div class="col-md-6 " >
-                        <p style="font-family: montserrat; font-size:180%; margin-top: 50px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div  id="grafico-gauge_d" style="width: 810%; height: 350px;margin-top:0px;margin-left:5% !important"></div>
+                        <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+                        <div  id="grafico-gauge_d" style="width: 900%; height: 400px;margin-top:0px;margin-left:5% !important"></div>
                     </div>
                 </div>
             </div>

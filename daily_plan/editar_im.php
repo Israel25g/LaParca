@@ -63,6 +63,8 @@
               "bl"=> $_POST['bl'],
               "destino"=> $_POST['destino'],
               "fecha_objetivo"=> $_POST['fecha_objetivo'],
+              "fecha_lleg_rampa"=> $_POST['fecha_lleg_rampa'],
+              "fecha_sal_rampa"=> $_POST['fecha_sal_rampa'],
           ];
 
           $consultaSQL = "UPDATE import SET
@@ -72,11 +74,40 @@
               t_vehiculo = :t_vehiculo,
               bl = :bl,
               destino = :destino,
-              fecha_objetivo = :fecha_objetivo
+              fecha_objetivo = :fecha_objetivo,
+              fecha_lleg_rampa = :fecha_lleg_rampa,
+              fecha_sal_rampa = :fecha_sal_rampa
               WHERE id = :id";
 
           $consulta = $conexion->prepare($consultaSQL);
           $consulta->execute($import);
+
+          $exportRecord = [
+            "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
+            "pedidos_despachados" => $_POST['pedidos_despachados'],
+            "vehiculo" => $_POST['vehiculo'],
+            "t_vehiculo" => $_POST['t_vehiculo'],
+            "bl" => $_POST['bl'],
+            "destino" => $_POST['destino'],
+            "fecha_objetivo" => $_POST['fecha_objetivo'],
+            "fecha_lleg_rampa" => $_POST['fecha_lleg_rampa'],  // Datos opcionales si son necesarios
+            "fecha_sal_rampa" => $_POST['fecha_sal_rampa']    // Datos opcionales si son necesarios
+        ];
+
+        // Consulta SQL para insertar un nuevo registro en la tabla `export_r`
+        $consultaRecordSQL = "INSERT INTO export_r 
+            (pedidos_en_proceso, pedidos_despachados, vehiculo, t_vehiculo, bl, destino, fecha_objetivo, fecha_lleg_rampa, fecha_sal_rampa) 
+            VALUES 
+            (:pedidos_en_proceso, :pedidos_despachados, :vehiculo, :t_vehiculo, :bl, :destino, :fecha_objetivo, :fecha_lleg_rampa, :fecha_sal_rampa)";
+
+        $consultaRecord = $conexion->prepare($consultaRecordSQL);
+        $consultaRecord->execute($exportRecord);
+
+    } catch(PDOException $error) {
+        // Manejo de errores
+        $resultado['error'] = true;
+        $resultado['mensaje'] = $error->getMessage();
+    
 
       } catch(PDOException $error) {
           $resultado['error'] = true;
@@ -173,8 +204,16 @@
                 <input type="text" name="destino" id="destino" class="form-control" placeholder="Anterior destino: <?= escapar($import['destino']) ?>" value="<?= escapar($import['destino']) ?>">
               </div>
               <div class="form-group">
-                <label for="fecha_objetivo">Fecha Objetivo</label>
+                <label for="fecha_objetivo">Fecha Estimada de llegada</label>
                 <input type="date" name="fecha_objetivo" id="fecha_objetivo" class="form-control" placeholder="Anterior fecha objetivo: <?= escapar($import['fecha_objetivo']) ?>" value="<?= escapar($import['fecha_objetivo']) ?>">
+              </div>
+              <div class="form-group">
+                <label for="fecha_lleg_rampa">Llegada a rampa</label>
+                <input type="date" name="fecha_lleg_rampa" id="fecha_lleg_rampa" class="form-control" placeholder="Anterior fecha objetivo: <?= escapar($import['fecha_lleg_rampa']) ?>" value="<?= escapar($import['fecha_lleg_rampa']) ?>">
+              </div>
+              <div class="form-group">
+                <label for="fecha_sal_rampa">Salida de rampa</label>
+                <input type="date" name="fecha_sal_rampa" id="fecha_sal_rampa" class="form-control" placeholder="Anterior fecha objetivo: <?= escapar($import['fecha_sal_rampa']) ?>" value="<?= escapar($import['fecha_sal_rampa']) ?>">
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" value="Actualizar">
@@ -187,20 +226,5 @@
     }
     ?>
   </body>
-  <footer class="footer">
-    <div class="container">
-      <span class="text-muted">IPL Group S.A.S &copy; 2023</span>
-    </div>
-  </footer>
-  <script>
-    function actualizarFechaYHora() {
-        const fechaActual = new Date();
-        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const opcionesHora = { hour: 'numeric', minute: 'numeric', second: 'numeric' };
-
-        document.getElementById('fecha-actual').textContent = fechaActual.toLocaleDateString('es-ES', opcionesFecha);
-        document.getElementById('hora-actual').textContent = fechaActual.toLocaleTimeString('es-ES', opcionesHora);
-    }
-    setInterval(actualizarFechaYHora, 1000);
-  </script>
+  <script src="../host_virtual_TI/js/script.js"></script>
 </html>

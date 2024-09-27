@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabla de Datos - Daily Plan</title>
+  <title>Daily Plan - Export</title>
   <link rel="stylesheet" href="../estilos.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -90,10 +90,10 @@
           <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border">
             <thead>
               <tr>
-                <th class="border end">ID</th>
+                <th class="border end">#</th>
                 <th class="border end">OID</th>
                 <th class="border end">Cliente</th>
-                <th class="border end">Número Vehículo o Contenedor</th>
+                <th class="border end"># Vehículo / Placa</th>
                 <th class="border end">Pedidos en proceso</th>
                 <th class="border end">Pedidos despachados</th>
                 <th class="border end">Fecha estimada de llegada</th>
