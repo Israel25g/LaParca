@@ -93,10 +93,15 @@
             <thead>
               <tr>
                 <th class="border end">#</th>
+                <th class="border end">OID</th>
                 <th class="border end">Cliente</th>
                 <th class="border end">Unidades por pickear</th>
+                <th class="border end">paletas</th>
                 <th class="border end">Unidades pickeadas</th>
+                <th class="border end">Cajas</th>
                 <th class="border end">Porcentaje de avance</th>
+                <th class="border end">Fecha de requerido</th>
+                <th class="border end">Prioridad de picking</th>
                 <th class="border end">Acciones</th>
               </tr>
             </thead>
@@ -105,9 +110,13 @@
                 <?php foreach ($datos as $fila): ?>
                   <tr>
                     <td class="border end"><?php echo escapar($fila["id"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["paletas"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["division_dp"]*100); ?>%</td>
                     <td class="border end">
                       <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_pk.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>

@@ -58,21 +58,17 @@
     };
 
             // Columnas de tu tabla
-            const colHeaders = ['Oid*', 'Cliente*', 'Vehículo/Placa*', 'Tipo de Vehículo', 'BL', 'Destino', 'Paletas', 'Cajas', 'Unidades', 'Pedidos por despachar*', 'Fecha estimada de salida*', 'Comentario Oficina'];
+            const colHeaders = ['Oid*', 'Cliente*', 'Paletas', 'Cajas', 'Unidades por pickear*', 'Fecha estimada de salida*', 'Prioridad de Picking*','Comentario Oficina'];
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
                 { data: 1, type: 'text' }, // cliente
-                { data: 2, type: 'text' }, // vehiculo/placa
-                { data: 3, type: 'text' }, // tipo de vehículo
-                { data: 4, type: 'text' }, // bl
-                { data: 5, type: 'text' }, // destino
-                { data: 6, type: 'numeric' }, // paletas
-                { data: 7, type: 'numeric' }, // cajas
-                { data: 8, type: 'numeric' }, // unidades
-                { data: 9, type: 'numeric' }, // pedidos en proceso
-                { data: 10, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
-                { data: 11, type: 'text' }  // comentario oficina
+                { data: 2, type: 'numeric' }, // paletas
+                { data: 3, type: 'numeric' }, // cajas
+                { data: 4, type: 'numeric' }, // unidades por pickear
+                { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
+                { data: 8, type: 'text' },  // comentario oficina
+                { data: 7, type: 'text' }  // prioridad de picking
             ];
 
             // Configuración de Handsontable
@@ -82,7 +78,7 @@
                 colHeaders: colHeaders,
                 columns: columns,
                 filters: true,
-                dropdownMenu: true,
+                dropdownMenu: false,
                 minSpareRows: 0,
                 contextMenu: false,
                 manualColumnResize: true,
@@ -97,7 +93,7 @@
                     const row = data[i];
                     // Validar que las columnas específicas no estén vacías
                     // Columnas: 0 (Oid), 1 (Cliente), 2 (Vehículo/placa), 9 (Pedidos en Proceso), 10 (Fecha estimada de salida)
-                    const requiredColumns = [0, 1, 2, 9, 10];
+                    const requiredColumns = [0, 1, 4, 6];
                     for (let j of requiredColumns) {
                         if (row[j] === null || row[j] === '') {
                             return false; // Devuelve falso si encuentra un campo obligatorio vacío

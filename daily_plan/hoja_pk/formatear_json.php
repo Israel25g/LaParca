@@ -16,7 +16,7 @@ $data = json_decode($jsonString, true); // true para obtener un array asociativo
 $result = [];
 
 // Suponiendo que tienes un conjunto de encabezados para tu base de datos
-$headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_oficina'];
+$headers = ['aid_oid', 'cliente', 'paletas', 'cajas', 'pedidos_en_proceso', 'fecha_objetivo', 'vacio_lleno', 'comentario_oficina'];
 
 // Procesar cada fila y combinar con los encabezados
 foreach ($data as $row) {
@@ -43,12 +43,12 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     // SQL para insertar en la tabla 'picking'
-    $insertSQL_picking = "INSERT INTO picking (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
-                         VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+    $insertSQL_picking = "INSERT INTO picking (aid_oid, cliente, paletas, cajas, pedidos_en_proceso, fecha_objetivo, vacio_lleno, comentario_oficina) 
+                         VALUES (:aid_oid, :cliente, :paletas, :cajas, :pedidos_en_proceso, :fecha_objetivo, :vacio_lleno,  :comentario_oficina)";
 
     // SQL para insertar en la tabla 'picking_r'
-    $insertSQL_picking_r = "INSERT INTO picking_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) 
-                           VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+    $insertSQL_picking_r = "INSERT INTO picking_r (aid_oid, cliente, paletas, cajas, pedidos_en_proceso, fecha_objetivo, vacio_lleno, comentario_oficina) 
+                           VALUES (:aid_oid, :cliente, :paletas, :cajas, :pedidos_en_proceso, :fecha_objetivo, :vacio_lleno,  :comentario_oficina)";
 
     // Preparar la consulta para 'picking'
     $stmt_picking = $pdo->prepare($insertSQL_picking);
@@ -65,15 +65,11 @@ try {
         $stmt_picking->execute([
             ':aid_oid' => $row['aid_oid'],
             ':cliente' => $row['cliente'],
-            ':vehiculo' => $row['vehiculo'],
-            ':t_vehiculo' => $row['t_vehiculo'],
-            ':bl' => $row['bl'],
-            ':destino' => $row['destino'],
             ':paletas' => $row['paletas'],
             ':cajas' => $row['cajas'],
-            ':unidades' => $row['unidades'],
             ':pedidos_en_proceso' => $row['pedidos_en_proceso'],
             ':fecha_objetivo' => $row['fecha_objetivo'],
+            ':vacio_lleno' => $row['vacio_lleno'],
             ':comentario_oficina' => $row['comentario_oficina']
         ]);
 
@@ -81,15 +77,11 @@ try {
         $stmt_picking_r->execute([
             ':aid_oid' => $row['aid_oid'],
             ':cliente' => $row['cliente'],
-            ':vehiculo' => $row['vehiculo'],
-            ':t_vehiculo' => $row['t_vehiculo'],
-            ':bl' => $row['bl'],
-            ':destino' => $row['destino'],
             ':paletas' => $row['paletas'],
             ':cajas' => $row['cajas'],
-            ':unidades' => $row['unidades'],
             ':pedidos_en_proceso' => $row['pedidos_en_proceso'],
             ':fecha_objetivo' => $row['fecha_objetivo'],
+            ':vacio_lleno' => $row['vacio_lleno'],
             ':comentario_oficina' => $row['comentario_oficina']
         ]);
     }
