@@ -99,8 +99,6 @@ try {
     // Confirmar la transacción
     $pdo->commit();
 
-    echo "Datos insertados correctamente en ambas tablas.";
-
 } catch (PDOException $e) {
     // En caso de error, deshacer la transacción
     $pdo->rollBack();

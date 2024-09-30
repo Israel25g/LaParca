@@ -163,12 +163,6 @@
                                 <textarea name="comentario_oficina" id="comentario_oficina" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
-                        <!-- <div class="form-row">
-        <div class="form-group col-md-3">
-            <label for="vacio_lleno">Vacío o Lleno</label>
-            <input type="text" name="vacio_lleno" id="vacio_lleno" class="form-control">
-        </div> -->
-        </div>
                         <div class="form-group">
                             <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">
                         </div>

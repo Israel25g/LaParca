@@ -146,9 +146,6 @@
                                 <label for="cajas">Cajas</label>
                                 <input type="number" name="cajas" id="cajas" class="form-control">
                             </div>
-                        </div>
-                        <hr>
-                        <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="unidades">Unidades</label>
                                 <input type="number" name="unidades" id="unidades" class="form-control">
@@ -158,7 +155,6 @@
                                 <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" required>
                             </div>
                         </div>
-
                         <hr>
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -198,7 +194,7 @@
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-12" style="margin-top: -1050px; margin-left:30%">
-                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:-20%">
+                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:10%">
                         <?= $resultado['mensaje'] ?>
                     </div>
                 </div>
