@@ -99,9 +99,9 @@
                 <th class="border end">paletas</th>
                 <th class="border end">Unidades pickeadas</th>
                 <th class="border end">Cajas</th>
-                <th class="border end">Porcentaje de avance</th>
                 <th class="border end">Fecha de requerido</th>
                 <th class="border end">Prioridad de picking</th>
+                <th class="border end">Porcentaje de avance</th>
                 <th class="border end">Acciones</th>
               </tr>
             </thead>
@@ -115,6 +115,7 @@
                     <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["paletas"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["cajas"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["division_dp"]*100); ?>%</td>

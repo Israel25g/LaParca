@@ -260,12 +260,13 @@
                 <textarea type="text" name="comentario_bodega" id="comentario_bodega" rows="3" class="form-control" placeholder="<?= escapar($export['comentario_bodega']) ?>" value="<?= escapar($export['comentario_bodega']) ?>"></textarea>
               </div>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary col-md-3">Actualizar</button>
+            <button type="submit" name="submit" class="btn btn-primary col-md-3"  style="margin-bottom: 100px !important;">Actualizar</button>
           </form>
         </div>
       </div>
     <?php } ?>
   </div>
   </body>
+  <footer></footer>
   <script src=".././host_virtual_TI/js/script.js"></script>
 </html>
