@@ -100,7 +100,7 @@
                       <th class="border end">Paletas</th>
                       <th class="border end">Cajas</th>
                       <th class="border end">Unidades</th>
-                      <th class="border end">Fecha estimada</th>
+                      <th class="border end">Fecha estimada de llegada</th>
                       <th class="border end">Llegada a rampa</th>
                       <th class="border end">Salida de rampa</th>
                       <th class="border end">Acciones</th>

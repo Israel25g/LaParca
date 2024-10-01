@@ -178,7 +178,7 @@
             <hr>
           <form method="POST">
             <div class="form-group">
-              <label for="pedidos_en_proceso">Nueva cantidad de pedidos por recibir (modificar solo de ser necesario).</label>
+              <label for="pedidos_en_proceso">Nueva cantidad de entradas por recibir (modificar solo de ser necesario).</label>
               <textarea name="pedidos_en_proceso" id="pedidos_en_proceso" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos en proceso: <?= escapar($export['pedidos_en_proceso']) ?>"><?= escapar($export['pedidos_en_proceso']) ?></textarea>
             </div>
             <div class="form-row">
