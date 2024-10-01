@@ -3,7 +3,7 @@
 include '../daily_plan/funcionalidades/config_G.php';
 
 // Consulta a la base de datos
-$query = "SELECT SUM(grafica_dp) AS total_grafico, SUM(contenedor_cerrado) AS total_meta, cliente FROM import WHERE fecha_objetivo = CURDATE()";
+$query = "SELECT SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta, cliente FROM import WHERE fecha_objetivo = CURDATE()";
 
 $result = $conn->query($query);
 
