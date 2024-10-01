@@ -1,0 +1,5 @@
+{
+    "name": "vendor/package",
+    "description": "A simple project without dependencies",
+    "require": {}
+}
