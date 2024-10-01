@@ -62,6 +62,18 @@
     </div>
     <div class="container">
         <div class="bloques ">
+          <!-- import -->
+         
+           <a href="../daily_plan/tabla_im.php"  rel="noopener noreferrer" style="color:black">
+             <div class="bloque" id="bloque_cotización">
+               <img   src="../images/Import.jpg" alt="">
+               <div class="text-overlay" style="height: 100%;width: 100%;">
+                 <h3>Import</h3>
+                 <p>Este apartado es exclusivamente para la edicion  de la grafica de Import.</p>
+               </div>
+             </div>
+           </a>
+         <!-- Fin de import -->
             <!--export-->
             <a href="../daily_plan/tabla_ex.php"  rel="noopener noreferrer" style="color:black">
               <div class="bloque" id="bloque_cotización">
@@ -74,18 +86,6 @@
             </a>
             <!-- Fin de export -->
             
-             <!-- import -->
-            
-              <a href="../daily_plan/tabla_im.php"  rel="noopener noreferrer" style="color:black">
-                <div class="bloque" id="bloque_cotización">
-                  <img   src="../images/Import.jpg" alt="">
-                  <div class="text-overlay" style="height: 100%;width: 100%;">
-                    <h3>Import</h3>
-                    <p>Este apartado es exclusivamente para la edicion  de la grafica de Import.</p>
-                  </div>
-                </div>
-              </a>
-            <!-- Fin de import -->
              <!-- picking -->
             <a href="../daily_plan/tabla_pk.php"  rel="noopener noreferrer" style="color:black">
               <div class="bloque" id="bloque_cotización">

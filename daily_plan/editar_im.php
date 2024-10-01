@@ -193,8 +193,8 @@
               </div>
 
               <div class="form-group col-md-3">
-                <label for="pedidos_despachados">Pedidos recibidos</label>
-                <textarea name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos despachados: <?= escapar($export['pedidos_despachados']) ?>"><?= escapar($export['pedidos_despachados']) ?></textarea>
+                <label for="pedidos_despachados">Entrada recibida</label>
+                <input name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="<?= escapar($export['pedidos_despachados']) ?>"></input>
               </div>
 
               <div class="form-group col-md-3">

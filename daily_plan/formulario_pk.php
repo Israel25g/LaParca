@@ -64,19 +64,18 @@
                     "vacio_lleno" => $_POST['vacio_lleno'],
                     "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
                     "fecha_objetivo" => $_POST['fecha_objetivo'],
-                    "comentario_oficina" => $_POST['comentario_oficina'],
-                    "comentario_bodega" => $_POST['comentario_bodega']
+                    "comentario_oficina" => $_POST['comentario_oficina']
 
                 );
 
-                $consultaSQL = "INSERT INTO picking (aid_oid, cliente, t_carga, paletas, cajas, vacio_lleno, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :t_carga, :paletas, :cajas, :vacio_lleno, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO picking (aid_oid, cliente, t_carga, paletas, cajas, vacio_lleno, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :t_carga, :paletas, :cajas, :vacio_lleno, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($datos);
 
-                $consultaSQL = "INSERT INTO picking_r (aid_oid, cliente, t_carga, paletas, cajas, vacio_lleno, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :t_carga, :paletas, :cajas, :vacio_lleno, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO picking_r (aid_oid, cliente, t_carga, paletas, cajas, vacio_lleno,  pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :t_carga, :paletas, :cajas, :vacio_lleno, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($datos);
@@ -103,8 +102,20 @@
                                 <input type="text" name="cliente" id="cliente" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
+                                <label for="t_carga">Tipo de carga</label>
+                                <select type="text" name="t_carga" id="t_carga" class="form-control">
+                                <option value="N/A">...</option>
+                                <option value="carga suelta">Carga suelta</option>
+                                <option value="contenerizada">Contenerizada</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
                                 <label for="vacio_lleno">Prioridad de picking</label>
-                                <input type="text" name="vacio_lleno" id="vacio_lleno" class="form-control" required>
+                                <select type="text" name="vacio_lleno" id="vacio_lleno" class="form-control">
+                                <option value="N/A">1</option>
+                                <option value="carga suelta">2</option>
+                                <option value="contenerizada">3</option>
+                                </select>
                             </div>
                         </div>
                         <hr>
@@ -155,7 +166,7 @@
     ?>
         <div class="container mt-3">
             <div class="row">
-                <div class="col-md-12" style="margin-top: -1000px; margin-left:30%">
+                <div class="col-md-12" style="margin-top: -850px; margin-left:30%">
                     <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
                         <?= $resultado['mensaje'] ?>
                     </div>

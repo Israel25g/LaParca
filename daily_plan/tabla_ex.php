@@ -96,7 +96,7 @@
                 <th class="border end"># Vehículo / Placa</th>
                 <th class="border end">Pedidos en proceso</th>
                 <th class="border end">Pedidos despachados</th>
-                <th class="border end">Fecha estimada de llegada</th>
+                <th class="border end">Fecha estimada de salida</th>
                 <th class="border end">Llegada a rampa</th>
                 <th class="border end">Salida de rampa</th>
                 <th class="border end">Acciones</th>

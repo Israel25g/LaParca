@@ -176,7 +176,7 @@
 
               <div class="form-group col-md-3">
                 <label for="pedidos_despachados">Unidades ya pickeadas</label>
-                <textarea name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos despachados: <?= escapar($export['pedidos_despachados']) ?>"><?= escapar($export['pedidos_despachados']) ?></textarea>
+                <textarea name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="<?= escapar($export['pedidos_despachados']) ?>"><?= escapar($export['pedidos_despachados']) ?></textarea>
               </div>
 
               <div class="form-group col-md-3">
