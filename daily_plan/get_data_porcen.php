@@ -11,7 +11,7 @@ function obtenerCumplimiento($tabla, $conn) {
     if ($tabla == 'export') {
         $query = "SELECT SUM(pedidos_en_proceso) AS total_pedidos_en_proceso, SUM(pedidos_despachados) AS total_pedidos_despachados FROM export WHERE fecha_objetivo = CURDATE()";
     } elseif ($tabla == 'import') {
-        $query = "SELECT SUM(contenedor_recibido) AS total_contenedor_recibido, SUM(contenedor_cerrado) AS total_contenedor_cerrado FROM import WHERE fecha_objetivo = CURDATE()";
+        $query = "SELECT SUM(pedidos_en_proceso) AS total_pedidos_en_proceso, SUM(pedidos_despachados) AS total_pedidos_despachados FROM import WHERE fecha_objetivo = CURDATE()";
     } elseif ($tabla == 'picking') {
         $query = "SELECT SUM(pedidos_en_proceso) AS total_pedidos_en_proceso, SUM(pedidos_despachados) AS total_pedidos_despachados FROM picking WHERE fecha_objetivo = CURDATE()";
     } else {
@@ -26,8 +26,8 @@ function obtenerCumplimiento($tabla, $conn) {
             $total_meta = $row['total_pedidos_en_proceso'];
             $total_listo = $row['total_pedidos_despachados'];
         } elseif ($tabla == 'import') {
-            $total_meta = $row['total_contenedor_recibido'];
-            $total_listo = $row['total_contenedor_cerrado'];
+            $total_meta = $row['total_pedidos_en_proceso'];
+            $total_listo = $row['total_pedidos_despachados'];
         }
 
         // Calcular el porcentaje

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabla de Datos - Daily Plan</title>
+  <title>Daily Plan - Picking</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -33,7 +33,7 @@
     <!-- Fin del Header -->
 
     <!-- Navbar -->
-    <div class="container-nav" style="margin-top: 90px; margin-left:0%; display: fixed; z-index: 999;">
+    <!-- <div class="container-nav" style="margin-top: 90px; margin-left:0%; display: fixed; z-index: 999;">
       <div class="navbarr">
         <ul class="nav" id="detallesOps">
           <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
@@ -42,7 +42,7 @@
           <li class="nav-li"><a href="#">logout</a></li>
         </ul>
       </div>
-    </div>
+    </div> -->
 
     <?php
     session_start();
@@ -83,15 +83,24 @@
         <div class="col-md-12">
           <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Picking</h2>
 
-          <a class="btn btn-success ingreso-data" href="../daily_plan/formulario_pk.php">Ingresar datos a Piking</a>
+          <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos a Piking</button>
+                  <ul class="dropdown-menu bg-success">
+                    <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_pk.php">Formulario singular</a></li>
+                    <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_pk/hoja_pk.php">Hoja de datos</a></li>
+                  </ul>
           <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <table id="tablaPicking" class="table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color:#fff;  margin-top: 1%">
             <thead>
               <tr>
-                <th class="border end">ID</th>
+                <th class="border end">#</th>
+                <th class="border end">OID</th>
                 <th class="border end">Cliente</th>
                 <th class="border end">Unidades por pickear</th>
+                <th class="border end">paletas</th>
                 <th class="border end">Unidades pickeadas</th>
+                <th class="border end">Cajas</th>
+                <th class="border end">Fecha de requerido</th>
+                <th class="border end">Prioridad de picking</th>
                 <th class="border end">Porcentaje de avance</th>
                 <th class="border end">Acciones</th>
               </tr>
@@ -101,9 +110,14 @@
                 <?php foreach ($datos as $fila): ?>
                   <tr>
                     <td class="border end"><?php echo escapar($fila["id"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["paletas"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["cajas"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["division_dp"]*100); ?>%</td>
                     <td class="border end">
                       <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_pk.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>

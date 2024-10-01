@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tabla de Datos - Daily Plan</title>
+  <title>Daily Plan - Export</title>
   <link rel="stylesheet" href="../estilos.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -81,20 +81,24 @@
       <div class="row">
         <div class="col-md-13">
           <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
-          <a class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</a>
-            <ul class="dropdown-menu">
+          <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</button>
+            <ul class="dropdown-menu bg-success">
               <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_ex.php">Formulario singular</a></li>
-              <li><a class="dropdown-item bg-success text-light" href="../daily_plan/bloque_de_formularios_ex.php">Bloque de formularios</a></li>
+              <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_ex/hoja_ex.php">Hoja de datos</a></li>
             </ul>
           <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border">
             <thead>
               <tr>
-                <th class="border end">ID</th>
+                <th class="border end">#</th>
+                <th class="border end">OID</th>
                 <th class="border end">Cliente</th>
+                <th class="border end"># Vehículo / Placa</th>
                 <th class="border end">Pedidos en proceso</th>
                 <th class="border end">Pedidos despachados</th>
-                <th class="border end">Fecha objetivo</th>
+                <th class="border end">Fecha estimada de salida</th>
+                <th class="border end">Llegada a rampa</th>
+                <th class="border end">Salida de rampa</th>
                 <th class="border end">Acciones</th>
               </tr>
             </thead>
@@ -103,10 +107,14 @@
                 <?php foreach ($datos as $fila): ?>
                   <tr>
                     <td class="border end"><?php echo escapar($fila["id"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
                     <td class="border end">
                       <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_ex.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
                       <a class="btn btn-outline-danger fs-6 bi bi-trash3-fill border end" href="<?= './funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
@@ -128,7 +136,8 @@
         new DataTable('#tablaExport', {
           paging: false,
           scrollCollapse: true,
-          scrollY: '200px',
+          scrollY: '400px',
+          scrollX: '1500px',
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
           dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
           info: false,
@@ -136,6 +145,7 @@
             "lengthMenu": "Mostrar _MENU_ registros por página",
             "zeroRecords": "No se encontraron resultados",
             "info": "Mostrando página _PAGE_ de _PAGES_",
+            "No data available in table":"No hay datos en esta tabla",
             "infoEmpty": "No hay registros disponibles",
             "infoFiltered": "(filtrado de _MAX_ registros totales)",
             "search": "Buscar:",

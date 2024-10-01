@@ -14,3 +14,6 @@ prueba
 Se creó el branch de Dashboards 09/17/24
 
 creacion de la tabkla de datos masivos 09/20/2024
+
+
+preparando branch para estilos 10/01/2024

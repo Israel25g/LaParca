@@ -67,18 +67,17 @@
                     "unidades" => $_POST['unidades'],
                     "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
                     "fecha_objetivo" => $_POST['fecha_objetivo'],
-                    "comentario_oficina" => $_POST['comentario_oficina'],
-                    "comentario_bodega" => $_POST['comentario_bodega']
+                    "comentario_oficina" => $_POST['comentario_oficina']
                 );
 
-                $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($datos);
 
-                $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina, comentario_bodega) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina, :comentario_bodega)";
+                $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
                 $sentencia = $conexion->prepare($consultaSQL);
                 $sentencia->execute($datos);
@@ -106,12 +105,19 @@
                                 <input type="text" name="cliente" id="cliente" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="vehiculo">Vehículo</label>
+                                <label for="vehiculo">Vehículo/Placa</label>
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="t_vehiculo">Tipo de Vehículo</label>
-                                <input type="text" name="t_vehiculo" id="t_vehiculo" class="form-control">
+                                <select type="text" name="t_vehiculo" list="datalistOptions" id="t_vehiculo" class="form-control">
+                                    <option value="N/A">...</option>    
+                                    <option value="Contenedor 20">Contenedor 20</option>
+                                    <option value="Contenedor 40">Contenedor 40</option>
+                                    <option value="Contenedor 45">Contenedor 45</option>
+                                    <option value="Camion">Camion</option>
+                                    <option value="furgon">furgon</option>
+                                </select>
                             </div>
                         </div>
                         <hr>
@@ -140,14 +146,14 @@
                                 <input type="number" name="unidades" id="unidades" class="form-control">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="pedidos_en_proceso">Pedidos en Proceso</label>
+                                <label for="pedidos_en_proceso">Pedidos por despachar</label>
                                 <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" required>
                             </div>
                         </div>
                         <hr>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="fecha_objetivo">Fecha Objetivo</label>
+                                <label for="fecha_objetivo">Fecha estimada de salida</label>
                                 <input type="date" id="fecha_objetivo" name="fecha_objetivo" class="form-control" required>
                             </div>
                         </div>
@@ -157,18 +163,6 @@
                                 <textarea name="comentario_oficina" id="comentario_oficina" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="comentario_bodega">Comentario Bodega</label>
-                                <textarea name="comentario_bodega" id="comentario_bodega" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <!-- <div class="form-row">
-        <div class="form-group col-md-3">
-            <label for="vacio_lleno">Vacío o Lleno</label>
-            <input type="text" name="vacio_lleno" id="vacio_lleno" class="form-control">
-        </div> -->
-        </div>
                         <div class="form-group">
                             <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">
                         </div>
@@ -188,7 +182,7 @@
     ?>
         <div class="container mt-3">
             <div class="row">
-                <div class="col-md-12" style="margin-top: -1000px; margin-left:30%">
+                <div class="col-md-12" style="margin-top: -1050px; margin-left:30%">
                     <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
                         <?= $resultado['mensaje'] ?>
                     </div>
