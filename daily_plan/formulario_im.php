@@ -87,21 +87,6 @@ if (isset($_POST['submit'])) {
         </div>
         <!-- Fin del Header -->
 
-        <!-- Navbar -->
-        <!-- <div class="container-nav">
-            <div class="navbar">
-                <ul class="nav" id="detallesOps">
-                    <li class="nav-li"><a href="Index.html">Inicio</a></li>
-                    <li class="nav-li"><a href="#">Capacitaciones</a></li>
-                    <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
-                    <li class="nav-li"><a class="active" href="../daily_plan/index_DP.php">Daily Plan</a></li>
-                    <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li>
-                    <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
-                </ul>
-            </div>
-        </div> -->
-        <!-- Fin Navbar -->
-
        <div class="container">
             <div class="row">
                 <div class="col-md-12">
