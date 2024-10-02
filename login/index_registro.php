@@ -41,6 +41,10 @@
         <?php
         }
         ?>
+
+    <?php
+        include("Conexion.php");
+    ?>
  
 
     <div class="form-container">
@@ -48,9 +52,26 @@
             <label for="text"><i class="fa-solid fa-user"></i> Usuario / Correo</label>
             <input type="text" name="user" id="user" required>
             
-            <label for="text"><i class="fa-solid fa-user"></i> Departamento</label>
-            <input type="text" name="user" id="user" required>
-    
+            <?php
+                $sql = "SELECT * FROM roles";
+                $result = mysqli_query($conexion, $sql);
+
+                if(mysqli_num_rows($result) > 0){
+                    ?>
+                    <label for="text"><i class="fa-solid fa-user-group"></i> Departamento</label>
+                    <br>
+                    <select type="text" name="departamento" id="departamento" required>
+                    <?php
+                    while($row = mysqli_fetch_assoc($result)){
+                        ?>
+                        <option value="<?php echo $row['id'] ?>"><?php echo $row['nombre_rol'] ?></option>
+                        <?php
+                    }
+                    ?>
+                    </select>
+                    <?php
+                }
+            ?>
             <label for="password"><i class="fa-solid fa-user-group"></i> Contraseña</label>
             <input type="password" name="password" id="password" required>
             
