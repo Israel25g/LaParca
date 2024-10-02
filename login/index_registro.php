@@ -72,7 +72,7 @@
                     <?php
                 }
             ?>
-            <label for="password"><i class="fa-solid fa-user-group"></i> Contraseña</label>
+            <label for="password"><i class="fa-solid fa-unlock"></i> Contraseña</label>
             <input type="password" name="password" id="password" required>
             
             <label for="password2"><i class="fa-solid fa-unlock"></i> Vuelva a introducir la contraseña</label>

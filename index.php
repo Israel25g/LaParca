@@ -43,7 +43,7 @@
     
 
     <div class="form-container">
-        <form action="login.php" method="POST">
+        <form action="../login.php" method="POST">
         <label for="text"><i class="fa-solid fa-user"></i> Usuario / Correo</label>
             <input type="text" name="user" id="user" required>
     
@@ -52,7 +52,7 @@
             
             <button type="submit">Iniciar Sesión</button>
         </form>
-        <a class="recuperar" href="index_registro.php"><button class="btn-recover">Registrar un usuario (solo Admin)</button></a>
+        <a class="recuperar" href="login/index_registro.php"><button class="btn-recover">Registrar un usuario (solo Admin)</button></a>
     </div>
 
 </body>
