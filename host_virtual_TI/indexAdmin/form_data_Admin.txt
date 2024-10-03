@@ -1,5 +1,5 @@
-id=4
-respuesta=fvjdfgkajhsdgv
-estado=En cotización
+id=3
+respuesta=respondiendoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+estado=Terminado
 correo=alcibiades@iplgsc.com
 nombrecompleto=Alcibiades Garay
