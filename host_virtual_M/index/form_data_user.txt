@@ -1,6 +1,5 @@
-nombrecompleto=Israel Góndola
+nombrecompleto=israel gondola
 correo=israel@iplgsc.com
-descripcion=Prueba de reparación
-
-ubicacion=Sistema de iluminacion bodega
+descripcion=probanbdo probando !!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+ubicacion=Mezzanine
 urgencia=Regular

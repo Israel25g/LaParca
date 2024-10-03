@@ -24,10 +24,9 @@ def send_email():
 
     # Configuración del correo
     email_subject = f"El ticket # {ticket_id} se encuentra {ticket_estado}"
-    sender_email_address = "ticketsprueba1@outlook.com"
-    email_password = "yiphgjwukvgfkltq"
-    email_smtp = "smtp-mail.outlook.com"
-
+    sender_email_address = "ticketsprueba1@gmail.com"
+    email_password = "nfzs zcii xrhr hyky"
+    email_smtp = "smtp.gmail.com"
     # Crear el mensaje de correo con codificación UTF-8
     message = EmailMessage()
     message['Subject'] = email_subject

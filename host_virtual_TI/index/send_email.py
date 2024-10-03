@@ -18,10 +18,9 @@ form_data = read_form_data(file_path)
 
 # Configuración del correo
 email_subject = "Confirmación de recepción del ticket"
-sender_email_address = "ticketsprueba1@outlook.com"
-email_password = "yiphgjwukvgfkltq"
-email_smtp = "smtp-mail.outlook.com"
-
+sender_email_address = "ticketpruebas1@gmail.com"
+email_password = "nfzs zcii xrhr hyky"
+email_smtp = "smtp.gmail.com"
 # Crear el mensaje de correo
 message = EmailMessage()
 message['Subject'] = email_subject
