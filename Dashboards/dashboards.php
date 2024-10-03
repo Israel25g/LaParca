@@ -103,10 +103,8 @@
             <!-- Compras -->
             <a href="http://" target="_blank" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_cotización">
-                    <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="https://consultorfinancontable.com/wp-content/uploads/2024/03/mujer-asiatica-trabajando-traves-papeleo_53876-138148.jpg" alt="">
+                    <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="" alt="">
                     <div class="text-overlay">
-                        <h3>Solicitud de orden de compra</h3>
-                        <p>Este helpdesk es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud cotizaciones.</p>
                     </div>
                 </div>
             </a>
