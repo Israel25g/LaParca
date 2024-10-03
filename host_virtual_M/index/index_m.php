@@ -84,16 +84,16 @@ if ($error) {
             foreach ($tickets as $fila) {
               ?>
               <tr>
-                <td><?php echo escapar($fila["id"]); ?></td>
-                <td><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                <td><?php echo escapar($fila["correo"]); ?></td>
-                <td><?php echo escapar($fila["ubicacion"]); ?></td>
-                <td><?php echo escapar($fila["descripcion"]); ?></td>
-                <td><?php echo escapar($fila["urgencia"]); ?></td>
-                <td><?php echo escapar($fila["respuesta"]); ?></td>
-                <td><?php echo escapar($fila["estado"]); ?></td>
-                <td><?php echo escapar($fila["created_at"]); ?></td>
-                <td><?php echo escapar($fila["updated_at"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["correo"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
+                <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
               </tr>
               <?php
             }

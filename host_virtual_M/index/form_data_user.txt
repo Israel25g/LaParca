@@ -1,6 +1,5 @@
-nombrecompleto=Israel Góndola
-correo=israel@iplgsc.com
-descripcion=Prueba de reparación
-
-ubicacion=Sistema de iluminacion bodega
+nombrecompleto=Alcibiades Garay
+correo=alcibiades@iplgsc.com
+descripcion=prueba uno en tickets m
+ubicacion=Pintura de paredes
 urgencia=Regular

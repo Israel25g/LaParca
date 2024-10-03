@@ -59,7 +59,7 @@
     Fin Navbar -->
 
     <!-- detalles -->
-    <div class="margin_top">
+    <!-- <div class="margin_top">
         <span style="margin-top: 30px;"></span>
     </div>
     <div class="dashboards-container">
@@ -70,14 +70,71 @@
             Inbox
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 10
-                <span class="visually-hidden">unread messages</span>
+                <span class="visually-hidden">unread messages</span> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! importante 
             </span>
         </button>
-    </div>
+    </div> -->
 
     <!-- fin de detalles -->
+    
+    <div class="container-descripcion">
+        <div class="bloque-descripcion">
+            <h2>Presentamos los Dashboards de Clientes</h2>
+            <p>En este apartado, podrá ver una compilación detallada de cada uno de los clientes®</p>
+        </div>
+
+    </div>
+
+    <!-- Dashboard STG -->
+    <div class="container">
+        <div class="bloques ">
+            <a href="../saint_g.php" rel="noopener noreferrer">
+                <div class="bloque" id="bloque_mantenimiento">
+                    <img  class="img_helpdesk " id="logo-stg" style="height: auto; margin-top: 15px" src="https://lobbymap.org/site//data/001/361/1361877.png" alt="">
+                </div>
+            </a>
+            <!-- Fin de Mantenimiento -->
+
+            <!-- IT -->
+            <a href="host_virtual_TI/index/index_ti.php">
+                <div class="bloque " id="bloque_IT">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_IT" src="../images/ipl_logo_gris.jpg" alt=""> -->
+                </div>
+            </a>
+            <!-- Fin de IT -->
+
+            <!-- Sobre tiempo -->
+            <a  href="#">
+                <div class="bloque" id="bloque_sobretiempo">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_overtime" src="#" alt=""> -->
+                </div>
+            </a>
+            <!-- Fín de sobretiempo -->
+
+            <!-- Compras -->
+            <a href="#"  rel="noopener noreferrer">
+                <div class="bloque" id="bloque_cotización">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="#" alt=""> -->
+
+                </div>
+            </a>
+            <!-- Fin de Compras -->
+        </div>
+    </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+    <!--======================================================================================================== evitar tocar ================================================================================ -->
     <script src="../../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>

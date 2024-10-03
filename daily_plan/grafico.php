@@ -62,7 +62,6 @@
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
-    <link rel="shortcut icon" href="../images/ICO.png">
 
 
     <style>
