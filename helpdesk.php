@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../main-global.css">
+    <link rel="stylesheet" href="main-global.css">
     <title>Helpdesk</title>
     <link rel="shortcut icon" href="images\ICO.png">
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">

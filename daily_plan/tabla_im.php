@@ -46,7 +46,7 @@
         <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
         <link rel="shortcut icon" href="../images/ICO.png">
-        <link rel="stylesheet" href="../../main-global.css">
+        <link rel="stylesheet" href="../main-global.css">
       </head>
 
       <body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; font-family:montserrat;">

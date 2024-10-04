@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de tickets</title>
-    <link rel="stylesheet" href="../../../main-global.css">
+    <link rel="stylesheet" href="../../main-global.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
     <!-- estilo bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

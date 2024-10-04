@@ -1,5 +1,5 @@
 nombrecompleto=Israel Góndola
 correo=israel@iplgsc.com
-descripcion=qwevdfkjvbsadfluivbpidfnvpnedfvansdcvpidafcv;kjsdnfuo;ivhwdfpiuvbn;jldhnv
+descripcion=asdcasdcasdcasdc
 ubicacion=Siatema de iluminación administrativo
 urgencia=Regular
