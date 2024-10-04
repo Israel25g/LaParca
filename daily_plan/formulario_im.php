@@ -1,3 +1,64 @@
+<?php
+include '../daily_plan/funcionalidades/funciones.php';
+
+$config = include '../daily_plan/funcionalidades/config_DP.php';
+
+try {
+    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+    // Consulta para obtener los clientes desde la tabla "clientes" al cargar la página
+    $sql = "SELECT id, nombre_cliente FROM clientes";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);  // Guardar los resultados en un array
+
+} catch (PDOException $error) {
+    $resultado['error'] = true;
+    $resultado['mensaje'] = "Error al conectar a la base de datos: " . $error->getMessage();
+}
+
+if (isset($_POST['submit'])) {
+    $resultado = [
+        'error' => false,
+        'mensaje' => 'La planificación de ' . $_POST['cliente'] . ' ha sido agregada con éxito'
+    ];
+
+    try {
+        $import = array(
+            "aid_oid" => $_POST['aid_oid'],
+            "cliente" => $_POST['cliente'],
+            "vehiculo" => $_POST['vehiculo'],
+            "t_vehiculo" => $_POST['t_vehiculo'],
+            "bl" => $_POST['bl'],
+            "destino" => $_POST['destino'],
+            "t_carga" => $_POST['t_carga'],
+            "paletas" => $_POST['paletas'],
+            "cajas" => $_POST['cajas'],
+            "unidades" => $_POST['unidades'],
+            "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
+            "fecha_objetivo" => $_POST['fecha_objetivo'],
+            "comentario_oficina" => $_POST['comentario_oficina']
+        );
+
+        // Inserción en la tabla import
+        $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+        $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($import);
+
+        // Inserción en la tabla import_r
+        $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+        $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($import);
+
+    } catch (PDOException $error) {
+        $resultado['error'] = true;
+        $resultado['mensaje'] = "Error al insertar los datos: " . $error->getMessage();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,84 +87,32 @@
         </div>
         <!-- Fin del Header -->
 
-        <!-- Navbar -->
-        <!-- <div class="container-nav">
-            <div class="navbar">
-                <ul class="nav" id="detallesOps">
-                    <li class="nav-li"><a href="Index.html">Inicio</a></li>
-                    <li class="nav-li"><a href="#">Capacitaciones</a></li>
-                    <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
-                    <li class="nav-li"><a class="active" href="../daily_plan/index_DP.php">Daily Plan</a></li>
-                    <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li>
-                    <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
-                </ul>
-            </div>
-        </div> -->
-        <!-- Fin Navbar -->
-
-        <?php
-        include '../daily_plan/funcionalidades/funciones.php';
-
-        if (isset($_POST['submit'])) {
-            $resultado = [
-                'error' => false,
-                'mensaje' => 'La planificacion de ' . $_POST['cliente'] . ' ha sido agregada con éxito'
-            ];
-            $config = include '../daily_plan/funcionalidades/config_DP.php';
-
-            try {
-                $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-                $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-                $import = array(
-                    "aid_oid" => $_POST['aid_oid'],
-                    "cliente" => $_POST['cliente'],
-                    "vehiculo" => $_POST['vehiculo'],
-                    "t_vehiculo" => $_POST['t_vehiculo'],
-                    "bl" => $_POST['bl'],
-                    "destino" => $_POST['destino'],
-                    "t_carga" => $_POST['t_carga'],
-                    "paletas" => $_POST['paletas'],
-                    "cajas" => $_POST['cajas'],
-                    "unidades" => $_POST['unidades'],
-                    "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
-                    "fecha_objetivo" => $_POST['fecha_objetivo'],
-                    "comentario_oficina" => $_POST['comentario_oficina']
-                );
-
-                $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
-
-                $sentencia = $conexion->prepare($consultaSQL);
-                $sentencia->execute($import);
-
-                $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-                $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
-
-                $sentencia = $conexion->prepare($consultaSQL);
-                $sentencia->execute($import);
-            } catch (PDOException $error) {
-                $resultado['error'] = true;
-                $resultado['mensaje'] = $error->getMessage();
-            }
-        }
-        ?>
-        <div class="container">
+       <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="mb-2"><a href="../daily_plan/tabla_im.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Import</h3>
                     <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_im.php" style="margin-top: 2%">Volver a la tabla</a>
                     <hr>
-                    <form method="post">
-                        <div class="form-row">
-                            <div class="form-group col-md-3">
-                                <label for="aid_oid">AID</label>
-                                <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="cliente">Cliente</label>
-                                <input type="text" name="cliente" id="cliente" class="form-control" required>
-                            </div>
+<form method="post">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="aid_oid">AID</label>
+            <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
+        </div>
+        
+        <!-- Selector de Cliente con datos de la base de datos -->
+        <div class="form-group col-md-3">
+            <label for="cliente">Cliente</label>
+            <select name="cliente" id="cliente" class="form-control" required>
+                <option value="" >Seleccione un cliente</option>  <!-- Opción por defecto -->
+                <?php
+                // Recorrer los clientes y generar las opciones del selector
+                foreach ($clientes as $cliente) {
+                    echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
+                }
+                ?>
+            </select>
+        </div>
                             <div class="form-group col-md-3">
                                 <label for="vehiculo">Vehículo/Placa</label>
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" required>
@@ -111,7 +120,7 @@
                             <div class="form-group col-md-3">
                                 <label for="t_vehiculo">Tipo de Vehículo</label>
                                 <select type="text" name="t_vehiculo" list="datalistOptions" id="t_vehiculo" class="form-control">
-                                    <option value="N/A">...</option>  
+                                    <option value="">...</option>  
                                     <option value="Contenedor 20">Contenedor 20</option>
                                     <option value="Contenedor 40">Contenedor 40</option>
                                     <option value="Contenedor 45">Contenedor 45</option>
@@ -133,7 +142,7 @@
                             <div class="form-group col-md-3">
                                 <label for="t_carga">Tipo de carga</label>
                                 <select type="text" name="t_carga" id="t_carga" class="form-control">
-                                <option value="N/A">...</option>
+                                <option value="">...</option>
                                 <option value="carga suelta">Carga suelta</option>
                                 <option value="contenerizada">Contenerizada</option>
                                 </select>
