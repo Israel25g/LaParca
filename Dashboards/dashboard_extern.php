@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../estilos.css">
+    <link rel="shortcut icon" href="../images/ICO.png">
+    <link rel="stylesheet" href="../estilos.css">
 
     <!-- Libreria para alertas ----->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -32,7 +33,7 @@
     <!-- Header -->
     <div class="header">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
         <h1><a class="link_h1" href="../dashboards.php">Dashboards</a></h1>
         <div class="cuadroFecha">
@@ -42,7 +43,7 @@
     </div>
     <!-- Fin del Header -->
 
-    <!-- Navbar
+     <!-- Navbar -->
     <div class="container-nav">
         <div class="navbar">
             <ul class="nav" id="detallesOps">
@@ -56,7 +57,7 @@
         </div>
     </div>
 
-    Fin Navbar -->
+    <!-- Fin Navbar  -->
 
     <!-- detalles -->
     <!-- <div class="margin_top">
@@ -88,7 +89,7 @@
     <!-- Dashboard STG -->
     <div class="container">
         <div class="bloques ">
-            <a href="../saint_g.php" rel="noopener noreferrer">
+            <a href="../Dashboards/clientes/saint_g/saint_g.php" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                     <img  class="img_helpdesk " id="logo-stg" style="height: auto; margin-top: 15px" src="https://lobbymap.org/site//data/001/361/1361877.png" alt="">
                 </div>
@@ -135,7 +136,7 @@
 
 
     <!--======================================================================================================== evitar tocar ================================================================================ -->
-    <script src="../../host_virtual_TI/js/script.js"></script>
+    <script src="../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>

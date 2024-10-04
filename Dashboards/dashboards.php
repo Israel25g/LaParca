@@ -13,7 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../daily_plan/css/estilos.css">
-    <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
 
@@ -67,7 +66,7 @@
     <!-- Dashboard externos -->
     <div class="container">
         <div class="bloques ">
-            <a href="./Dashboards/dashboard_extern.php" rel="noopener noreferrer">
+            <a href="../Dashboards/dashboard_extern.php" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                     <img loading="lazy" class="img_helpdesk  bg-success" id="logo-stg" src="../images/dashboards_externos.jpg" alt="">
                     <div class="text-overlay">
