@@ -1,6 +1,11 @@
 import smtplib
 from email.message import EmailMessage
 
+# import os
+# file_path = 'C:/xampp/htdocs/sistema_de_tickets/sistema_de_tickets/host_virtual_M/index/formDataUser.txt'
+# os.chdir('C:/xampp/htdocs/sistema_de_tickets/sistema_de_tickets/host_virtual_M/index')  # Cambia el directorio de trabajo a la carpeta del archivo
+# print(os.path.exists(file_path))  # Imprime True si el archivo existe, False si no.    
+
 # Función para leer datos del archivo en UTF-8
 def read_form_data(file_path):
     data = {}
@@ -11,7 +16,7 @@ def read_form_data(file_path):
     return data
 
 # Ruta al archivo que contiene los datos del formulario
-file_path = 'form_data_user.txt'
+file_path = 'C:/xampp/htdocs/sistema_de_tickets/sistema_de_tickets/host_virtual_M/index/form_data_user.txt'
 
 # Leer datos del archivo
 form_data = read_form_data(file_path)

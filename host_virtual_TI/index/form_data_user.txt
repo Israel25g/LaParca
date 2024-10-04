@@ -1,5 +1,5 @@
 nombrecompleto=Israel Góndola
 correo=israel@iplgsc.com
-descripcion=asdasdasd
-ubicacion=Operaciones planta baja
+descripcion=adfasdvasdfxzcdfgadfasdfjyutuyiuo.jtjnaegwe
+ubicacion=mezzanine
 urgencia=Regular

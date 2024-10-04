@@ -45,14 +45,14 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
         <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
         <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
-        <link rel="stylesheet" href="../estilos.css">
         <link rel="shortcut icon" href="../images/ICO.png">
+        <link rel="stylesheet" href="../../main-global.css">
       </head>
 
       <body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; font-family:montserrat;">
-        <div style="margin-top: 90px;">
+        <div class="espacio">
           <!-- Header -->
-          <div class="header">
+          <div class="header-error">
             <div class="logo-container">
               <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
             </div>

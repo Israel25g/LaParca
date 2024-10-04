@@ -1,10 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilos.css">
+    <link rel="stylesheet" href="../main-global.css">
     <title>Helpdesk</title>
     <link rel="shortcut icon" href="images\ICO.png">
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
@@ -16,16 +19,7 @@
 
 </head>
 
-<body>
-    <style>
-        body {
-            background-image: url('./images/Motivo2.png');
-            margin: 0;
-            padding: 0;
-            background-size: cover;
-        }
-    </style>
-
+<body style="background-image: url('./images/Motivo2.png')">
     <!-- Header -->
     <div class="header">
         <div class="logo-container">
@@ -34,7 +28,7 @@
         <h1>Helpdesk</h1>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
-            <p id="hora-actual">prueba</p>
+            <p id="hora-actual"></p>
         </div>
     </div>
     <!-- Fin del Header -->
@@ -46,8 +40,8 @@
                 <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
                 <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
                 <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
-                <li class="nav-li"><a href="./daily_plan/index_DP.php">Daily Plan</a></li>
-                <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li>
+                <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
+                <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
         </div>
@@ -58,13 +52,13 @@
     <div class="container-descripcion">
         <div class="bloque-descripcion">
             <h2>¿En qué podemos ayudarte?</h2>
-            <p>Selecciona una de las siguientes opciones para generar un ticket de soporte.</p>
+            <h4>Selecciona una de las siguientes opciones para generar un ticket de soporte.</h4>
         </div>
     </div>
-    
+
     <!-- Mantenimiento -->
-    <div class="container">
-        <div class="bloques ">
+    <div class="container-block">
+        <div class="bloques-grid">
             <a href="host_virtual_M\index\index_m.php" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                     <img loading="lazy" class="img_helpdesk" id="img_mantenimiento" src="images\Mantenimiento.webp" alt="">
@@ -74,7 +68,7 @@
                     </div>
                 </div>
             </a>
-    <!-- Fin de Mantenimiento -->
+            <!-- Fin de Mantenimiento -->
 
             <!-- IT -->
             <a href="host_virtual_TI/index/index_ti.php">

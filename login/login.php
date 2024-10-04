@@ -32,16 +32,20 @@ session_start();
                         header("Location: ../helpdesk.php?error=Inicio de sesión con ". $_SESSION['user']);
                     }
                     else{
-                        header("Location: index.php?error=ha iniciado sesion con el rol ". $row['nombre_rol']);
+                        $_SESSION['user'] = $user;
+                        $_SESSION['rol'] = $row['nombre_rol'];
+                        $_SESSION['id'] = $row['id'];
+                        header("Location: ../helpdesk.php?error=ha iniciado sesion con el rol ". $_SESSION['rol']. session_id());
+                        echo session_id();
                     }
                 }
                 else{
-                    header("Location: index.php?error=Usuario o contraseña incorrectos");
+                    header("Location: ../index.php?error=Usuario o contraseña incorrectos");
                     exit();
                 }
             }
             else{
-                header("Location: index.php?error=Usuario no existe");
+                header("Location: ../index.php?error=Usuario no existe");
                 exit();
             }
     }

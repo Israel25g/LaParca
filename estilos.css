@@ -75,10 +75,11 @@ h1{
     margin: auto!important;
 }
 
-h2{
-    padding: 5px;
+/* h2{
     font-size: 50PX;
-}
+    margin: 35px 0;
+} */
+
 
 h3.mb-2{
     font-size: 30px;
@@ -88,6 +89,11 @@ h3.mb-2{
 h4{
     font-size: 20px;
     font-weight: 700;
+}
+
+.subtitulo{
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .logo-container{
@@ -145,14 +151,22 @@ ul.detallesOps{
 }
 
 .container-nav{
-    position: relative;
     display: flex;
     justify-content: center;
-    margin: 0;
-    padding: 0;
+    align-items: center;
+    margin-top: 110px;
 }
 
 .navbar{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+/* 
+.navbar{
+    margin: 0 !important;
     padding: 0;
     width: 100%;
     display: flex;
@@ -161,7 +175,7 @@ ul.detallesOps{
     top: 90px;
     left: 0;
     z-index: 999;
-}
+} */
 
 .nav{
     width: auto;
@@ -304,6 +318,8 @@ table, td,th{
     text-align: center;
     max-width: 800px;
 }
+
+
 
 .container{
     display: flex;
