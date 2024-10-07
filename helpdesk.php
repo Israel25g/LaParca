@@ -82,6 +82,18 @@ session_start();
             </a>
             <!-- Fin de IT -->
 
+            <!-- IT -->
+            <a href="host_virtual_EEMP/index/index_EEMP.php">
+                <div class="bloque" id="bloque_EEMP">
+                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://cdn.udax.edu.mx/blog/la-clave-del-exito-en-los-negocios-mejora-continua-y-optimizacion-de-procesos_1.jpg" alt="">
+                    <div class="text-overlay">
+                        <h3>Soporte de Mejoras</h3>
+                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar solicitudes de mejora/DEPIC's en cuanto al sistema DIPROP</p>
+                    </div>
+                </div>
+            </a>
+            <!-- Fin de IT -->
+
             <!-- Sobre tiempo -->
             <a target="_blank" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
                 <div class="bloque" id="bloque_sobretiempo">
