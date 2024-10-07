@@ -24,7 +24,7 @@
 <body>
     <style>
         body{
-            background-image: url('./images/IMG_9533.JPG');
+            background-image: url('./images/tinified/IMG_9533.jpg');
             margin: 0;
             padding: 0;
             
