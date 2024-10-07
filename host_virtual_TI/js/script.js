@@ -29,28 +29,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // temporizador
 
-let registrarInactividad = function() {
-    var temporizador;
-    window.onload = resetTimer;
-    // DOM Events
-    document.onmousemove = resetTimer;
-    document.onkeypress = resetTimer;
-    document.onmousedown = resetTimer;
-    document.ontouchstart = resetTimer;
-    document.onclick = resetTimer;
-    document.onscroll = resetTimer;
-
-    function cerrarSesion() {
-        window.location.href = "/sistema_de_tickets/sistema_de_tickets/index.php";
-        toastr.warning("Sesión cerrada por inactividad.");
-    }
-
-    function resetTimer() {
-        clearTimeout(temporizador);
-        temporizador = setTimeout(cerrarSesion, 5000); // 1000 milisegundos = 1 segundo
-    }
-    console.log(temporizador);
-}
-
-registrarInactividad();
-

@@ -58,6 +58,5 @@
         </form>
         <!-- <a class="recuperar" href="./login/index_registro.php"><button class="btn-recover">Registrar un usuario (solo Admin)</button></a> -->
     </div>
-    <script src="host_virtual_TI/js/script.js"></script>
 </body>
 </html>
