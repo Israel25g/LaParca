@@ -62,7 +62,7 @@
                 rowHeaders: true,
                 colHeaders: colHeaders,
                 columns: columns,
-                minSpareRows: 0,
+                minSpareRows: 14,
                 contextMenu: true,
                 manualColumnResize: true,
                 manualRowResize: true,

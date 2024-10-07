@@ -79,7 +79,7 @@
                 columns: columns,
                 filters: true,
                 dropdownMenu: false,
-                minSpareRows: 0,
+                minSpareRows: 14,
                 contextMenu: false,
                 manualColumnResize: true,
                 manualRowResize: true,
