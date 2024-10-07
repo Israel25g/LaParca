@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboards</title>
     <link rel="stylesheet" href="../estilos.css">
+    <link rel="shortcut icon" href="../images/ICO.png">
 
     <!-- Libreria para alertas ----->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Incluir Bootstrap desde el CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../daily_plan/css/estilos.css">
+    <!-- Incluir ECharts desde el CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
 
 </head>
 
@@ -41,9 +45,7 @@
     <div class="container-nav">
         <div class="navbar">
             <ul class="nav" id="detallesOps">
-                <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
-                <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
-                <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
+                <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda</a></li>
                 <li class="nav-li"><a href="../daily_plan/index_DP.php">Daily Plan</a></li>
                 <li class="nav-li"><a class="active" href="#">Dashboards</a></li>
                 <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
@@ -55,62 +57,57 @@
 
     <div class="container-descripcion">
         <div class="bloque-descripcion">
-            <h2>Presentamos los Dashboards de Clientes</h2>
-            <p>En este apartado, podrá ver una compilación detallada de cada uno de los clientes®</p>
+            <h2>Presentamos los Dashboards de IPL Group</h2>
+            <span>En este apartado, podrá ver una compilación detallada de cada uno de los reportes, internos y externos de IPL.</span>
         </div>
 
     </div>
 
-    <!-- Dashboard STG -->
+    <!-- Dashboard externos -->
     <div class="container">
         <div class="bloques ">
-            <a href="./Dashboards/dashboardStg.php" rel="noopener noreferrer">
+            <a href="../Dashboards/dashboard_extern.php" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
-                    <img loading="lazy" class="img_helpdesk" id="logo-stg" src="https://lobbymap.org/site//data/001/361/1361877.png" alt="">
+                    <img loading="lazy" class="img_helpdesk  bg-success" id="logo-stg" src="../images/dashboards_externos.jpg" alt="">
                     <div class="text-overlay">
-                        <h3>Dashboard STG</h3>
-                        
+                        <h3>Dashboards externos</h3>
+                        <p>En este apartado podra visualizar el estado de las operaciones de los clientes de IPL Group</p>
                     </div>
                 </div>
             </a>
-            <!-- Fin de Mantenimiento -->
+            <!-- Fin de Dashboard externos -->
 
-            <!-- IT -->
+            <!-- Dashboard internos -->
             <a href="host_virtual_TI/index/index_ti.php">
-                <div class="bloque" id="bloque_IT">
-                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="images\Tecnología.jpg" alt="">
-                    <div class="text-overlay">
-                        <h3>Soporte de Tecnología</h3>
-                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna reparación en el apartado de IT (Reparaciones y mantenimiento de equipos, reparación de software interno, etc...).</p>
+                <div class="bloque " id="bloque_IT">
+                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="../images/ipl_logo_gris.jpg" alt="">
+                    <div class="text-overlay  bg-dark">
+                        <h3>Dashboards internos</h3>
+                        <p>En este apartado podra visualizar el estado de las operaciones de IPL Group</p>
                     </div>
                 </div>
             </a>
-            <!-- Fin de IT -->
+            <!-- Fin de Dashboard internos -->
 
-            <!-- Sobre tiempo -->
-            <a target="_blank" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
+            <!-- placeholder -->
+            <a  href="#">
                 <div class="bloque" id="bloque_sobretiempo">
-
-                    <img loading="lazy" class="img_helpdesk" id="img_overtime" src="images\Sobretiempo.jpg" alt="">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_overtime" src="#" alt=""> -->
                     <div class="text-overlay">
-                        <h3>Solicitud de Sobretiempo</h3>
-                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud de sobretiempo.</p>
                     </div>
                 </div>
             </a>
-            <!-- Fín de sobretiempo -->
+            <!-- Fín de placeholder -->
 
-            <!-- Compras -->
-            <a href="http://" target="_blank" rel="noopener noreferrer">
+            <!-- placeholder -->
+            <a href="#"  rel="noopener noreferrer">
                 <div class="bloque" id="bloque_cotización">
-                    <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="https://consultorfinancontable.com/wp-content/uploads/2024/03/mujer-asiatica-trabajando-traves-papeleo_53876-138148.jpg" alt="">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="#" alt=""> -->
                     <div class="text-overlay">
-                        <h3>Solicitud de orden de compra</h3>
-                        <p>Este helpdesk es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud cotizaciones.</p>
                     </div>
                 </div>
             </a>
-            <!-- Fin de Compras -->
+            <!-- Fin de placeholder -->
         </div>
     </div>
 

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../estilos.css">
+    <link rel="shortcut icon" href="../images/ICO.png">
+    <link rel="stylesheet" href="../estilos.css">
 
     <!-- Libreria para alertas ----->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -32,9 +33,9 @@
     <!-- Header -->
     <div class="header">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
-        <h1><a class="link_h1" href="../dashboards.php">Dashboards</a></h1>
+        <h1><a class="link_h1" href="../Dashboards/dashboards.php">Dashboards Externos</a></h1>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
@@ -42,8 +43,8 @@
     </div>
     <!-- Fin del Header -->
 
-    <!-- Navbar
-    <div class="container-nav">
+     <!-- Navbar -->
+    <!-- <div class="container-nav">
         <div class="navbar">
             <ul class="nav" id="detallesOps">
                 <li class="nav-li"><a href="Index.html">Inicio</a></li>
@@ -54,12 +55,12 @@
                 <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
         </div>
-    </div>
+    </div> -->
 
-    Fin Navbar -->
+    <!-- Fin Navbar  -->
 
     <!-- detalles -->
-    <div class="margin_top">
+    <!-- <div class="margin_top">
         <span style="margin-top: 30px;"></span>
     </div>
     <div class="dashboards-container">
@@ -70,15 +71,72 @@
             Inbox
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 10
-                <span class="visually-hidden">unread messages</span>
+                <span class="visually-hidden">unread messages</span> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! importante 
             </span>
         </button>
-    </div>
+    </div> -->
 
     <!-- fin de detalles -->
+    
+    <div class="container-descripcion">
+        <div class="bloque-descripcion">
+            <h2>Presentamos los Dashboards de Clientes</h2>
+            <p>En este apartado, podrá ver una compilación detallada de cada uno de los clientes®</p>
+        </div>
+
+    </div>
+
+    <!-- Dashboard STG -->
+    <div class="container">
+        <div class="bloques ">
+            <a href="../Dashboards/clientes/saint_g/saint_g.php" rel="noopener noreferrer">
+                <div class="bloque" id="bloque_mantenimiento">
+                    <img  class="img_helpdesk " id="logo-stg" style="height: auto; margin-top: 15px" src="https://lobbymap.org/site//data/001/361/1361877.png" alt="">
+                </div>
+            </a>
+            <!-- Fin de Mantenimiento -->
+
+            <!-- IT -->
+            <a href="host_virtual_TI/index/index_ti.php">
+                <div class="bloque " id="bloque_IT">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_IT" src="../images/ipl_logo_gris.jpg" alt=""> -->
+                </div>
+            </a>
+            <!-- Fin de IT -->
+
+            <!-- Sobre tiempo -->
+            <a  href="#">
+                <div class="bloque" id="bloque_sobretiempo">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_overtime" src="#" alt=""> -->
+                </div>
+            </a>
+            <!-- Fín de sobretiempo -->
+
+            <!-- Compras -->
+            <a href="#"  rel="noopener noreferrer">
+                <div class="bloque" id="bloque_cotización">
+                    <!-- <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="#" alt=""> -->
+
+                </div>
+            </a>
+            <!-- Fin de Compras -->
+        </div>
+    </div>
 
 
-    <script src="../../host_virtual_TI/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    <!--======================================================================================================== evitar tocar ================================================================================ -->
+    <script src="../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>
