@@ -167,7 +167,6 @@
       });
     </script>
   </div>
-
+  <script src="host_virtual_TI/js/script.js"></script>
 </body>
-
 </html>
