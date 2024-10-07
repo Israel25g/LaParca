@@ -12,7 +12,7 @@
     if ($conn->connect_error) {
         die("Error en la conexión: " . $conn->connect_error);
     }
-    header('Location: helpdesk.php');
+    header('Location: ../helpdesk.php');
 
 ?>
 
