@@ -3,9 +3,9 @@
 
 // Configuración de la conexión
 $servername = "localhost";
-$username = "root";
-$password = "";  // Sin contraseña
-$dbname = "daily_plan";
+$username = "u366386740_db_mainbase";
+$password = "1plGr0up01*";  // Sin contraseña
+$dbname = "u366386740_db_mainbase";
 
 // Crear la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
