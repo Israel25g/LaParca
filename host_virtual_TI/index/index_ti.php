@@ -118,7 +118,7 @@
                   <tr>
                     <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["correo"]); ?></td>
+                    <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
                     <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
