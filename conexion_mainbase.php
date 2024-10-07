@@ -1,17 +1,18 @@
 <?php
 
-    $host = "88.223.84.91";
-    $user = "u366386740_adminDP";
+    $servername = "localhost"; // o el nombre del servidor proporcionado por Hostinger
+    $username = "u366386740_adminDP";
     $password = "1plGr0up01*";
-    $db = "u366386740_db_mainbase";
-
-    $conexion = new mysqli($host, $user, $password, $db);
-
-    if ($conexion->connect_error) {
-        die("La conexión falló: " . $conexion->connect_error);
+    $dbname = "u366386740_db_dailyplan";
+    
+    // Crear conexión
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Error en la conexión: " . $conn->connect_error);
     }
+    echo "Conexión exitosa";
 
 ?>
 
-<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
