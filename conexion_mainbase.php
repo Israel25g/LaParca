@@ -1,9 +1,9 @@
 <?php
 
     $servername = "localhost"; // o el nombre del servidor proporcionado por Hostinger
-    $username = "u366386740_adminDP";
-    $password = "1plGr0up01*";
-    $dbname = "u366386740_db_dailyplan";
+    $username = "root";
+    $password = "";
+    $dbname = "db_mainbase";
     
     // Crear conexión
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,7 +12,7 @@
     if ($conn->connect_error) {
         die("Error en la conexión: " . $conn->connect_error);
     }
-    echo "Conexión exitosa";
+    header('Location: ../helpdesk.php');
 
 ?>
 
