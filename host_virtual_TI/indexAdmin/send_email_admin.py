@@ -32,7 +32,7 @@ def send_email():
     message = EmailMessage()
     message['Subject'] = email_subject
     message['From'] = sender_email_address
-    message['To'] = form_data.get('correo')  # Usar el correo del formulario
+    message['To'] = f"{form_data.get('correo')}, ricaurte@iplgsc.com "  # Usar el correo del formulario
     message['Cc'] = sender_email_address  # Enviar una copia visible al remitente
     message.set_content(
         f"Hola {form_data.get('nombrecompleto', 'usuario')},\n\n"

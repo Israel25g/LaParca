@@ -45,7 +45,7 @@
         <div class="container-fluid ">
             <div class="btn-group " role="group" aria-label="Basic example">
         <a class="btn btn-outline-success link-body-emphasis" href="https://iplgsc.com">IPL group</a>
-        <a class="btn btn-outline-success link-body-emphasis" href="../../helpdesk.html">Help Desk</a>
+        <a class="btn btn-outline-success link-body-emphasis" href="../../helpdesk.php">Help Desk</a>
         <a class="btn btn-outline-success link-body-emphasis" href="../../daily_plan/index_DP.php">Daily plan</a>
         <a class="btn btn-outline-success link-body-emphasis" href="#">logout</a>
       </div>

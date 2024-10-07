@@ -27,7 +27,7 @@ smtp_port = 587
 message = EmailMessage()
 message['Subject'] = email_subject
 message['From'] = sender_email_address
-message['To'] = form_data.get('correo')  # Usar el correo del formulario
+message['To'] = f"{form_data.get('correo')}, cecilio@iplgsc.com"  # Usar el correo del formulario
 message.set_content(
     f"Hola {form_data.get('nombrecompleto', 'Usuario')},\n\n"
     f"Gracias por contactarnos. Aquí aparecen los datos que nos suministró para confirmar su correcto envío:\n\n"

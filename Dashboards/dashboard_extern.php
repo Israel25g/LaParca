@@ -35,7 +35,7 @@
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
-        <h1><a class="link_h1" href="../dashboards.php">Dashboards</a></h1>
+        <h1><a class="link_h1" href="../Dashboards/dashboards.php">Dashboards Externos</a></h1>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
@@ -44,7 +44,7 @@
     <!-- Fin del Header -->
 
      <!-- Navbar -->
-    <div class="container-nav">
+    <!-- <div class="container-nav">
         <div class="navbar">
             <ul class="nav" id="detallesOps">
                 <li class="nav-li"><a href="Index.html">Inicio</a></li>
@@ -55,7 +55,7 @@
                 <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
         </div>
-    </div>
+    </div> -->
 
     <!-- Fin Navbar  -->
 

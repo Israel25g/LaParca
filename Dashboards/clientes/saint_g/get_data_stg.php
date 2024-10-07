@@ -3,7 +3,7 @@
 include '../../../daily_plan/funcionalidades/config_G.php';
 
 // Consulta a la base de datos
-$query = "SELECT cliente, SUM(grafica_dp) as total_grafica_dp FROM export  GROUP BY cliente";
+$query = "SELECT cliente, SUM(grafica_dp) as total_grafica_dp FROM export  GROUP BY t_carga";
 $result = $conn->query($query);
 
 // Inicializar un array para los datos

@@ -23,10 +23,11 @@
         }
 
         .container_d {
-            display: flex;
+            /* display: flex; */
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 30px !important;
+            margin-left: 350px !important;
         }
 
         .bloques_d {
@@ -46,30 +47,42 @@
         }
 
         .custom-btn {
-        font-size: 90px; /* Ajusta el tamaño de la fuente */
-        padding: 25px 50px !important; /* Tamaño del botón */
-        margin-bottom: -100%; /* Espacio entre los botones */
-        /*border-radius: 80px;  Bordes redondeados */
-        width: 40px !important; /* Ajusta el ancho del botón */
+        opacity: 1 !important ;
+        color: gold !important;
+        font-weight:500;
+        font-size: 9px; /* Ajusta el tamaño de la fuente */
+        text-align: center !important;
+        padding: 28px 50px ; /* Tamaño del botón */
+        border-radius: 20px; /* Bordes redondeados */
+        width: 200px !important; /* Ajusta el ancho del botón */
+        height: 50px !important;
     }
     
     /* Opcional: Cambiar el color del botón cuando se hace hover */
     .custom-btn:hover {
-        background-color: #0056b3; /* Cambia el color de fondo cuando el cursor pasa por encima */
+        background-color: gold; /* Cambia el color de fondo cuando el cursor pasa por encima */
     }
 
     .side_menu{
-            position: relative;
+            position: fixed;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            height: 150%; width: 300px; 
+            height: 150%; width: 231px; 
             position:absolute; 
             margin-top: -200px; 
             background-color:#FD9901; 
             z-index: 999;
-
-
     }
+
+    .carousel-indicators {
+    position: relative !important; /* O asegúrate de que no sea static */
+    z-index: 1 !important; /* Dale un valor bajo para que esté detrás */
+}
+
+#grafico-pastel1 {
+    position: relative; /* Asegúrate de que esté posicionado para aplicar z-index */
+    z-index: 10 !important; /* Dale un valor más alto para que esté por encima del carousel-indicators */
+}
     </style>
 
     <!-- Header -->
@@ -77,7 +90,7 @@
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
-        <h1>Saint Gobain</h1>
+        <h1 style="margin-left: 41% !important;">Saint Gobain</h1>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
@@ -93,37 +106,30 @@
 
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
-        <div> 
-    <div class="carousel-indicators" style="margin-bottom: 1000px;">
-    <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="margin-top: 500px;">
-        <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1">Button</button>
-        <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">Button</button>
-        <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">Button</button>
-        </div>
+    <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="margin-top: 300px;" aria-label="Basic mixed styles example">
+        <button type="button" class="btn btn-success custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1"><p style="font-family:montserrat !important; font-size:large; color: black;">Import</p></button>
+        <button type="button" class="btn btn-danger custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"><p style="font-family:montserrat !important ; font-size:large; color:black; ">Export</p></button>
+        <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"><p style=" font-family:montserrat !important;font-size:large; color:black; ">Varios</p></button>
+        <button type="button" class="btn btn-warning custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"><p style="font-family:montserrat !important;font-size:large; color:black; ">Facturación</p></button>
     </div>
-</div>
-
-<style>
-
-</style>
         
     </div>
 
 
-    <div id="carouselExampleIndicators" class="carousel slide btn-group" role="group">
+<div id="carouselExampleIndicators" class="carousel slide btn-group" role="group">
 
   <div class="carousel-inner">
     <div class="carousel-item active">
 
-    <div class="container_d" style="margin-left: 250px;">
+    <div class="container_d" style="margin-left: 400px !important" >
         <div class="bloques_d ">
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-                <div id="grafico-pastel1" class="bg-white" style="width: 200%; height: 350%;"></div>
+                <div id="grafico-pastel1" class="bg-white" style="width: 100%; height: 100%;"></div>
             </div>
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
+          <p>IMPORT</p>
             </div>
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
@@ -139,11 +145,11 @@
         <div class="bloques_d ">
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-                <div id="grafico-pastel1" class="bg-white" style="width: 200%; height: 350%;"></div>
+                
             </div>
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
+            <p>Export</p>
             </div>
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
@@ -159,11 +165,11 @@
         <div class="bloques_d ">
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-                <div id="grafico-pastel1" class="bg-white" style="width: 200%; height: 350%;"></div>
+
             </div>
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
+            <p>detalles varios</p>
             </div>
 
             <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
@@ -173,6 +179,25 @@
     </div>
 
     </div>
+    <div class="carousel-item">
+
+<div class="container_d" style="margin-left: 250px;">
+    <div class="bloques_d ">
+
+        <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+        </div>
+
+        <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+        <p>facturacion</p>
+        </div>
+
+        <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+
+        </div>
+    </div>
+</div>
+
+</div>
   </div>
 
 </div>
@@ -191,7 +216,7 @@
                     // Configurar el gráfico de export
                     chart1.setOption({
                         color:['#2E8B57', '#FF8C33', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
-                        title: {text: 'Export', subtext: '', left: 'center'},
+                        title: {text: 'Importaciones', subtext: '', left: 'center'},
                         tooltip: {trigger: 'item'},
                         legend: {orient: 'vertical', left: 'left'},
                         series: [{
