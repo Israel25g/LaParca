@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-    include("../conexion_mainbase.php");
+    include("../../conexion_mainbase.php");
 
     if(isset($_POST['user']) && isset($_POST['password'])){
         function validate($data){
