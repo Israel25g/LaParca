@@ -25,9 +25,9 @@ foreach ($data as $row) {
 
 // Configuración de la base de datos
 $host = 'localhost'; // Cambia esto si tu base de datos está en otro host
-$db   = 'daily_plan';
-$user = 'root';
-$pass = '';
+$db   = 'u366386740_db_mainbase';
+$user = 'u366386740_admin123';
+$pass = '1plGr0up01*';
 $charset = 'utf8mb4';
 
 // Configurar el DSN
