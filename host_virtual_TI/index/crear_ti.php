@@ -47,7 +47,7 @@
             }
     
             // Redirigir a send_mail.php para enviar el correo
-            header('Location: send_mail.php');
+            header('Location: send_email.php');
             exit(); // Asegúrate de que el script se detenga aquí después de redirigir
     
         } catch (PDOException $error) {
@@ -61,7 +61,7 @@
     
     ?>
     <?php include "../templates/header.php"; ?>
-    
+
     <?php if (isset($_GET['status'])) { ?>
     <div class="container mt-3">
         <div class="row">
