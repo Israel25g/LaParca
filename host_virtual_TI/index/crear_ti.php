@@ -61,17 +61,23 @@
     
     ?>
     <?php include "../templates/header.php"; ?>
-    <?php if (isset($resultado)) { ?>
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
-                        <?= $resultado['mensaje'] ?>
-                    </div>
+    
+    <?php if (isset($_GET['status'])) { ?>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-<?= $_GET['status'] == 'success' ? 'success' : 'danger' ?>" role="alert">
+                    <?php if ($_GET['status'] == 'success') { ?>
+                        El correo se envió correctamente.
+                    <?php } else { ?>
+                        Error al enviar el correo: <?= htmlspecialchars($_GET['message']) ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
-    <?php } ?>
+    </div>
+<?php } ?>
+
 
     <div class="container">
         <div class="row">
