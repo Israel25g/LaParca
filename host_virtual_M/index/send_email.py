@@ -23,9 +23,9 @@ form_data = read_form_data(file_path)
 
 # Configuración del correo para Gmail
 email_subject = "Confirmación de recepción del ticket"
-sender_email_address = "ticketpruebas1@gmail.com"
-email_password = "nfzs zcii xrhr hyky"  
-email_smtp = "smtp.gmail.com"
+sender_email_address = "sistemadiprop@outlook.com"
+email_password = "vvvglnmafyngyqlz"  
+email_smtp = "smtp.office365.com"
 smtp_port = 587
 
 # Crear el mensaje de correo
