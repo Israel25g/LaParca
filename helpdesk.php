@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: index.php?error=No has iniciado sesión.');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,7 +119,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
     <script>
         // temporizador
-
+       
         let registrarInactividad = function() {
             var temporizador;
             window.onload = resetTimer;
@@ -127,8 +132,8 @@ session_start();
             document.onscroll = resetTimer;
 
             function cerrarSesion() {
+                window.location.href = "index.php";
                 toastr.warning("Sesión cerrada por inactividad.");
-                window.location.href = "login/index.php";
             }
 
             function resetTimer() {

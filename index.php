@@ -1,3 +1,8 @@
+<?php
+    session_unset();
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +38,6 @@
         }
         ?>
 
-    
-
     <div class="form-container">
         <form action="./login/login.php" method="POST">
         <label for="text"><i class="fa-solid fa-user"></i> Usuario / Correo</label>
@@ -47,6 +50,5 @@
         </form>
         <!-- <a class="recuperar" href="./login/index_registro.php"><button class="btn-recover">Registrar un usuario (solo Admin)</button></a> -->
     </div>
-
 </body>
 </html>

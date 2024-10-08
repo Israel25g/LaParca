@@ -18,21 +18,20 @@ form_data = read_form_data(file_path)
 
 # Configuración del correo
 email_subject = "Confirmación de recepción del ticket"
-sender_email_address = "ticketsprueba1@outlook.com"
-email_password = "yiphgjwukvgfkltq"
-email_smtp = "smtp-mail.outlook.com"
-
+sender_email_address = "ticketpruebas1@gmail.com"
+email_password = "nfzs zcii xrhr hyky"
+email_smtp = "smtp.gmail.com"
 # Crear el mensaje de correo
 message = EmailMessage()
 message['Subject'] = email_subject
 message['From'] = sender_email_address
-message['To'] = form_data['correo'], # Usar el correo del formulario
+message['To'] = f"{form_data['correo']}, ricaurte@iplgsc.com"
 message.set_content(
     f"Hola {form_data['nombrecompleto']},\n\n"
     f"Gracias por contactarnos, aqui apareceran los datos que nos suministro, para confirmar su correcto envio:\n\n"
     f"Nombre Completo: {form_data['nombrecompleto']}.\n"
     f"Descripción: {form_data['descripcion']}\n"
-    f"Departamento: {form_data['ubicacion']}.\n"
+    f"Ubicación: {form_data['ubicacion']}.\n"
     f"Urgencia: {form_data['urgencia']}.\n\n"
     "Atentamente,\nEl departamento de TI\n(no responder a este mensaje).",
     charset='utf-8'

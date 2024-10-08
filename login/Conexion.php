@@ -1,17 +1,13 @@
 <?php
-
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $db = "db_mainbase";
-
-    $conexion = new mysqli($host, $user, $password, $db);
-
-    if ($conexion->connect_error) {
-        die("La conexión falló: " . $conexion->connect_error);
+    $servername = "localhost";
+    $database = "u366386740_db_mainbase";
+    $username = "u366386740_admin123";
+    $password = "1plGr0up01*";
+    // Create connection
+    $conexion = new mysqli($servername, $username, $password, $database);
+    // Check connection
+    if (!$conexion) {
+        die("Connection failed: " . mysqli_connect_error());
     }
 
 ?>
-
-<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">

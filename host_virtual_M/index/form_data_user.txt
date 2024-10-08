@@ -1,5 +1,5 @@
-nombrecompleto=Israel Góndola
-correo=israel@iplgsc.com
-descripcion=asdcasdcasdcasdc
-ubicacion=Siatema de iluminación administrativo
-urgencia=Regular
+nombrecompleto=Alcibiades Garay
+correo=alcibiades@iplgsc.com
+descripcion=este correo solo deberia ser enviado a mi corro personal
+ubicacion=Puerta electrica
+urgencia=seleccione una opción...
