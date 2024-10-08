@@ -1,5 +1,0 @@
-nombrecompleto=israel
-correo=israel@iplgsc.com
-descripcion=wtbbgbdsvbsdvSDFGQEV
-ubicacion=Escalera
-urgencia=Regular

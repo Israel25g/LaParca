@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
             "estado"    => $_POST['estado'],
         ];
 
-        $consultaSQL = "UPDATE tickets SET
+        $consultaSQL = "UPDATE tickets_m SET
             respuesta = :respuesta,
             estado = :estado,
             updated_at = NOW()
@@ -133,7 +133,7 @@ if (!isset($_POST['submit'])) {
 </head>
 
 <body style="margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png'); font-family: montserrat;">
-    <?php include "../templates/header.php"; ?>
+    <?php include "../componentesxd/header.php"; ?>
 
     <!-- Mostrar mensajes de error o éxito -->
     <?php if ($resultado['error']) { ?>
@@ -166,7 +166,7 @@ if (!isset($_POST['submit'])) {
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="mt-4">Respondiendo al Ticket de <?= escapar($tickets['nombrecompleto']) ?>, sobre: <?= escapar($tickets['descripcion']) ?></h2>
-                    <a class="btn btn-success" href="../indexAdmin/indexAdmin_m.php">Regresar al listado</a>
+                    <a class="btn btn-success" href="../indexAdmin//indexAdmin_m.php">Regresar al listado</a>
                     <hr>
                     <form method="post">
                         <div class="form-group">
