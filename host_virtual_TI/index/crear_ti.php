@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                       "Gracias por contactarnos. Aquí están los datos que nos suministraste para confirmar su correcto envío:\n\n" .
                       "Nombre Completo: " . $tickets['nombrecompleto'] . ".\n" .
                       "Descripción: " . $tickets['descripcion'] . "\n" .
-                      "Ubicación: " . $tickets['ubicacion'] . ".\n" .
+                      "Ubicación o Departamento: " . $tickets['ubicacion'] . ".\n" .
                       "Urgencia: " . $tickets['urgencia'] . ".\n\n" .
                       "Atentamente,\nEl departamento de TI\n(no responder a este mensaje).";
 
