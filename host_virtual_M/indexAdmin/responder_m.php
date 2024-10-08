@@ -7,7 +7,7 @@ require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 include '../funciones.php';
-$config = include '../config.php';
+$config = include '../../host_virtual_TI/config.php';
 
 $resultado = [
     'error' => false,
