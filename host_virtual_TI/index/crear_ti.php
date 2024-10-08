@@ -59,12 +59,12 @@ if (isset($_POST['submit'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'tickesprueba1@gmail.com';
-        $mail->Password = 'nfzs zcii xrhr hyky';
+        $mail->Username = 'ticketpruebas1@gmail.com';
+        $mail->Password = 'cyaj xxnu hjof ezrt';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('tickesPrueba1@gmail.com', 'Departamento TI');
+        $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
         $mail->addAddress($tickets['correo']);
         $mail->addAddress('ricaurte@iplgsc.com'); // Correo adicional
 
@@ -85,11 +85,11 @@ if (isset($_POST['submit'])) {
     } catch (PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $error->getMessage();
-        echo $resultado['mensaje']; // Agregar esto para ver el error
+        echo $resultado['mensaje']; //para ver el error
     } catch (Exception $e) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $e->getMessage();
-        echo $resultado['mensaje']; // Agregar esto para ver el error
+        echo $resultado['mensaje']; // para ver el error
     }
 }
 ?>
