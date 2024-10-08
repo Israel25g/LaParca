@@ -1,106 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de tickets</title>
-    <link rel="stylesheet" href="../../main-global.css">
+    <link rel="stylesheet" href="../../host_virtual_TI/estilosT.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
-    <!-- estilo bootstrap css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../estilos.css">
-    <!--estilos ccs-->
 </head>
+<body style=" margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png'); font-family:montserrat;">
 
-<body style="background-image: url('../../host_virtual_TI/images/Motivo2.png');">
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-    <?php
-    include '../funciones.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-    if (isset($_POST['submit'])) {
-        $resultado = [
-            'error' => false,
-            'mensaje' => 'El Ticket de ' . $_POST['nombrecompleto'] . ' ha sido agregado con éxito'
-        ];
-        $config = include '../config.php';
+require '../../vendor/phpmailer/phpmailer/src/Exception.php';
+require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
-        try {
-            $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-            $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+$resultado = []; // Variable para mensajes de resultado
 
-            $tickets = array(
-                "nombrecompleto"   => $_POST['nombrecompleto'],
-                "correo"           => $_POST['correo'],
-                "ubicacion"        => implode(", ", $_POST['ubicacion']), // Convertir array a string
-                "descripcion"      => $_POST['descripcion'],
-                "urgencia"         => implode(", ", $_POST['urgencia']) // Convertir array a string
-            );
+if (isset($_POST['submit'])) {
+    echo "Formulario enviado.<br>"; // Debug
 
-            $consultaSQL = "INSERT INTO tickets_m (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
-            $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
+    $config = include '../../host_virtual_TI/config.php';
 
-            $sentencia = $conexion->prepare($consultaSQL);
-            $sentencia->execute($tickets);
+    try {
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
+        ]);
 
-            // Guardar datos en un archivo para que el script Python los lea
-            $form_data = "nombrecompleto=" . htmlspecialchars($_POST['nombrecompleto']) . "\n" .
-                "correo=" . htmlspecialchars($_POST['correo']) . "\n" .
-                "descripcion=" . htmlspecialchars($_POST['descripcion']) . "\n" .
-                "ubicacion=" . htmlspecialchars(implode(", ", $_POST['ubicacion'])) . "\n" .
-                "urgencia=" . htmlspecialchars(implode(", ", $_POST['urgencia'])) . "\n";
-            file_put_contents('form_data_user.txt', $form_data);
+        echo "Conexión a la base de datos exitosa.<br>"; // Debug
 
-            // Ejecutar el script Python
-            $command = 'python3 send_email.py';
-            exec($command, $output, $return_var);
+        // Datos del formulario
+        $tickets = array(
+            "nombrecompleto" => $_POST['nombrecompleto'],
+            "correo" => $_POST['correo'],
+            "ubicacion" => implode(", ", $_POST['ubicacion']),
+            "descripcion" => $_POST['descripcion'],
+            "urgencia" => implode(", ", $_POST['urgencia'])
+        );
 
-            if ($return_var === 0) {
-                $resultado['mensaje'] .= "<br>El correo se envio correctamente.";
-            } else {
-                $resultado['error'] = true;
-                $resultado['mensaje'] .= "<br>Error al enviar el correo.";
-            }
-        } catch (PDOException $error) {
-            $resultado['error'] = true;
-            $resultado['mensaje'] = $error->getMessage();
-        }
+        // Guardar datos en la base de datos
+        $consultaSQL = "INSERT INTO tickets_m (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($tickets);
+
+        echo "Datos guardados en la base de datos.<br>"; // Debug
+
+        // Configuración del correo
+        $mail = new PHPMailer(true);
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'ticketpruebas1@gmail.com';
+        $mail->Password = 'cyaj xxnu hjof ezrt';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+                // Establecer la codificación de caracteres
+                $mail->CharSet = 'UTF-8';
+
+        $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento Mantenimineto');
+        $mail->addAddress($tickets['correo']);
+        $mail->addAddress('cecilio@iplgsc.com'); // Correo adicional
+
+        $mail->isHTML(false);
+        $mail->Subject = 'Confirmación de recepción del ticket';
+        $mail->Body = "Hola " . $tickets['nombrecompleto'] . ",\n\n" .
+                      "Gracias por contactarnos. Aquí están los datos que nos suministraste para confirmar su correcto envío:\n\n" .
+                      "Nombre Completo: " . $tickets['nombrecompleto'] . ".\n" .
+                      "Descripción: " . $tickets['descripcion'] . "\n" .
+                      "Ubicación o Departamento: " . $tickets['ubicacion'] . ".\n" .
+                      "Urgencia: " . $tickets['urgencia'] . ".\n\n" .
+                      "Atentamente,\nEl departamento de Mantenimiento\n(no responder a este mensaje).";
+
+        $mail->send();
+
+        echo "Correo enviado.<br>"; // Debug
+        $resultado['mensaje'] = 'El Ticket ha sido agregado con éxito y el correo se envió correctamente.';
+    } catch (PDOException $error) {
+        $resultado['error'] = true;
+        $resultado['mensaje'] = $error->getMessage();
+        echo $resultado['mensaje']; //para ver el error
+    } catch (Exception $e) {
+        $resultado['error'] = true;
+        $resultado['mensaje'] = $e->getMessage();
+        echo $resultado['mensaje']; // para ver el error
     }
-    ?>
-    <!-- Header -->
-    <div class="header">
-        <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
-        </div>
-        <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
-        <div class="cuadroFecha">
-            <p id="fecha-actual"></p>
-            <p id="hora-actual"></p>
-        </div>
-    </div>
-    <!-- Fin del Header -->
-    <div class="espacio">
-        <span class="margin10"></span>
-    </div>
+}
+?>
 
-    <?php
-    if (isset($resultado)) {
-    ?>
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
-                        <?= $resultado['mensaje'] ?>
-                    </div>
+<?php include "../componentesxd/header.php"; ?>
+<?php if (isset($resultado)) { ?>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-<?= isset($resultado['error']) ? 'danger' : 'success' ?>" role="alert">
+                    <?= $resultado['mensaje'] ?>
                 </div>
             </div>
         </div>
-    <?php
-    }
-    ?>
+    </div>
+<?php } ?>
 
-    <div class="tickM-main-block">
+<div class="tickM-main-block">
         <div class="row">
             <div class="col-md-12">
                 <h2 class="">Ingrese los datos para crear el Ticket</h2>
@@ -149,7 +157,7 @@
                     <div class="form-group">
                         <label for="urgencia">Nivel de urgencia</label>
                         <select class="form-control" name="urgencia[]" id="urgencia" required>
-                            <option>seleccione una opción...</option>
+                            <option>Seleccione una opción...</option>
                             <option>Regular</option>
                             <option>Urgente</option>
                         </select>

@@ -14,7 +14,7 @@
       include '../funciones.php';
 
       $error = false;
-      $config = include '../config.php';
+      $config = include '../../host_virtual_TI/config.php';
 
       try {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
@@ -32,7 +32,7 @@
       }
       ?>
 
-      <?php include "../templates/header.php"; ?>
+      <?php include "../componentesxd/header.php";?>
 
       <?php
       if ($error) {
