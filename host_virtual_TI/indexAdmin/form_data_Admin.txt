@@ -1,5 +1,0 @@
-id=3
-respuesta=respondiendoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-estado=Terminado
-correo=alcibiades@iplgsc.com
-nombrecompleto=Alcibiades Garay
