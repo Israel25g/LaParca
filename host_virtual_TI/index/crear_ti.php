@@ -18,43 +18,38 @@
             'error' => false,
             'mensaje' => 'El Ticket de ' . $_POST['nombrecompleto'] . ' ha sido agregado con éxito'
         ];
-
+    
         $config = include '../config.php';
-
+    
         try {
             $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
             $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
+    
             // Datos del formulario
             $tickets = array(
                 "nombrecompleto"   => $_POST['nombrecompleto'],
                 "correo"           => $_POST['correo'],
-                "ubicacion"        => implode(", ", $_POST['ubicacion']), // Convertir array a string
+                "ubicacion"        => implode(", ", $_POST['ubicacion']),
                 "descripcion"      => $_POST['descripcion'],
-                "urgencia"         => implode(", ", $_POST['urgencia']) // Convertir array a string
+                "urgencia"         => implode(", ", $_POST['urgencia'])
             );
-
+    
             // Guardar datos en la base de datos
             $consultaSQL = "INSERT INTO tickets (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
             $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
             $sentencia = $conexion->prepare($consultaSQL);
             $sentencia->execute($tickets);
-
+    
             // Guardar datos en archivo JSON
             $json_data = json_encode($tickets, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
             if (file_put_contents('form_data_user.json', $json_data) === false) {
                 throw new Exception("Error al guardar los datos en el archivo JSON.");
             }
-
-                // En lugar de exec()
-                include '../index/send_email.php'; // O require 'send_mail.php';
-
-            if ($return_var === 0) {
-                $resultado['mensaje'] .= "<br>El correo se envió correctamente.";
-            } else {
-                $resultado['error'] = true;
-                $resultado['mensaje'] .= "<br>Error al enviar el correo.";
-            }
+    
+            // Redirigir a send_mail.php para enviar el correo
+            header('Location: send_mail.php');
+            exit(); // Asegúrate de que el script se detenga aquí después de redirigir
+    
         } catch (PDOException $error) {
             $resultado['error'] = true;
             $resultado['mensaje'] = $error->getMessage();
@@ -63,6 +58,7 @@
             $resultado['mensaje'] = $error->getMessage();
         }
     }
+    
     ?>
     <?php include "../templates/header.php"; ?>
     <?php if (isset($resultado)) { ?>

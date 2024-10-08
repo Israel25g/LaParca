@@ -1,5 +1,0 @@
-nombrecompleto=Alcibiades Garay
-correo=alcibiades@iplgsc.com
-descripcion=se me perdieron 1000000 PDT, en una caja que iba a brazil 
-ubicacion=Inventario
-urgencia=Urgente

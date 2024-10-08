@@ -1,77 +1,51 @@
 <?php
+// Aquí incluyes la configuración de PHPMailer y los datos de envío
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Cargar el autoloader de Composer
-require 'vendor/autoload.php';
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 
-// Función para leer datos del archivo JSON
-function read_form_data($file_path) {
-    if (!file_exists($file_path)) {
-        throw new Exception("El archivo no existe: " . $file_path);
-    }
-
-    $json_content = file_get_contents($file_path);
-    $data = json_decode($json_content, true);  // Convierte el contenido JSON a un array asociativo
-
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception("Error al decodificar el JSON: " . json_last_error_msg());
-    }
-
-    return $data;
-}
-
-// Ruta al archivo que contiene los datos del formulario (en formato JSON)
-$file_path = 'form_data_user.json';
+$mail = new PHPMailer(true);
 
 try {
-    // Leer datos del archivo JSON
-    $form_data = read_form_data($file_path);
-
-    // Configuración del correo
-    $email_subject = "Confirmación de recepción del ticket";
-    $sender_email_address = "ticketpruebas1@gmail.com";
-    $email_password = "nfzs zcii xrhr hyky";
-    $email_smtp = "smtp.gmail.com";
-    $recipient_email = $form_data['correo'];
-
-    // Crear una nueva instancia de PHPMailer
-    $mail = new PHPMailer(true);
-
-    // Configuración del servidor SMTP
+    // Configuración del servidor SMTP de Gmail
     $mail->isSMTP();
-    $mail->Host = $email_smtp;
+    $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = $sender_email_address;
-    $mail->Password = $email_password;
-    $mail->SMTPSecure = 'tls';
+    $mail->Username = 'tu-correo@gmail.com';
+    $mail->Password = 'tu-password';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    // Configurar el remitente y destinatarios
-    $mail->setFrom($sender_email_address, 'Departamento de TI');
+    // Configuración del correo
+    $form_data = json_decode(file_get_contents('form_data_user.json'), true);
+    $mail->setFrom('tu-correo@gmail.com', 'Departamento TI');
     $mail->addAddress($form_data['correo']);
-    $mail->addAddress('ricaurte@iplgsc.com');
+    $mail->addAddress('ricaurte@iplgsc.com'); // Correo adicional
 
-    // Asunto del correo
-    $mail->Subject = $email_subject;
+    $mail->isHTML(false); // Enviar el mensaje en formato texto
+    $mail->Subject = 'Confirmación de recepción del ticket';
+    $mail->Body    = "Hola " . $form_data['nombrecompleto'] . ",\n\n" .
+                     "Gracias por contactarnos. Aquí están los datos que nos suministraste para confirmar su correcto envío:\n\n" .
+                     "Nombre Completo: " . $form_data['nombrecompleto'] . ".\n" .
+                     "Descripción: " . $form_data['descripcion'] . "\n" .
+                     "Ubicación: " . $form_data['ubicacion'] . ".\n" .
+                     "Urgencia: " . $form_data['urgencia'] . ".\n\n" .
+                     "Atentamente,\nEl departamento de TI\n(no responder a este mensaje).";
 
-    // Contenido del correo
-    $mail->Body = "Hola " . $form_data['nombrecompleto'] . ",\n\n" .
-                  "Gracias por contactarnos, aqui apareceran los datos que nos suministro, para confirmar su correcto envio:\n\n" .
-                  "Nombre Completo: " . $form_data['nombrecompleto'] . ".\n" .
-                  "Descripción: " . $form_data['descripcion'] . "\n" .
-                  "Ubicación: " . $form_data['ubicacion'] . ".\n" .
-                  "Urgencia: " . $form_data['urgencia'] . ".\n\n" .
-                  "Atentamente,\nEl departamento de TI\n(no responder a este mensaje).";
-
-    // Intentar enviar el correo
     $mail->send();
-    echo "Correo enviado exitosamente.";
+
+    // Redirigir de vuelta a crear_ti.php con un mensaje de éxito
+    header('Location: crear_ti.php?status=success');
+    exit();
 } catch (Exception $e) {
-    echo "Error al enviar el correo: {$mail->ErrorInfo}";
-} catch (\Exception $e) {
-    echo "Error: " . $e->getMessage();
+    // Redirigir de vuelta a crear_ti.php con un mensaje de error
+    header('Location: crear_ti.php?status=error&message=' . urlencode($mail->ErrorInfo));
+    exit();
 }
+
 ?>
 
 <!-- . ", ricaurte@iplgsc.com" -->
