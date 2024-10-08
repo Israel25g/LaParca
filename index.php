@@ -21,16 +21,8 @@
 
     <title>Inicio de sesión - IPL DIPROP</title>
 </head>
-<body>
-    <style>
-        body{
-            background-image: url('./images/tinified/IMG_9533.jpg');
-            margin: 0;
-            padding: 0;
-            
-        }
-    </style>
-    <h1>Inicio de Sesión</h1>
+<body style="background-image: url('./images/tinified/IMG_9533.jpg');">
+     <h1>Inicio de Sesión</h1>
 
     <?php
         if(isset($_GET['error'])){

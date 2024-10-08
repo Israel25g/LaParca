@@ -23,9 +23,9 @@ form_data = read_form_data(file_path)
 
 # Configuración del correo para Gmail
 email_subject = "Confirmación de recepción del ticket"
-sender_email_address = "ticketpruebas1@gmail.com"
-email_password = "nfzs zcii xrhr hyky"  
-email_smtp = "smtp.gmail.com"
+sender_email_address = "sistemadiprop@outlook.com"
+email_password = "vvvglnmafyngyqlz"  
+email_smtp = "smtp.office365.com"
 smtp_port = 587
 
 # Crear el mensaje de correo
@@ -45,12 +45,12 @@ message.set_content(
 )
 
 try:
-    # Conectar al servidor SMTP de Gmail
+    # Conectar al servidor SMTP de Outlook
     with smtplib.SMTP(email_smtp, smtp_port) as server:
         server.ehlo()  # Saludo inicial al servidor
         server.starttls()  # Comenzar la conexión segura TLS
         server.ehlo()  # Repetir saludo después de TLS
-        server.login(sender_email_address, email_password)  # Iniciar sesión en Gmail
+        server.login(sender_email_address, email_password)  # Iniciar sesión en Outlook
         server.send_message(message)  # Enviar el correo
 
     print("Correo enviado exitosamente.")  # Mensaje de éxito
