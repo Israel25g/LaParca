@@ -18,12 +18,14 @@
             'error' => false,
             'mensaje' => 'El Ticket de ' . $_POST['nombrecompleto'] . ' ha sido agregado con éxito'
         ];
+
         $config = include '../config.php';
 
         try {
             $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
             $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
+            // Datos del formulario
             $tickets = array(
                 "nombrecompleto"   => $_POST['nombrecompleto'],
                 "correo"           => $_POST['correo'],
@@ -32,26 +34,24 @@
                 "urgencia"         => implode(", ", $_POST['urgencia']) // Convertir array a string
             );
 
+            // Guardar datos en la base de datos
             $consultaSQL = "INSERT INTO tickets (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
             $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
-
             $sentencia = $conexion->prepare($consultaSQL);
             $sentencia->execute($tickets);
 
-            // Guardar datos en un archivo para que el script Python los lea
-            $form_data = "nombrecompleto=" . htmlspecialchars($_POST['nombrecompleto']) . "\n" .
-                "correo=" . htmlspecialchars($_POST['correo']) . "\n" .
-                "descripcion=" . htmlspecialchars($_POST['descripcion']) . "\n" .
-                "ubicacion=" . htmlspecialchars(implode(", ", $_POST['ubicacion'])) . "\n" .
-                "urgencia=" . htmlspecialchars(implode(", ", $_POST['urgencia'])) . "\n";
-            file_put_contents('form_data_user.txt', $form_data);
+            // Guardar datos en archivo JSON
+            $json_data = json_encode($tickets, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            if (file_put_contents('form_data_user.json', $json_data) === false) {
+                throw new Exception("Error al guardar los datos en el archivo JSON.");
+            }
 
-            // Ejecutar el script Python
-            $command = 'python3 send_email.py';
+            // Ejecutar el archivo PHP send_mail.php
+            $command = 'php send_mail.php';
             exec($command, $output, $return_var);
 
             if ($return_var === 0) {
-                $resultado['mensaje'] .= "<br>El correo se envio correctamente.";
+                $resultado['mensaje'] .= "<br>El correo se envió correctamente.";
             } else {
                 $resultado['error'] = true;
                 $resultado['mensaje'] .= "<br>Error al enviar el correo.";
@@ -59,13 +59,14 @@
         } catch (PDOException $error) {
             $resultado['error'] = true;
             $resultado['mensaje'] = $error->getMessage();
+        } catch (Exception $error) {
+            $resultado['error'] = true;
+            $resultado['mensaje'] = $error->getMessage();
         }
     }
     ?>
     <?php include "../templates/header.php"; ?>
-    <?php
-    if (isset($resultado)) {
-    ?>
+    <?php if (isset($resultado)) { ?>
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-12">
@@ -76,7 +77,6 @@
             </div>
         </div>
     <?php } ?>
-
 
     <div class="container">
         <div class="row">
