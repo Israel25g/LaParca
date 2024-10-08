@@ -46,9 +46,8 @@
                 throw new Exception("Error al guardar los datos en el archivo JSON.");
             }
 
-            // Ejecutar el archivo PHP send_mail.php
-            $command = 'php send_mail.php';
-            exec($command, $output, $return_var);
+                // En lugar de exec()
+                include '../index/send_email.php'; // O require 'send_mail.php';
 
             if ($return_var === 0) {
                 $resultado['mensaje'] .= "<br>El correo se envió correctamente.";
