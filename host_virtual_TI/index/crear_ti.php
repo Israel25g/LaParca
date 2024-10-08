@@ -28,11 +28,9 @@ if (isset($_POST['submit'])) {
     $config = include '../config.php';
 
     try {
-        // Conectar a la base de datos
-        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=u366386740_db_mainbase;charset=utf8';
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
         ]);
 
         echo "Conexión a la base de datos exitosa.<br>"; // Debug
@@ -63,6 +61,9 @@ if (isset($_POST['submit'])) {
         $mail->Password = 'cyaj xxnu hjof ezrt';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
+
+                // Establecer la codificación de caracteres
+                $mail->CharSet = 'UTF-8';
 
         $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
         $mail->addAddress($tickets['correo']);
