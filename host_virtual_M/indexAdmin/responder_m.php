@@ -102,7 +102,7 @@ if (!isset($_POST['submit'])) {
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
         $id = $_GET['id'];
-        $consultaSQL = "SELECT * FROM tickets WHERE id = :id";
+        $consultaSQL = "SELECT * FROM tickets_m WHERE id = :id";
 
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute(['id' => $id]);
