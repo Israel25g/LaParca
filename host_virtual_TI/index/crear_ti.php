@@ -10,6 +10,9 @@
 <body style=" margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png'); font-family:montserrat;">
 
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -20,6 +23,8 @@ require 'PHPMailer/src/SMTP.php';
 $resultado = []; // Variable para mensajes de resultado
 
 if (isset($_POST['submit'])) {
+    echo "Formulario enviado.<br>"; // Debug
+
     $config = include '../config.php';
 
     try {
@@ -29,6 +34,8 @@ if (isset($_POST['submit'])) {
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ]);
+
+        echo "Conexión a la base de datos exitosa.<br>"; // Debug
 
         // Datos del formulario
         $tickets = array(
@@ -44,6 +51,8 @@ if (isset($_POST['submit'])) {
         $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
+
+        echo "Datos guardados en la base de datos.<br>"; // Debug
 
         // Configuración del correo
         $mail = new PHPMailer(true);
@@ -71,13 +80,16 @@ if (isset($_POST['submit'])) {
 
         $mail->send();
 
+        echo "Correo enviado.<br>"; // Debug
         $resultado['mensaje'] = 'El Ticket ha sido agregado con éxito y el correo se envió correctamente.';
     } catch (PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $error->getMessage();
+        echo $resultado['mensaje']; // Agregar esto para ver el error
     } catch (Exception $e) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $e->getMessage();
+        echo $resultado['mensaje']; // Agregar esto para ver el error
     }
 }
 ?>
