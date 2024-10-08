@@ -25,7 +25,7 @@ $resultado = []; // Variable para mensajes de resultado
 if (isset($_POST['submit'])) {
     echo "Formulario enviado.<br>"; // Debug
 
-    $config = include '../config.php';
+    $config = include '../../host_virtual_TI/config.php';
 
     try {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];

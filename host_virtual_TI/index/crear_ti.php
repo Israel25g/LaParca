@@ -95,7 +95,9 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php include "../templates/header.php"; ?>
+<?php include "../../host_virtual_TI/templates/header.php"; ?>
+
+
 <?php if (isset($resultado)) { ?>
     <div class="container mt-3">
         <div class="row">
