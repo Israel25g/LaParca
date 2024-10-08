@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'tickesPrueba1@gmail.com';
+        $mail->Username = 'tickesprueba1@gmail.com';
         $mail->Password = 'nfzs zcii xrhr hyky';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
@@ -160,3 +160,9 @@ if (isset($_POST['submit'])) {
 <?php include "../templates/footer.php"; ?>
 </body>
 </html>
+
+
+Formulario enviado.
+Conexión a la base de datos exitosa.
+Datos guardados en la base de datos.
+SMTP Error: Could not authenticate.
