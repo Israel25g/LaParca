@@ -30,8 +30,11 @@
 
     if (isset($_POST['submit'])) {
         $resultado = [
-            'error' => false,
-            'mensaje' => 'El Ticket de ' . $_POST['nombrecompleto'] . ' ha sido agregado con éxito'
+            $resultado = [
+                'error' => false,
+                'mensaje' => 'El Ticket de ' . htmlspecialchars($_POST['nombrecompleto']) . ' ha sido agregado con éxito'
+            ]
+            
         ];
         $config = include '../config.php';
 
@@ -40,12 +43,13 @@
             $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
             $tickets = array(
-                "nombrecompleto"   => $_POST['nombrecompleto'],
-                "correo"           => $_POST['correo'],
-                "ubicacion"        => implode(", ", $_POST['ubicacion']), // Convertir array a string
-                "descripcion"      => $_POST['descripcion'],
-                "urgencia"         => implode(", ", $_POST['urgencia']) // Convertir array a string
+                "nombrecompleto" => isset($_POST['nombrecompleto']) ? $_POST['nombrecompleto'] : '',
+                "correo" => isset($_POST['correo']) ? $_POST['correo'] : '',
+                "ubicacion" => isset($_POST['ubicacion']) ? implode(", ", $_POST['ubicacion']) : '',
+                "descripcion" => isset($_POST['descripcion']) ? $_POST['descripcion'] : '',
+                "urgencia" => isset($_POST['urgencia']) ? implode(", ", $_POST['urgencia']) : ''
             );
+            
 
             // Guardar datos en la base de datos
             $consultaSQL = "INSERT INTO tickets_m (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
@@ -58,6 +62,7 @@
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
+
             $mail->Username = 'ticketpruebas1@gmail.com';
             $mail->Password = 'nfzs zcii xrhr hyky'; // Asegúrate de usar la contraseña correcta
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -68,20 +73,25 @@
             $mail->addAddress($tickets['correo']); // Correo del usuario
             $mail->addAddress('cecilio@iplgsc.com'); // Correo adicional
 
+            $mail->CharSet = 'UTF-8'; // Asegurando la codificación UTF-8
             $mail->isHTML(false); // Enviar el mensaje en formato texto
+            
             $mail->Subject = 'Confirmación de recepción del ticket';
-            $mail->Body    = "Hola " . $tickets['nombrecompleto'] . ",\n\n" .
-                             "Gracias por contactarnos. Aquí están los datos que nos suministraste para confirmar su correcto envío:\n\n" .
-                             "Nombre Completo: " . $tickets['nombrecompleto'] . ".\n" .
-                             "Descripción: " . $tickets['descripcion'] . "\n" .
-                             "Ubicación: " . $tickets['ubicacion'] . ".\n" .
-                             "Urgencia: " . $tickets['urgencia'] . ".\n\n" .
-                             "Atentamente,\nEl departamento de Mantenimiento\n(no responder a este mensaje).";
+
+            $mail->Body    = "Hola " . htmlspecialchars($tickets['nombrecompleto']) . ",\n\n" .
+            "Gracias por contactarnos. Aquí están los datos que nos suministraste para confirmar su correcto envío:\n\n" .
+            "Nombre Completo: " . htmlspecialchars($tickets['nombrecompleto']) . ".\n" .
+            "Descripción: " . htmlspecialchars($tickets['descripcion']) . "\n" .
+            "Ubicación: " . htmlspecialchars($tickets['ubicacion']) . ".\n" .
+            "Urgencia: " . htmlspecialchars($tickets['urgencia']) . ".\n\n" .
+            "Atentamente,\nEl departamento de TI\n(no responder a este mensaje).";
+
 
             $mail->CharSet = 'UTF-8'; // Asegurando la codificación UTF-8
             $mail->send();
 
             $resultado['mensaje'] .= "<br>El correo se envió correctamente.";
+            
         } catch (PDOException $error) {
             $resultado['error'] = true;
             $resultado['mensaje'] = $error->getMessage();
