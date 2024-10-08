@@ -14,14 +14,14 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'tu-correo@gmail.com';
-    $mail->Password = 'tu-password';
+    $mail->Username = 'tickesPrueba1@gmail.com';
+    $mail->Password = 'nfzs zcii xrhr hyky';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
     // Configuración del correo
     $form_data = json_decode(file_get_contents('form_data_user.json'), true);
-    $mail->setFrom('tu-correo@gmail.com', 'Departamento TI');
+    $mail->setFrom('tickesPrueba1@gmail.com', 'Departamento TI');
     $mail->addAddress($form_data['correo']);
     $mail->addAddress('ricaurte@iplgsc.com'); // Correo adicional
 
