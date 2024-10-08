@@ -32,7 +32,7 @@
       }
       ?>
 
-      <?php include "../templates/header.php"; ?>
+      <?php include "../componentesxd/header.php";?>
 
       <?php
       if ($error) {
