@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
         // Conexión a la base de datos
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+        $conexion->exec("set names utf8");
 
         // Actualización de los datos del ticket
         $tickets = [
@@ -59,6 +60,7 @@ if (isset($_POST['submit'])) {
             $mail->Password = 'nfzs zcii xrhr hyky';      // Cambia esto por la contraseña adecuada
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
+            $mail->CharSet = 'UTF-8';
 
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de TI');
