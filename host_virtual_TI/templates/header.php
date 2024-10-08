@@ -40,7 +40,7 @@
     <!-- Fin del Header -->
     <!-- Navbar -->
      
-    <div class="container ">
+    <!-- <div class="container ">
   <nav class="navbar navbar-expand-lg bg-body-success shadow-sm p-3 mb-5 bg-body-tertiary rounded-5 rounded-top-0 bg-success-subtle ">
         <div class="container-fluid ">
             <div class="btn-group " role="group" aria-label="Basic example">
@@ -51,7 +51,7 @@
       </div>
     </div>
   </nav>
-</div>
+</div> -->
     <!-- Fin Navbar -->
     <!--script-->
     <script src="../js/script.js"></script>
