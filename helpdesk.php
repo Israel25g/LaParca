@@ -47,6 +47,11 @@ if (!isset($_SESSION['user'])) {
                 <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
                 <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
+                 <?php 
+                    if($_SESSION['rol'] === 'Admin'){
+                        echo '<li class="nav-li"><a href="Dashboards/dashboards.php">Admin</a></li>';
+                    }
+                 ?>
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
         </div>

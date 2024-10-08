@@ -29,13 +29,13 @@ session_start();
                         $_SESSION['user'] = $user;
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
-                        header("Location: ../helpdesk.php?error=Inicio de sesión con ". $_SESSION['user']);
+                        header("Location: ../helpdesk.php?error=Inicio de sesión con ". $_SESSION['rol']);
                     }
                     else{
                         $_SESSION['user'] = $user;
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
-                        header("Location: ../helpdesk.php?error=ha iniciado sesion con el rol ". $_SESSION['rol']. session_id());
+                        header("Location: ../helpdesk.php?error=ha iniciado sesion con el rol ". $_SESSION['rol']);
                         echo session_id();
                     }
                 }

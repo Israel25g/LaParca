@@ -74,67 +74,8 @@
   <?php
 }
 ?>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <a href="crear_m.php"  class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
-      <hr>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h2 class="mt-3">Listado de ticket de Mantenimiento</h2>
-      <table class="table shadow-sm p-3 mb-5 bg-body-tertiary rounded table-striped">
-        <thead>
-          <tr>
-            <th>TID</th>
-            <th>Solicitante</th>
-            <th>correo</th>
-            <th>Departamento</th>
-            <th>Estado del problema</th>
-            <th>nivel de urgencia</th>
-            <th>Respuesta</th>
-            <th>Estado</th>
-            <th>fecha de creacion</th>
-            <th>ultima actualizacion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          if ($tickets && $sentencia->rowCount() > 0) {
-            foreach ($tickets as $fila) {
-              ?>
-              <tr>
-                <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["correo"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
-                <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
-              </tr>
-              <?php
-            }
-          }
-          ?>
-        <tbody>
-      </table>
-    </div>
-  </div>
-</div>
 
-<?php include "../templates/footer.php"; ?>
-
-  
-  }
-  ?>
   <br>
-
   <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
