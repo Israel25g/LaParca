@@ -119,7 +119,7 @@
               }
             }
             ?>
-          <tbody>
+          </tbody>
           <tfoot>
             <tr>
               <th>TID</th>
