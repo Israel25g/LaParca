@@ -87,6 +87,7 @@
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_im/hoja_im.php">Hoja de datos</a></li>
                   </ul>
                 <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                <br/>
                 <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color: #fff;  margin-top: 1%">
                   <thead>
                     <tr>
