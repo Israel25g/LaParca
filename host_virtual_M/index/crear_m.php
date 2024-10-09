@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../estilos.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
-<body style="background-image: url('../../images/Motivo2.png'); font-family: montserrat ">
+<body style="background-image: url('../../images/Motivo2.png')!important;">
     <!-- <style>
 .body{
 
