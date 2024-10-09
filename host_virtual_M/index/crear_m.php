@@ -23,7 +23,7 @@ require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 $resultado = []; // Variable para mensajes de resultado
 
 if (isset($_POST['submit'])) {
-    echo "Formulario enviado.<br>"; // Debug
+   // echo "Formulario enviado.<br>";  Debug
 
     $config = include '../../host_virtual_TI/config.php';
 
@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
         ]);
 
-        echo "Conexión a la base de datos exitosa.<br>"; // Debug
+       // echo "Conexión a la base de datos exitosa.<br>";  Debug
 
         // Datos del formulario
         $tickets = array(
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
 
-        echo "Datos guardados en la base de datos.<br>"; // Debug
+       // echo "Datos guardados en la base de datos.<br>"; // Debug
 
         // Configuración del correo
         $mail = new PHPMailer(true);
@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
 
 <?php include "../componentesxd/header.php"; ?>
 <?php if (isset($resultado)) { ?>
-    <div class="container mt-3">
+    <!-- <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-<?= isset($resultado['error']) ? 'danger' : 'success' ?>" role="alert">
@@ -105,11 +105,11 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 <?php } ?>
 
 <div class="tickM-main-block">
-        <div class="row  justify-content-md-center">
+        <div class="row" style="margin-left:600px!important">
             <div class="col-md-6">
                 <h2 class="">Ingrese los datos para crear el Ticket</h2>
                 <a class="btn btn-success btn-lg" href="../index/index_m.php">Volver al listado</a>
