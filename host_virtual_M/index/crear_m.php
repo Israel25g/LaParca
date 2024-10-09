@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de tickets</title>
-    <link rel="stylesheet" href="../../host_virtual_TI/estilosT.css">
+    <link rel="stylesheet" href="../../estilos.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
 <body style=" margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png'); font-family:montserrat;">
