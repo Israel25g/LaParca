@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 
-<body style="background-image: url('../images/Motivo.png');">
+<body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; font-family:montserrat;">
   <div>
     <!-- Header -->
     <div class="header">
