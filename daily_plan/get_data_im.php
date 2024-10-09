@@ -1,32 +1,36 @@
 <?php
-// Archivo para extraer los datos de la base de datos (get_data.php)
-include '../daily_plan/funcionalidades/config_G.php';
+header('Content-Type: application/json');
 
-// Consulta a la base de datos
-$query = "SELECT SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta, cliente FROM import WHERE fecha_objetivo = CURDATE()";
+include '../daily_plan/funcionalidades/config_G.php'; // Suponiendo que este archivo contiene la conexión a la base de datos.
+
+$query = "
+    SELECT 
+        cliente, 
+        SUM(grafica_dp) AS total_grafico, 
+        SUM(pedidos_despachados) AS total_meta 
+    FROM 
+        import 
+    WHERE 
+        fecha_objetivo = CURDATE() 
+    GROUP BY 
+        cliente
+";
 
 $result = $conn->query($query);
 
-// Inicializar un array para los datos
-$data = array();
+$clientes = [];
+$total_grafico = [];
+$total_meta = [];
 
-if ($result->num_rows > 0) {
-    // Almacenar los resultados en el array
-    while($row = $result->fetch_assoc()) {
-        $data[] = array(
-            'name' => ['cliente'],
-            'total_meta' => (int)$row['total_meta'],
-            'total_grafico' => (int)$row['total_grafico']
-            
-        );
-    }
-} else {
-    echo "No se encontraron datos.";
+while ($row = $result->fetch_assoc()) {
+    $clientes[] = $row['cliente'];
+    $total_grafico[] = (int)$row['total_grafico']; // Asegúrate de que los valores sean enteros
+    $total_meta[] = (int)$row['total_meta'];
 }
 
-// Devolver los datos en formato JSON
-echo json_encode($data);
-
-// Cerrar la conexión
-$conn->close();
+echo json_encode([
+    'clientes' => $clientes,
+    'total_grafico' => $total_grafico,
+    'total_meta' => $total_meta
+]);
 ?>
