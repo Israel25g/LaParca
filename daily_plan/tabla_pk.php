@@ -1,3 +1,7 @@
+<?php
+include("../apertura_sesion.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +49,6 @@
     </div> -->
 
     <?php
-    session_start();
     include '../daily_plan/funcionalidades/funciones.php';
     $error = false;
     $config = include '../daily_plan/funcionalidades/config_DP.php';

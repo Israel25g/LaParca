@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user'])) {
-    header('Location: index.php?error=No has iniciado sesión.');
-    exit;
-}
+include("apertura_sesion.php")
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +44,7 @@ if (!isset($_SESSION['user'])) {
                 <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
                  <?php 
                     if($_SESSION['rol'] === 'Admin'){
-                        echo '<li class="nav-li"><a href="Dashboards/dashboards.php">Admin</a></li>';
+                        echo '<li class="nav-li"><a href="access_control/index/index_users.php">Admin</a></li>';
                     }
                  ?>
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
