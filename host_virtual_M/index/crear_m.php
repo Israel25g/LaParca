@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
 
 <div class="tickM-main-block">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <h2 class="">Ingrese los datos para crear el Ticket</h2>
                 <a class="btn btn-success btn-lg" href="../index/index_m.php">Volver al listado</a>
                 <hr>
