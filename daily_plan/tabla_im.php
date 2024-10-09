@@ -145,7 +145,7 @@
                 paging: false,
                 scrollCollapse: true,
                 scrollY: '500px',
-                scrollX: '1600px',
+                scrollX: '1700px',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
                 info: false,

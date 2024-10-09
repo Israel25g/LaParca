@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 
-<body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0;  font-family:montserrat;">
+<body style="background-image:url('../images/Motivo.png');margin: 0;padding: 0;  font-family:montserrat;">
   <div style="margin-top: 90px;">
     <!-- Header -->
     <div class="header">

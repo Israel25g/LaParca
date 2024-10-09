@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 
-<body>
+<body style="background-image: url('../images/Motivo.png');">
   <div>
     <!-- Header -->
     <div class="header">
@@ -137,7 +137,7 @@
           paging: false,
           scrollCollapse: true,
           scrollY: '400px',
-          scrollX: '1500px',
+          scrollX: '1600px',
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
           dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
           info: false,
