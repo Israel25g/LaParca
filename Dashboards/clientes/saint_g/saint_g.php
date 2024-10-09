@@ -57,11 +57,6 @@
         width: 200px !important; /* Ajusta el ancho del botón */
         height: 50px !important;
     }
-    
-    /* Opcional: Cambiar el color del botón cuando se hace hover */
-    .custom-btn:hover {
-        background-color: gold; /* Cambia el color de fondo cuando el cursor pasa por encima */
-    }
 
     .side_menu{
             position: fixed;
