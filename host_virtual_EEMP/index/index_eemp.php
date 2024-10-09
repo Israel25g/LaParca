@@ -33,12 +33,9 @@
   try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-    $consultaSQL = "SELECT * FROM tickets";
-
+    $consultaSQL = "SELECT * FROM tickets_eemp";
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
-    
     $tickets = $sentencia->fetchAll();
   } catch (PDOException $error) {
     $error = $error->getMessage();
@@ -46,7 +43,7 @@
   ?>
 
   <!-- Header -->
-  <div class="header-error">
+  <div class="header">
     <div class="logo-container">
       <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
     </div>
@@ -75,30 +72,15 @@
   ?>
   <br>
 
-  <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="...">
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-    <?= $error ?>
-    </div>
-  </div>
-</div>
 
   <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
-        <h2>Listado de ticket de TI</h2>
+        <h2>Listado de ticket de EEMP</h2>
         <div class="col-md-12">
-          <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
+          <a href="crear_eemp.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
         </div>
-        <table id="tickTItable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
+        <table id="tickEemptable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>
             <tr>
               <th class="border-end">TID</th>
@@ -115,24 +97,24 @@
           </thead>
           <tbody>
             <?php
-              if ($tickets && $sentencia->rowCount() > 0) {
-                foreach ($tickets as $fila) {
-                  ?>
-                  <tr>
-                    <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                    <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
-                    <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
-                  </tr>
-                  <?php
-                }
+            if ($tickets && $sentencia->rowCount() > 0) {
+              foreach ($tickets as $fila) {
+            ?>
+                <tr>
+                  <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
+                  <!-- <td><?php #echo escapar($fila["correo"]);?></td> -->
+                  <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
+                </tr>
+            <?php
               }
+            }
             ?>
           </tbody>
           <tfoot>
@@ -163,7 +145,7 @@
   <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
 
   <script>
-    new DataTable('#tickTItable', {
+    new DataTable('#tickEemptable', {
       layout: {
         topStart: {
           pageLength: {
