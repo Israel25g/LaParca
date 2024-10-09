@@ -31,6 +31,12 @@ session_start();
                         $_SESSION['id'] = $row['id'];
                         header("Location: ../helpdesk.php?error=Inicio de sesión con ". $_SESSION['rol']);
                     }
+                    elseif ($row['nombre_rol'] == 'TV'){
+                        $_SESSION['user'] = $user;
+                        $_SESSION['rol'] = $row['nombre_rol'];
+                        $_SESSION['id'] = $row['id'];
+                        header("Location: ../daily_plan/grafico.php?error=Inicio de sesión con ". $_SESSION['rol']);
+                    }
                     else{
                         $_SESSION['user'] = $user;
                         $_SESSION['rol'] = $row['nombre_rol'];
