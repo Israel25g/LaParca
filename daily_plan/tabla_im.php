@@ -80,8 +80,8 @@
           <div class="tabla-container">
             <div class="row">
               <div class="col-md-12">
-                <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
-                <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Import</button>
+                <h2 class="mt-3 nombre-tabla" style="margin: 10px;" ><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
+                <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php" style="margin: 10px;">Ingresar datos de Import</button>
                   <ul class="dropdown-menu bg-success">
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_im.php">Formulario singular</a></li>
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_im/hoja_im.php">Hoja de datos</a></li>
