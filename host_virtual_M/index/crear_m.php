@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
 
 <?php include "../componentesxd/header.php"; ?>
 <?php if (isset($resultado)) { ?>
-    <!-- <div class="container mt-3">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-<?= isset($resultado['error']) ? 'danger' : 'success' ?>" role="alert">
@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 <?php } ?>
 
 <div class="tickM-main-block">
