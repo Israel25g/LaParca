@@ -33,9 +33,12 @@
   try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
     $consultaSQL = "SELECT * FROM tickets";
+
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
+    
     $tickets = $sentencia->fetchAll();
   } catch (PDOException $error) {
     $error = $error->getMessage();
