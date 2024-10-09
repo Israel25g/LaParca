@@ -24,7 +24,7 @@ require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 $resultado = ['mensaje' => ''];
 
 if (isset($_POST['submit'])) {
-    echo "Formulario enviado.<br>"; // Debug
+   // echo "Formulario enviado.<br>"; // Debug
 
     $config = include '../config.php';
 
