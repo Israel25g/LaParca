@@ -81,12 +81,12 @@
             <div class="row">
               <div class="col-md-12">
                 <h2 class="mt-3 nombre-tabla" style="margin: 10px;" ><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
-                <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php" style="margin-bottom: 10px;margin-left:-5px;">Ingresar datos de Import</button>
+                <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php" style="margin-bottom: 10px;">Ingresar datos de Import</button>
                   <ul class="dropdown-menu bg-success">
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_im.php">Formulario singular</a></li>
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_im/hoja_im.php">Hoja de datos</a></li>
                   </ul>
-                <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                 <br/>
                 <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border" style="background-color: #fff;  margin-top: 2%">
                   <thead>
