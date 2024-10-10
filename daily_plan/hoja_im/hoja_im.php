@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable@11.0.0/dist/handsontable.full.min.css">
     <script src="https://cdn.jsdelivr.net/npm/handsontable@11.0.0/dist/handsontable.full.min.js"></script>
 </head>
-<body style="background-image:url('../images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
+<body style="background-image:url('../../images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
     <div class="form-table">
         <!-- Header -->
         <div class="header">
