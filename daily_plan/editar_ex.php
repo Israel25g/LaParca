@@ -175,7 +175,7 @@
           <div class="col-md-12">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Export, del cliente <?= escapar($export['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_ex.php">Regresar a la tabla Export</a>
-            <br/>
+    </br>
           <form method="POST" style="margin-top: 50px;">
             <div class="form-group">
               <label for="pedidos_en_proceso">Nueva cantidad de pedidos en proceso (modificar solo de ser necesario).</label>

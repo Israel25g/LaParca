@@ -157,7 +157,7 @@
           <div class="col-md-12">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Picking, del cliente <?= escapar($export['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_pk.php">Regresar a la tabla picking</a>
-            <br/>
+    </br>
           <form method="POST" style="margin-top: 50px;">
             <div class="form-group">
               <label for="pedidos_en_proceso">Cantidad de Unidades por pickear (modificar solo de ser necesario).</label>
