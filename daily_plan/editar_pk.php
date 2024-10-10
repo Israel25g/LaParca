@@ -143,7 +143,7 @@
       <div class="container mt-2">
         <div class="row">
           <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="margin-top: 490%; margin-left: 100%; position: absolute">
+            <div class="alert alert-success" role="alert" style="margin-top: 450%; margin-left: 500%; position: absolute">
               <?= $resultado['mensaje'] ?>
             </div>
           </div>
@@ -157,7 +157,7 @@
           <div class="col-md-12">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Picking, del cliente <?= escapar($export['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_pk.php">Regresar a la tabla picking</a>
-            <hr>
+            <br/>
           <form method="POST">
             <div class="form-group">
               <label for="pedidos_en_proceso">Cantidad de Unidades por pickear (modificar solo de ser necesario).</label>
