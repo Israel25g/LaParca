@@ -10,10 +10,10 @@ if ($data) {
     $archivo = 'arreglo_pk.json'; // Nombre del archivo
     if (file_put_contents($archivo, $json_data)) {
         // Respuesta exitosa
-        echo json_encode(['message' => 'Datos de Picking seran guardados']);
+        echo json_encode(['message' => 'Datos de Picking guardados correctamente']);
     } else {
         // Error al guardar los datos
-        echo json_encode(['message' => 'Error al guardar los datos ']);
+        echo json_encode(['message' => 'Error al guardar los datos']);
     }
 } else {
     // Error al recibir los datos

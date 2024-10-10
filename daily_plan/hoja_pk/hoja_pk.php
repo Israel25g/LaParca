@@ -105,44 +105,50 @@
 
             // Evento click para guardar datos
             document.getElementById('guardarDatos').addEventListener('click', function () {
-    const data = hot.getData(); // Obtener los datos de la tabla
+                const data = hot.getData(); // Obtener los datos de la tabla
 
-    // Validar los datos antes de enviarlos
-    if (!validarDatos(data)) {
-        alert('Por favor, complete todos los campos obligatorios antes de guardar, los campos obligatorios están señalados con "*"');
-        return; // Detener si la validación falla
-    }
+                if (!validarDatos(data)) {
+                    alert('Por favor, complete todos los campos obligatorios antes de guardar, los campos obligatorios estan señalados con "*"');
+                    return;
+                }
 
-    // Enviar los datos al servidor
-    fetch('guardar_datos.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ data: data }) // Enviar los datos como JSON
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al guardar los datos. Estado: ' + response.statusText);
-        }
-        return response.json(); // Asegurar que la respuesta sea JSON
-    })
-    .then(result => {
-        // Solo mostramos el mensaje si la respuesta es exitosa
-        alert('Los datos se guardaron correctamente.');
+                fetch('guardar_datos.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ data: data })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    alert(result.message); // Mensaje del servidor
+                    // Redirigir
+                    setTimeout(function() {
+                        window.location.href = '../hoja_pk/formatear_json.php';
+                    });
 
-        // Redirigir a otra página después de la alerta (esperar 1 segundo)
-        setTimeout(function() {
-            window.location.href = '../hoja_pk/formatear_json.php';
-        }, 1000);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Hubo un error al guardar los datos.');
-    });
-});
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
         });
     </script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === 'success') {
+            alert('Datos guardados correctamente en la base de datos.');
+        } else if (status === 'error') {
+            alert('Hubo un error al guardar los datos.');
+        }
+    });
+</script>
+
     <script src="../../host_virtual_TI/js/script.js"></script>
+
 </body>
 </html>
