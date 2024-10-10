@@ -25,8 +25,8 @@ foreach ($data as $row) {
 
 // Configuración de la base de datos
 $host = 'localhost'; // Cambia esto si tu base de datos está en otro host
-$db   = 'u366386740_db_mainbase';
-$user = 'u366386740_admin123';
+$db   = 'u366386740_db_dailyplan';
+$user = 'u366386740_adminDP';
 $pass = '1plGr0up01*';
 $charset = 'utf8mb4';
 
