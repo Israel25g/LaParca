@@ -161,7 +161,7 @@
       <div class="container mt-2">
         <div class="row">
           <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="margin-top: 490%; margin-left: 500%; position: absolute">
+            <div class="alert alert-success" role="alert" style="margin-top: 490%; margin-left: 600%; position: absolute">
               <?= $resultado['mensaje'] ?>
             </div>
           </div>
