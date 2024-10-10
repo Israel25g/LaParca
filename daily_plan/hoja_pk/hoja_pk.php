@@ -34,9 +34,9 @@
     <div id="tablaExcel" style="margin: 60px;"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const container = document.getElementById('tablaExcel');
-            const customContextMenu = {
+document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('tablaExcel');
+    const customContextMenu = {
         items: {
             'row_above': {name: 'Insertar fila arriba'},
             'row_below': {name: 'Insertar fila abajo'},
@@ -57,82 +57,81 @@
         }
     };
 
-            // Columnas de tu tabla
-            const colHeaders = ['Oid*', 'Cliente*', 'Paletas', 'Cajas', 'Unidades por pickear*', 'Fecha estimada de salida*', 'Prioridad de Picking*','Comentario Oficina'];
-            
-            const columns = [
-                { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'text' }, // cliente
-                { data: 2, type: 'numeric' }, // paletas
-                { data: 3, type: 'numeric' }, // cajas
-                { data: 4, type: 'numeric' }, // unidades por pickear
-                { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
-                { data: 8, type: 'text' },  // comentario oficina
-                { data: 7, type: 'text' }  // prioridad de picking
-            ];
+    // Columnas de tu tabla
+    const colHeaders = ['Oid*', 'Cliente*', 'Paletas', 'Cajas', 'Unidades por pickear*', 'Fecha estimada de salida*', 'Prioridad de Picking*', 'Comentario Oficina'];
+    
+    const columns = [
+        { data: 0, type: 'text' }, // aid_oid
+        { data: 1, type: 'text' }, // cliente
+        { data: 2, type: 'numeric' }, // paletas
+        { data: 3, type: 'numeric' }, // cajas
+        { data: 4, type: 'numeric' }, // unidades por pickear
+        { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
+        { data: 8, type: 'text' },  // comentario oficina
+        { data: 7, type: 'text' }  // prioridad de picking
+    ];
 
-            // Configuración de Handsontable
-            const hot = new Handsontable(container, {
-                data: Handsontable.helper.createEmptySpreadsheetData(1, colHeaders.length), // Datos vacíos con el número de columnas adecuado
-                rowHeaders: true,
-                colHeaders: colHeaders,
-                columns: columns,
-                filters: true,
-                dropdownMenu: false,
-                minSpareRows: 0,
-                contextMenu: false,
-                manualColumnResize: true,
-                manualRowResize: true,
-                stretchH: 'all',
-                licenseKey: 'non-commercial-and-evaluation', // Necesario para la versión gratuita
-            });
+    // Configuración de Handsontable
+    const hot = new Handsontable(container, {
+        data: Handsontable.helper.createEmptySpreadsheetData(1, colHeaders.length), // Datos vacíos con el número de columnas adecuado
+        rowHeaders: true,
+        colHeaders: colHeaders,
+        columns: columns,
+        filters: true,
+        dropdownMenu: false,
+        minSpareRows: 0,
+        contextMenu: false,
+        manualColumnResize: true,
+        manualRowResize: true,
+        stretchH: 'all',
+        licenseKey: 'non-commercial-and-evaluation', // Necesario para la versión gratuita
+    });
 
-            // Función para validar los datos antes de guardarlos
-            function validarDatos(data) {
-                for (let i = 0; i < data.length; i++) {
-                    const row = data[i];
-                    // Validar que las columnas específicas no estén vacías
-                    // Columnas: 0 (Oid), 1 (Cliente), 2 (Vehículo/placa), 9 (Pedidos en Proceso), 10 (Fecha estimada de salida)
-                    const requiredColumns = [0, 1, 4, 6];
-                    for (let j of requiredColumns) {
-                        if (row[j] === null || row[j] === '') {
-                            return false; // Devuelve falso si encuentra un campo obligatorio vacío
-                        }
-                    }
+    // Función para validar los datos antes de guardarlos
+    function validarDatos(data) {
+        for (let i = 0; i < data.length; i++) {
+            const row = data[i];
+            const requiredColumns = [0, 1, 4, 6];
+            for (let j of requiredColumns) {
+                if (row[j] === null || row[j] === '') {
+                    return false; // Devuelve falso si encuentra un campo obligatorio vacío
                 }
-                return true; // Devuelve verdadero si todos los campos obligatorios están completos
             }
+        }
+        return true; // Devuelve verdadero si todos los campos obligatorios están completos
+    }
 
-            // Evento click para guardar datos
-            document.getElementById('guardarDatos').addEventListener('click', function () {
-                const data = hot.getData(); // Obtener los datos de la tabla
+    // Evento click para guardar datos
+    document.getElementById('guardarDatos').addEventListener('click', function () {
+        const data = hot.getData(); // Obtener los datos de la tabla
 
-                if (!validarDatos(data)) {
-                    alert('Por favor, complete todos los campos obligatorios antes de guardar, los campos obligatorios estan señalados con "*"');
-                    return;
-                }
+        if (!validarDatos(data)) {
+            alert('Por favor, complete todos los campos obligatorios antes de guardar, los campos obligatorios estan señalados con "*"');
+            return;
+        }
 
-                fetch('guardar_datos.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ data: data })
-                })
-                .then(response => response.json())
-                .then(result => {
-                    alert(result.message); // Mensaje del servidor
-                    // Redirigir
-                    setTimeout(function() {
-                        window.location.href = '../hoja_pk/formatear_json.php';
-                    });
-
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
+        fetch('guardar_datos.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: data })
+        })
+        .then(response => response.json())
+        .then(result => {
+            // Alerta de éxito
+            alert('Los datos se guardaron correctamente.');
+            // Redirigir después de mostrar la alerta
+            setTimeout(function() {
+                window.location.href = '../hoja_pk/formatear_json.php';
+            }, 1000); // Esperar 1 segundo para redirigir
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+    });
+});
+
     </script>
     <script src="../../host_virtual_TI/js/script.js"></script>
 </body>
