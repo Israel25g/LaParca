@@ -61,9 +61,9 @@ if (isset($_POST['submit'])) {
         // Establecer la codificación de caracteres
         $mail->CharSet = 'UTF-8';
 
-        $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
+        $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento Mantenimiento');
         $mail->addAddress($tickets['correo']);
-        $mail->addAddress('ricaurte@iplgsc.com'); // Correo adicional
+        $mail->addAddress('cecilio@iplgsc.com'); // Correo adicional
 
         $mail->isHTML(false);
         $mail->Subject = 'Confirmación de recepción del ticket';
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
                       "Descripción: " . $tickets['descripcion'] . "\n" .
                       "Ubicación o Departamento: " . $tickets['ubicacion'] . ".\n" .
                       "Urgencia: " . $tickets['urgencia'] . ".\n\n" .
-                      "Atentamente,\nEl departamento de TI\n(no responder a este mensaje).";
+                      "Atentamente,\nEl departamento de Mantenimiento\n(no responder a este mensaje).";
 
         $mail->send();
 
