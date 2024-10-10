@@ -119,7 +119,7 @@
     <div class="container_d" style="margin-left: 400px !important" >
         <div class="bloques_d ">
 
-            <div class="bloque_d border border-info-success border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
                 <div id="grafico-pastel1" class="bg-white" style="width: 100%; height: 100%;"></div>
             </div>
 
