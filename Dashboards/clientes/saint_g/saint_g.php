@@ -102,7 +102,7 @@
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
 
-    <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 125px; width: 137px;">
+    <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 125px; width: 137px; margin-top: 700px!important; margin: left 5px !important; ">
         <img loading="lazy" class="img_helpdesk  bg-success" id="logo-stg" src="../../../images/Saint-Gobain.png" alt="">
     </div>
 
