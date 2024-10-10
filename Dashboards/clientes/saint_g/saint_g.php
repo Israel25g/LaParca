@@ -101,6 +101,11 @@
 
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
+
+    <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+        <img loading="lazy" class="img_helpdesk  bg-success" id="logo-stg" src="../../../images/Saint-Gobain.png" alt="">
+    </div>
+
     <div class="" role="group" aria-label="Vertical button group" style="margin-top: 300px;" aria-label="Basic mixed styles example">
         <button type="button" class="btn btn-success custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1"><p style="font-family:montserrat !important; font-size:large; color: black;">Import</p></button>
         <button type="button" class="btn btn-danger custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"><p style="font-family:montserrat !important ; font-size:large; color:black; ">Export</p></button>
