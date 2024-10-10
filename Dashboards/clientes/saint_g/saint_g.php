@@ -102,8 +102,8 @@
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
 
-    <div class="bloque_d border border-warning border-5" id="grafico1" style="height: 125px; width: 230px; margin-top: 150px!important; margin: left 200px !important; ">
-        <img loading="lazy" class="img_helpdesk" id="logo-stg" src="../../../images/Saint-Gobain.png" style="height: 125px; width: 230px;" alt="">
+    <div class="bloque_d border border-warning border-5" id="grafico1" style="height: 170px; width: 230px; margin-top: 150px!important; margin: left 200px !important; ">
+        <img loading="lazy" class="img_helpdesk" id="logo-stg" src="../../../images/Saint-Gobain.png" style="height: 170px; width: 230px;" alt="">
     </div>
 
     <div class="" role="group" aria-label="Vertical button group" style="margin-top: 50px;" aria-label="Basic mixed styles example">
