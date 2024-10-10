@@ -25,7 +25,7 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
         exit();
     } else {
         if (password_verify($password, $password_hash)) {
-            $sql = "INSERT INTO users(user, pass, rol_id)  VALUES('$user', '$password_hash', '$departamento')";
+            $sql = "INSERT INTO users(user, pass, rol_id, estado_id)  VALUES('$user', '$password_hash', '$departamento',1)";
             $result = mysqli_query($conexion, $sql);
     
             if ($result) {

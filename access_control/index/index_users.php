@@ -24,6 +24,11 @@ if ($_SESSION['rol'] != 'Admin') {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.css" rel="stylesheet">
   <!--estilos ccs-->
+  <!-- Librerías de la modal -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </head>
 
 <body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
@@ -39,10 +44,16 @@ if ($_SESSION['rol'] != 'Admin') {
   try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-    $consultaSQL = "SELECT * FROM users INNER JOIN roles ON users.rol_id = roles.id";
+    $consultaSQL = "SELECT *,users.id, roles.nombre_rol, estados.estado
+FROM users
+JOIN roles ON users.rol_id = roles.id
+JOIN estados ON users.estado_id = estados.id;
+";
+
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
     $tickets = $sentencia->fetchAll();
+
   } catch (PDOException $error) {
     $error = $error->getMessage();
   }
@@ -60,6 +71,8 @@ if ($_SESSION['rol'] != 'Admin') {
     </div>
   </div>
   <!-- Fin del Header -->
+  
+  <!-- <?php #include "../templates/header.php"; ?> -->
 
   <?php
   if ($error) {
@@ -84,7 +97,7 @@ if ($_SESSION['rol'] != 'Admin') {
       <div class="col-md-12">
         <h2>Listado de Usuarios</h2>
         <div class="col-md-12">
-          <a href="../../login/index_registro.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear usuario</a>
+          <a href="../../login/index_registro.php" class="btn btn-success mb-3"><i class="bi bi-pen-fill"></i> Crear usuario</a>
         </div>
         <table id="tickEemptable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>
@@ -93,6 +106,8 @@ if ($_SESSION['rol'] != 'Admin') {
               <th class="border-end">Usuario</th>
               <!-- <th>correo</th> -->
               <th class="border-end">Departamento</th>
+              <th class="border-end">Estado</th>
+              <th class="border-end">Acciones</th>
               <!-- <th class="border-end">Descripción del problema</th>
               <th class="border-end">Nivel de urgencia</th>
               <th class="border-end">Respuesta</th>
@@ -101,24 +116,52 @@ if ($_SESSION['rol'] != 'Admin') {
               <th class="border-end">Ultima actualizacion</th> -->
             </tr>
           </thead>
-          <tbody>
+          <tbody data-toggle="modal" data-target="#login<?= $fila["id"] ?>">
             <?php
             if ($tickets && $sentencia->rowCount() > 0) {
               foreach ($tickets as $fila) {
-            ?>
+                ?>
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["user"]); ?></td>
                   <!-- <td><?php #echo escapar($fila["correo"]);?></td> -->
-                  <td class="text-break"><?php echo escapar($fila["rol_id"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["nombre_rol"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
                   <!-- <td class="text-break"><?php #echo escapar($fila["descripcion"]); ?></td> -->
                   <!-- <td class="text-break"><?php #echo escapar($fila["urgencia"]); ?></td> -->
                   <!-- <td class="text-break"><?php #echo escapar($fila["respuesta"]); ?></td> -->
                   <!-- <td class="text-break"><?php #echo escapar($fila["estado"]); ?></td> -->
                   <!-- <td class="text-break"><?php #echo escapar($fila["created_at"]); ?></td> -->
                   <!-- <td class="text-break"><?php #echo escapar($fila["updated_at"]); ?></td> -->
+                  <td>  
+                <a type="button" class="btn btn-outline-warning d-block m-1" data-toggle="modal" data-target="#login<?= $fila["id"] ?>"><i class="bi bi-gear-fill"></i></a>
+                <form class="form-inline">
+                    <!-- Modal -->
+                        <div id="login<?= $fila["id"] ?>" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Modificación del usuario <?= $fila["user"]?></h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Nota: no es necesario llenar todos los campos, solo actualice lo que requiera.</p>
+                                <?php include ("editar_user.php")?>
+                                <button class="btn btn-warning" role="button" type="submit" href="<?='actualizar_usuario.php?id='. escapar($fila["id"])?>">Actualizar</button> 
+                              </div>
+                              <div class="modal-footer">
+                                <a class="btn btn-default" role="button" data-dismiss="modal">Cerrar</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    <!--modal -->
+                </form>
+                <a class="btn btn-outline-success d-block m-1"  href="<?='actualizar_user.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
+                </td>
                 </tr>
-            <?php
+              <?php
               }
             }
             ?>
@@ -129,6 +172,7 @@ if ($_SESSION['rol'] != 'Admin') {
               <th class="border-end">Usuario</th>
               <!-- <th>correo</th> -->
               <th class="border-end">Departamento</th>
+              <th class="border-end">Estado</th>
               <!-- <th class="border-end">Descripción del problema</th>
               <th class="border-end">Nivel de urgencia</th>
               <th class="border-end">Respuesta</th>
@@ -146,8 +190,6 @@ if ($_SESSION['rol'] != 'Admin') {
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
 
   <script>
@@ -193,6 +235,8 @@ if ($_SESSION['rol'] != 'Admin') {
           });
       },
     });
+    $('#container').css('display', 'block');
+    table.columns.adjust().draw();
   </script>
 </body>
 

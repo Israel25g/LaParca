@@ -44,7 +44,7 @@ include("apertura_sesion.php")
                 <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
                  <?php 
                     if($_SESSION['rol'] === 'Admin'){
-                        echo '<li class="nav-li"><a href="access_control/index/index_users.php">Admin</a></li>';
+                        echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
                     }
                  ?>
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
@@ -87,7 +87,7 @@ include("apertura_sesion.php")
             </a>
             <!-- Fin de IT -->
 
-            <!-- IT -->
+            <!-- EEMP -->
             <a href="host_virtual_EEMP/index/index_EEMP.php">
                 <div class="bloque" id="bloque_EEMP">
                     <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://cdn.udax.edu.mx/blog/la-clave-del-exito-en-los-negocios-mejora-continua-y-optimizacion-de-procesos_1.jpg" alt="">
@@ -97,8 +97,8 @@ include("apertura_sesion.php")
                     </div>
                 </div>
             </a>
-            <!-- Fin de IT -->
-
+            <!-- Fin de EEMP -->
+            
             <!-- Sobre tiempo -->
             <a target="_blank" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
                 <div class="bloque" id="bloque_sobretiempo">
