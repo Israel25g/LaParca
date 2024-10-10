@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 
-<body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; font-family:montserrat;">
+<body style="background-image:url('../host_virtual_TI/images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
     <div class="form-table">
         <!-- Header -->
         <div class="header">
