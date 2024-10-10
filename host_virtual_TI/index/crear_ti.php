@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="mt-4">Ingrese los datos para crear el Ticket</h2>
+            <h2 class="mt-4"><a href="../../host_virtual_TI/index/index_ti.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Ticket</h2>
             <a class="btn btn-success btn-lg" href="../index/index_ti.php">Volver al listado</a>
             <hr>
             <form method="post">
