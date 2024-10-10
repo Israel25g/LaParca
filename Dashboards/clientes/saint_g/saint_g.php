@@ -102,11 +102,11 @@
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
 
-    <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 125px; width: 137px; margin-top: 50px!important; margin: left 20px !important; ">
+    <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 125px; width: 137px; margin-top: 100px!important; margin: left 20px !important; ">
         <img loading="lazy" class="img_helpdesk" id="logo-stg" src="../../../images/Saint-Gobain.png" style="height: 125px; width: 137px;" alt="">
     </div>
 
-    <div class="" role="group" aria-label="Vertical button group" style="margin-top: 100px;" aria-label="Basic mixed styles example">
+    <div class="" role="group" aria-label="Vertical button group" style="margin-top: 50px;" aria-label="Basic mixed styles example">
         <button type="button" class="btn btn-success custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1"><p style="font-family:montserrat !important; font-size:large; color: black;">Import</p></button>
         <button type="button" class="btn btn-danger custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"><p style="font-family:montserrat !important ; font-size:large; color:black; ">Export</p></button>
         <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"><p style=" font-family:montserrat !important;font-size:large; color:black; ">Varios</p></button>
