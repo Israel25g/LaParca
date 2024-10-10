@@ -8,16 +8,6 @@
     <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
 <body style="background-image: url('../../images/Motivo2.png')!important;">
-    <!-- <style>
-.body{
-
-    background-image: url("../../images/Motivo2.png");
-
-
-}
-
-    </style> -->
-
     <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -98,7 +88,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php include "../../host_virtual_TI/templates/header.php"; ?>
+<?php include "../componentesxd/header.php"; ?>
 
 <?php if (!empty($resultado['mensaje'])) { ?>
     <script>
