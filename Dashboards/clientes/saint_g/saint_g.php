@@ -48,12 +48,11 @@
 
         .custom-btn {
         opacity: 1 !important ;
-        color: gold !important;
         font-weight:500;
         font-size: 9px; /* Ajusta el tamaño de la fuente */
-        text-align: center !important;
+        text-align: right !important;
         padding: 28px 50px ; /* Tamaño del botón */
-        border-radius: 20px; /* Bordes redondeados */
+        border-radius: 5px 50px 50px 5px; /* Bordes redondeados */
         width: 200px !important; /* Ajusta el ancho del botón */
         height: 50px !important;
     }
@@ -216,7 +215,7 @@
                         legend: {orient: 'vertical', left: 'left'},
                         series: [{
                             name: 'Export',
-                            type: 'bar',
+                            type: 'pie',
                             radius: ['30%', '80%'],
                             label: {formatter: '{c}', position: 'inside', fontSize: 25},
                             data: data,
