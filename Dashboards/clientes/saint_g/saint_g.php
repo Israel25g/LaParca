@@ -51,8 +51,9 @@
         font-weight:500;
         font-size: 9px; /* Ajusta el tamaño de la fuente */
         text-align: right !important;
+        margin-top: 10px!important;
         padding: 28px 50px ; /* Tamaño del botón */
-        border-radius: 5px 50px 50px 5px; /* Bordes redondeados */
+        border-radius: 0px 50px 50px 5px; /* Bordes redondeados */
         width: 200px !important; /* Ajusta el ancho del botón */
         height: 50px !important;
     }
