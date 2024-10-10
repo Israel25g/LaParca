@@ -156,7 +156,7 @@
         <div class="form-row">
           <div class="col-md-12">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Picking, del cliente <?= escapar($export['cliente'])?>.</h2>
-            <a class="btn btn-success" href="../daily_plan/tabla_pk.php">Regresar a la tabla import</a>
+            <a class="btn btn-success" href="../daily_plan/tabla_pk.php">Regresar a la tabla picking</a>
             <hr>
           <form method="POST">
             <div class="form-group">
