@@ -101,7 +101,7 @@
 
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
-    <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="margin-top: 300px;" aria-label="Basic mixed styles example">
+    <div class="" role="group" aria-label="Vertical button group" style="margin-top: 300px;" aria-label="Basic mixed styles example">
         <button type="button" class="btn btn-success custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1"><p style="font-family:montserrat !important; font-size:large; color: black;">Import</p></button>
         <button type="button" class="btn btn-danger custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"><p style="font-family:montserrat !important ; font-size:large; color:black; ">Export</p></button>
         <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"><p style=" font-family:montserrat !important;font-size:large; color:black; ">Varios</p></button>
@@ -216,7 +216,7 @@
                         legend: {orient: 'vertical', left: 'left'},
                         series: [{
                             name: 'Export',
-                            type: 'pie',
+                            type: 'bar',
                             radius: ['30%', '80%'],
                             label: {formatter: '{c}', position: 'inside', fontSize: 25},
                             data: data,
