@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php include "../../host_virtual_TI/templates/header.php"; ?>
+<?php include "../"; ?>
 
 <?php if (!empty($resultado['mensaje'])) { ?>
     <script>
