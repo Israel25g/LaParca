@@ -1,6 +1,6 @@
 <?php
 // Nombre del archivo JSON que deseas leer
-$jsonFile = 'arreglo_im.json'; 
+$jsonFile = 'arreglo_im.json';
 
 // Comprobar si el archivo JSON existe
 if (!file_exists($jsonFile)) {
@@ -15,7 +15,7 @@ $data = json_decode($jsonString, true); // true para obtener un array asociativo
 
 $result = [];
 
-//  conjunto de encabezados para tu base de datos
+// Conjunto de encabezados para tu base de datos
 $headers = ['aid_oid', 'cliente', 'vehiculo', 't_vehiculo', 'bl', 'destino', 't_carga', 'paletas', 'cajas', 'unidades', 'pedidos_en_proceso', 'fecha_objetivo', 'comentario_oficina'];
 
 // Procesar cada fila y combinar con los encabezados
@@ -99,17 +99,16 @@ try {
     // Confirmar la transacción
     $pdo->commit();
 
-    echo "Datos insertados correctamente en ambas tablas.";
+    // Redirigir a hoja_im.php con un parámetro de éxito
+    header("Location: ../hoja_im/hoja_im.php?status=success");
+    exit();
 
 } catch (PDOException $e) {
     // En caso de error, deshacer la transacción
     $pdo->rollBack();
-    echo "Error al insertar datos: " . $e->getMessage();
+
+    // Redirigir a hoja_im.php con un parámetro de error
+    header("Location: ../hoja_im/hoja_im.php?status=error");
+    exit();
 }
 ?>
-<script>
-  // Redirigir a la pagina de datos
-  setTimeout(function() {
-    window.location.href = '../hoja_im/hoja_im.php';
-  },);
-</script>
