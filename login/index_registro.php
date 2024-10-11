@@ -1,3 +1,6 @@
+<?php
+include("../apertura_sesion.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="images\ICO.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- <meta http-equiv="refresh" content="5"> -->
 
     <!-- Libreria para alertas ----->
@@ -27,7 +31,7 @@
     </style>
 
     <div class="overlay"></div>
-    <h1>Registro de usuarios</h1>
+    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="../access_control/index/index_users.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Registro de usuarios</h1>
 
     <?php
         if(isset($_GET['error'])){
@@ -62,6 +66,7 @@
                     <label for="text"><i class="fa-solid fa-user-group"></i> Departamento</label>
                     <br>
                     <select type="text" name="departamento" id="departamento" required>
+                        <option value=" ">Seleccione un departamento...</option>
                     <?php
                     while($row = mysqli_fetch_assoc($result)){
                         ?>

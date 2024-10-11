@@ -1,3 +1,6 @@
+<?php
+include("../apertura_sesion.php");
+?>
       <?php
       session_start();
       include '../daily_plan/funcionalidades/funciones.php';

@@ -36,12 +36,9 @@ include("../../apertura_sesion.php")
   try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-    $consultaSQL = "SELECT * FROM tickets";
-
+    $consultaSQL = "SELECT * FROM tickets_eemp";
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
-
     $tickets = $sentencia->fetchAll();
   } catch (PDOException $error) {
     $error = $error->getMessage();
@@ -49,7 +46,7 @@ include("../../apertura_sesion.php")
   ?>
 
   <!-- Header -->
-  <div class="header-error">
+  <div class="header">
     <div class="logo-container">
       <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
     </div>
@@ -78,35 +75,20 @@ include("../../apertura_sesion.php")
   ?>
   <br>
 
-  <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        <?= $error ?>
-      </div>
-    </div>
-  </div>
 
   <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
-        <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de TI</h2>
+        <h2>Listado de ticket de EEMP</h2>
         <div class="col-md-12">
-          <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
+          <a href="crear_eemp.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
           <?php
-          if ($_SESSION['rol'] === 'Admin') {
-            echo '<a href="../indexAdmin/indexAdmin_ti.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de TI</a>';
+          if ($_SESSION['rol'] === 'EEMP') {
+            echo '<a href="../indexAdmin/indexAdmin_eemp.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de EEMP</a>';
           }
           ?>
         </div>
-        <table id="tickTItable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
+        <table id="tickEemptable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>
             <tr>
               <th class="border-end">TID</th>
@@ -129,7 +111,7 @@ include("../../apertura_sesion.php")
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                  <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
+                  <!-- <td><?php #echo escapar($fila["correo"]);?></td> -->
                   <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
@@ -171,7 +153,7 @@ include("../../apertura_sesion.php")
   <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
 
   <script>
-    new DataTable('#tickTItable', {
+    new DataTable('#tickEemptable', {
       layout: {
         topStart: {
           pageLength: {
@@ -198,12 +180,12 @@ include("../../apertura_sesion.php")
           .every(function() {
             let column = this;
             let title = column.footer().textContent;
-
+  
             // Create input element
             let input = document.createElement('input');
             input.placeholder = title;
             column.footer().replaceChildren(input);
-
+  
             // Event listener for user input
             input.addEventListener('keyup', () => {
               if (column.search() !== this.value) {

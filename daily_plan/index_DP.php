@@ -1,14 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user'])) {
-    header('Location: ../index.php?error=No has iniciado sesión.');
-    exit;
-}
-
-
+include("../apertura_sesion.php");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,6 +43,11 @@ if (!isset($_SESSION['user'])) {
         <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
         <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
         <li class="nav-li"><a class="active" href="#">Daily Plan</a></li>
+        <?php
+        if ($_SESSION['rol'] === 'Admin') {
+          echo '<li class="nav-li"><a href="../access_control/index/index_users.php">Control de Usuarios</a></li>';
+        }
+        ?>
         <!-- <li class="nav-li"><a href="../Dashboards/dashboards.php">Dashboards</a></li> -->
         <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
       </ul>
@@ -67,72 +64,72 @@ if (!isset($_SESSION['user'])) {
   <div class="container">
     <div class="bloques ">
       <!-- import -->
-    <div class="container-block">
-      <div class="bloques-grid">
+      <div class="container-block">
+        <div class="bloques-grid">
 
-        <a href="../daily_plan/tabla_im.php" rel="noopener noreferrer" style="color:black">
-          <div class="bloque" id="bloque_cotización">
-            <img src="../images/Import.jpg" alt="">
-            <div class="text-overlay" style="height: 100%;width: 100%;">
-              <h3>Import</h3>
-              <p>Este apartado es exclusivamente para la edicion de la grafica de Import.</p>
+          <a href="../daily_plan/tabla_im.php" rel="noopener noreferrer" style="color:black">
+            <div class="bloque" id="bloque_cotización">
+              <img src="../images/Import.jpg" alt="">
+              <div class="text-overlay" style="height: 100%;width: 100%;">
+                <h3>Import</h3>
+                <p>Este apartado es exclusivamente para la edicion de la grafica de Import.</p>
+              </div>
             </div>
-          </div>
-        </a>
-        <!-- Fin de import -->
-        <!--export-->
-        <a href="../daily_plan/tabla_ex.php" rel="noopener noreferrer" style="color:black">
-          <div class="bloque" id="bloque_cotización">
-            <img src="../images/export.jpg" alt="">
-            <div class="text-overlay" style="height: 100%;width: 100%;">
-              <h3>Export</h3>
-              <p>Este apartado es exclusivamente para la edicion de la grafica de Export.</p>
+          </a>
+          <!-- Fin de import -->
+          <!--export-->
+          <a href="../daily_plan/tabla_ex.php" rel="noopener noreferrer" style="color:black">
+            <div class="bloque" id="bloque_cotización">
+              <img src="../images/export.jpg" alt="">
+              <div class="text-overlay" style="height: 100%;width: 100%;">
+                <h3>Export</h3>
+                <p>Este apartado es exclusivamente para la edicion de la grafica de Export.</p>
+              </div>
             </div>
-          </div>
-        </a>
-        <!-- Fin de export -->
-  
-        <!-- picking -->
-        <a href="../daily_plan/tabla_pk.php" rel="noopener noreferrer" style="color:black">
-          <div class="bloque" id="bloque_cotización">
-            <img class="img_helpdesk" id="img_cotizacion" src="../images/picking.jpg" alt="">
-            <div class="text-overlay" style="height: 100%;width: 100%;">
-              <h3>Picking</h3>
-              <p>Este apartado es exclusivamente para la edicion de la grafica de Picking.</p>
+          </a>
+          <!-- Fin de export -->
+
+          <!-- picking -->
+          <a href="../daily_plan/tabla_pk.php" rel="noopener noreferrer" style="color:black">
+            <div class="bloque" id="bloque_cotización">
+              <img class="img_helpdesk" id="img_cotizacion" src="../images/picking.jpg" alt="">
+              <div class="text-overlay" style="height: 100%;width: 100%;">
+                <h3>Picking</h3>
+                <p>Este apartado es exclusivamente para la edicion de la grafica de Picking.</p>
+              </div>
             </div>
-          </div>
-        </a>
-        <!-- Fin de picking-->
-  
-        <!-- graficos -->
-        <a href="../daily_plan/grafico.php" rel="noopener noreferrer" style="color:black">
-          <div class="bloque" id="bloque_cotización">
-            <img class="img_helpdesk" id="img_cotizacion" src="../images/Graficas.jpg" alt="">
-            <div class="text-overlay" style="height: 100%;width: 100%;">
-              <h3>Graficos</h3>
-              <p>Este apartado es exclusivamente para la visualizacion de los graficos del daily plan.</p>
+          </a>
+          <!-- Fin de picking-->
+
+          <!-- graficos -->
+          <a href="../daily_plan/grafico.php" rel="noopener noreferrer" style="color:black">
+            <div class="bloque" id="bloque_cotización">
+              <img class="img_helpdesk" id="img_cotizacion" src="../images/Graficas.jpg" alt="">
+              <div class="text-overlay" style="height: 100%;width: 100%;">
+                <h3>Graficos</h3>
+                <p>Este apartado es exclusivamente para la visualizacion de los graficos del daily plan.</p>
+              </div>
             </div>
-          </div>
-        </a>
-        <!-- Fín de graficos -->
+          </a>
+          <!-- Fín de graficos -->
+        </div>
       </div>
+
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="../host_virtual_TI/js/script.js"></script>
+      <script>
+        function on() {
+          document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+          document.getElementById("overlay").style.display = "none";
+        }
+      </script>
+
     </div>
-
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../host_virtual_TI/js/script.js"></script>
-  <script>
-    function on() {
-      document.getElementById("overlay").style.display = "block";
-    }
-
-    function off() {
-      document.getElementById("overlay").style.display = "none";
-    }
-  </script>
-
-  </div>
 </body>
 
 </html>

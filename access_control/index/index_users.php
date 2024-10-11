@@ -1,5 +1,8 @@
 <?php
-include("../../apertura_sesion.php")
+include("../../apertura_sesion.php");
+if ($_SESSION['rol'] != 'Admin') {
+  header("Location: ../../index.php?error=Acesso no autorizado");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +24,11 @@ include("../../apertura_sesion.php")
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.css" rel="stylesheet">
   <!--estilos ccs-->
+  <!-- Librerías de la modal -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </head>
 
 <body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
@@ -36,13 +44,16 @@ include("../../apertura_sesion.php")
   try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-    $consultaSQL = "SELECT * FROM tickets";
+    $consultaSQL = "SELECT *,users.id, roles.nombre_rol, estados.estado
+FROM users
+JOIN roles ON users.rol_id = roles.id
+JOIN estados ON users.estado_id = estados.id;
+";
 
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
-
     $tickets = $sentencia->fetchAll();
+
   } catch (PDOException $error) {
     $error = $error->getMessage();
   }
@@ -53,13 +64,15 @@ include("../../apertura_sesion.php")
     <div class="logo-container">
       <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
     </div>
-    <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
+    <h1><a href="../../helpdesk.php">Control de Usuarios</a></h1>
     <div class="cuadroFecha">
       <p id="fecha-actual"></p>
       <p id="hora-actual"></p>
     </div>
   </div>
   <!-- Fin del Header -->
+  
+  <!-- <?php #include "../templates/header.php"; ?> -->
 
   <?php
   if ($error) {
@@ -78,83 +91,93 @@ include("../../apertura_sesion.php")
   ?>
   <br>
 
-  <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        <?= $error ?>
-      </div>
-    </div>
-  </div>
 
   <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
-        <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de TI</h2>
+        <h2>Listado de Usuarios</h2>
         <div class="col-md-12">
-          <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
-          <?php
-          if ($_SESSION['rol'] === 'Admin') {
-            echo '<a href="../indexAdmin/indexAdmin_ti.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de TI</a>';
-          }
-          ?>
+          <a href="../../login/index_registro.php" class="btn btn-success mb-3"><i class="bi bi-pen-fill"></i> Crear usuario</a>
         </div>
-        <table id="tickTItable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
+        <table id="tickEemptable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>
             <tr>
-              <th class="border-end">TID</th>
-              <th class="border-end">Solicitante</th>
+              <th class="border-end">UID</th>
+              <th class="border-end">Usuario</th>
               <!-- <th>correo</th> -->
               <th class="border-end">Departamento</th>
-              <th class="border-end">Descripción del problema</th>
+              <th class="border-end">Estado</th>
+              <th class="border-end">Acciones</th>
+              <!-- <th class="border-end">Descripción del problema</th>
               <th class="border-end">Nivel de urgencia</th>
               <th class="border-end">Respuesta</th>
               <th class="border-end">Estado</th>
               <th class="border-end">Fecha de creacion</th>
-              <th class="border-end">Ultima actualizacion</th>
+              <th class="border-end">Ultima actualizacion</th> -->
             </tr>
           </thead>
-          <tbody>
+          <tbody data-toggle="modal" data-target="#login<?= $fila["id"] ?>">
             <?php
-            if ($tickets && $sentencia->rowCount() > 0) {
+            if ($sentencia && $sentencia->rowCount() > 0) {
               foreach ($tickets as $fila) {
-            ?>
+                ?>
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                  <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
-                  <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["user"]); ?></td>
+                  <!-- <td><?php #echo escapar($fila["correo"]);?></td> -->
+                  <td class="text-break"><?php echo escapar($fila["nombre_rol"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
+                  <!-- <td class="text-break"><?php #echo escapar($fila["descripcion"]); ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["urgencia"]); ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["respuesta"]); ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["estado"]); ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["created_at"]); ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["updated_at"]); ?></td> -->
+                  <td>  
+                <a type="button" class="btn btn-outline-warning d-block m-1" data-toggle="modal" data-target="#login<?= $fila["id"] ?>"><i class="bi bi-gear-fill"></i></a>
+                <form class="form-inline">
+                    <!-- Modal -->
+                        <div id="login<?= $fila["id"] ?>" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Modificación del usuario <?= $fila["user"]?></h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Nota: no es necesario llenar todos los campos, solo actualice lo que requiera.</p>
+                                <?php include ("editar_user.php")?>
+                              </div>
+                              <div class="modal-footer">
+                                <a class="btn btn-default" role="button" data-dismiss="modal">Cerrar</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    <!--modal -->
+                </form>
+                <a class="btn btn-outline-success d-block m-1"  href="<?='actualizar_user.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
+                </td>
                 </tr>
-            <?php
+              <?php
               }
             }
             ?>
           </tbody>
           <tfoot>
-            <tr>
-              <th>TID</th>
-              <th>Solicitante</th>
+          <tr>
+              <th class="border-end">UID</th>
+              <th class="border-end">Usuario</th>
               <!-- <th>correo</th> -->
-              <th>Departamento</th>
-              <th>Descripción del problema</th>
-              <th>nivel de urgencia</th>
-              <th>Respuesta</th>
-              <th>Estado</th>
-              <th>fecha de creacion</th>
-              <th>ultima actualizacion</th>
+              <th class="border-end">Departamento</th>
+              <th class="border-end">Estado</th>
+              <!-- <th class="border-end">Descripción del problema</th>
+              <th class="border-end">Nivel de urgencia</th>
+              <th class="border-end">Respuesta</th>
+              <th class="border-end">Estado</th>
+              <th class="border-end">Fecha de creacion</th>
+              <th class="border-end">Ultima actualizacion</th> -->
             </tr>
           </tfoot>
         </table>
@@ -166,12 +189,10 @@ include("../../apertura_sesion.php")
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
 
   <script>
-    new DataTable('#tickTItable', {
+    new DataTable('#tickEemptable', {
       layout: {
         topStart: {
           pageLength: {
@@ -198,12 +219,12 @@ include("../../apertura_sesion.php")
           .every(function() {
             let column = this;
             let title = column.footer().textContent;
-
+  
             // Create input element
             let input = document.createElement('input');
             input.placeholder = title;
             column.footer().replaceChildren(input);
-
+  
             // Event listener for user input
             input.addEventListener('keyup', () => {
               if (column.search() !== this.value) {
@@ -213,6 +234,8 @@ include("../../apertura_sesion.php")
           });
       },
     });
+    $('#container').css('display', 'block');
+    table.columns.adjust().draw();
   </script>
 </body>
 
