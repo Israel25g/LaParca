@@ -100,7 +100,7 @@ try {
     $pdo->commit();
 
     // Redirigir a hoja_im.php con un parámetro de éxito
-    header("Location: ../hoja_im/hoja_im.php?status=success");
+    header("Location: ../hoja_ex/hoja_ex.php?status=success");
     exit();
 
 } catch (PDOException $e) {
@@ -108,7 +108,7 @@ try {
     $pdo->rollBack();
 
     // Redirigir a hoja_im.php con un parámetro de error
-    header("Location: ../hoja_im/hoja_im.php?status=error");
+    header("Location: ../hoja_ex/hoja_ex.php?status=error");
     exit();
 }
 ?>
