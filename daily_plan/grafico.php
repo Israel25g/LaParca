@@ -177,7 +177,7 @@
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
 
 
-        <div class="bloquee " id="export" style="position:relative;width: 900px; height: 350px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
+        <div class="bloquee " id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
           <div class="col-md-6 ">
               <div class="container">
                 <div class="row">
@@ -214,7 +214,7 @@
                     </div>   
                 </div>
 
-                <div class="bloquee " id="import" style="position: relative;width: 900px; height: 300px;border-radius: 15px; overflow: hidden;margin-top:2%" >
+                <div class="bloquee " id="import" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >
                     <div class="col-md-6">
                     <div class="container">
                           <div class="row">
