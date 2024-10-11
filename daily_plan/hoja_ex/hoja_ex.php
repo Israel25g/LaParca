@@ -117,6 +117,18 @@
             });
         });
     </script>
+     <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === 'success') {
+            alert('Datos insertados correctamente.');
+        } else if (status === 'error') {
+            alert('Hubo un error al insertar los datos.');
+        }
+    });
+</script>
     <script src="../../host_virtual_TI/js/script.js"></script>
 </body>
 </html>

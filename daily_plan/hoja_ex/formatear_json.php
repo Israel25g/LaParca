@@ -99,15 +99,16 @@ try {
     // Confirmar la transacción
     $pdo->commit();
 
+    // Redirigir a hoja_im.php con un parámetro de éxito
+    header("Location: ../hoja_im/hoja_im.php?status=success");
+    exit();
+
 } catch (PDOException $e) {
     // En caso de error, deshacer la transacción
     $pdo->rollBack();
-    echo "Error al insertar datos: " . $e->getMessage();
+
+    // Redirigir a hoja_im.php con un parámetro de error
+    header("Location: ../hoja_im/hoja_im.php?status=error");
+    exit();
 }
 ?>
-<script>
-  // Redirigir a la pagina de datos
-  setTimeout(function() {
-    window.location.href = '../hoja_ex/hoja_ex.php';
-  },);
-</script>
