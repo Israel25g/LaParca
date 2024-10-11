@@ -13,7 +13,7 @@ if ($data) {
         echo json_encode(['message' => 'Datos de Picking seran guardados']);
     } else {
         // Error al guardar los datos
-        echo json_encode(['message' => 'Error al guardar los datos ']);
+        echo json_encode(['message' => 'Error al guardar los datos']);
     }
 } else {
     // Error al recibir los datos

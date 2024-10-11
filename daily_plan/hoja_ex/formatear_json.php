@@ -25,8 +25,8 @@ foreach ($data as $row) {
 
 // Configuración de la base de datos
 $host = 'localhost'; // Cambia esto si tu base de datos está en otro host
-$db   = 'u366386740_db_mainbase';
-$user = 'u366386740_admin123';
+$db   = 'u366386740_db_dailyplan';
+$user = 'u366386740_adminDP';
 $pass = '1plGr0up01*';
 $charset = 'utf8mb4';
 
@@ -99,15 +99,16 @@ try {
     // Confirmar la transacción
     $pdo->commit();
 
+    // Redirigir a hoja_im.php con un parámetro de éxito
+    header("Location: ../hoja_ex/hoja_ex.php?status=success");
+    exit();
+
 } catch (PDOException $e) {
     // En caso de error, deshacer la transacción
     $pdo->rollBack();
-    echo "Error al insertar datos: " . $e->getMessage();
+
+    // Redirigir a hoja_im.php con un parámetro de error
+    header("Location: ../hoja_ex/hoja_ex.php?status=error");
+    exit();
 }
 ?>
-<script>
-  // Redirigir a la pagina de datos
-  setTimeout(function() {
-    window.location.href = '../hoja_ex/hoja_ex.php';
-  },);
-</script>

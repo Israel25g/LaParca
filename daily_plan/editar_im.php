@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../estilos.css">
     <link rel="shortcut icon" href="../images/ICO.png">
   </head>
-  <body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; font-family:montserrat;">
+  <body style="background-image:url('../images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
     <div style="margin-top: 90px;">
       <!-- Header -->
       <div class="header">
@@ -161,7 +161,7 @@
       <div class="container mt-2">
         <div class="row">
           <div class="col-md-12">
-            <div class="alert alert-success" role="alert" style="margin-top: 490%; position: absolute">
+            <div class="alert alert-success" role="alert" style="margin-top: 490%; margin-left: 600%; position: absolute">
               <?= $resultado['mensaje'] ?>
             </div>
           </div>
@@ -175,8 +175,8 @@
           <div class="col-md-12">
             <h2 class="mt-4">Editando el campo  #<?= escapar($export['id'])?> de la tabla Import, del cliente <?= escapar($export['cliente'])?>.</h2>
             <a class="btn btn-success" href="../daily_plan/tabla_im.php">Regresar a la tabla import</a>
-            <hr>
-          <form method="POST">
+    </br>
+          <form method="POST" style="margin-top: 50px;">
             <div class="form-group">
               <label for="pedidos_en_proceso">Nueva cantidad de entradas por recibir (modificar solo de ser necesario).</label>
               <textarea name="pedidos_en_proceso" id="pedidos_en_proceso" rows="1" class="form-control" placeholder="Anterior cantidad de pedidos en proceso: <?= escapar($export['pedidos_en_proceso']) ?>"><?= escapar($export['pedidos_en_proceso']) ?></textarea>

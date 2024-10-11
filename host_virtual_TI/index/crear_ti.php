@@ -20,10 +20,11 @@ require '../../vendor/phpmailer/phpmailer/src/Exception.php';
 require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
-$resultado = []; // Variable para mensajes de resultado
+// Inicializamos resultado con un valor predeterminado para evitar el error
+$resultado = ['mensaje' => ''];
 
 if (isset($_POST['submit'])) {
-    echo "Formulario enviado.<br>"; // Debug
+   // echo "Formulario enviado.<br>"; // Debug
 
     $config = include '../config.php';
 
@@ -33,7 +34,7 @@ if (isset($_POST['submit'])) {
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
         ]);
 
-        echo "Conexión a la base de datos exitosa.<br>"; // Debug
+        //echo "Conexión a la base de datos exitosa.<br>"; // Debug
 
         // Datos del formulario
         $tickets = array(
@@ -50,7 +51,7 @@ if (isset($_POST['submit'])) {
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
 
-        echo "Datos guardados en la base de datos.<br>"; // Debug
+       // echo "Datos guardados en la base de datos.<br>"; // Debug
 
         // Configuración del correo
         $mail = new PHPMailer(true);
@@ -62,8 +63,8 @@ if (isset($_POST['submit'])) {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-                // Establecer la codificación de caracteres
-                $mail->CharSet = 'UTF-8';
+        // Establecer la codificación de caracteres
+        $mail->CharSet = 'UTF-8';
 
         $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
         $mail->addAddress($tickets['correo']);
@@ -81,16 +82,13 @@ if (isset($_POST['submit'])) {
 
         $mail->send();
 
-        echo "Correo enviado.<br>"; // Debug
         $resultado['mensaje'] = 'El Ticket ha sido agregado con éxito y el correo se envió correctamente.';
     } catch (PDOException $error) {
         $resultado['error'] = true;
-        $resultado['mensaje'] = $error->getMessage();
-        echo $resultado['mensaje']; //para ver el error
+        $resultado['mensaje'] = 'Error en la base de datos: ' . $error->getMessage();
     } catch (Exception $e) {
         $resultado['error'] = true;
-        $resultado['mensaje'] = $e->getMessage();
-        echo $resultado['mensaje']; // para ver el error
+        $resultado['mensaje'] = 'Error al enviar el correo: ' . $e->getMessage();
     }
 }
 ?>
@@ -98,12 +96,12 @@ if (isset($_POST['submit'])) {
 <?php include "../../host_virtual_TI/templates/header.php"; ?>
 
 
-<?php if (isset($resultado)) { ?>
+<?php if (!empty($resultado['mensaje'])) { ?>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-<?= isset($resultado['error']) ? 'danger' : 'success' ?>" role="alert">
-                    <?= $resultado['mensaje'] ?>
+                <div class="alert alert-<?= isset($resultado['error']) && $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
+                    <?= htmlspecialchars($resultado['mensaje']) ?>
                 </div>
             </div>
         </div>
@@ -113,7 +111,7 @@ if (isset($_POST['submit'])) {
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="mt-4">Ingrese los datos para crear el Ticket</h2>
+            <h2 class="mt-4"><a href="../../host_virtual_TI/index/index_ti.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Ticket</h2>
             <a class="btn btn-success btn-lg" href="../index/index_ti.php">Volver al listado</a>
             <hr>
             <form method="post">

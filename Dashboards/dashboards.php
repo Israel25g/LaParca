@@ -21,7 +21,7 @@
 <body>
     <style>
         body {
-            background-image: url('../images/Motivo2.png');
+            background-image: url('../images/Motivo2.png')!important;
             margin: 0;
             padding: 0;
             background-size: cover;

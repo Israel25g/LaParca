@@ -7,18 +7,8 @@
     <link rel="stylesheet" href="../../estilos.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
-<body style="background-image: url('../../images/Motivo2.png'); font-family: montserrat ">
-    <!-- <style>
-.body{
-
-    background-image: url("../../images/Motivo2.png");
-
-
-}
-
-    </style> -->
-
-<?php
+<body style="background-image: url('../../images/Motivo2.png')!important;">
+    <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -29,20 +19,19 @@ require '../../vendor/phpmailer/phpmailer/src/Exception.php';
 require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
-$resultado = []; // Variable para mensajes de resultado
+// Inicializamos resultado con un valor predeterminado
+$resultado = ['mensaje' => ''];
 
 if (isset($_POST['submit'])) {
-   // echo "Formulario enviado.<br>";  Debug
 
-    $config = include '../../host_virtual_TI/config.php';
+    $config = include '../config.php';
 
     try {
+        // Conexión a la base de datos
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
         ]);
-
-       // echo "Conexión a la base de datos exitosa.<br>";  Debug
 
         // Datos del formulario
         $tickets = array(
@@ -54,12 +43,10 @@ if (isset($_POST['submit'])) {
         );
 
         // Guardar datos en la base de datos
-        $consultaSQL = "INSERT INTO tickets_m (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL = "INSERT INTO tickets (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
         $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
-
-       // echo "Datos guardados en la base de datos.<br>"; // Debug
 
         // Configuración del correo
         $mail = new PHPMailer(true);
@@ -67,14 +54,14 @@ if (isset($_POST['submit'])) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'ticketpruebas1@gmail.com';
-        $mail->Password = 'cyaj xxnu hjof ezrt';
+        $mail->Password = 'cyaj xxnu hjof ezrt';  // Nota: nunca se debe exponer una contraseña en un archivo de producción
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-                // Establecer la codificación de caracteres
-                $mail->CharSet = 'UTF-8';
+        // Establecer la codificación de caracteres
+        $mail->CharSet = 'UTF-8';
 
-        $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento Mantenimineto');
+        $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento Mantenimiento');
         $mail->addAddress($tickets['correo']);
         $mail->addAddress('cecilio@iplgsc.com'); // Correo adicional
 
@@ -90,37 +77,34 @@ if (isset($_POST['submit'])) {
 
         $mail->send();
 
-        echo "Correo enviado.<br>"; // Debug
         $resultado['mensaje'] = 'El Ticket ha sido agregado con éxito y el correo se envió correctamente.';
     } catch (PDOException $error) {
         $resultado['error'] = true;
-        $resultado['mensaje'] = $error->getMessage();
-        echo $resultado['mensaje']; //para ver el error
+        $resultado['mensaje'] = 'Error en la base de datos: ' . $error->getMessage();
     } catch (Exception $e) {
         $resultado['error'] = true;
-        $resultado['mensaje'] = $e->getMessage();
-        echo $resultado['mensaje']; // para ver el error
+        $resultado['mensaje'] = 'Error al enviar el correo: ' . $e->getMessage();
     }
 }
 ?>
 
 <?php include "../componentesxd/header.php"; ?>
-<?php if (isset($resultado)) { ?>
-    <!-- <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-<?= isset($resultado['error']) ? 'danger' : 'success' ?>" role="alert">
-                    <?= $resultado['mensaje'] ?>
-                </div>
-            </div>
-        </div>
-    </div> -->
+
+<?php if (!empty($resultado['mensaje'])) { ?>
+    <script>
+        <?php if (isset($resultado['error']) && $resultado['error']) { ?>
+            alert("<?= addslashes($resultado['mensaje']) ?>");
+        <?php } else { ?>
+            alert("<?= addslashes($resultado['mensaje']) ?>");
+        <?php } ?>
+    </script>
 <?php } ?>
 
+
 <div class="tickM-main-block">
-        <div class="row" style="margin-left:600px!important; margin-top: 110px!important">
+        <div class="row" style="margin-left:400px!important; margin-top: 110px!important">
             <div class="col-lg-8">
-                <h2 class="">Ingrese los datos para crear el Ticket</h2>
+                <h2 class=""><a href="../index/index_m.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Ticket</h2>
                 <a class="btn btn-success btn-lg" href="../index/index_m.php">Volver al listado</a>
                 <hr>
                 <form method="post">

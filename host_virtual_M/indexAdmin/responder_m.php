@@ -132,7 +132,7 @@ if (!isset($_POST['submit'])) {
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 
-<body style="margin: 0; padding: 0;background-image: url('../../images/Motivo2.png'); font-family: montserrat;">
+<body style="margin: 0; padding: 0;background-image: url('../../images/Motivo2.png')!important; font-family: montserrat;">
     <?php include "../componentesxd/header.php"; ?>
 
     <!-- Mostrar mensajes de error o éxito -->

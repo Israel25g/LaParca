@@ -16,7 +16,7 @@
 <body>
     <style>
         body {
-            background-image: url('../images/Motivo2.png');
+            background-image: url('../../../images/Motivo2.png')!important;
             margin: 0;
             padding: 0;
             background-size: cover;
@@ -48,12 +48,12 @@
 
         .custom-btn {
         opacity: 1 !important ;
-        color: gold !important;
         font-weight:500;
         font-size: 9px; /* Ajusta el tamaño de la fuente */
-        text-align: center !important;
+        text-align: right !important;
+        margin-top: 10px!important;
         padding: 28px 50px ; /* Tamaño del botón */
-        border-radius: 20px; /* Bordes redondeados */
+        border-radius: 0px 50px 50px 5px; /* Bordes redondeados */
         width: 200px !important; /* Ajusta el ancho del botón */
         height: 50px !important;
     }
@@ -101,7 +101,12 @@
 
     <!-- Dashboard STG -->
     <div class="side_menu" id="side_menu" >
-    <div class="btn-group-vertical" role="group" aria-label="Vertical button group" style="margin-top: 300px;" aria-label="Basic mixed styles example">
+
+    <div class="bloque_d border border-warning border-5" id="grafico1" style="height: 170px; width: 231px; margin-top: 150px!important; margin: left 200px !important; ">
+        <img loading="lazy" class="img_helpdesk" id="logo-stg" src="../../../images/Saint-Gobain.png" style="height: 170px; width: 231px;" alt="">
+    </div>
+
+    <div class="" role="group" aria-label="Vertical button group" style="margin-top: 50px;" aria-label="Basic mixed styles example">
         <button type="button" class="btn btn-success custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1"><p style="font-family:montserrat !important; font-size:large; color: black;">Import</p></button>
         <button type="button" class="btn btn-danger custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"><p style="font-family:montserrat !important ; font-size:large; color:black; ">Export</p></button>
         <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"><p style=" font-family:montserrat !important;font-size:large; color:black; ">Varios</p></button>
@@ -119,15 +124,15 @@
     <div class="container_d" style="margin-left: 400px !important" >
         <div class="bloques_d ">
 
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
                 <div id="grafico-pastel1" class="bg-white" style="width: 100%; height: 100%;"></div>
             </div>
 
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
           <p>IMPORT</p>
             </div>
 
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
 
             </div>
         </div>
@@ -139,15 +144,15 @@
         <div class="container_d" style="margin-left: 250px;">
         <div class="bloques_d ">
 
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-danger-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
                 
             </div>
 
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-danger-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
             <p>Export</p>
             </div>
 
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+            <div class="bloque_d border border-danger-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
 
             </div>
    
@@ -179,14 +184,14 @@
 <div class="container_d" style="margin-left: 250px;">
     <div class="bloques_d ">
 
-        <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+        <div class="bloque_d border border-warning-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
         </div>
 
-        <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+        <div class="bloque_d border border-warning-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
         <p>facturacion</p>
         </div>
 
-        <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
+        <div class="bloque_d border border-warning-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
 
         </div>
     </div>
