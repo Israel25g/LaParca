@@ -1,3 +1,6 @@
+<?php
+include("../../apertura_sesion.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,6 +84,11 @@
         <h2>Listado de ticket de Mantenimiento</h2>
         <div class="col-md-12">
           <a href="crear_m.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
+          <?php
+          if ($_SESSION['rol'] === 'Admin') {
+            echo '<a href="../indexAdmin/indexAdmin_m.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de Mantenimiento</a>';
+          }
+          ?>
         </div>
         <table id="tickMtable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>

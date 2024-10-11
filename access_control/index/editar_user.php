@@ -69,5 +69,6 @@ $result2 = mysqli_query($conexion2, $sql2);
     <?php
     }
     ?>
-
+    
+    <input type="submit" name="submit" class="btn btn-warning m-3" value="Actualizar"> 
 </form>

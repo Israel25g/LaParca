@@ -1,3 +1,6 @@
+<?php
+include("../../apertura_sesion.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +41,7 @@
 
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
-    
+
     $tickets = $sentencia->fetchAll();
   } catch (PDOException $error) {
     $error = $error->getMessage();
@@ -77,19 +80,19 @@
 
   <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
 
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="...">
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-    <?= $error ?>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <?= $error ?>
+      </div>
     </div>
   </div>
-</div>
 
   <div class="tabla-container">
     <div class="row">
@@ -97,6 +100,11 @@
         <h2>Listado de ticket de TI</h2>
         <div class="col-md-12">
           <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
+          <?php
+          if ($_SESSION['rol'] === 'Admin') {
+            echo '<a href="../indexAdmin/indexAdmin_ti.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de TI</a>';
+          }
+          ?>
         </div>
         <table id="tickTItable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>
@@ -115,24 +123,24 @@
           </thead>
           <tbody>
             <?php
-              if ($tickets && $sentencia->rowCount() > 0) {
-                foreach ($tickets as $fila) {
-                  ?>
-                  <tr>
-                    <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                    <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
-                    <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
-                  </tr>
-                  <?php
-                }
+            if ($tickets && $sentencia->rowCount() > 0) {
+              foreach ($tickets as $fila) {
+            ?>
+                <tr>
+                  <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
+                  <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
+                  <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
+                </tr>
+            <?php
               }
+            }
             ?>
           </tbody>
           <tfoot>
@@ -190,12 +198,12 @@
           .every(function() {
             let column = this;
             let title = column.footer().textContent;
-  
+
             // Create input element
             let input = document.createElement('input');
             input.placeholder = title;
             column.footer().replaceChildren(input);
-  
+
             // Event listener for user input
             input.addEventListener('keyup', () => {
               if (column.search() !== this.value) {

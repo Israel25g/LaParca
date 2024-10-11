@@ -1,3 +1,6 @@
+<?php
+include("../../apertura_sesion.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,6 +82,11 @@
         <h2>Listado de ticket de EEMP</h2>
         <div class="col-md-12">
           <a href="crear_eemp.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
+          <?php
+          if ($_SESSION['rol'] === 'EEMP') {
+            echo '<a href="../indexAdmin/indexAdmin_eemp.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de EEMP</a>';
+          }
+          ?>
         </div>
         <table id="tickEemptable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
           <thead>

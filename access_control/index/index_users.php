@@ -118,7 +118,7 @@ JOIN estados ON users.estado_id = estados.id;
           </thead>
           <tbody data-toggle="modal" data-target="#login<?= $fila["id"] ?>">
             <?php
-            if ($tickets && $sentencia->rowCount() > 0) {
+            if ($sentencia && $sentencia->rowCount() > 0) {
               foreach ($tickets as $fila) {
                 ?>
                 <tr>
@@ -148,7 +148,6 @@ JOIN estados ON users.estado_id = estados.id;
                               <div class="modal-body">
                                 <p>Nota: no es necesario llenar todos los campos, solo actualice lo que requiera.</p>
                                 <?php include ("editar_user.php")?>
-                                <button class="btn btn-warning" role="button" type="submit" href="<?='actualizar_usuario.php?id='. escapar($fila["id"])?>">Actualizar</button> 
                               </div>
                               <div class="modal-footer">
                                 <a class="btn btn-default" role="button" data-dismiss="modal">Cerrar</a>
