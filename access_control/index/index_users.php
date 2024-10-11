@@ -118,7 +118,7 @@ JOIN estados ON users.estado_id = estados.id;
           </thead>
           <tbody data-toggle="modal" data-target="#login<?= $fila["id"] ?>">
             <?php
-            if ($sentencia && $sentencia->rowCount() > 0) {
+            if ($sentencia->rowCount() > 0) {
               foreach ($tickets as $fila) {
                 ?>
                 <tr>
