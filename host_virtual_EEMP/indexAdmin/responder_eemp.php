@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
             "estado"    => $_POST['estado'],
         ];
 
-        $consultaSQL = "UPDATE tickets SET
+        $consultaSQL = "UPDATE tickets_eemp SET
             respuesta = :respuesta,
             estado = :estado,
             updated_at = NOW()
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         $consulta->execute($tickets);
 
         // Obtener el correo y nombrecompleto
-        $consultaInfo = "SELECT correo, nombrecompleto FROM tickets WHERE id = :id";
+        $consultaInfo = "SELECT correo, nombrecompleto FROM tickets_eemp WHERE id = :id";
         $consultaInfoStmt = $conexion->prepare($consultaInfo);
         $consultaInfoStmt->execute(['id' => $_GET['id']]);
         $info = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
