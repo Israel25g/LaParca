@@ -88,7 +88,7 @@ include("apertura_sesion.php")
             <!-- Fin de IT -->
 
             <!-- EEMP -->
-            <a href="host_virtual_EEMP/index/index_EEMP.php">
+            <a href="host_virtual_EEMP/index/index_eemp.php">
                 <div class="bloque" id="bloque_EEMP">
                     <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://cdn.udax.edu.mx/blog/la-clave-del-exito-en-los-negocios-mejora-continua-y-optimizacion-de-procesos_1.jpg" alt="">
                     <div class="text-overlay">
