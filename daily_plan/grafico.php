@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      header("Refresh:74");
+      header("Refresh:81");
       ?>
 
 <!DOCTYPE html>
@@ -302,7 +302,13 @@
 
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/3.png"  alt="cumpleaños1" style="width: 100%;position: flex;margin-top:1.9%;z-index: 999;">
+      <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex;margin-top:1.9%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7500">
+      <img src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7500">
+      <img src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
@@ -315,9 +321,6 @@
     </div>
     <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
-    </div>
-    <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/4.png"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
