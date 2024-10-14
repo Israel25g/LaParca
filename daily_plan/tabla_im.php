@@ -135,6 +135,24 @@ include("../apertura_sesion.php");
                       <?php endforeach; ?>
                     <?php endif; ?>
                   </tbody>
+                  <tfoot>
+                  <tr>
+                      <th class="border end">#</th>
+                      <th class="border end">AID</th>
+                      <th class="border end">Cliente</th>
+                      <th class="border end">vehículo / Placa</th>
+                      <th class="border end">Contenedor a recibir</th>
+                      <th class="border end">Contenedor recibido</th>
+                      <th class="border end">Tipo de carga</th>
+                      <th class="border end">Paletas</th>
+                      <th class="border end">Cajas</th>
+                      <th class="border end">Unidades</th>
+                      <th class="border end">Fecha estimada de llegada</th>
+                      <th class="border end">Llegada a rampa</th>
+                      <th class="border end">Salida de rampa</th>
+                      <th class="border end">Acciones</th>
+                    </tr>
+                   </tfoot>
                 </table>
               </div>
             </div>
@@ -150,6 +168,28 @@ include("../apertura_sesion.php");
                 scrollCollapse: true,
                 scrollY: '500px',
                 scrollX: '1700px',
+
+                initComplete: function() {
+        this.api()
+          .columns()
+          .every(function() {
+            let column = this;
+            let title = column.footer().textContent;
+
+            // Create input element
+            let input = document.createElement('input');
+            input.placeholder = title;
+            column.footer().replaceChildren(input);
+
+            // Event listener for user input
+            input.addEventListener('keyup', () => {
+              if (column.search() !== this.value) {
+                column.search(input.value).draw();
+              }
+            });
+          });
+      },
+
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
                 info: false,
