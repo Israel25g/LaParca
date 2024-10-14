@@ -49,6 +49,7 @@ include("apertura_sesion.php")
                  ?>
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
+            <div class="sessid"><span class="id_sesion">Usuario: <?php echo ($_SESSION['usuario'])?></span></div>
         </div>
     </div>
     <!-- Fin Navbar -->
@@ -100,7 +101,7 @@ include("apertura_sesion.php")
             <!-- Fin de EEMP -->
             
             <!-- Sobre tiempo -->
-            <a target="_blank" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
+            <a target="https://forms.office.com/Pages/ShareFormPage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u&sharetoken=NhdNt0HuLG7WFd5Sc9QH" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
                 <div class="bloque" id="bloque_sobretiempo">
 
                     <img loading="lazy" class="img_helpdesk" id="img_overtime" src="images\Sobretiempo.jpg" alt="">
@@ -113,7 +114,10 @@ include("apertura_sesion.php")
             <!-- Fín de sobretiempo -->
 
             <!-- Compras -->
-            <a href="http://" target="_blank" rel="noopener noreferrer">
+            <a href="https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUM1FEV0xDUEU5SkZDM1JTMFdVSk01S0FYMC4u
+Microsoft Forms
+Easily create surveys, quizzes, and polls.
+ " target="_blank" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_cotización">
                     <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="https://consultorfinancontable.com/wp-content/uploads/2024/03/mujer-asiatica-trabajando-traves-papeleo_53876-138148.jpg" alt="">
                     <div class="text-overlay">
