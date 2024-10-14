@@ -16,7 +16,7 @@ session_start();
         
 
         // $sql = "SELECT * FROM users WHERE user='$user'";
-        $sql = "SELECT u.id, r.nombre_rol, pass FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
+        $sql = "SELECT u.id, r.nombre_rol, pass, usuario FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
         $result = mysqli_query($conexion, $sql);
         
 
@@ -27,18 +27,21 @@ session_start();
                 if(password_verify($password, $password_hash)){
                     if ($row['nombre_rol'] == 'Admin'){
                         $_SESSION['user'] = $user;
+                        $_SESSION['usuario'] = $row['usuario'];
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
                         header("Location: ../helpdesk.php");
                     }
                     elseif ($row['nombre_rol'] == 'TV'){
                         $_SESSION['user'] = $user;
+                        $_SESSION['usuario'] = $row['usuario'];
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
                         header("Location: ../daily_plan/grafico.php");
                     }
                     else{
                         $_SESSION['user'] = $user;
+                        $_SESSION['usuario'] = $row['usuario'];
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
                         header("Location: ../helpdesk.php");
