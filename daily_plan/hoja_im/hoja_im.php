@@ -76,7 +76,7 @@
                     const row = data[i];
                     // Validar que las columnas específicas no estén vacías
                     // Columnas: 0 (Oid), 1 (Cliente), 2 (Vehículo/placa), 9 (Pedidos en Proceso), 10 (Fecha estimada de salida)
-                    const requiredColumns = [0, 1, 2, 9, 10];
+                    const requiredColumns = [0, 1, 2, 10, 11];
                     for (let j of requiredColumns) {
                         if (row[j] === null || row[j] === '') {
                             return false; // Devuelve falso si encuentra un campo obligatorio vacío
