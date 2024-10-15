@@ -75,7 +75,7 @@
   }
 
   /* Consulta de medios para pantallas de 1488px de ancho y 740px de alto o más pequeñas */
-  @media (max-width: 1270px) and (max-height: 610px) {
+  @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
       grid-template-columns: 2fr !important; /* Una sola columna para apilar los gráficos verticalmente */
