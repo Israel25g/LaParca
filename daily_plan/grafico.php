@@ -95,8 +95,8 @@
 
     /* Ajustar el tamaño de los gráficos individuales */
     #grafico-gauge {
-      width: 150% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 150px !important; /* Ajustar la altura del gráfico */
+      width: 225% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 200px !important; /* Ajustar la altura del gráfico */
       margin-top: 0% !important;
     }
   }
