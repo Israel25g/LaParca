@@ -74,32 +74,32 @@
     margin-left: 45% !important;
   }
 
-  /* Consulta de medios para pantallas de 1488px de ancho y 740px de alto o más pequeñas */
+  /* Consulta de medios para pantallas pequeñas */
   @media (max-width: 1280px) and (max-height: 620px) {
-      .bloquess {
-        display: grid !important;
-        grid-template-columns: 2fr !important; /* Una sola columna para apilar los gráficos verticalmente */
-        gap: 10px !important; /* Espacio entre los gráficos */
-      }
-
-      /* Ajustar el tamaño de los gráficos */
-      .bloquee {
-        width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
-        height: 150px !important; /* Ajustar la altura automáticamente */
-      }
-
-      #grafico-pastel1, #grafico-pastel2, #grafico-barras {
-        width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
-        height: 150px !important; /* Ajustar la altura del gráfico */
-      }
-
-      /* Ajustar el tamaño de los gráficos individuales */
-      #grafico-gauge {
-        width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
-        height: 150px !important; /* Ajustar la altura del gráfico */
-        margin-top: 0% !important;
-      }
+    .bloquess {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
+      gap: 10px !important; /* Espacio entre los gráficos */
     }
+
+    /* Ajustar el tamaño de los gráficos */
+    .bloquee {
+      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
+      height: 150px !important; /* Ajustar la altura automáticamente */
+    }
+
+    #grafico-pastel1, #grafico-pastel2, #grafico-barras {
+      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 150px !important; /* Ajustar la altura del gráfico */
+    }
+
+    /* Ajustar el tamaño de los gráficos individuales */
+    #grafico-gauge {
+      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 150px !important; /* Ajustar la altura del gráfico */
+      margin-top: 0% !important;
+    }
+  }
 </style>
 
 
