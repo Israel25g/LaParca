@@ -89,8 +89,8 @@
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras {
-      width: 300% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 300px !important; /* Ajustar la altura del gráfico */
+      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 250px !important; /* Ajustar la altura del gráfico */
     }
 
     /* Ajustar el tamaño de los gráficos individuales */
