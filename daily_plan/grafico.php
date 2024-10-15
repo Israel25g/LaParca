@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      header("Refresh:81");
+      // header("Refresh:81");
       ?>
 
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
-      grid-template-columns: 2fr !important; /* Una sola columna para apilar los gráficos verticalmente */
+      grid-template-columns:auto !important; /* Una sola columna para apilar los gráficos verticalmente */
       gap: 10px !important ; /* Espacio entre los gráficos */
     }
 
