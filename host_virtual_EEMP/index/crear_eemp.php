@@ -93,25 +93,27 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php include "../../host_virtual_TI/templates/header.php"; ?>
+<?php include "../../host_virtual_EEMP/componentesxd/header.php"; ?>
 
 
-<?php if (!empty($resultado['mensaje'])) { ?>
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-<?= isset($resultado['error']) && $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
-                    <?= htmlspecialchars($resultado['mensaje']) ?>
+
+<div class="tick-main-block">
+    <span class="alerta-enviado">
+        <?php if (!empty($resultado['mensaje'])) { ?>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-<?= isset($resultado['error']) && $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
+                            <?= htmlspecialchars($resultado['mensaje']) ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-<?php } ?>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="mt-4"><a href="../../host_virtual_EEMP/index/index_eemp.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Ticket</h2>
+        <?php } ?>
+    </span>
+    <div class="fondo-tickets">
+        <div class="">
+            <h2 class="form-tickets"><a href="../../host_virtual_EEMP/index/index_eemp.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Ticket</h2>
             <a class="btn btn-success btn-lg" href="../index/index_eemp.php">Volver al listado</a>
             <hr>
             <form method="post">

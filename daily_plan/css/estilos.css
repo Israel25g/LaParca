@@ -1,114 +1,186 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-:root{
-    font-family: 'Montserrat', 'Roboto', sans-serif;
-    --color1 : #00A52C;
-    --color2 : #26214b;
-} 
+/* ======================== Bloque de interfaz base ======================== */
 
-*{
-    margin: 0px;
+:root,
+html,
+*,
+body {
+  font-family: "Montserrat", "Roboto", sans-serif;
+  --color1: #00a52c;
+  --color2: #26214b;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    background-image: url('./images/Motivo2.png');
-    margin: 0;
-    padding: 0;
+/* ======================== Estilos BG ======================== */
+body {
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.header{
-    width: 100%;
-    background-color: var(--color1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    border-radius: 0 0 50px 50px;
-    padding: 10px;
+/* ======================== Headings ======================== */
+
+h1 {
+  color: #fff !important;
+  font-weight: 800 !important;
+  font-size: 60px !important;
+  margin: auto !important;
 }
 
-.background-container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('./images/Motivo2.png'); /* Reemplaza con la ruta de tu imagen */
-    background-size: cover;
-    background-position: center;
-    opacity: 0.5; /* Ajusta la opacidad según sea necesario */
-    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+h1 a {
+  color: #fff !important;
+  text-decoration: none;
+  transition: all 0.3s;
 }
 
-h1{
-    color: #fff;
-    font-weight: 800;
-    font-size: 60px;
-    margin: auto;
+h1 a:hover {
+  color: #26214b !important;
+  text-decoration: none;
 }
 
-h2{
-    padding: 5px;
-    font-size: 50PX;
+h2 {
+  font-size: 50px;
+  margin: 25px 0;
 }
 
-h3{
-    font-size: 30px;
-    font-weight: 700;
+h3.mb-2 {
+  font-size: 30px;
+  font-weight: 700;
 }
 
-h4{
-    font-size: 20px;
-    font-weight: 700;
+h4 {
+  font-size: 20px;
+  font-weight: 500;
 }
 
-.logo-container{
-    position: absolute;
-    top: 8px;
-    left: 20px;
-    background-color: #fff;
-    padding: 5px;
-    border-radius: 10px 10px 10px 40px;
+/* ======================== Encabezado de las páginas ("header" es el div base) ======================== */
+.header {
+  width: 99%;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  border-radius: 0 0 50px 50px;
+  padding: 10px;
+}
+.header-error {
+  width: 100%;
+  height: 93px;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-radius: 0 0 50px 50px;
+  padding: 10px;
 }
 
-.logo{
-    
-    max-width: 200px;
-    height: auto;
-    width: auto;
-    padding: 10px;
+.header-dp {
+  width: 100%;
+  height: 93px;
+  background-color: var(--color1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-radius: 0 0 0 50px;
+  padding: 10px;
 }
 
+/* ======================== Logo IPL ======================== */
+.logo-container {
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 10px 40px;
+}
+.logo {
+  max-width: 200px;
+  height: auto;
+  width: auto;
+  padding: 10px;
+}
 
-.cuadroFecha{
-    position: absolute;
-    top: 8px;
-    right: 20px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 10px 10px 50px 10px;
+/* ======================== Fecha ======================== */
+.cuadroFecha {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 50px 10px;
+  width: 270.48px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cuadroFecha-error {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 50px 10px;
+  width: 281px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cuadroFecha p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: --;
-    color: #26214B;
+  margin: 0;
+  font-size: 16px;
+  font-weight: --;
+  color: #26214b;
 }
 
-.cuadroFecha #hora-actual{
-    font-weight: 900;
-    font-size: x-large;
+.cuadroFecha-error p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: --;
+  color: #26214b;
 }
 
-.cuadroFecha #fecha-actual{
-    font-weight: 700;
+.cuadroFecha #hora-actual {
+  font-weight: 900;
+  font-size: x-large;
 }
+
+.cuadroFecha-error #hora-actual {
+  font-weight: 900;
+  font-size: x-large;
+}
+
+.cuadroFecha #fecha-actual {
+  font-weight: 700;
+}
+
+.cuadroFecha-error #fecha-actual {
+  font-weight: 700;
+}
+
+/* ======================== Fin de encabezado de las páginas ======================== */
 
 ul{
     width: 290px;
