@@ -144,9 +144,6 @@ include("../../apertura_sesion.php")
             ?>
           </tbody>
           <tfoot>
-          <tr>
-            <th colspan="10" class="border end text-center">Filtros</th>
-          </tr>
             <tr>
               <th>TID</th>
               <th>Solicitante</th>
