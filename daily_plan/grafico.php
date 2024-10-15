@@ -89,13 +89,13 @@
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras {
-      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      width: 150% !important; /* Hacer que el gráfico ocupe todo el ancho */
       height: 150px !important; /* Ajustar la altura del gráfico */
     }
 
     /* Ajustar el tamaño de los gráficos individuales */
     #grafico-gauge {
-      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      width: 150% !important; /* Hacer que el gráfico ocupe todo el ancho */
       height: 150px !important; /* Ajustar la altura del gráfico */
       margin-top: 0% !important;
     }
