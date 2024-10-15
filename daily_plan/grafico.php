@@ -106,7 +106,7 @@
       width: 100% !important; /* Ocupar el ancho completo */
       margin: 0 auto !important; /* Centrar la tabla */
     }
-    .titilo_gauge{
+    .titulo_gauge{
       font-size: 100% !important;
     }
 
@@ -159,7 +159,7 @@
              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
-                    <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
+                    <div id="grafico-gauge" class="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
         </div>
