@@ -192,6 +192,7 @@ include("../../apertura_sesion.php")
       },
       scrollX: '150vh',
       scrollY: '450px',
+      
       initComplete: function() {
         this.api()
           .columns()
