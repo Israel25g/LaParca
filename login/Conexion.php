@@ -1,6 +1,6 @@
 <?php
     $servername = "localhost";
-    $database = "u366386740_db_test_main";
+    $database = "db_mainbase";
     $username = "u366386740_adminTestMain";
     $password = "1plGr0up01*";
     // Create connection
