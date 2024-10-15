@@ -95,9 +95,9 @@
 
     /* Ajustar el tamaño de los gráficos individuales */
     #grafico-gauge {
-      width: 300% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 300px !important; /* Ajustar la altura del gráfico */
-      margin-top: 0% !important;
+      width: 200% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 200px !important; /* Ajustar la altura del gráfico */
+      margin-top: -100px !important;
     }
   }
 </style>
@@ -144,10 +144,10 @@
                     <div id="grafico-pastel1" class="bg-white " href="../daily_plan/tabla_ex.php" style="width: 200%; height: 350%;"></div>
                 </div>    
             </div>
-        
+        <!-- grafico de gauge -->
              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
-                    <p style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
+                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
                     <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
