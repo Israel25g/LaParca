@@ -85,12 +85,12 @@
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
       width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
-      height: 150px !important; /* Ajustar la altura automáticamente */
+      height: 200px !important; /* Ajustar la altura automáticamente */
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras {
-      width: 150% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 150px !important; /* Ajustar la altura del gráfico */
+      width: 225% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 200px !important; /* Ajustar la altura del gráfico */
     }
 
     /* Ajustar el tamaño de los gráficos individuales */
@@ -168,7 +168,7 @@
                 <div class="row">
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
-                    <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                    <table id="tablaExport" class=" table_query display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                       <thead>
                         <tr style="font-family: montserrat; font-size: 15px">
                           <th class="border end" style="background-color: #dc3545">OID</th>
@@ -205,7 +205,7 @@
                           <div class="row">
                             <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
                               <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                              <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                              <table id="tablaImport" class="table_query  display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                           <thead>
                             <tr  style="font-family: montserrat; font-size: 15px">
                               <th class="border end" style="background-color: #0dcaf0">AID</th>
@@ -241,7 +241,7 @@
                     <div class="row">
                       <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                        <table   id="tablapicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
+                        <table   id="tablapicking" class="table_query display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
                                 <thead>
                                   <tr style="font-family: montserrat; font-size: 14px">
                                     <th class="border end" style="background-color: #ffc107">OID</th>
