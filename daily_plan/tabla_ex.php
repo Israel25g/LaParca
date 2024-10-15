@@ -155,7 +155,7 @@ include("../apertura_sesion.php");
           paging: false,
           scrollCollapse: true,
           scrollY: '400px',
-          scrollX: '800px',
+          scrollX: '1600px',
           
           initComplete: function() {
         this.api()
