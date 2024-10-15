@@ -106,6 +106,10 @@
       width: 100% !important; /* Ocupar el ancho completo */
       margin: 0 auto !important; /* Centrar la tabla */
     }
+
+    .titulo_gauge{
+      font-size: 100% !important;
+    }
   }
 </style>
 
