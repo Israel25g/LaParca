@@ -77,7 +77,7 @@
   /* Consulta de medios para pantallas pequeñas */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
-      width: 100% !important;
+      width: 50% !important;
       height: 300px !important;
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
@@ -86,7 +86,7 @@
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
-      width: 50% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
+      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
       height: 200px !important; /* Ajustar la altura automáticamente */
     }
 
