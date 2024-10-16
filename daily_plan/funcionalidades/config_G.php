@@ -4,7 +4,7 @@
 // Configuración de la conexión
 $servername = "localhost";
 $username = "u366386740_adminDP";
-$password = "1plGr0up01*";  // Sin contraseña
+$password = "1plGr0up01*"; 
 $dbname = "u366386740_db_dailyplan";
 
 // Crear la conexión
@@ -17,3 +17,27 @@ if ($conn->connect_error) {
 
 }
 ?>
+
+<!--==============================testing=====================================
+    $servername = "localhost";
+    $database = "u366386740_db_test_main";
+    $username = "u366386740_adminTestMain";
+    $password = "1plGr0up01*"; 
+    ==============================testing======================================-->
+
+    <!--==============================localhost================================
+    $servername = "localhost";
+    $database = "db_mainbase";
+    $username = "root";
+    $password = "";
+    ==============================localhost=====================================-->
+
+    <!-- ==============================PRODUCTIVO================================
+    $servername = "localhost";
+    $username = "u366386740_adminDP";
+    $password = "1plGr0up01*"; 
+    $dbname = "u366386740_db_dailyplan";
+    ==============================PRODUCTIVO======================================-->
+
+
+

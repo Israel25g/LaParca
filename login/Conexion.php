@@ -21,12 +21,11 @@
     // Check connection
     if (!$conexion) {
         die("Connection failed: " . mysqli_connect_error());}
-        
     ==============================PRODUCTIVO======================================-->
 
     <!-- ==============================LOCALHOST======================================
     $servername = "localhost";
-    $database = "db_mainbase";
+    $database = "u366386740_db_test_main";
     $username = "root";
     $password = "";
     // Create connection
