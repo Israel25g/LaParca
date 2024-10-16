@@ -40,9 +40,9 @@ include("../apertura_sesion.php");
     <div class="navbar">
       <ul class="nav" id="detallesOps">
         <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
-        <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
         <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
         <li class="nav-li"><a class="active" href="#">Daily Plan</a></li>
+        <li class="nav-li"><a href="../daily_plan/carusel.php">Imagenes IPL</a></li>
         <?php
         if ($_SESSION['rol'] === 'Admin') {
           echo '<li class="nav-li"><a href="../access_control/index/index_users.php">Control de Usuarios</a></li>';
