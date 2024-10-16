@@ -77,21 +77,23 @@
   /* Consulta de medios para pantallas pequeñas */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
+      display: grid !important;
+    grid-template-columns: auto auto !important;
+    margin-top: 10% !important;
+    margin-left: 45% !important;
       width: 50%;
       height: 50%;
-      display: grid !important;
-      grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
       gap: 10px !important; /* Espacio entre los gráficos */
     }
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
       position: fixed;
-      width: 200px;
-       height: 75px;
+      width: 100%;
+       height: 75%;
        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: black;
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
