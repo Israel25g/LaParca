@@ -156,7 +156,8 @@ include("../apertura_sesion.php");
         new DataTable('#tablaPicking', {
           paging: false,
           scrollCollapse: true,
-          scrollY: '200px',
+          scrollY: '400px',
+          scrollX: '1700px',
 
           initComplete: function() {
         this.api()

@@ -50,7 +50,7 @@ include("../apertura_sesion.php");
         ?>
         <!-- <li class="nav-li"><a href="../Dashboards/dashboards.php">Dashboards</a></li> -->
         <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
-      </ul>
+      </ul> 
     </div>
   </div>
 

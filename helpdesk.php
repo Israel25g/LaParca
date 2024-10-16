@@ -49,6 +49,7 @@ include("apertura_sesion.php")
                  ?>
                 <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
+            
         </div>
     </div>
     <!-- Fin Navbar -->

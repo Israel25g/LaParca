@@ -230,6 +230,23 @@ ul.detallesOps {
   padding: 5px;
 }
 
+
+/* ======================== Cuadro de sesión ======================== */
+
+.sessid{
+  margin : 0 50px;
+}
+
+.id_sesion {
+  background-color: var(--color2);
+  padding: 15px;
+  border-radius: 0 0 20px 20px;
+  color: #fff;
+}
+
+/* ======================== Fin de Cuadro de sesión ======================== */
+
+
 /* ======================== Fin del navegador======================== */
 
 /* ======================== Páginas de seleccion (Dashboards, Helpdesk, Dailyplan, etc...) ======================== */
