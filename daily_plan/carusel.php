@@ -30,7 +30,7 @@
 
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
-    <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
+    <div class="carousel-item active "data-bs-interval="7500" style="height: 50%; height: 100%;position: fixed;">
       <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex;margin-top:1.9%;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
