@@ -65,22 +65,22 @@
 
 
     <style>
-  /* Estilo general para pantallas grandes */
+  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVO*/
   .bloquess {
     display: grid !important;
     grid-template-columns: auto auto !important;
     gap: 10px!important;
     margin-top: 10% !important;
-    margin-left: 1% !important;
+    margin-left: 45% !important;
   }
 
-  /* Consulta de medios para pantallas pequeñas */
+  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
     grid-template-columns: auto auto !important;
     margin-top: 10% !important;
-    margin-left: 45% !important;
+    margin-left: 5% !important;
       width: 50%;
       height: 50%;
       gap: 10px !important; /* Espacio entre los gráficos */
@@ -97,8 +97,8 @@
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
-      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 100% !important; /* Ajustar la altura del gráfico */
+      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 225px !important; /* Ajustar la altura del gráfico */
     }
 
         /* Ajustar las tablas para pantallas pequeñas */
