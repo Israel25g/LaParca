@@ -128,6 +128,7 @@ if (isset($_POST['submit'])) {
                     <select class="form-control" name="ubicacion[]" id="ubicacion" required>
                         <option>Seleccione una opción...</option>
                         <option>Trafico</option>
+                        <option>Recepción</option>
                         <option>Servicio al cliente</option>
                         <option>Contabilidad</option>
                         <option>RRHH</option>
