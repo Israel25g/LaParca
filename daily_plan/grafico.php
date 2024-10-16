@@ -80,7 +80,7 @@
       display: grid !important;
     grid-template-columns: auto auto !important;
     margin-top: 10% !important;
-    margin-left: 5% !important;
+    margin-left: -1000px !important;
       width: 50%;
       height: 50%;
       gap: 10px !important; /* Espacio entre los gráficos */
@@ -89,8 +89,8 @@
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
       position: fixed;
-      width: 100%;
-       height: 75%;
+      width: 50%;
+       height: 100%;
        border-radius: 15px;
         overflow: hidden;
       border: black;
