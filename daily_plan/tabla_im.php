@@ -162,6 +162,11 @@ include("../apertura_sesion.php");
           <script>
             $(document).ready(function() {
               new DataTable('#tablaImport', {
+                layout:{
+                  topStart:{
+                    buttons:[ 'copy', 'exel','pdf']
+                  }
+                },
                 paging: false,
                 scrollCollapse: true,
                 scrollY: '500px',
