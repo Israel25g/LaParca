@@ -75,8 +75,10 @@
   }
 
   /* Consulta de medios para pantallas pequeñas */
-  @media (max-width: 1180px) and (max-height: 520px) {
+  @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
+      width: 100% !important;
+      height: 300px !important;
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
       gap: 10px !important; /* Espacio entre los gráficos */
