@@ -30,7 +30,7 @@ return [
 //=======================productivo============================
 // return [
 //   'db' => [
-//     'host' => 'localhost',
+//     'host' => 'localhost',|
 //     'user' => 'u366386740_admin123',
 //     'pass' => '1plGr0up01*',
 //     'name' => 'u366386740_db_mainbase',
