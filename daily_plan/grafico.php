@@ -71,7 +71,7 @@
     grid-template-columns: auto auto !important;
     gap: 10px!important;
     margin-top: 10% !important;
-    margin-left: 45% !important;
+    margin-left: 1% !important;
   }
 
   /* Consulta de medios para pantallas pequeñas */
@@ -97,8 +97,8 @@
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
-      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 225px !important; /* Ajustar la altura del gráfico */
+      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 100% !important; /* Ajustar la altura del gráfico */
     }
 
         /* Ajustar las tablas para pantallas pequeñas */
