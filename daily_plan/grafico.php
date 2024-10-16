@@ -75,7 +75,7 @@
   }
 
   /* Consulta de medios para pantallas pequeñas */
-  @media (max-width: 1280px) and (max-height: 620px) {
+  @media (max-width: 1180px) and (max-height: 520px) {
     .bloquess {
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
@@ -89,8 +89,8 @@
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
-      width: 225% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 200px !important; /* Ajustar la altura del gráfico */
+      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 225px !important; /* Ajustar la altura del gráfico */
     }
 
         /* Ajustar las tablas para pantallas pequeñas */
