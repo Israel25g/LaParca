@@ -21,26 +21,5 @@ if ($conn->connect_error) {
 }
 ?>
 
-<!--==============================testing=====================================
-    $servername = "localhost";
-    $database = "u366386740_db_test_main";
-    $username = "u366386740_adminTestMain";
-    $password = "1plGr0up01*"; 
-    ==============================testing======================================-->
-
-    <!--==============================localhost================================
-    $servername = "localhost";
-    $database = "db_mainbase";
-    $username = "root";
-    $password = "";
-    ==============================localhost=====================================-->
-
-    <!-- ==============================PRODUCTIVO================================
-    $servername = "localhost";
-    $database = "u366386740_db_dailyplan";
-    $username = "u366386740_adminDP";
-    $password = "1plGr0up01*"; 
-    ==============================PRODUCTIVO======================================-->
-
 
 
