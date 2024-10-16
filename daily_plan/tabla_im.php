@@ -162,15 +162,13 @@ include("../apertura_sesion.php");
           <script>
             $(document).ready(function() {
               new DataTable('#tablaImport', {
-                layout:{
-                  topStart:{
-                    buttons:[ 'copy', 'exel','pdf']
-                  }
-                },
+
                 paging: false,
                 scrollCollapse: true,
                 scrollY: '500px',
                 scrollX: '1700px',
+                dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
 
                 initComplete: function() {
         this.api()
