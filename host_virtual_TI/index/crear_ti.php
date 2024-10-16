@@ -129,6 +129,7 @@ if (isset($_POST['submit'])) {
                         <option>Seleccione una opción...</option>
                         <option>Trafico</option>
                         <option>Recursos humanos</option>
+                        <option>Servicio al cliente</option>
                         <option>Contabilidad</option>
                         <option>RRHH</option>
                         <option>Operaciones planta baja</option>
