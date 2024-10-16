@@ -77,8 +77,6 @@
   /* Consulta de medios para pantallas pequeñas */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
-      width: 50% !important;
-      height: 300px !important;
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
       gap: 10px !important; /* Espacio entre los gráficos */
@@ -86,8 +84,12 @@
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
-      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
-      height: 200px !important; /* Ajustar la altura automáticamente */
+      position: relative;
+      width: 400px;
+       height: 150px;
+       border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
