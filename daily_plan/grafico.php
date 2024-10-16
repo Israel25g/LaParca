@@ -86,7 +86,7 @@
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
-      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
+      width: 50% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
       height: 200px !important; /* Ajustar la altura automáticamente */
     }
 
