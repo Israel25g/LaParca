@@ -89,13 +89,12 @@
     }
 
     #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
-      width: 275% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      width: 225% !important; /* Hacer que el gráfico ocupe todo el ancho */
       height: 200px !important; /* Ajustar la altura del gráfico */
     }
 
-
         /* Ajustar las tablas para pantallas pequeñas */
-        .tabla-ajustada {
+        #tablaExport,#tablaImport,#tablapicking {
       font-size: 10px !important; /* Texto aún más pequeño en pantallas pequeñas */
       width: 100% !important; /* Ocupar el ancho completo */
       margin: 0 auto !important; /* Centrar la tabla */
