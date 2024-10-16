@@ -188,8 +188,8 @@ include("../apertura_sesion.php");
           });
       },
 
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 info: false,
                 language: {
                   "lengthMenu": "Mostrar _MENU_ registros por página",
