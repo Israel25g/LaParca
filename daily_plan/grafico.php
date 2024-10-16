@@ -84,9 +84,9 @@
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
-      position: relative;
-      width: 400px;
-       height: 150px;
+      position: fixed;
+      width: 200px;
+       height: 75px;
        border-radius: 15px;
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
