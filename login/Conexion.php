@@ -1,8 +1,8 @@
 <?php
     $servername = "localhost";
-    $database = "u366386740_db_test_main";
-    $username = "u366386740_adminTestMain";
-    $password = "1plGr0up01*";
+    $database = "u366386740_db_mainbase";
+    $username = "root";
+    $password = "";
     // Create connection
     $conexion = new mysqli($servername, $username, $password, $database);
     // Check connection
