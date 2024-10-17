@@ -24,6 +24,20 @@ include("../../apertura_sesion.php")
 
 <body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
 
+  <!-- Header -->
+  <div class="header-error">
+    <div class="logo-container">
+      <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
+    </div>
+    <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
+    <div class="cuadroFecha-error">
+      <p id="fecha-actual"></p>
+      <p id="hora-actual"></p>
+    </div>
+  </div>
+  <!-- Fin del Header -->
+
+
   <?php
   function escapar($html)
   {
@@ -48,37 +62,25 @@ include("../../apertura_sesion.php")
   }
   ?>
 
-  <!-- Header -->
-  <div class="header-error">
-    <div class="logo-container">
-      <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
-    </div>
-    <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
-    <div class="cuadroFecha">
-      <p id="fecha-actual"></p>
-      <p id="hora-actual"></p>
-    </div>
-  </div>
-  <!-- Fin del Header -->
 
-  <?php
-  if ($error) {
-  ?>
-    <div class="container mt-2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-danger" role="alert">
-            <?= $error ?>
+
+<div class="espacio">
+  <div class="tabla-container">
+    <?php
+    if ($error) {
+    ?>
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+              <?= $error ?>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <?php
-}
-?>
-
-  <br>
-  <div class="tabla-container">
+    <?php
+    }
+    ?>
     <div class="row">
       <div class="col-md-12">
         <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de Mantenimiento</h2>
@@ -90,7 +92,8 @@ include("../../apertura_sesion.php")
           }
           ?>
         </div>
-        <table id="tickMtable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
+
+        <table id="tickMtable" class="display table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color: #fff;  margin-top: 2%">
           <thead>
             <tr>
               <th class="border end">TID</th>
@@ -113,7 +116,8 @@ include("../../apertura_sesion.php")
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                  <!-- <td><?php #echo escapar($fila["correo"]); ?></td> -->
+                  <!-- <td><?php #echo escapar($fila["correo"]); 
+                            ?></td> -->
                   <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
@@ -145,6 +149,7 @@ include("../../apertura_sesion.php")
       </div>
     </div>
   </div>
+</div>
   <script src="../js/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>

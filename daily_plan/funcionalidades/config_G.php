@@ -6,20 +6,15 @@
 
 // Configuración de la conexión
 $servername = "localhost";
+$database = "u366386740_db_dailyplan";
 $username = "u366386740_adminDP";
-$password = "1plGr0up01*";  
-$dbname = "u366386740_db_dailyplan";
+$password = "1plGr0up01*"; 
 
 // Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $database);
 
 // Verificar la conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
-} else {
-    echo "";
 }
 ?>
-
-
-

@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      header("Refresh:81");
+      // header("Refresh:81");
       ?>
 
 <!DOCTYPE html>
@@ -116,10 +116,10 @@
 
 
 </head>
-<body style="background-image:url('../host_virtual_TI/images/Motivo2.png');margin: 0;padding: 0; overflow:hidden">
-  <div style="margin-top: 90px;" >
+<body style="background-image: url('../images/Motivo2.png;">
+  <div style="margin-top: 70px;" >
      <!-- Header -->
-     <div class="headerr" style="width: 100%;background-color: var(--color1);display: flex;justify-content: space-between;align-items: center;padding: 1.5%;position: fixed;top: 0;left: 0;z-index: 1000;border-radius: 0 0 0px 50px;">
+     <div class="header-dp">
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
         </div>
@@ -129,6 +129,7 @@
             <p id="hora-actual"></p>
         </div>
     </div>
+  </div>
     <!-- Fin del Header -->
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="display: block-inline;"> 
 
@@ -299,25 +300,25 @@
 
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex;margin-top:1.9%;z-index: 999;">
+      <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;margin-top:2%;z-index: 999;">
+      <img src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+      <img src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+      <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+      <img src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;;margin-top:1%;z-index: 999;">
+      <img src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+      <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">

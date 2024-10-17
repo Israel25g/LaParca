@@ -46,18 +46,20 @@ include("../../apertura_sesion.php")
   ?>
 
   <!-- Header -->
-  <div class="header">
+  <div class="header-error">
     <div class="logo-container">
       <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
     </div>
     <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
-    <div class="cuadroFecha">
+    <div class="cuadroFecha-error">
       <p id="fecha-actual"></p>
       <p id="hora-actual"></p>
     </div>
   </div>
   <!-- Fin del Header -->
 
+<div class="espacio">
+  <div class="tabla-container">
   <?php
   if ($error) {
   ?>
@@ -73,10 +75,6 @@ include("../../apertura_sesion.php")
   <?php
   }
   ?>
-  <br>
-
-
-  <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
         <h2>Listado de ticket de EEMP</h2>
@@ -143,6 +141,7 @@ include("../../apertura_sesion.php")
       </div>
     </div>
   </div>
+</div>
   <script src="../js/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
