@@ -60,87 +60,90 @@ include("../../apertura_sesion.php")
     </div>
   </div>
   <!-- Fin del Header -->
-  
+
   <div class="tabla-container">
-      <?php
-      if ($error) {
-      ?>
-        <div class="container mt-2">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="alert alert-danger" role="alert">
-                <?= $error ?>
-              </div>
+    <?php
+    if ($error) {
+    ?>
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+              <?= $error ?>
             </div>
           </div>
         </div>
-      <?php
-      }
-      ?>
-      <br>
-    <div class="row">
-      <div class="col-md-12">
-        <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de TI</h2>
+      </div>
+    <?php
+    }
+    ?>
+    <br>
+    <div class="espacio">
+
+      <div class="row">
         <div class="col-md-12">
-          <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
-          <?php
-          if ($_SESSION['rol'] === 'Admin') {
-            echo '<a href="../indexAdmin/indexAdmin_ti.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de TI</a>';
-          }
-          ?>
-        </div>
-        <table id="tickTItable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
-          <thead>
-            <tr>
-              <th class="border-end">TID</th>
-              <th class="border-end">Solicitante</th>
-              <!-- <th>correo</th> -->
-              <th class="border-end">Departamento</th>
-              <th class="border-end">Descripción del problema</th>
-              <th class="border-end">Nivel de urgencia</th>
-              <th class="border-end">Respuesta</th>
-              <th class="border-end">Estado</th>
-              <th class="border-end">Fecha de creacion</th>
-              <th class="border-end">Ultima actualizacion</th>
-            </tr>
-          </thead>
-          <tbody>
+          <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de TI</h2>
+          <div class="col-md-12">
+            <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
             <?php
-            if ($tickets && $sentencia->rowCount() > 0) {
-              foreach ($tickets as $fila) {
-            ?>
-                <tr>
-                  <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                  <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
-                  <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
-                </tr>
-            <?php
-              }
+            if ($_SESSION['rol'] === 'Admin') {
+              echo '<a href="../indexAdmin/indexAdmin_ti.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de TI</a>';
             }
             ?>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>TID</th>
-              <th>Solicitante</th>
-              <!-- <th>correo</th> -->
-              <th>Departamento</th>
-              <th>Descripción del problema</th>
-              <th>nivel de urgencia</th>
-              <th>Respuesta</th>
-              <th>Estado</th>
-              <th>fecha de creacion</th>
-              <th>ultima actualizacion</th>
-            </tr>
-          </tfoot>
-        </table>
+          </div>
+          <table id="tickTItable" class="table shadow p-3 mb-5 bg-body-tertiary rounded compact hover cell-border" style="background-color:#fff; width: 100%; margin-top: 1%;">
+            <thead>
+              <tr>
+                <th class="border-end">TID</th>
+                <th class="border-end">Solicitante</th>
+                <!-- <th>correo</th> -->
+                <th class="border-end">Departamento</th>
+                <th class="border-end">Descripción del problema</th>
+                <th class="border-end">Nivel de urgencia</th>
+                <th class="border-end">Respuesta</th>
+                <th class="border-end">Estado</th>
+                <th class="border-end">Fecha de creacion</th>
+                <th class="border-end">Ultima actualizacion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              if ($tickets && $sentencia->rowCount() > 0) {
+                foreach ($tickets as $fila) {
+              ?>
+                  <tr>
+                    <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
+                    <!-- <td class="text-break"><?php echo escapar($fila["correo"]); ?></td> -->
+                    <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["respuesta"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["created_at"]); ?></td>
+                    <td class="text-break"><?php echo escapar($fila["updated_at"]); ?></td>
+                  </tr>
+              <?php
+                }
+              }
+              ?>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>TID</th>
+                <th>Solicitante</th>
+                <!-- <th>correo</th> -->
+                <th>Departamento</th>
+                <th>Descripción del problema</th>
+                <th>nivel de urgencia</th>
+                <th>Respuesta</th>
+                <th>Estado</th>
+                <th>fecha de creacion</th>
+                <th>ultima actualizacion</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -175,7 +178,7 @@ include("../../apertura_sesion.php")
       },
       scrollX: '150vh',
       scrollY: '450px',
-      
+
       initComplete: function() {
         this.api()
           .columns()

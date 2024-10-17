@@ -64,23 +64,23 @@ include("../../apertura_sesion.php")
 
 
 
-  
+<div class="espacio">
   <div class="tabla-container">
-  <?php
-  if ($error) {
-  ?>
-    <div class="container mt-2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-danger" role="alert">
-            <?= $error ?>
+    <?php
+    if ($error) {
+    ?>
+      <div class="container mt-2">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+              <?= $error ?>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <?php
-  }
-  ?>
+    <?php
+    }
+    ?>
     <div class="row">
       <div class="col-md-12">
         <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de Mantenimiento</h2>
@@ -146,10 +146,10 @@ include("../../apertura_sesion.php")
             </tr>
           </tfoot>
         </table>
-
+      </div>
     </div>
   </div>
-  </div>
+</div>
   <script src="../js/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>

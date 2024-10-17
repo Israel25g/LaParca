@@ -22,7 +22,7 @@
     <title>Inicio de sesión - IPL DIPROP</title>
 </head>
 <body style="background-image: url('./images/tinified/IMG_9533.jpg'); background-size:cover">
-     <h1>Inicio de Sesión<span class="badge text-bg-warning">Testing</span></h1>
+     <h1>Inicio de Sesión</h1>
 
     <?php
         if(isset($_GET['error'])){
