@@ -153,60 +153,95 @@ include("../apertura_sesion.php");
           <!-- Scripts -->
           <?php include "../daily_plan/datatable.php" ?>
           <script src="../host_virtual_TI/js/script.js"></script>
-          <script>
-            $(document).ready(function() {
-              new DataTable('#tablaPicking', {
-                paging: false,
-                scrollCollapse: true,
-                scrollY: '500px',
-                scrollX: '1700px',
-                initComplete: function() {
-        this.api()
-          .columns()
-          .every(function() {
-            let column = this;
-            let title = column.footer().textContent;
+                      <script>
+                  new DataTable('#tablaPicking', {
+                  paging: false,
+                  scrollCollapse: true,
+                  scrollY: '500px',
+                  scrollX: '1700px',
+                  initComplete: function() {
+                    this.api()
+                      .columns()
+                      .every(function() {
+                        let column = this;
+                        let footer = column.footer();
 
-            // Create input element
-            let input = document.createElement('input');
-            input.placeholder = title;
-            column.footer().replaceChildren(input);
+                        if (footer) { 
+                          let title = footer.textContent;
+                          let input = document.createElement('input');
+                          input.placeholder = title;
+                          column.footer().replaceChildren(input);
 
-            // Event listener for user input
-            input.addEventListener('keyup', () => {
-              if (column.search() !== this.value) {
-                column.search(input.value).draw();
-              }
-            });
-          });
-      },
-
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
-                info: false,
-                language: {
-                  "lengthMenu": "Mostrar _MENU_ registros por página",
-                  "zeroRecords": "No se encontraron resultados",
-                  "info": "Mostrando página _PAGE_ de _PAGES_",
-                  "infoEmpty": "No hay registros disponibles",
-                  "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                  "search": "Buscar:",
-                  "paginate": {
-                    "first": "<◀",
-                    "last": "▶> ",
-                    "next": "▶",
-                    "previous": "◀"
+                          input.addEventListener('keyup', () => {
+                            if (column.search() !== this.value) {
+                              column.search(input.value).draw();
+                            }
+                          });
+                        }
+                      });
                   },
-                  "buttons": {
-                    "copy": "Copiar",
-                    "csv": "CSV",
-                    "excel": "Excel",
-                    "pdf": "PDF",
-                    "print": "Imprimir"
+                  buttons: [
+                    {
+                      extend: 'copy',
+                      text: 'Copiar',
+                      exportOptions: {
+                        columns: ':not(:last-child)'  // Excluir la última columna
+                      }
+                    },
+                    {
+                      extend: 'csv',
+                      text: 'CSV',
+                      exportOptions: {
+                        columns: ':not(:last-child)'  // Excluir la última columna
+                      }
+                    },
+                    {
+                      extend: 'excel',
+                      text: 'Excel',
+                      exportOptions: {
+                        columns: ':not(:last-child)'  // Excluir la última columna
+                      }
+                    },
+                    {
+                      extend: 'pdf',
+                      text: 'PDF',
+                      exportOptions: {
+                        columns: ':not(:last-child)'  // Excluir la última columna
+                      }
+                    },
+                    {
+                      extend: 'print',
+                      text: 'Imprimir',
+                      exportOptions: {
+                        columns: ':not(:last-child)'  // Excluir la última columna
+                      }
+                    }
+                  ],
+                  dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+                  info: false,
+                  language: {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                      "first": "<◀",
+                      "last": "▶> ",
+                      "next": "▶",
+                      "previous": "◀"
+                    },
+                    "buttons": {
+                      "copy": "Copiar",
+                      "csv": "CSV",
+                      "excel": "Excel",
+                      "pdf": "PDF",
+                      "print": "Imprimir"
+                    }
                   }
-                }
-              });
-            });
+                });
+
           </script>
         </div>
       </body>
