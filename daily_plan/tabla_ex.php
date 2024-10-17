@@ -9,7 +9,7 @@ include("../apertura_sesion.php");
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Plan - Export</title>
-  <link rel="stylesheet" href="../estilos.css">
+  <link rel="stylesheet" href="../../sistema_de_tickets/main-global.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -22,9 +22,9 @@ include("../apertura_sesion.php");
 </head>
 
 <body style="background-image:url('../host_virtual_TI/images/Motivo2.png')!important ;margin: 0;padding: 0; font-family:montserrat;">
-  <div>
+  <div class="espacio">
     <!-- Header -->
-    <div class="header">
+    <div class="header-error">
       <div class="logo-container">
         <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
       </div>
@@ -49,7 +49,6 @@ include("../apertura_sesion.php");
     </div>
   </div> -->
     <?php
-    session_start();
     include '../daily_plan/funcionalidades/funciones.php';
     $error = false;
     $config = include '../daily_plan/funcionalidades/config_DP.php';
@@ -68,30 +67,31 @@ include("../apertura_sesion.php");
     }
     ?>
 
-    <?php if ($error): ?>
-      <div class="container mt-2">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="alert alert-danger" role="alert">
-              <?= $error ?>
+
+<!-- Tabla 'datos' -->
+<div class="tabla-container">
+      <?php if ($error): ?>
+        <div class="container mt-2">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-danger" role="alert">
+                <?= $error ?>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <?php endif; ?>
-
-    <!-- Tabla 'datos' -->
-    <div class="tabla-container">
+      <?php endif; ?>
       <div class="row">
         <div class="col-md-13">
           <h2 class="mt-3 nombre-tabla"><a href="../daily_plan/index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
-          <button class="btn btn-success ingreso-data dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</button>
+          <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</button>
             <ul class="dropdown-menu bg-success">
               <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_ex.php">Formulario singular</a></li>
               <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_ex/hoja_ex.php">Hoja de datos</a></li>
             </ul>
-          <a class="btn btn-warning ingreso-data"  href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
-          <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-tertiary rounded table-striped border">
+          <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+          <br/>
+          <table id="tablaExport" class="display table shadow p-3 mb-5 mt-2 bg-body-tertiary rounded table-striped border">
             <thead>
               <tr>
                 <th class="border end">#</th>

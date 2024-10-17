@@ -390,7 +390,6 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 90px !important;
 }
 
 .nombre-tabla {

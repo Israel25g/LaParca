@@ -63,6 +63,9 @@ include("../../apertura_sesion.php")
   ?>
 
 
+
+  
+  <div class="tabla-container">
   <?php
   if ($error) {
   ?>
@@ -78,9 +81,6 @@ include("../../apertura_sesion.php")
   <?php
   }
   ?>
-
-  <br>
-  <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
         <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de Mantenimiento</h2>

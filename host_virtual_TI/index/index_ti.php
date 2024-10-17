@@ -60,41 +60,24 @@ include("../../apertura_sesion.php")
     </div>
   </div>
   <!-- Fin del Header -->
-
-  <?php
-  if ($error) {
-  ?>
-    <div class="container mt-2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-danger" role="alert">
-            <?= $error ?>
+  
+  <div class="tabla-container">
+      <?php
+      if ($error) {
+      ?>
+        <div class="container mt-2">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-danger" role="alert">
+                <?= $error ?>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  <?php
-  }
-  ?>
-  <br>
-
-  <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small>11 mins ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        <?= $error ?>
-      </div>
-    </div>
-  </div>
-
-  <div class="tabla-container">
+      <?php
+      }
+      ?>
+      <br>
     <div class="row">
       <div class="col-md-12">
         <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de ticket de TI</h2>

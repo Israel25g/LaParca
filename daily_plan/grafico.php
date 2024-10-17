@@ -115,7 +115,7 @@
 
 
 </head>
-<body>
+<body style="background-image: url('../../sistema_de_tickets//images//Motivo2.png')">
   <div style="margin-top: 70px;" >
      <!-- Header -->
      <div class="header-dp">
