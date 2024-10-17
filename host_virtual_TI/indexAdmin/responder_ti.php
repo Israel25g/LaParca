@@ -39,13 +39,7 @@ if (isset($_POST['submit'])) {
         ];
 
         $consultaSQL = "UPDATE tickets SET
-        id = :id,
-        nombrecompleto = :nombrecompleto,
-        correo = :correo,
-        ubicacion = :ubicacion,
-        descripcion = :descripcion,
         estado = :estado,
-        urgencia = :urgencia,
         respuesta = :respuesta,
         updated_at = NOW()
             WHERE id = :id";
@@ -54,13 +48,7 @@ if (isset($_POST['submit'])) {
         $consulta->execute($tickets);
 
         $consultaSQL = "INSERT INTO tickets_r SET
-        id = :id,
-        nombrecompleto = :nombrecompleto,
-        correo = :correo,
-        ubicacion = :ubicacion,
-        descripcion = :descripcion,
         estado = :estado,
-        urgencia = :urgencia,
         respuesta = :respuesta,
         updated_at = NOW()";
 
