@@ -138,6 +138,7 @@ include("../apertura_sesion.php");
                         <th class="border end">Fecha estimada de salida</th>
                         <th class="border end">Llegada a rampa</th>
                         <th class="border end">Salida de rampa</th>
+                        <th class="border end">Acciones</th>
                     </tr>
                    </tfoot>
                 </table>
