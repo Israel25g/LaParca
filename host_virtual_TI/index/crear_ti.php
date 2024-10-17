@@ -51,6 +51,12 @@ if (isset($_POST['submit'])) {
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
 
+        // Guardar datos en la base de datos
+        $consultaSQL = "INSERT INTO tickets_r (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($tickets);
+
        // echo "Datos guardados en la base de datos.<br>"; // Debug
 
         // Configuración del correo
@@ -68,7 +74,7 @@ if (isset($_POST['submit'])) {
 
         $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
         $mail->addAddress($tickets['correo']);
-        $mail->addAddress('ricaurte@iplgsc.com'); // Correo adicional
+        $mail->addAddress('garayaalcibiades@gmail.com'); // Correo adicional
 
         $mail->isHTML(false);
         $mail->Subject = 'Confirmación de recepción del ticket';

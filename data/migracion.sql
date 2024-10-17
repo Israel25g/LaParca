@@ -17,6 +17,19 @@ CREATE TABLE tickets (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE tickets_r (
+  id INT(100) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombrecompleto VARCHAR(100) NOT NULL,
+  correo  VARCHAR(100) NOT NULL,
+  ubicacion VARCHAR(100) NOT NULL,
+  descripcion VARCHAR(250) NOT NULL,
+  urgencia VARCHAR(100) NOT NULL,
+  respuesta VARCHAR(250) NOT NULL,
+  estado VARCHAR(250) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE tickets_m (
   id INT(100) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombrecompleto VARCHAR(100) NOT NULL,
@@ -29,6 +42,45 @@ CREATE TABLE tickets_m (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE tickets_m_r (
+  id INT(100) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombrecompleto VARCHAR(100) NOT NULL,
+  correo  VARCHAR(100) NOT NULL,
+  ubicacion VARCHAR(100) NOT NULL,
+  descripcion VARCHAR(250) NOT NULL,
+  urgencia VARCHAR(100) NOT NULL,
+  respuesta VARCHAR(250) NOT NULL,
+  estado VARCHAR(250) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tickets_eemp (
+  id int(100) UNSIGNED NOT NULL,
+  nombrecompleto varchar(100) NOT NULL,
+  correo varchar(100) NOT NULL,
+  ubicacion varchar(100) NOT NULL,
+  descripcion varchar(250) NOT NULL,
+  urgencia varchar(100) NOT NULL,
+  respuesta varchar(250) NOT NULL,
+  estado varchar(250) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+
+  CREATE TABLE tickets_eemp_r (
+  id int(100) UNSIGNED NOT NULL,
+  nombrecompleto varchar(100) NOT NULL,
+  correo varchar(100) NOT NULL,
+  ubicacion varchar(100) NOT NULL,
+  descripcion varchar(250) NOT NULL,
+  urgencia varchar(100) NOT NULL,
+  respuesta varchar(250) NOT NULL,
+  estado varchar(250) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
 
 
 
