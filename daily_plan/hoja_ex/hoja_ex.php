@@ -42,7 +42,13 @@
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'text' }, // cliente
+                { data: 1, type: 'dropdown', 
+        source: ['Brapan Optical', 'Delta Fashion', 'Go Outdoors',
+         'Owl', 'Bensherman', 'Miniso', 'AMPS Middle East', 'AP GROUP',
+          'Cps', 'Cesa', 'Gulf', 'Incaso', 'Adiplatinum', 'Cool Hunter',
+           'Juki', 'Kashima', 'Parawa', 'Promocean', 'Saint Gobain', 'Tania', 
+           'USOpanthalic', 'Energy Brands', 'Knipex' ,'Pentel', 'IMSA'], // Opciones del selector de clientes 
+        strict: true }, // cliente
                 { data: 2, type: 'text' }, // vehiculo/placa
                 { data: 3, type: 'text' }, // tipo de vehículo
                 { data: 4, type: 'text' }, // bl
