@@ -42,6 +42,15 @@ if (isset($_POST['submit'])) {
         $consulta = $conexion->prepare($consultaSQL);
         $consulta->execute($tickets);
 
+        $consultaSQL = "INSERT INTO tickets_r SET
+        respuesta = :respuesta,
+        estado = :estado,
+        updated_at = NOW()
+        WHERE id = :id";
+
+    $consulta = $conexion->prepare($consultaSQL);
+    $consulta->execute($tickets);
+
         // Obtener el correo y nombrecompleto
         $consultaInfo = "SELECT correo, nombrecompleto FROM tickets WHERE id = :id";
         $consultaInfoStmt = $conexion->prepare($consultaInfo);
@@ -65,7 +74,7 @@ if (isset($_POST['submit'])) {
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de TI');
             $mail->addAddress($info['correo'], $info['nombrecompleto']);  // Enviar al correo del solicitante
-            $mail->addCC('ricaurte@iplgsc.com');  // Copia a un correo adicional si es necesario
+            $mail->addCC('garayaalcibiades@gmail.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
             $mail->isHTML(true);
