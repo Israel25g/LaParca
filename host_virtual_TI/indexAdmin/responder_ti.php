@@ -28,12 +28,6 @@ if (isset($_POST['submit'])) {
 
         // Actualización de los datos del ticket
         $tickets = [
-            "id"        => $_GET['id'],
-            "nombrecompleto"        => $_GET['nombrecompleto'],
-            "correo"        => $_GET['correo'],
-            "ubicacion"        => $_GET['ubicacion'],
-            "descripcion"        => $_GET['descripcion'],
-            "urgencia"        => $_GET['urgencia'],
             "respuesta" => $_POST['respuesta'],
             "estado"    => $_POST['estado'],
         ];
