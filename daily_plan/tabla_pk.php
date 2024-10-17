@@ -246,7 +246,7 @@ include("../apertura_sesion.php");
                     }
                   }
                 });
-
+              });
           </script>
         </div>
       </body>
