@@ -1,15 +1,15 @@
 <?php
-// return [
-//   'db' => [
-//     'host' => 'localhost',
-//     'user' => 'root',
-//     'pass' => '',
-//     'name' => 'u366386740_db_dailyplan',
-//     'options' => [
-//       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-//     ]
-//   ]
-// ];
+return [
+  'db' => [
+    'host' => 'localhost',
+    'user' => 'root',
+    'pass' => '',
+    'name' => 'u366386740_db_dailyplan',
+    'options' => [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]
+  ]
+];
 
 
 // =========================================PRODUCTIVO=========================================
