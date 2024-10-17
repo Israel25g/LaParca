@@ -58,6 +58,8 @@ include("../../apertura_sesion.php")
   </div>
   <!-- Fin del Header -->
 
+<div class="espacio">
+  <div class="tabla-container">
   <?php
   if ($error) {
   ?>
@@ -73,10 +75,6 @@ include("../../apertura_sesion.php")
   <?php
   }
   ?>
-  <br>
-
-
-  <div class="tabla-container">
     <div class="row">
       <div class="col-md-12">
         <h2>Listado de ticket de EEMP</h2>
@@ -143,6 +141,7 @@ include("../../apertura_sesion.php")
       </div>
     </div>
   </div>
+</div>
   <script src="../js/script.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
