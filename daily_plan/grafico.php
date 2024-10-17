@@ -74,45 +74,41 @@
     margin-left: 45% !important;
   }
 
-  /* Consulta de medios para pantallas de 1488px de ancho y 740px de alto o más pequeñas */
-  @media (max-width: 1488px) and (max-height: 740px) {
+  /* Consulta de medios para pantallas pequeñas */
+  @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
-      grid-template-columns: 2fr !important; /* Una sola columna para apilar los gráficos verticalmente */
-      gap: 10px !important ; /* Espacio entre los gráficos */
+      grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
+      gap: 10px !important; /* Espacio entre los gráficos */
     }
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
-      width: 700px !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
-      height: 250px !important; /* Ajustar la altura automáticamente */
+      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
+      height: 200px !important; /* Ajustar la altura automáticamente */
     }
 
-    #grafico-pastel1{
-        width: 200% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 250px !important; /* Ajustar la altura del gráfico */
-      margin-left: 0px;
-    }
-    #grafico-pastel2{
-        width: 200% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 260px !important; /* Ajustar la altura del gráfico */
-      margin-left: 0px !important;
-      padding-top: 0px !important ;
-    }
-
-    #grafico-barras{
-        width: 200% !important;
-        height: 250px !important ;
-        margin-top:0% !important ;
-        margin-left :0px !important;
+    #grafico-pastel1, #grafico-pastel2, #grafico-barras {
+      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 200px !important; /* Ajustar la altura del gráfico */
     }
 
     /* Ajustar el tamaño de los gráficos individuales */
     #grafico-gauge {
-        width: 130% !important;
-        height: 330px !important ;
-        margin-top:-30% !important ;
-        margin-left :200px !important;
+      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
+      height: 200px !important; /* Ajustar la altura del gráfico */
+      margin-top: -50px !important;
+    }
+
+        /* Ajustar las tablas para pantallas pequeñas */
+        .tabla-ajustada {
+      font-size: 10px !important; /* Texto aún más pequeño en pantallas pequeñas */
+      width: 100% !important; /* Ocupar el ancho completo */
+      margin: 0 auto !important; /* Centrar la tabla */
+    }
+
+    .titulo_gauge{
+      font-size: 100% !important;
     }
   }
 </style>
@@ -160,10 +156,10 @@
                     <div id="grafico-pastel1" class="bg-white " href="../daily_plan/tabla_ex.php" style="width: 200%; height: 350%;"></div>
                 </div>    
             </div>
-        
+        <!-- grafico de gauge -->
              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
-                    <p style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
+                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
                     <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
@@ -184,7 +180,7 @@
                 <div class="row">
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
-                    <table id="tablaExport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                    <table id="tablaExport" class=" tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                       <thead>
                         <tr style="font-family: montserrat; font-size: 15px">
                           <th class="border end" style="background-color: #dc3545">OID</th>
@@ -221,7 +217,7 @@
                           <div class="row">
                             <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
                               <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                              <table id="tablaImport" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                              <table id="tablaImport" class="tabla-ajustada  display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                           <thead>
                             <tr  style="font-family: montserrat; font-size: 15px">
                               <th class="border end" style="background-color: #0dcaf0">AID</th>
@@ -257,7 +253,7 @@
                     <div class="row">
                       <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                        <table   id="tablapicking" class="display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
+                        <table   id="tablapicking" class="tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
                                 <thead>
                                   <tr style="font-family: montserrat; font-size: 14px">
                                     <th class="border end" style="background-color: #ffc107">OID</th>

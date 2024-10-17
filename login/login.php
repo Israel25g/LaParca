@@ -16,7 +16,7 @@ session_start();
         
 
         // $sql = "SELECT * FROM users WHERE user='$user'";
-        $sql = "SELECT u.id, r.nombre_rol, pass, usuario FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
+        $sql = "SELECT u.id, r.nombre_rol, pass FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
         $result = mysqli_query($conexion, $sql);
         
 

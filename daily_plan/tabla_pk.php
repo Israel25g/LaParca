@@ -130,6 +130,21 @@ include("../apertura_sesion.php");
                 <?php endforeach; ?>
               <?php endif; ?>
             </tbody>
+            <tfoot>
+            <tr>
+                <th class="border end">#</th>
+                <th class="border end">OID</th>
+                <th class="border end">Cliente</th>
+                <th class="border end">Unidades por pickear</th>
+                <th class="border end">paletas</th>
+                <th class="border end">Unidades pickeadas</th>
+                <th class="border end">Cajas</th>
+                <th class="border end">Fecha de requerido</th>
+                <th class="border end">Prioridad de picking</th>
+                <th class="border end">Porcentaje de avance</th>
+                <th class="border end">Acciones</th>
+              </tr>
+          </tfoot>
           </table>
         </div>
       </div>
@@ -141,7 +156,30 @@ include("../apertura_sesion.php");
         new DataTable('#tablaPicking', {
           paging: false,
           scrollCollapse: true,
-          scrollY: '200px',
+          scrollY: '400px',
+          scrollX: '1700px',
+
+          initComplete: function() {
+        this.api()
+          .columns()
+          .every(function() {
+            let column = this;
+            let title = column.footer().textContent;
+
+            // Create input element
+            let input = document.createElement('input');
+            input.placeholder = title;
+            column.footer().replaceChildren(input);
+
+            // Event listener for user input
+            input.addEventListener('keyup', () => {
+              if (column.search() !== this.value) {
+                column.search(input.value).draw();
+              }
+            });
+          });
+      },
+
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
           dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
           info: false,

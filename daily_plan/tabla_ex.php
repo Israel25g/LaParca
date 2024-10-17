@@ -127,6 +127,20 @@ include("../apertura_sesion.php");
                 <?php endforeach; ?>
               <?php endif; ?>
             </tbody>
+            <tfoot>
+            <tr>
+                <th class="border end">#</th>
+                <th class="border end">OID</th>
+                <th class="border end">Cliente</th>
+                <th class="border end"># Vehículo / Placa</th>
+                <th class="border end">Pedidos en proceso</th>
+                <th class="border end">Pedidos despachados</th>
+                <th class="border end">Fecha estimada de salida</th>
+                <th class="border end">Llegada a rampa</th>
+                <th class="border end">Salida de rampa</th>
+                <th class="border end">Acciones</th>
+              </tr>
+          </tfoot>
           </table>
         </div>
       </div>
@@ -141,7 +155,28 @@ include("../apertura_sesion.php");
           paging: false,
           scrollCollapse: true,
           scrollY: '400px',
-          scrollX: '1600px',
+          scrollX: '1700px',
+          
+          initComplete: function() {
+        this.api()
+          .columns()
+          .every(function() {
+            let column = this;
+            let title = column.footer().textContent;
+
+            // Create input element
+            let input = document.createElement('input');
+            input.placeholder = title;
+            column.footer().replaceChildren(input);
+
+            // Event listener for user input
+            input.addEventListener('keyup', () => {
+              if (column.search() !== this.value) {
+                column.search(input.value).draw();
+              }
+            });
+          });
+      },
           buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
           dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
           info: false,
