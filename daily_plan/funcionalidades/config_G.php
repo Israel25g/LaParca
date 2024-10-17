@@ -21,5 +21,15 @@ if ($conn->connect_error) {
 }
 ?>
 
+<!-- local
+$servername = "localhost";
+$username = "root";
+$password = "";  
+$dbname = "u366386740_db_dailyplan"; -->
 
 
+<!-- productivo
+$servername = "localhost";
+$username = "u366386740_adminDP";
+$password = "1plGr0up01*";  
+$dbname = "u366386740_db_dailyplan"; -->
