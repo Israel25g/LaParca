@@ -33,8 +33,8 @@ if (isset($_POST['submit'])) {
         ];
 
         $consultaSQL = "UPDATE tickets SET
-        estado = :estado,
         respuesta = :respuesta,
+        estado = :estado,
         updated_at = NOW()
             WHERE id = :id";
 
