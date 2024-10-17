@@ -42,14 +42,25 @@ if (isset($_POST['submit'])) {
         $consulta = $conexion->prepare($consultaSQL);
         $consulta->execute($tickets);
 
-        $consultaSQL = "INSERT INTO tickets_r SET
-        id=:id,
-        estado = :estado,
-        respuesta = :respuesta,
-        updated_at = NOW()";
-
-    $consulta = $conexion->prepare($consultaSQL);
-    $consulta->execute($tickets);
+         // Obtener toda la información del ticket desde la primera tabla (para insertar en la segunda tabla)
+         $consultaInfo = "SELECT * FROM tickets WHERE id = :id";
+         $consultaInfoStmt = $conexion->prepare($consultaInfo);
+         $consultaInfoStmt->execute(['id' => $_GET['id']]);
+         $ticketInfo = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
+ 
+         // Insertar en la segunda tabla todos los datos del ticket
+         $consultaSQL = "INSERT INTO tickets_r (id, estado, respuesta, nombrecompleto, descripcion, updated_at) 
+                         VALUES (:id, :estado, :respuesta, :nombrecompleto, :descripcion, NOW())";
+ 
+         // Asegurarse de que todos los valores se incluyan correctamente
+         $consulta = $conexion->prepare($consultaSQL);
+         $consulta->execute([
+             'id' => $ticketInfo['id'],
+             'estado' => $_POST['estado'],  // Estado actualizado
+             'respuesta' => $_POST['respuesta'],  // Respuesta actualizada
+             'nombrecompleto' => $ticketInfo['nombrecompleto'],  // Datos originales
+             'descripcion' => $ticketInfo['descripcion'],  // Datos originales
+         ]);
 
         // Obtener el correo y nombrecompleto
         $consultaInfo = "SELECT correo, nombrecompleto FROM tickets WHERE id = :id";
