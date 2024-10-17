@@ -29,6 +29,11 @@ if (isset($_POST['submit'])) {
         // Actualización de los datos del ticket
         $tickets = [
             "id"        => $_GET['id'],
+            "nombrecompleto"        => $_GET['nombrecompleto'],
+            "correo"        => $_GET['correo'],
+            "ubicacion"        => $_GET['ubicacion'],
+            "descripcion"        => $_GET['descripcion'],
+            "urgencia"        => $_GET['urgencia'],
             "respuesta" => $_POST['respuesta'],
             "estado"    => $_POST['estado'],
         ];
@@ -43,10 +48,15 @@ if (isset($_POST['submit'])) {
         $consulta->execute($tickets);
 
         $consultaSQL = "INSERT INTO tickets_r SET
-        respuesta = :respuesta,
+        id = :id,
+        nombrecompleto = :nombrecompleto,
+        correo = :correo,
+        ubicacion = :ubicacion,
+        descripcion = :descripcion,
         estado = :estado,
-        updated_at = NOW()
-        WHERE id = :id";
+        urgencia = :urgencia,
+        respuesta = :respuesta,
+        updated_at = NOW()";
 
     $consulta = $conexion->prepare($consultaSQL);
     $consulta->execute($tickets);
