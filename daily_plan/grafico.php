@@ -119,7 +119,7 @@
 <body style="overflow: hidden;">
 <div style= "margin-top: 70px;" >
      <!-- Header -->
-     <div class="header_g" style="border-radius: 0 0 50px 50px !important;">
+     <div class="header" style="border-radius: 0 0 50px 50px !important;">
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
         </div>
