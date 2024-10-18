@@ -116,7 +116,7 @@
 
 
 </head>
-<body style="background-image: url(../images/Motivo2.png);">
+<body>
 <div style= "margin-top: 70px;" >
      <!-- Header -->
      <div class="header">
