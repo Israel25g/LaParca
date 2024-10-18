@@ -73,7 +73,9 @@ if (isset($_POST['submit'])) {
 
         $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
         $mail->addAddress($tickets['correo']);
-        $mail->addAddress('einar@iplgsc.com , ricaurte@iplgsc.com'); // Einar
+        $mail->addAddress('einar@iplgsc.com'); // Einar
+        $mail->addAddress('ricaurte@iplgsc.com');//correo adicional si es necesario
+        // $mail->addCC('ricaurte@iplgsc.com');// Copia a un correo adicional si es necesario
         
 
         $mail->isHTML(false);
