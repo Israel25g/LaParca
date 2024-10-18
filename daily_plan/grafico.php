@@ -419,7 +419,7 @@
                 }
             },
             legend: {
-                orient: 'vertical',
+                orient: 'horizontal',
                 left: 'left'
             },
             yAxis: {
