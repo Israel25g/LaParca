@@ -425,7 +425,7 @@
             yAxis: {
                 type: 'category',
                 data: clientes,  // Los nombres de los clientes en el eje Y
-                fontSize: 20
+                fontSize: 10
             },
             xAxis: {
                 type: 'value'
