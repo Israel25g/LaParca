@@ -461,9 +461,6 @@
         barChart.setOption(option);
     });
 
-
-
-
                 fetch('get_data_porcen.php')
         .then(response => response.json())
         .then(gaugeData => {
