@@ -437,16 +437,16 @@
                     showBackground: true,
                     backgroundStyle: {
                         color: 'rgba(220, 220, 220, 0.8)',
-                        borderRadius: [1, 30, 30, 1],
+                        borderRadius: [1, 1, 1, 1],
                     },
                     data: [data.reduce((acc, item) => acc + item.total_meta, 0)], // Sumar los valores de total_meta
                     itemStyle: {
-                        borderRadius: [1, 30, 30, 1],
+                        borderRadius: [1, 1, 1, 1],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
-                        fontSize: 35
+                        fontSize: 20
                     }
                 },
                 // Barra de "En espera" apilada por clientes
@@ -456,12 +456,12 @@
                     stack: 'En espera',  // Apilar las barras
                     data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
                     itemStyle: {
-                        borderRadius: [1, 30, 30, 1],
+                        borderRadius: [1, 1, 1, 1],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
-                        fontSize: 35
+                        fontSize: 20
                     }
                 }))
             ]
