@@ -182,7 +182,7 @@ include("../apertura_sesion.php");
                       extend: 'copy',
                       text: 'Copiar',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8,9] 
+                        columns: [0, 1, 2,3,4,5,6,7,8] 
 
                       }
                     },
@@ -190,28 +190,28 @@ include("../apertura_sesion.php");
                       extend: 'csv',
                       text: 'CSV',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8,9]
+                        columns: [0, 1, 2,3,4,5,6,7,8]
                       }
                     },
                     {
                       extend: 'excel',
                       text: 'Excel',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8,9]
+                        columns: [0, 1, 2,3,4,5,6,7,8]
                       }
                     },
                     {
                       extend: 'pdf',
                       text: 'PDF',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8,9]
+                        columns: [0, 1, 2,3,4,5,6,7,8]
                       }
                     },
                     {
                       extend: 'print',
                       text: 'Imprimir',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8,9]
+                        columns: [0, 1, 2,3,4,5,6,7,8]
                       }
                     }
                   ],
