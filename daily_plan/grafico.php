@@ -431,8 +431,7 @@
             },
             series: [
                 // Barra de "Recibido" con el total (suma de todos los valores de total_meta)
-                ...clientes.map((cliente,index)=>({
-                    name: 'Recibido',
+                   { name: 'Recibido',
                     type: 'bar',
                     showBackground: true,
                     backgroundStyle: {
@@ -448,7 +447,7 @@
                         position: 'insideRight',
                         fontSize: 35
                     }
-                })),
+                },
                 // Barras de "En espera", apiladas por cliente
                 ...clientes.map((cliente, index) => ({
                     name: `En espera (${cliente})`,
