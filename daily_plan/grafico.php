@@ -398,17 +398,46 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Extraer los nombres de los clientes
-        const clientes = data.map(item => item.cliente);
-        const recibidoData = data.map(item => item.total_recibido);
-        const enEsperaData = data.map(item => item.total_espera);
+        // Crear la estructura de series según el formato deseado
+        const series = [];
+
+        // Agrupar los datos en la estructura esperada
+        const clientes = [...new Set(data.map(item => item.name))]; // Obtener clientes únicos
+
+        // Iterar sobre cada cliente para construir la serie
+        clientes.forEach(cliente => {
+            // Filtrar datos para el cliente actual
+            const clienteData = data.filter(item => item.name === cliente);
+            
+            // Añadir datos de "Recibido"
+            series.push({
+                name: cliente, // Nombre del cliente
+                type: 'bar',
+                stack: 'total', // Para apilar
+                label: {
+                    show: true // Mostrar etiquetas
+                },
+                data: clienteData[0].data // Recibido
+            });
+
+            // Añadir datos de "En espera"
+            series.push({
+                name: cliente, // Nombre del cliente
+                type: 'bar',
+                stack: 'total', // Para apilar
+                label: {
+                    show: true // Mostrar etiquetas
+                },
+                data: clienteData[1].data // En espera
+            });
+        });
 
         // Configurar el gráfico de barras
         const option = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow' // Usa 'shadow' para mostrar el tooltip en las barras
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
                 }
             },
             legend: {},
@@ -423,39 +452,15 @@
             },
             yAxis: {
                 type: 'category',
-                data: ['Recibido', 'En espera'] // Etiquetas de categorías
+                data: ['recibido', 'en espera']
             },
-            series: [
-                {
-                    name: 'Recibido',
-                    type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: true
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: recibidoData // Datos de "Recibido" para cada cliente
-                },
-                {
-                    name: 'En espera',
-                    type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: true
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: enEsperaData // Datos de "En espera" para cada cliente
-                }
-            ]
+            series: series // Reemplazar la parte de series con la nueva estructura
         };
 
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
 
 
