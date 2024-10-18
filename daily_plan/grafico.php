@@ -394,7 +394,7 @@
                         }]
                     });
                 });
-                
+
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
@@ -451,7 +451,7 @@
                     name: `En espera (${cliente})`,
                     type: 'bar',
                     stack: 'En espera',  // Apilar las barras
-                    data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
+                    data: [null, totalMETA[index]], // Solo en la barra de "En espera"
                     itemStyle: {
                         borderRadius: [0, 0, 0, 0],
                     },
