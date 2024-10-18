@@ -395,17 +395,18 @@
                     });
                 });
 
+                
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Extraer los nombres de los clientes y los datos de "En espera"
+        // Extraer los nombres de los clientes y los datos
         const clientes = data.map(item => item.cliente);
+        const totalRecibidoPorCliente = data.map(item => item.total_meta);
         const totalEnEsperaPorCliente = data.map(item => item.total_grafico);
-        const totalMETA = data.map(item => item.total_meta);
-        
+
         // Configurar el gráfico de import
         barChart.setOption({
-            color: ['#00CED1 ', '#4682B4', '#FFD700', '#FF4500', '#32CD32'], // Colores para diferenciar clientes
+            color: ['#00CED1', '#4682B4', '#FFD700', '#FF4500', '#32CD32'], // Colores para diferenciar clientes
             title: {
                 text: 'Import',
                 subtext: '',
@@ -413,57 +414,64 @@
                 fontSize: 20
             },
             tooltip: {
-                trigger: 'item',
+                trigger: 'axis',
                 axisPointer: { // Para que el tooltip siga las barras
                     type: 'shadow'
                 }
             },
             legend: {
-                orient: 'vertical',
-                left: 'left'
+                orient: 'horizontal',
+                left: 'center',
+                top: 'top'
             },
             yAxis: {
                 type: 'category',
-                data: ["Recibido", "En espera"],
+                data: clientes,  // Mostrar los clientes en el eje Y
                 fontSize: 20
             },
             xAxis: {
                 type: 'value'
             },
             series: [
-                // Barra de "Recibido" con el total
-                ...clientes.map((cliente, index) => ({
-                    name: `En espera (${cliente})`,
+                // Barra de "Recibido" apilada por cliente
+                {
+                    name: 'Recibido',
                     type: 'bar',
-                    stack: 'Recibido',  // Apilar las barras
-                    data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
+                    stack: 'Total',  // Apilamos las barras de "Recibido" y "En espera" bajo "Total"
+                    showBackground: true,
+                    backgroundStyle: {
+                        color: 'rgba(220, 220, 220, 0.8)',
+                        borderRadius: [1, 30, 30, 1],
+                    },
+                    data: totalRecibidoPorCliente,  // Valores de "Recibido" por cliente
                     itemStyle: {
-                        borderRadius: [0, 0, 0, 0],
+                        borderRadius: [1, 30, 30, 1],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
-                        fontSize: 20
+                        fontSize: 35
                     }
-                })),
-                // Barra de "En espera" apilada por clientes
-                ...clientes.map((cliente, index) => ({
-                    name: `Recibido (${cliente})`,
+                },
+                // Barra de "En espera" apilada por cliente
+                {
+                    name: 'En espera',
                     type: 'bar',
-                    stack: 'En espera',  // Apilar las barras
-                    data: [null, totalMETA[index]], // Solo en la barra de "Recibido"
+                    stack: 'Total',  // Apilamos las barras de "Recibido" y "En espera" bajo "Total"
+                    data: totalEnEsperaPorCliente,  // Valores de "En espera" por cliente
                     itemStyle: {
-                        borderRadius: [0, 0, 0, 0],
+                        borderRadius: [1, 30, 30, 1],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
-                        fontSize: 20
+                        fontSize: 35
                     }
-                }))
+                }
             ]
         });
     });
+
 
 
 
