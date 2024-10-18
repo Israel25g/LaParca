@@ -3,24 +3,10 @@
 include '../daily_plan/funcionalidades/config_G.php';
 
 // Consulta a la base de datos, agrupando por cliente
-$query = "
-    SELECT cliente, 
-        SUM(
-            CASE 
-                WHEN pedidos_despachados >= 1 THEN 0
-                ELSE grafica_dp
-            END
-        ) AS total_grafico,
-        SUM(
-            CASE 
-                WHEN pedidos_despachados >= 1 THEN pedidos_despachados
-                ELSE pedidos_despachados
-            END
-        ) AS total_meta
-    FROM import
-    WHERE fecha_objetivo = CURDATE()
-    GROUP BY cliente
-";
+$query = "SELECT cliente, SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta 
+          FROM import 
+          WHERE fecha_objetivo = CURDATE() 
+          GROUP BY cliente";  // Asegúrate de agrupar por cliente
 
 $result = $conn->query($query);
 
@@ -32,8 +18,8 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $data[] = array(
             'cliente' => $row['cliente'],  // Nombre del cliente
-            'total_meta' => (int)$row['total_meta'],  // pedidos_despachados
-            'total_grafico' => (int)$row['total_grafico']  // grafica_dp
+            'total_meta' => (int)$row['total_meta'],
+            'total_grafico' => (int)$row['total_grafico']
         );
     }
 } else {
@@ -46,4 +32,3 @@ echo json_encode($data);
 // Cerrar la conexión
 $conn->close();
 ?>
-

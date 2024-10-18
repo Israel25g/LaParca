@@ -401,11 +401,11 @@
         // Extraer los nombres de los clientes y los datos de "En espera"
         const clientes = data.map(item => item.cliente);
         const totalEnEsperaPorCliente = data.map(item => item.total_grafico);
-        const totalMETA = data.map(item => item.total_meta);  // Consistencia en el nombre
+        const totalMETA = data.map(item => item.total_meta);
         
         // Configurar el gráfico de import
         barChart.setOption({
-            color: ['#00CED1', '#4682B4'], // Colores para diferenciar Recibido y En espera
+            color: ['#00CED1', '#4682B4'],  // Colores para diferenciar las barras
             title: {
                 text: 'Import',
                 subtext: '',
@@ -413,25 +413,25 @@
                 fontSize: 20
             },
             tooltip: {
-                trigger: 'axis',
-                axisPointer: { // Para que el tooltip siga las barras
-                    type: 'shadow'
+                trigger: 'axis',  // Cambiado a 'axis' para mostrar ambos valores apilados
+                axisPointer: { 
+                    type: 'shadow'  // Para que el tooltip siga las barras
                 }
             },
             legend: {
-                orient: 'horizontal',
+                orient: 'vertical',
                 left: 'left'
             },
             yAxis: {
                 type: 'category',
                 data: clientes,  // Los nombres de los clientes en el eje Y
-                fontSize: 10
+                fontSize: 20
             },
             xAxis: {
                 type: 'value'
             },
             series: [
-                // Barra de "Recibido" apilada por cliente
+                // Barra de "Recibido" con el total
                 {
                     name: 'Recibido',
                     type: 'bar',
@@ -464,6 +464,7 @@
             ]
         });
     });
+
 
 
                 fetch('get_data_porcen.php')
