@@ -398,54 +398,65 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Configurar el gráfico de import
-        barChart.setOption({
-            color: ['#00CED1 ', '#4682B4'],
-            title: {text: 'Import',subtext: '',left: 'center',fontSize: 20},
-            tooltip: {trigger: 'item'},
-            legend: {orient: 'vertical',left: 'left'},
-            yAxis: {type: 'category',data: [""], fontSize: 20},
-            xAxis: {type: 'value'},
+        // Extraer los nombres de los clientes
+        const clientes = data.map(item => item.cliente);
+        const recibidoData = data.map(item => item.total_recibido);
+        const enEsperaData = data.map(item => item.total_espera);
+
+        // Configurar el gráfico de barras
+        const option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow' // Usa 'shadow' para mostrar el tooltip en las barras
+                }
+            },
+            legend: {},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
+                type: 'category',
+                data: ['Recibido', 'En espera'] // Etiquetas de categorías
+            },
             series: [
                 {
                     name: 'Recibido',
                     type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                    color: 'rgba(220, 220, 220, 0.8)',
-                    borderRadius: [1,30,30,1],},
-                    data: data.map(item => item.total_meta), // Los valores de meta_despacho
-                    category:["Recibido"],
-                    itemStyle: {
-                        borderRadius: [1,30,30,1],
-                        },
+                    stack: 'total',
                     label: {
-                        show: true,
-                        position: 'insideRight',
-                        fontSize: 35
+                        show: true
                     },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: recibidoData // Datos de "Recibido" para cada cliente
                 },
                 {
                     name: 'En espera',
                     type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                    color: 'rgba(220, 220, 220, 0.8)',
-                    borderRadius: [1,30,30,1],},
-                    data: data.map(item => item.total_grafico), // Los valores de grafica_dp
-                    itemStyle: {
-                            borderRadius: [1,30,30,1],
-                        },
+                    stack: 'total',
                     label: {
-                        show: true,
-                        position: 'insideRight',
-                        fontSize: 35
-                    }
+                        show: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    data: enEsperaData // Datos de "En espera" para cada cliente
                 }
             ]
-            
-        });
+        };
+
+        // Establecer la opción en el gráfico
+        barChart.setOption(option);
     });
+
 
 
                 fetch('get_data_porcen.php')

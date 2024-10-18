@@ -1,9 +1,14 @@
 <?php
-// Archivo para extraer los datos de la base de datos (get_data.php)
+// Archivo para extraer los datos de la base de datos (get_data_im.php)
 include '../daily_plan/funcionalidades/config_G.php';
 
-// Consulta a la base de datos
-$query = "SELECT SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta, cliente FROM import WHERE fecha_objetivo = CURDATE()";
+// Consulta a la base de datos agrupando por cliente y con condiciones
+$query = "SELECT cliente, 
+                 SUM(CASE WHEN pedidos_despachados >= 1 THEN pedidos_despachados ELSE 0 END) AS total_recibido,
+                 SUM(CASE WHEN pedidos_despachados < 1 THEN grafica_dp ELSE 0 END) AS total_espera 
+          FROM import 
+          WHERE fecha_objetivo = CURDATE() 
+          GROUP BY cliente";
 
 $result = $conn->query($query);
 
@@ -14,10 +19,9 @@ if ($result->num_rows > 0) {
     // Almacenar los resultados en el array
     while($row = $result->fetch_assoc()) {
         $data[] = array(
-            'name' => ['cliente'],
-            'total_meta' => (int)$row['total_meta'],
-            'total_grafico' => (int)$row['total_grafico']
-            
+            'cliente' => $row['cliente'],  // Nombre del cliente
+            'total_recibido' => (int)$row['total_recibido'],  // Datos para "Recibido"
+            'total_espera' => (int)$row['total_espera']  // Datos para "En espera"
         );
     }
 } else {
