@@ -53,6 +53,21 @@ body{
     padding: 10px !important;
 }
 
+.header_g{
+    width: 100% !important;
+    background-color: var(--color1) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000 !important;
+    border-radius: 0 0 0px 50px !important;
+    padding: 10px !important;
+}
+
 .background-container::before {
     content: '' !important;
     position: fixed !important;
