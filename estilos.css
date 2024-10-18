@@ -12,7 +12,7 @@
 
 
 body{
-    background-image: url('../sistema_de_tickets/host_virtual_TI/images/Motivo2.png') !important;
+    background-image: url('./images/Motivo2.png');
     margin: 0 !important;
     padding: 0 !important;
 }
