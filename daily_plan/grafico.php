@@ -437,7 +437,7 @@
                     name: `Recibido (${cliente})`,
                     type: 'bar',
                     stack: 'Recibido',  // Apilar las barras
-                    data: [null, total_meta[index]], // Solo en la barra de "Recibido"
+                    data: [null, totalMETA[index]], // Solo en la barra de "Recibido"
                     itemStyle: {
                         borderRadius: [1, 1, 1, 1],
                     },
@@ -465,9 +465,6 @@
             ]
         });
     });
-
-
-
 
                 fetch('get_data_porcen.php')
         .then(response => response.json())
