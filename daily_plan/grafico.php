@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      // header("Refresh:81");
+      header("Refresh:81");
       ?>
 
 <!DOCTYPE html>
