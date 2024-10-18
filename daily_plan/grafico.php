@@ -116,7 +116,7 @@
 
 
 </head>
-<body>
+<body style="overflow: hidden;">
 <div style= "margin-top: 70px;" >
      <!-- Header -->
      <div class="header">
