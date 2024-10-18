@@ -455,12 +455,12 @@
                     stack: 'En espera',  // Apilar las barras
                     data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
                     itemStyle: {
-                        borderRadius: [1, 30, 30, 1],
+                        borderRadius: [0, 0, 0, 0],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
-                        fontSize: 35
+                        fontSize: 20
                     }
                 }))
             ]
