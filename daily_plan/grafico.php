@@ -394,19 +394,18 @@
                         }]
                     });
                 });
-
                 
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Extraer los nombres de los clientes y los datos de "En espera" y "Recibido"
+        // Extraer los nombres de los clientes y los datos de "En espera"
         const clientes = data.map(item => item.cliente);
-        const totalRecibidoPorCliente = data.map(item => item.total_meta);
         const totalEnEsperaPorCliente = data.map(item => item.total_grafico);
-
+        const totalMETA = data.map(item => item.total_meta);
+        
         // Configurar el gráfico de import
         barChart.setOption({
-            color: ['#00CED1', '#4682B4'], // Colores para diferenciar Recibido y En espera
+            color: ['#00CED1 ', '#4682B4', '#FFD700', '#FF4500', '#32CD32'], // Colores para diferenciar clientes
             title: {
                 text: 'Import',
                 subtext: '',
@@ -414,7 +413,7 @@
                 fontSize: 20
             },
             tooltip: {
-                trigger: 'axis',
+                trigger: 'item',
                 axisPointer: { // Para que el tooltip siga las barras
                     type: 'shadow'
                 }
@@ -425,19 +424,19 @@
             },
             yAxis: {
                 type: 'category',
-                data: clientes,  // Los nombres de los clientes en el eje Y
+                data: ["Recibido", "En espera"],
                 fontSize: 20
             },
             xAxis: {
                 type: 'value'
             },
             series: [
-                // Barra de "Recibido" apilada por cliente
-                {
-                    name: 'Recibido',
+                // Barra de "Recibido" con el total
+                ...clientes.map((cliente, index) => ({
+                    name: `En espera (${cliente})`,
                     type: 'bar',
-                    stack: 'Total',  // Apilamos ambas series
-                    data: totalRecibidoPorCliente,  // Valores de "Recibido" por cliente
+                    stack: 'Recibido',  // Apilar las barras
+                    data: [null, totalMETA[index]], // Solo en la barra de "En espera"
                     itemStyle: {
                         borderRadius: [0, 0, 0, 0],
                     },
@@ -446,13 +445,13 @@
                         position: 'insideRight',
                         fontSize: 20
                     }
-                },
-                // Barra de "En espera" apilada por cliente
-                {
-                    name: 'En espera',
+                })),
+                // Barra de "En espera" apilada por clientes
+                ...clientes.map((cliente, index) => ({
+                    name: `En espera (${cliente})`,
                     type: 'bar',
-                    stack: 'Total',  // Apilamos ambas series
-                    data: totalEnEsperaPorCliente,  // Valores de "En espera" por cliente
+                    stack: 'En espera',  // Apilar las barras
+                    data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
                     itemStyle: {
                         borderRadius: [0, 0, 0, 0],
                     },
@@ -461,11 +460,10 @@
                         position: 'insideRight',
                         fontSize: 20
                     }
-                }
+                }))
             ]
         });
     });
-
 
 
 
