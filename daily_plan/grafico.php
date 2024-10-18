@@ -421,15 +421,15 @@
             });
 
             // Añadir datos de "En espera"
-            series.push({
-                name: cliente, // Nombre del cliente
-                type: 'bar',
-                stack: 'total', // Para apilar
-                label: {
-                    show: true // Mostrar etiquetas
-                },
-                data: clienteData[1].data // En espera
-            });
+            // series.push({
+            //     name: cliente, 
+            //     type: 'bar',
+            //     stack: 'total', 
+            //     label: {
+            //         show: true 
+            //     },
+            //     data: clienteData[1].data 
+            // });
         });
 
         // Configurar el gráfico de barras
