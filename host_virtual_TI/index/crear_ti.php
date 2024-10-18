@@ -73,7 +73,8 @@ if (isset($_POST['submit'])) {
 
         $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento TI');
         $mail->addAddress($tickets['correo']);
-        $mail->addAddress('ricaurte@iplgsc.com'); // Correo adicional
+        $mail->addAddress('einar@iplgsc.com , ricaurte@iplgsc.com'); // Einar
+        
 
         $mail->isHTML(false);
         $mail->Subject = 'Confirmación de recepción del ticket';
