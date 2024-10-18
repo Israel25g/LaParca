@@ -2,8 +2,11 @@
 // Archivo para extraer los datos de la base de datos (get_data.php)
 include '../daily_plan/funcionalidades/config_G.php';
 
-// Consulta a la base de datos
-$query = "SELECT SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta, cliente FROM import WHERE fecha_objetivo = CURDATE()";
+// Consulta a la base de datos, agrupando por cliente
+$query = "SELECT cliente, SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta 
+          FROM import 
+          WHERE fecha_objetivo = CURDATE() 
+          GROUP BY cliente";  // Asegúrate de agrupar por cliente
 
 $result = $conn->query($query);
 
@@ -14,10 +17,9 @@ if ($result->num_rows > 0) {
     // Almacenar los resultados en el array
     while($row = $result->fetch_assoc()) {
         $data[] = array(
-            'name' => ['cliente'],
+            'cliente' => $row['cliente'],  // Nombre del cliente
             'total_meta' => (int)$row['total_meta'],
             'total_grafico' => (int)$row['total_grafico']
-            
         );
     }
 } else {

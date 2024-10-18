@@ -397,54 +397,76 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
+        // Extraer los nombres de los clientes y los datos de "En espera"
+        const clientes = data.map(item => item.cliente);
+        const totalEnEsperaPorCliente = data.map(item => item.total_grafico);
+        
         // Configurar el gráfico de import
         barChart.setOption({
-            color: ['#00CED1 ', '#4682B4'],
-            title: {text: 'Import',subtext: '',left: 'center',fontSize: 20},
-            tooltip: {trigger: 'item'},
-            legend: {orient: 'vertical',left: 'left'},
-            yAxis: {type: 'category',data: [""], fontSize: 20},
-            xAxis: {type: 'value'},
+            color: ['#00CED1 ', '#4682B4', '#FFD700', '#FF4500', '#32CD32'], // Colores para diferenciar clientes
+            title: {
+                text: 'Import',
+                subtext: '',
+                left: 'center',
+                fontSize: 20
+            },
+            tooltip: {
+                trigger: 'item',
+                axisPointer: { // Para que el tooltip siga las barras
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            yAxis: {
+                type: 'category',
+                data: ["Recibido", "En espera"],
+                fontSize: 20
+            },
+            xAxis: {
+                type: 'value'
+            },
             series: [
+                // Barra de "Recibido" con el total
                 {
                     name: 'Recibido',
                     type: 'bar',
                     showBackground: true,
                     backgroundStyle: {
-                    color: 'rgba(220, 220, 220, 0.8)',
-                    borderRadius: [1,30,30,1],},
-                    data: data.map(item => item.total_meta), // Los valores de meta_despacho
-                    category:["Recibido"],
-                    itemStyle: {
-                        borderRadius: [1,30,30,1],
-                        },
-                    label: {
-                        show: true,
-                        position: 'insideRight',
-                        fontSize: 35
+                        color: 'rgba(220, 220, 220, 0.8)',
+                        borderRadius: [1, 30, 30, 1],
                     },
-                },
-                {
-                    name: 'En espera',
-                    type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                    color: 'rgba(220, 220, 220, 0.8)',
-                    borderRadius: [1,30,30,1],},
-                    data: data.map(item => item.total_grafico), // Los valores de grafica_dp
+                    data: [data.reduce((acc, item) => acc + item.total_meta, 0)], // Sumar los valores de total_meta
                     itemStyle: {
-                            borderRadius: [1,30,30,1],
-                        },
+                        borderRadius: [1, 30, 30, 1],
+                    },
                     label: {
                         show: true,
                         position: 'insideRight',
                         fontSize: 35
                     }
-                }
+                },
+                // Barra de "En espera" apilada por clientes
+                ...clientes.map((cliente, index) => ({
+                    name: `En espera (${cliente})`,
+                    type: 'bar',
+                    stack: 'En espera',  // Apilar las barras
+                    data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
+                    itemStyle: {
+                        borderRadius: [1, 30, 30, 1],
+                    },
+                    label: {
+                        show: true,
+                        position: 'insideRight',
+                        fontSize: 35
+                    }
+                }))
             ]
-            
         });
     });
+
 
 
                 fetch('get_data_porcen.php')
