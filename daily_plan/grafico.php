@@ -401,6 +401,7 @@
         // Extraer los nombres de los clientes y los datos de "En espera"
         const clientes = data.map(item => item.cliente);
         const totalEnEsperaPorCliente = data.map(item => item.total_grafico);
+        const totalMETA = data.map(item => item.total_meta);
         
         // Configurar el gráfico de import
         barChart.setOption({
@@ -431,15 +432,12 @@
             },
             series: [
                 // Barra de "Recibido" con el total
-                {
-                    name: 'Recibido',
+                                // Barra de "En espera" apilada por clientes
+                 ...clientes.map((cliente, index) => ({
+                    name: `Recibido (${cliente})`,
                     type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                        color: 'rgba(220, 220, 220, 0.8)',
-                        borderRadius: [1, 1, 1, 1],
-                    },
-                    data: [data.reduce((acc, item) => acc + item.total_meta, 0)], // Sumar los valores de total_meta
+                    stack: 'Recibido',  // Apilar las barras
+                    data: [null, total_meta[index]], // Solo en la barra de "Recibido"
                     itemStyle: {
                         borderRadius: [1, 1, 1, 1],
                     },
@@ -448,7 +446,7 @@
                         position: 'insideRight',
                         fontSize: 20
                     }
-                },
+                })),
                 // Barra de "En espera" apilada por clientes
                 ...clientes.map((cliente, index) => ({
                     name: `En espera (${cliente})`,
