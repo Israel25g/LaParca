@@ -397,14 +397,13 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Extraer los nombres de los clientes y los datos
+        // Extraer los nombres de los clientes y los datos de "En espera"
         const clientes = data.map(item => item.cliente);
-        const totalRecibidoPorCliente = data.map(item => item.total_meta);
         const totalEnEsperaPorCliente = data.map(item => item.total_grafico);
-
+        
         // Configurar el gráfico de import
         barChart.setOption({
-            color: ['#00CED1', '#4682B4', '#FFD700', '#FF4500', '#32CD32'], // Colores para diferenciar clientes
+            color: ['#00CED1 ', '#4682B4', '#FFD700', '#FF4500', '#32CD32'], // Colores para diferenciar clientes
             title: {
                 text: 'Import',
                 subtext: '',
@@ -412,60 +411,58 @@
                 fontSize: 20
             },
             tooltip: {
-                trigger: 'axis',
+                trigger: 'item',
                 axisPointer: { // Para que el tooltip siga las barras
                     type: 'shadow'
                 }
             },
             legend: {
-                orient: 'horizontal',
-                left: 'center',
-                top: 'top'
+                orient: 'vertical',
+                left: 'left'
             },
             yAxis: {
                 type: 'category',
-                data: clientes,  // Mostrar los clientes en el eje Y
+                data: ["Recibido", "En espera"],
                 fontSize: 20
             },
             xAxis: {
                 type: 'value'
             },
             series: [
-                // Barra de "Recibido" apilada por cliente
+                // Barra de "Recibido" con el total
                 {
                     name: 'Recibido',
                     type: 'bar',
-                    stack: 'Total',  // Apilamos las barras de "Recibido" y "En espera" bajo "Total"
                     showBackground: true,
                     backgroundStyle: {
                         color: 'rgba(220, 220, 220, 0.8)',
-                        borderRadius: [1, 1, 1, 1],
+                        borderRadius: [1, 30, 30, 1],
                     },
-                    data: totalRecibidoPorCliente,  // Valores de "Recibido" por cliente
+                    data: [data.reduce((acc, item) => acc + item.total_meta, 0)], // Sumar los valores de total_meta
                     itemStyle: {
-                        borderRadius: [1, 1, 1, 1],
+                        borderRadius: [1, 30, 30, 1],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
-                        fontSize: 20
+                        fontSize: 35
                     }
                 },
-                // Barra de "En espera" apilada por cliente
-                {
-                    name: 'En espera',
+                // Barra de "En espera" apilada por clientes
+                ...clientes.map((cliente, index) => ({
+                    name: `En espera (${cliente})`,
                     type: 'bar',
-                    stack: 'Total',  // Apilamos las barras de "Recibido" y "En espera" bajo "Total"
-                    data: totalEnEsperaPorCliente,  // Valores de "En espera" por cliente
+                    stack: 'En espera',  // Apilar las barras
+                    data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
                     itemStyle: {
-                        borderRadius: [1, 1, 1, 1],
+                        borderRadius: [0, 0, 0, 0],
                     },
                     label: {
                         show: true,
                         position: 'insideRight',
                         fontSize: 20
                     }
-                }
+                }))
             ]
         });
     });
