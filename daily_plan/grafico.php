@@ -404,7 +404,7 @@
         
         // Configurar el gráfico de import
         barChart.setOption({
-            color: ['#00CED1', '#4682B4'],  // Colores para diferenciar "Recibido" y "En espera"
+            color: ['#00CED1', '#4682B4','#000','#fff'],  // Colores para diferenciar "Recibido" y "En espera"
             title: {
                 text: 'Import',
                 subtext: '',
