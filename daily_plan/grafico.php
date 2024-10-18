@@ -46,7 +46,7 @@
         }
         ?>
       <?php
-      // header("Refresh:81");
+      header("Refresh:81");
       ?>
 
 <!DOCTYPE html>
@@ -58,14 +58,14 @@
     <!-- Incluir Bootstrap desde el CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../daily_plan/css/estilos.css">
+    <link rel="stylesheet" href="../estilos.css">
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
 
 
     <style>
-  /* Estilo general para pantallas grandes */
+  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVO*/
   .bloquess {
     display: grid !important;
     grid-template-columns: auto auto !important;
@@ -74,34 +74,35 @@
     margin-left: 45% !important;
   }
 
-  /* Consulta de medios para pantallas pequeñas */
+  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
-      grid-template-columns: repeat(2, 1fr) !important; /* Dos columnas para gráficos y tablas */
+    grid-template-columns: auto auto !important;
+    margin-top: 10% !important;
+    margin-left: -1000px !important;
+      width: 50%;
+      height: 50%;
       gap: 10px !important; /* Espacio entre los gráficos */
     }
 
     /* Ajustar el tamaño de los gráficos */
     .bloquee {
-      width: 100% !important; /* Hacer que el gráfico ocupe todo el ancho disponible */
-      height: 200px !important; /* Ajustar la altura automáticamente */
+      position: fixed;
+      width: 50%;
+       height: 100%;
+       border-radius: 15px;
+        overflow: hidden;
+      border: black;
     }
 
-    #grafico-pastel1, #grafico-pastel2, #grafico-barras {
+    #grafico-pastel1, #grafico-pastel2, #grafico-barras,#grafico-gauge {
       width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 200px !important; /* Ajustar la altura del gráfico */
-    }
-
-    /* Ajustar el tamaño de los gráficos individuales */
-    #grafico-gauge {
-      width: 250% !important; /* Hacer que el gráfico ocupe todo el ancho */
-      height: 200px !important; /* Ajustar la altura del gráfico */
-      margin-top: -50px !important;
+      height: 225px !important; /* Ajustar la altura del gráfico */
     }
 
         /* Ajustar las tablas para pantallas pequeñas */
-        .tabla-ajustada {
+        #tablaExport,#tablaImport,#tablapicking {
       font-size: 10px !important; /* Texto aún más pequeño en pantallas pequeñas */
       width: 100% !important; /* Ocupar el ancho completo */
       margin: 0 auto !important; /* Centrar la tabla */
@@ -115,10 +116,10 @@
 
 
 </head>
-<body style="background-image: url('../images/Motivo2.png;">
-  <div style="margin-top: 70px;" >
+<body style="overflow: hidden;">
+<div style= "margin-top: 70px;" >
      <!-- Header -->
-     <div class="header-dp">
+     <div class="header" style="border-radius: 0 0 0px 50px !important;">
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
         </div>
