@@ -436,7 +436,7 @@
                     name: `En espera (${cliente})`,
                     type: 'bar',
                     stack: 'Recibido',  // Apilar las barras
-                    data: [null, totalMETA[index]], // Solo en la barra de "En espera"
+                    data: [null, totalEnEsperaPorCliente[index]], // Solo en la barra de "En espera"
                     itemStyle: {
                         borderRadius: [0, 0, 0, 0],
                     },
