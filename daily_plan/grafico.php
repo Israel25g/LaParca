@@ -397,55 +397,68 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Configurar el gráfico de import
-        barChart.setOption({
-            color: ['#00CED1 ', '#4682B4'],
-            title: {text: 'Import',subtext: '',left: 'center',fontSize: 20},
-            tooltip: {trigger: 'item'},
-            legend: {orient: 'vertical',left: 'left'},
-            yAxis: {type: 'category',data: [""], fontSize: 20},
-            xAxis: {type: 'value'},
-            series: [
-                {
-                    name: 'Recibido',
-                    type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                    color: 'rgba(220, 220, 220, 0.8)',
-                    borderRadius: [1,30,30,1],},
-                    data: data.map(item => item.total_meta), // Los valores de meta_despacho
-                    category:["Recibido"],
-                    itemStyle: {
-                        borderRadius: [1,30,30,1],
-                        },
-                    label: {
-                        show: true,
-                        position: 'insideRight',
-                        fontSize: 35
-                    },
-                },
-                {
-                    name: 'En espera',
-                    type: 'bar',
-                    showBackground: true,
-                    backgroundStyle: {
-                    color: 'rgba(220, 220, 220, 0.8)',
-                    borderRadius: [1,30,30,1],},
-                    data: data.map(item => item.total_grafico), // Los valores de grafica_dp
-                    itemStyle: {
-                            borderRadius: [1,30,30,1],
-                        },
-                    label: {
-                        show: true,
-                        position: 'insideRight',
-                        fontSize: 35
-                    }
-                }
-            ]
-            
-        });
-    });
+        // Crear la estructura de series según el formato deseado
+        const series = [];
 
+        // Agrupar los datos en la estructura esperada
+        const clientes = [...new Set(data.map(item => item.name))]; // Obtener clientes únicos
+
+        // Iterar sobre cada cliente para construir la serie
+        clientes.forEach(cliente => {
+            // Filtrar datos para el cliente actual
+            const clienteData = data.filter(item => item.name === cliente);
+            
+            // Añadir datos de "Recibido"
+            series.push({
+                name: cliente, // Nombre del cliente
+                type: 'bar',
+                stack: 'total', // Para apilar
+                label: {
+                    show: true // Mostrar etiquetas
+                },
+                data: clienteData[0].data // Recibido
+            });
+
+            // Añadir datos de "En espera"
+            // series.push({
+            //     name: cliente, 
+            //     type: 'bar',
+            //     stack: 'total', 
+            //     label: {
+            //         show: true 
+            //     },
+            //     data: clienteData[1].data 
+            // });
+        });
+
+        // Configurar el gráfico de barras
+        const option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                }
+            },
+            legend: {},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
+                type: 'category',
+                data: ['recibido', 'en espera']
+            },
+            series: series // Reemplazar la parte de series con la nueva estructura
+        };
+
+        // Establecer la opción en el gráfico
+        barChart.setOption(option);
+    });
 
                 fetch('get_data_porcen.php')
         .then(response => response.json())
