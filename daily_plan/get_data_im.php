@@ -2,11 +2,13 @@
 // Archivo para extraer los datos de la base de datos (get_data.php)
 include '../daily_plan/funcionalidades/config_G.php';
 
-// Consulta a la base de datos, agrupando por cliente
-$query = "SELECT cliente, SUM(grafica_dp) AS total_grafico, SUM(pedidos_despachados) AS total_meta 
+// Consulta a la base de datos, agrupando por cliente y aplicando la lógica de pedidos despachados
+$query = "SELECT cliente, 
+                 SUM(CASE WHEN pedidos_despachados >= 1 THEN grafica_dp ELSE 0 END) AS total_grafico, 
+                 SUM(CASE WHEN pedidos_despachados >= 1 THEN pedidos_despachados ELSE 0 END) AS total_meta 
           FROM import 
           WHERE fecha_objetivo = CURDATE() 
-          GROUP BY cliente";  // Asegúrate de agrupar por cliente
+          GROUP BY cliente";
 
 $result = $conn->query($query);
 
@@ -32,3 +34,4 @@ echo json_encode($data);
 // Cerrar la conexión
 $conn->close();
 ?>
+
