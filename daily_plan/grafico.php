@@ -74,25 +74,6 @@
     margin-left: 45% !important;
   }
 
-  .table-container {
-            width: 50%; /* Puedes ajustar el tamaño */
-            height: 300px; /* Altura fija con scroll */
-            overflow-y: auto; /* Activa el scroll vertical */
-            border: 1px solid #ccc;
-            margin-bottom: 20px; /* Espaciado entre tablas */
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
 
   /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
