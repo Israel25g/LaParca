@@ -155,6 +155,7 @@ include("../apertura_sesion.php");
     </div>
     <?php include "../daily_plan/datatable.php" ?>
     <script src="../host_virtual_TI/js/script.js"></script>
+
     <script>
       $(document).ready(function() {
         new DataTable('#tablaPicking', {
@@ -169,7 +170,6 @@ include("../apertura_sesion.php");
           .every(function() {
             let column = this;
             let title = column.footer().textContent;
-
                         if (footer) { 
                           let title = footer.textContent;
                           let input = document.createElement('input');
@@ -248,7 +248,6 @@ include("../apertura_sesion.php");
                 });
               });
           </script>
-        </div>
       </body>
 
       </html>
