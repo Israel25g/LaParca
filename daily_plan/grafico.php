@@ -74,6 +74,25 @@
     margin-left: 45% !important;
   }
 
+  .table-container {
+            width: 50%; /* Puedes ajustar el tamaño */
+            height: 300px; /* Altura fija con scroll */
+            overflow-y: auto; /* Activa el scroll vertical */
+            border: 1px solid #ccc;
+            margin-bottom: 20px; /* Espaciado entre tablas */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
 
   /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
@@ -171,132 +190,137 @@
     </div>
     </div>
 
-    <div class="carousel-item" data-bs-interval="15000">
-    <div class="container" style="margin-top: 0%">
-        <div class="bloquess" style="display: grid; grid-template-columns: auto auto; gap: 10px; margin-left: -10% !important; margin-top: 0% !important">
+            <div class="carousel-item" data-bs-interval="15000">
+            <div class="container" style="margin-top: 0%">
+            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
 
-            <div class="bloquee" id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%">
-                <div class="col-md-6 ">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 scrollable-table" style="width: 700px; height: 60%; margin-left: 250px">
-                                <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
-                                <div>
-                                    <table id="tablaExport" class="scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="margin-left: 25% !important">
-                                        <thead>
-                                            <tr style="font-family: montserrat; font-size: 15px">
-                                                <th class="border end" style="background-color: #dc3545">OID</th>
-                                                <th class="border end" style="background-color: #dc3545">Cliente</th>
-                                                <th class="border end" style="background-color: #dc3545">Vehiculo</th>
-                                                <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
-                                                <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if ($export && $sentencia_e->rowCount() > 0): ?>
-                                                <?php foreach ($export as $fila): ?>
-                                                    <tr style="font-family: montserrat; font-size: 14px">
-                                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+        <div class="bloquee " id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
+          <div class="col-md-6 ">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-3 scrollable-table"  style=" width: 700px; height: 60%; margin-left: 250px">
+                    <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
+                    <div>
+                    <table id="tablaExport" class=" scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                      <thead>
+                        <tr style="font-family: montserrat; font-size: 15px">
+                          <th class="border end" style="background-color: #dc3545">OID</th>
+                          <th class="border end" style="background-color: #dc3545">Cliente</th>
+                          <th class="border end" style="background-color: #dc3545">Vehiculo</th>
+                          <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
+                          <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
+                        </tr>
+                      </thea class="table-container scrollable-table">
+                      <tbody>
+                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
+                          <?php foreach ($export as $fila): ?>
+                            <tr style="font-family: montserrat; font-size: 14px">
+                              <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                              <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                            </tr>
+                          <?php endforeach; ?>
+                        <?php endif; ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+              </div>
             </div>
 
-            <div class="bloquee" id="import" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%">
-                <div class="col-md-6">
+                    </div>   
+                </div>
+
+                <div class="bloquee " id="import" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >
+                    <div class="col-md-6">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 scrollable-table" style="width: 700px; height: 60%; margin-left: 250px">
-                                <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                                <table id="tablaImport" class="scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="margin-left: 25% !important">
-                                    <thead>
-                                        <tr style="font-family: montserrat; font-size: 15px">
-                                            <th class="border end" style="background-color: #0dcaf0">AID</th>
-                                            <th class="border end" style="background-color: #0dcaf0">Cliente</th>
-                                            <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
-                                            <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php if ($import && $sentencia_i->rowCount() > 0): ?>
-                                            <?php foreach ($import as $fila): ?>
-                                                <tr style="font-family: montserrat; font-size: 14px">
-                                                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                                                    <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                                                    <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                                                    <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
+                          <div class="row">
+                            <div class="col-md-3 scrollable-table" style=" width: 700px; height: 60%; margin-left: 250px">
+                              <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
+                              <table id="tablaImport" class=" scrollable-table tabla-ajustada  display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                          <thead>
+                            <tr  style="font-family: montserrat; font-size: 15px">
+                              <th class="border end" style="background-color: #0dcaf0">AID</th>
+                              <th class="border end" style="background-color: #0dcaf0">Cliente</th>
+                              <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
+                              <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
+                                    <?php foreach ($import as $fila): ?>
+                                      <tr style="font-family: montserrat; font-size: 14px">
+                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  <?php endif; ?>
+                          </tbody>
+                        </table>
+
                             </div>
-                        </div>
+                          </div>
+                        </div> 
+
+                    </div>
+                </div>   
+
+                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
+                    <div class="col-md-6 " >
+                    <div class="container">
+                    <div class="row">
+                      <div class="col-md-2 scrollable-table" style="  width: 700px; height: 60%; margin-left: 250px">
+                        <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
+                        <table   id="tablapicking" class=" scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
+                                <thead>
+                                  <tr style="font-family: montserrat; font-size: 14px">
+                                    <th class="border end" style="background-color: #ffc107">OID</th>
+                                    <th class="border end" style="background-color: #ffc107">Cliente</th>
+                                    <th class="border end" style="background-color: #ffc107">Prioridad de picking</th>
+                                    <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
+                                    <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
+                                    <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
+                                    <th class="border end" style="background-color: #ffc107">Fecha de requerido</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
+                                    <?php foreach ($picking as $fila): ?>
+                                      <tr>
+                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                        <td class="border end"><?php echo escapar($fila["division_dp"])*100.00; ?>%</td>
+                                        <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                                      </tr>
+                                    <?php endforeach; ?>
+                                  <?php endif; ?>
+                                </tbody>
+                              </table>
+                      </div>
+                    </div>
+                  </div>
                     </div>
                 </div>
 
-                <div class="bloquee" id="barras" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden; margin-top:0%">
-                    <div class="col-md-6 ">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2 scrollable-table" style="width: 700px; height: 60%; margin-left: 250px">
-                                    <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Picking</h2>
-                                    <table id="tablapicking" class="scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="margin-left: 25% !important">
-                                        <thead>
-                                            <tr style="font-family: montserrat; font-size: 14px">
-                                                <th class="border end" style="background-color: #ffc107">OID</th>
-                                                <th class="border end" style="background-color: #ffc107">Cliente</th>
-                                                <th class="border end" style="background-color: #ffc107">Prioridad de picking</th>
-                                                <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
-                                                <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
-                                                <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
-                                                <th class="border end" style="background-color: #ffc107">Fecha de requerido</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
-                                                <?php foreach ($picking as $fila): ?>
-                                                    <tr>
-                                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                                                        <td class="border end"><?php echo escapar($fila["division_dp"]) * 100.00; ?>%</td>
-                                                        <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%">
-                    <div class="col-md-6 ">
+                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
+                    <div class="col-md-6 " >
                         <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div id="grafico-gauge_d" style="width: 900%; height: 400px;margin-top:0px;margin-left:5% !important"></div>
+                        <div  id="grafico-gauge_d" style="width: 900%; height: 400px;margin-top:0px;margin-left:5% !important"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            </div>
 
+    </div>
     <div class="carousel-item" data-bs-interval="7500">
       <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
     </div>
