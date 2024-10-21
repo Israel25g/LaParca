@@ -297,8 +297,10 @@
                     <div class="row">
                       <div class="col-md-2 scrollable-table" style="  width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                        <table   id="tablapicking" class=" scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
-                                <thead>
+                                                      <!-- Tabla 1 -->
+                        <div  id="tablapicking" class="table-container scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border"  style="  margin-left: 25% !important">
+                            <table>
+                            <thead>
                                   <tr style="font-family: montserrat; font-size: 14px">
                                     <th class="border end" style="background-color: #ffc107">OID</th>
                                     <th class="border end" style="background-color: #ffc107">Cliente</th>
@@ -323,31 +325,6 @@
                                       </tr>
                                     <?php endforeach; ?>
                                   <?php endif; ?>
-                                </tbody>
-                              </table>
-                                                      <!-- Tabla 1 -->
-                        <div class="table-container scrollable-table">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Añade varias filas para observar el scroll -->
-                                    <tr><td>1</td><td>Cliente 1</td></tr>
-                                    <tr><td>2</td><td>Cliente 2</td></tr>
-                                    <tr><td>3</td><td>Cliente 3</td></tr>
-                                    <tr><td>4</td><td>Cliente 4</td></tr>
-                                    <tr><td>5</td><td>Cliente 5</td></tr>
-                                    <tr><td>6</td><td>Cliente 6</td></tr>
-                                    <tr><td>6</td><td>Cliente 6</td></tr>
-                                    <tr><td>6</td><td>Cliente 6</td></tr>
-                                    <tr><td>6</td><td>Cliente 6</td></tr>
-                                    <tr><td>6</td><td>Cliente 6</td></tr>
-                                    <tr><td>6</td><td>Cliente 6</td></tr>
-                                    <!-- Puedes añadir más filas -->
                                 </tbody>
                             </table>
                         </div>
