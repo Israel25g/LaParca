@@ -6,11 +6,11 @@
     <title>Tablas con Auto-scroll</title>
     <style>
         .table-container {
-            width: 50%; /* Puedes ajustar el tamaño */
-            height: 300px; /* Altura fija con scroll */
-            overflow-y: auto; /* Activa el scroll vertical */
+            width: 50%; 
+            height: 300px;
+            overflow-y: auto; 
             border: 1px solid #ccc;
-            margin-bottom: 20px; /* Espaciado entre tablas */
+            margin-bottom: 20px; 
         }
         table {
             width: 100%;

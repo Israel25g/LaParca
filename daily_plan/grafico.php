@@ -65,6 +65,27 @@
 
 
     <style>
+
+        .table-container {
+            width: 50%; 
+            height: 300px;
+            overflow-y: auto; 
+            border: 1px solid #ccc;
+            margin-bottom: 20px; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+
   /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVO*/
   .bloquess {
     display: grid !important;
@@ -304,6 +325,32 @@
                                   <?php endif; ?>
                                 </tbody>
                               </table>
+                                                      <!-- Tabla 1 -->
+                        <div class="table-container scrollable-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Añade varias filas para observar el scroll -->
+                                    <tr><td>1</td><td>Cliente 1</td></tr>
+                                    <tr><td>2</td><td>Cliente 2</td></tr>
+                                    <tr><td>3</td><td>Cliente 3</td></tr>
+                                    <tr><td>4</td><td>Cliente 4</td></tr>
+                                    <tr><td>5</td><td>Cliente 5</td></tr>
+                                    <tr><td>6</td><td>Cliente 6</td></tr>
+                                    <tr><td>6</td><td>Cliente 6</td></tr>
+                                    <tr><td>6</td><td>Cliente 6</td></tr>
+                                    <tr><td>6</td><td>Cliente 6</td></tr>
+                                    <tr><td>6</td><td>Cliente 6</td></tr>
+                                    <tr><td>6</td><td>Cliente 6</td></tr>
+                                    <!-- Puedes añadir más filas -->
+                                </tbody>
+                            </table>
+                        </div>
                       </div>
                     </div>
                   </div>
