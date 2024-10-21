@@ -108,7 +108,7 @@ include("../apertura_sesion.php");
               <img class="img_helpdesk" id="img_cotizacion" src="../images/Graficas.jpg" alt="">
               <div class="text-overlay" style="height: 100%;width: 100%;">
                 <h3>Graficos</h3>
-                <p>Este apartado es exclusivamente para la visualizacion de los graficos del daily plan.</p>
+                <p>Este apartado es exclusivamente para la visualizacion </br> de los graficos del daily plan.</p>
               </div>
             </div>
           </a>
