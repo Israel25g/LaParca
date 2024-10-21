@@ -657,20 +657,9 @@
         $tableContainers.each(function() {
             startAutoScroll($(this));
         });
-
-        // Pausa el auto-scroll cuando el usuario interactúa con alguna tabla
-        $tableContainers.on('mouseenter', function() {
-            var index = $tableContainers.index(this);
-            clearInterval(scrollingIntervals[index]);
-        });
-
-        // Reinicia el auto-scroll cuando el usuario deja de interactuar
-        $tableContainers.on('mouseleave', function() {
-            var index = $tableContainers.index(this);
-            startAutoScroll($(this));
-        });
     });
 </script>
+
 
 
 </body>
