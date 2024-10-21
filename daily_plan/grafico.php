@@ -74,6 +74,26 @@
     margin-left: 45% !important;
   }
 
+  .table-container {
+            width: 50%; /* Puedes ajustar el tamaño */
+            height: 300px; /* Altura fija con scroll */
+            overflow-y: auto; /* Activa el scroll vertical */
+            border: 1px solid #ccc;
+            margin-bottom: 20px; /* Espaciado entre tablas */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+
   /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
@@ -181,6 +201,7 @@
                 <div class="row">
                   <div class="col-md-3 scrollable-table"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
+                    <div>
                     <table id="tablaExport" class=" scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                       <thead>
                         <tr style="font-family: montserrat; font-size: 15px">
@@ -190,7 +211,7 @@
                           <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
                           <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
                         </tr>
-                      </thead>
+                      </thea class="table-container scrollable-table">
                       <tbody>
                         <?php if ($export && $sentencia_e->rowCount() > 0): ?>
                           <?php foreach ($export as $fila): ?>
@@ -208,6 +229,7 @@
                   </div>
                 </div>
               </div>
+            </div>
 
                     </div>   
                 </div>
@@ -522,6 +544,57 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../host_virtual_TI/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Seleccionamos todos los contenedores con la clase 'scrollable-table'
+            var $tableContainers = $('.scrollable-table');
+            var scrollSpeed = 50; // Milisegundos por píxel
+            var scrollingIntervals = [];
+
+            // Función para iniciar el auto-scroll en una tabla específica
+            function startAutoScroll($container) {
+                var containerHeight = $container.height();
+                var scrollHeight = $container[0].scrollHeight;
+                var scrollDirection = 1; // 1 para abajo, -1 para arriba
+
+                // Solo aplica el scroll si el contenido es más alto que el contenedor
+                if (scrollHeight > containerHeight) {
+                    var interval = setInterval(function() {
+                        var currentScrollPos = $container.scrollTop();
+                        var newScrollPos = currentScrollPos + scrollDirection;
+
+                        // Cambia de dirección cuando llega al fondo o al inicio
+                        if (newScrollPos >= scrollHeight - containerHeight || newScrollPos <= 0) {
+                            scrollDirection *= -1; // Cambia la dirección del scroll
+                        }
+
+                        $container.scrollTop(newScrollPos);
+                    }, scrollSpeed);
+
+                    // Guardamos el intervalo de cada tabla
+                    scrollingIntervals.push(interval);
+                }
+            }
+
+            // Inicia el auto-scroll en cada tabla que lo necesite
+            $tableContainers.each(function() {
+                startAutoScroll($(this));
+            });
+
+            // Pausa el auto-scroll cuando el usuario interactúa con alguna tabla
+            $tableContainers.on('mouseenter', function() {
+                var index = $tableContainers.index(this);
+                clearInterval(scrollingIntervals[index]);
+            });
+
+            // Reinicia el auto-scroll cuando el usuario deja de interactuar
+            $tableContainers.on('mouseleave', function() {
+                var index = $tableContainers.index(this);
+                startAutoScroll($(this));
+            });
+        });
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
