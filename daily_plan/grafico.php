@@ -621,54 +621,55 @@
     </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Seleccionamos todos los contenedores con la clase 'scrollable-table'
-        var $tableContainers = $('.scrollable-table');
-        var scrollSpeed = 50; // Milisegundos por píxel
-        var scrollingIntervals = [];
+        $(document).ready(function() {
+            // Seleccionamos todos los contenedores con la clase 'scrollable-table'
+            var $tableContainers = $('.scrollable-table');
+            var scrollSpeed = 50; // Milisegundos por píxel
+            var scrollingIntervals = [];
 
-        // Función para iniciar el auto-scroll en una tabla específica
-        function startAutoScroll($container) {
-            var containerHeight = $container.height();
-            var scrollHeight = $container.prop('scrollHeight');
-            var distance = scrollHeight - containerHeight;
+            // Función para iniciar el auto-scroll en una tabla específica
+            function startAutoScroll($container) {
+                var containerHeight = $container.height();
+                var scrollHeight = $container[0].scrollHeight;
+                var scrollDirection = 1; // 1 para abajo, -1 para arriba
 
-            if (distance > 0) {
-                var scrollStep = distance / 500; // Ajusta este número para controlar la velocidad de desplazamiento
+                // Solo aplica el scroll si el contenido es más alto que el contenedor
+                if (scrollHeight > containerHeight) {
+                    var interval = setInterval(function() {
+                        var currentScrollPos = $container.scrollTop();
+                        var newScrollPos = currentScrollPos + scrollDirection;
 
-                // Función que realiza el desplazamiento
-                function scroll() {
-                    if ($container.scrollTop() < distance) {
-                        $container.scrollTop($container.scrollTop() + scrollStep);
-                    } else {
-                        $container.scrollTop(0); // Reinicia el scroll
-                    }
+                        // Cambia de dirección cuando llega al fondo o al inicio
+                        if (newScrollPos >= scrollHeight - containerHeight || newScrollPos <= 0) {
+                            scrollDirection *= -1; // Cambia la dirección del scroll
+                        }
+
+                        $container.scrollTop(newScrollPos);
+                    }, scrollSpeed);
+
+                    // Guardamos el intervalo de cada tabla
+                    scrollingIntervals.push(interval);
                 }
-
-                scrollingIntervals.push(setInterval(scroll, scrollSpeed));
             }
-        }
 
-        // Inicia el auto-scroll para cada contenedor
-        $tableContainers.each(function() {
-            startAutoScroll($(this));
-        });
-
-        // Limpia los intervalos al salir de la vista
-        $('.carousel-item').on('mouseleave', function() {
-            scrollingIntervals.forEach(function(interval) {
-                clearInterval(interval);
-            });
-        });
-
-        // Reinicia el scroll al entrar de nuevo
-        $('.carousel-item').on('mouseenter', function() {
+            // Inicia el auto-scroll en cada tabla que lo necesite
             $tableContainers.each(function() {
                 startAutoScroll($(this));
             });
+
+            // Pausa el auto-scroll cuando el usuario interactúa con alguna tabla
+            $tableContainers.on('mouseenter', function() {
+                var index = $tableContainers.index(this);
+                clearInterval(scrollingIntervals[index]);
+            });
+
+            // Reinicia el auto-scroll cuando el usuario deja de interactuar
+            $tableContainers.on('mouseleave', function() {
+                var index = $tableContainers.index(this);
+                startAutoScroll($(this));
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
