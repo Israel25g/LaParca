@@ -621,55 +621,57 @@
     </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        $(document).ready(function() {
-            // Seleccionamos todos los contenedores con la clase 'scrollable-table'
-            var $tableContainers = $('.scrollable-table');
-            var scrollSpeed = 50; // Milisegundos por píxel
-            var scrollingIntervals = [];
+    $(document).ready(function() {
+        // Seleccionamos todos los contenedores con la clase 'scrollable-table'
+        var $tableContainers = $('.scrollable-table');
+        var scrollSpeed = 50; // Milisegundos por píxel
+        var scrollingIntervals = [];
 
-            // Función para iniciar el auto-scroll en una tabla específica
-            function startAutoScroll($container) {
-                var containerHeight = $container.height();
-                var scrollHeight = $container[0].scrollHeight;
-                var scrollDirection = 1; // 1 para abajo, -1 para arriba
+        // Función para iniciar el auto-scroll en una tabla específica
+        function startAutoScroll($container) {
+            var containerHeight = $container.height();
+            var scrollHeight = $container[0].scrollHeight;
+            var scrollDirection = 1; // 1 para abajo, -1 para arriba
 
-                // Solo aplica el scroll si el contenido es más alto que el contenedor
-                if (scrollHeight > containerHeight) {
-                    var interval = setInterval(function() {
-                        var currentScrollPos = $container.scrollTop();
-                        var newScrollPos = currentScrollPos + scrollDirection;
+            // Solo aplica el scroll si el contenido es más alto que el contenedor
+            if (scrollHeight > containerHeight) {
+                var interval = setInterval(function() {
+                    var currentScrollPos = $container.scrollTop();
+                    var newScrollPos = currentScrollPos + scrollDirection;
 
-                        // Cambia de dirección cuando llega al fondo o al inicio
-                        if (newScrollPos >= scrollHeight - containerHeight || newScrollPos <= 0) {
-                            scrollDirection *= -1; // Cambia la dirección del scroll
-                        }
+                    // Cambia de dirección cuando llega al fondo o al inicio
+                    if (newScrollPos >= scrollHeight - containerHeight || newScrollPos <= 0) {
+                        scrollDirection *= -1; // Cambia la dirección del scroll
+                        newScrollPos = currentScrollPos + scrollDirection; // Actualiza la posición para el nuevo sentido
+                    }
 
-                        $container.scrollTop(newScrollPos);
-                    }, scrollSpeed);
+                    $container.scrollTop(newScrollPos);
+                }, scrollSpeed);
 
-                    // Guardamos el intervalo de cada tabla
-                    scrollingIntervals.push(interval);
-                }
+                // Guardamos el intervalo de cada tabla
+                scrollingIntervals.push(interval);
             }
+        }
 
-            // Inicia el auto-scroll en cada tabla que lo necesite
-            $tableContainers.each(function() {
-                startAutoScroll($(this));
-            });
-
-            // Pausa el auto-scroll cuando el usuario interactúa con alguna tabla
-            $tableContainers.on('mouseenter', function() {
-                var index = $tableContainers.index(this);
-                clearInterval(scrollingIntervals[index]);
-            });
-
-            // Reinicia el auto-scroll cuando el usuario deja de interactuar
-            $tableContainers.on('mouseleave', function() {
-                var index = $tableContainers.index(this);
-                startAutoScroll($(this));
-            });
+        // Inicia el auto-scroll en cada tabla que lo necesite
+        $tableContainers.each(function() {
+            startAutoScroll($(this));
         });
-    </script>
+
+        // Pausa el auto-scroll cuando el usuario interactúa con alguna tabla
+        $tableContainers.on('mouseenter', function() {
+            var index = $tableContainers.index(this);
+            clearInterval(scrollingIntervals[index]);
+        });
+
+        // Reinicia el auto-scroll cuando el usuario deja de interactuar
+        $tableContainers.on('mouseleave', function() {
+            var index = $tableContainers.index(this);
+            startAutoScroll($(this));
+        });
+    });
+</script>
+
 
 </body>
 </html>
