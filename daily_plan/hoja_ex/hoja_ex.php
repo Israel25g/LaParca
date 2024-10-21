@@ -45,7 +45,7 @@
                 { data: 1, type: 'dropdown', 
                     source: ['Brapan Optical', 'Delta Fashion', 'Go Outdoors', 'Owl', 'Bensherman', 'Miniso', 
                     'AMPS Middle East', 'AP GROUP', 'Cps', 'Cesa', 'Gulf', 'Incaso', 'Adiplatinum', 'Cool Hunter', 
-                    'Juki', 'Kashima', 'Parawa', 'Promocean', 'Saint Gobain', 'Tania', 'USOpanthalic', 'Energy Brands', 
+                    'Juki', 'Kashima', 'Parawa', 'Promocean', 'Saint Gobain', 'Tania','Master Retail', 'USOpanthalic', 'Energy Brands', 
                     'Knipex' ,'Pentel', 'IMSA'], // Opciones del selector de clientes
                     strict: true }, // cliente
                 { data: 2, type: 'text' }, // vehiculo/placa
