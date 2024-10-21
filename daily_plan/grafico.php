@@ -190,137 +190,132 @@
     </div>
     </div>
 
-            <div class="carousel-item" data-bs-interval="15000">
-            <div class="container" style="margin-top: 0%">
-            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
+    <div class="carousel-item" data-bs-interval="15000">
+    <div class="container" style="margin-top: 0%">
+        <div class="bloquess" style="display: grid; grid-template-columns: auto auto; gap: 10px; margin-left: -10% !important; margin-top: 0% !important">
 
-
-        <div class="bloquee " id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
-          <div class="col-md-6 ">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-3 scrollable-table"  style=" width: 700px; height: 60%; margin-left: 250px">
-                    <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
-                    <div>
-                    <table id="tablaExport" class=" scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
-                      <thead>
-                        <tr style="font-family: montserrat; font-size: 15px">
-                          <th class="border end" style="background-color: #dc3545">OID</th>
-                          <th class="border end" style="background-color: #dc3545">Cliente</th>
-                          <th class="border end" style="background-color: #dc3545">Vehiculo</th>
-                          <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
-                          <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
-                        </tr>
-                      </thea class="table-container scrollable-table">
-                      <tbody>
-                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
-                          <?php foreach ($export as $fila): ?>
-                            <tr style="font-family: montserrat; font-size: 14px">
-                              <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                              <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                              <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
-                              <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                              <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                            </tr>
-                          <?php endforeach; ?>
-                        <?php endif; ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-                    </div>   
-                </div>
-
-                <div class="bloquee " id="import" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >
-                    <div class="col-md-6">
+            <div class="bloquee" id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%">
+                <div class="col-md-6 ">
                     <div class="container">
-                          <div class="row">
-                            <div class="col-md-3 scrollable-table" style=" width: 700px; height: 60%; margin-left: 250px">
-                              <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                              <table id="tablaImport" class=" scrollable-table tabla-ajustada  display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
-                          <thead>
-                            <tr  style="font-family: montserrat; font-size: 15px">
-                              <th class="border end" style="background-color: #0dcaf0">AID</th>
-                              <th class="border end" style="background-color: #0dcaf0">Cliente</th>
-                              <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
-                              <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
-                                    <?php foreach ($import as $fila): ?>
-                                      <tr style="font-family: montserrat; font-size: 14px">
-                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                                      </tr>
-                                    <?php endforeach; ?>
-                                  <?php endif; ?>
-                          </tbody>
-                        </table>
-
+                        <div class="row">
+                            <div class="col-md-3 scrollable-table" style="width: 700px; height: 60%; margin-left: 250px">
+                                <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
+                                <div>
+                                    <table id="tablaExport" class="scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="margin-left: 25% !important">
+                                        <thead>
+                                            <tr style="font-family: montserrat; font-size: 15px">
+                                                <th class="border end" style="background-color: #dc3545">OID</th>
+                                                <th class="border end" style="background-color: #dc3545">Cliente</th>
+                                                <th class="border end" style="background-color: #dc3545">Vehiculo</th>
+                                                <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
+                                                <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if ($export && $sentencia_e->rowCount() > 0): ?>
+                                                <?php foreach ($export as $fila): ?>
+                                                    <tr style="font-family: montserrat; font-size: 14px">
+                                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                          </div>
-                        </div> 
-
+                        </div>
                     </div>
-                </div>   
+                </div>
+            </div>
 
-                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
-                    <div class="col-md-6 " >
+            <div class="bloquee" id="import" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%">
+                <div class="col-md-6">
                     <div class="container">
-                    <div class="row">
-                      <div class="col-md-2 scrollable-table" style="  width: 700px; height: 60%; margin-left: 250px">
-                        <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                        <table   id="tablapicking" class=" scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
-                                <thead>
-                                  <tr style="font-family: montserrat; font-size: 14px">
-                                    <th class="border end" style="background-color: #ffc107">OID</th>
-                                    <th class="border end" style="background-color: #ffc107">Cliente</th>
-                                    <th class="border end" style="background-color: #ffc107">Prioridad de picking</th>
-                                    <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
-                                    <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
-                                    <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
-                                    <th class="border end" style="background-color: #ffc107">Fecha de requerido</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
-                                    <?php foreach ($picking as $fila): ?>
-                                      <tr>
-                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                                        <td class="border end"><?php echo escapar($fila["division_dp"])*100.00; ?>%</td>
-                                        <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
-                                      </tr>
-                                    <?php endforeach; ?>
-                                  <?php endif; ?>
-                                </tbody>
-                              </table>
-                      </div>
-                    </div>
-                  </div>
+                        <div class="row">
+                            <div class="col-md-3 scrollable-table" style="width: 700px; height: 60%; margin-left: 250px">
+                                <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
+                                <table id="tablaImport" class="scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="margin-left: 25% !important">
+                                    <thead>
+                                        <tr style="font-family: montserrat; font-size: 15px">
+                                            <th class="border end" style="background-color: #0dcaf0">AID</th>
+                                            <th class="border end" style="background-color: #0dcaf0">Cliente</th>
+                                            <th class="border end" style="background-color: #0dcaf0">Contenedores recibidos</th>
+                                            <th class="border end" style="background-color: #0dcaf0">Contenedores cerrados</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if ($import && $sentencia_i->rowCount() > 0): ?>
+                                            <?php foreach ($import as $fila): ?>
+                                                <tr style="font-family: montserrat; font-size: 14px">
+                                                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                                                    <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                                    <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                                    <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+                <div class="bloquee" id="barras" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden; margin-top:0%">
+                    <div class="col-md-6 ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2 scrollable-table" style="width: 700px; height: 60%; margin-left: 250px">
+                                    <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Picking</h2>
+                                    <table id="tablapicking" class="scrollable-table tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="margin-left: 25% !important">
+                                        <thead>
+                                            <tr style="font-family: montserrat; font-size: 14px">
+                                                <th class="border end" style="background-color: #ffc107">OID</th>
+                                                <th class="border end" style="background-color: #ffc107">Cliente</th>
+                                                <th class="border end" style="background-color: #ffc107">Prioridad de picking</th>
+                                                <th class="border end" style="background-color: #ffc107">Unidades por pickear</th>
+                                                <th class="border end" style="background-color: #ffc107">Unidades pickeadas</th>
+                                                <th class="border end" style="background-color: #ffc107">Porcentaje de avance</th>
+                                                <th class="border end" style="background-color: #ffc107">Fecha de requerido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
+                                                <?php foreach ($picking as $fila): ?>
+                                                    <tr>
+                                                        <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["vacio_lleno"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                                                        <td class="border end"><?php echo escapar($fila["division_dp"]) * 100.00; ?>%</td>
+                                                        <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
-                    <div class="col-md-6 " >
+                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%">
+                    <div class="col-md-6 ">
                         <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div  id="grafico-gauge_d" style="width: 900%; height: 400px;margin-top:0px;margin-left:5% !important"></div>
+                        <div id="grafico-gauge_d" style="width: 900%; height: 400px;margin-top:0px;margin-left:5% !important"></div>
                     </div>
                 </div>
             </div>
-            </div>
-
+        </div>
     </div>
+</div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
     </div>
@@ -595,57 +590,56 @@
             });
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Seleccionamos todos los contenedores con la clase 'scrollable-table'
-            var $tableContainers = $('.scrollable-table');
-            var scrollSpeed = 50; // Milisegundos por píxel
-            var scrollingIntervals = [];
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Seleccionamos todos los contenedores con la clase 'scrollable-table'
+        var $tableContainers = $('.scrollable-table');
+        var scrollSpeed = 50; // Milisegundos por píxel
+        var scrollingIntervals = [];
 
-            // Función para iniciar el auto-scroll en una tabla específica
-            function startAutoScroll($container) {
-                var containerHeight = $container.height();
-                var scrollHeight = $container[0].scrollHeight;
-                var scrollDirection = 1; // 1 para abajo, -1 para arriba
+        // Función para iniciar el auto-scroll en una tabla específica
+        function startAutoScroll($container) {
+            var containerHeight = $container.height();
+            var scrollHeight = $container.prop('scrollHeight');
+            var distance = scrollHeight - containerHeight;
 
-                // Solo aplica el scroll si el contenido es más alto que el contenedor
-                if (scrollHeight > containerHeight) {
-                    var interval = setInterval(function() {
-                        var currentScrollPos = $container.scrollTop();
-                        var newScrollPos = currentScrollPos + scrollDirection;
+            if (distance > 0) {
+                var scrollStep = distance / 500; // Ajusta este número para controlar la velocidad de desplazamiento
 
-                        // Cambia de dirección cuando llega al fondo o al inicio
-                        if (newScrollPos >= scrollHeight - containerHeight || newScrollPos <= 0) {
-                            scrollDirection *= -1; // Cambia la dirección del scroll
-                        }
-
-                        $container.scrollTop(newScrollPos);
-                    }, scrollSpeed);
-
-                    // Guardamos el intervalo de cada tabla
-                    scrollingIntervals.push(interval);
+                // Función que realiza el desplazamiento
+                function scroll() {
+                    if ($container.scrollTop() < distance) {
+                        $container.scrollTop($container.scrollTop() + scrollStep);
+                    } else {
+                        $container.scrollTop(0); // Reinicia el scroll
+                    }
                 }
-            }
 
-            // Inicia el auto-scroll en cada tabla que lo necesite
+                scrollingIntervals.push(setInterval(scroll, scrollSpeed));
+            }
+        }
+
+        // Inicia el auto-scroll para cada contenedor
+        $tableContainers.each(function() {
+            startAutoScroll($(this));
+        });
+
+        // Limpia los intervalos al salir de la vista
+        $('.carousel-item').on('mouseleave', function() {
+            scrollingIntervals.forEach(function(interval) {
+                clearInterval(interval);
+            });
+        });
+
+        // Reinicia el scroll al entrar de nuevo
+        $('.carousel-item').on('mouseenter', function() {
             $tableContainers.each(function() {
                 startAutoScroll($(this));
             });
-
-            // Pausa el auto-scroll cuando el usuario interactúa con alguna tabla
-            $tableContainers.on('mouseenter', function() {
-                var index = $tableContainers.index(this);
-                clearInterval(scrollingIntervals[index]);
-            });
-
-            // Reinicia el auto-scroll cuando el usuario deja de interactuar
-            $tableContainers.on('mouseleave', function() {
-                var index = $tableContainers.index(this);
-                startAutoScroll($(this));
-            });
         });
-    </script>
+    });
+</script>
 
 </body>
 </html>
