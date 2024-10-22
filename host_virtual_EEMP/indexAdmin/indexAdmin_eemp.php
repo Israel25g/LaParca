@@ -159,6 +159,9 @@
       </div>
     </div>
 
+
+    <script src="../../host_virtual_TI/js/script.js"></script>
+    <?php include "../../daily_plan/datatable.php" ?>
     <script>
       $(document).ready(function() {
         new DataTable('#admin_eemp', {
