@@ -6,6 +6,10 @@
     <title>sistema de tickets</title>
     <link rel="stylesheet" href="../../host_virtual_TI/estilosT.css">
     <link rel="shortcut icon" href="../images/ICO.png">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
      
 </head>
 <body style=" margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png');font-family:montserrat;">
@@ -56,7 +60,7 @@
       <div class="row">
         <div class="col-md-12">
           <h2 class="mt-3"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de tickets de TI</h2>
-          <table class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5;">
+          <table id="tabla_ti" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5;">
             <thead>
             <tr>
                 <th>TID</th>
@@ -124,6 +128,51 @@
         </div>
       </div>
     </div>
+    <script>
+    new DataTable('#tabla_ti', {
+      layout: {
+        topStart: {
+          pageLength: {
+            menu: [10, 25, 50, 100],
+          }
+        },
+        topEnd: {
+          search: {
+            placeholder: 'Busca un ticket'
+          }
+        },
+
+        bottomEnd: {
+          paging: {
+            buttons: 3
+          }
+        }
+      },
+      scrollX: '150vh',
+      scrollY: '450px',
+
+      initComplete: function() {
+        this.api()
+          .columns()
+          .every(function() {
+            let column = this;
+            let title = column.footer().textContent;
+
+            // Create input element
+            let input = document.createElement('input');
+            input.placeholder = title;
+            column.footer().replaceChildren(input);
+
+            // Event listener for user input
+            input.addEventListener('keyup', () => {
+              if (column.search() !== this.value) {
+                column.search(input.value).draw();
+              }
+            });
+          });
+      },
+    });
+  </script>
     <?php include "../templates/footer.php"; ?>
   </body>
 </html>
