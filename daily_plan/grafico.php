@@ -478,7 +478,7 @@
             },
             legend: {left: 'left', orient: 'vertical',},
             grid: {
-                left: '3%',
+                left: '30%',
                 right: '4%',
                 bottom: '3%',
                 containLabel: true
