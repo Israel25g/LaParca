@@ -75,7 +75,7 @@
       <div class="row">
         <div class="col-md-12">
           <h2 class="mt-3"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de tickets de TI</h2>
-          <table id="admin_ti" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5; ">
+          <table id="admin_ti" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5; margin-top:300px; ">
             <thead>
             <tr>
                 <th>TID</th>
