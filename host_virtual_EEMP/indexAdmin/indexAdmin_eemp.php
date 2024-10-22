@@ -72,7 +72,7 @@
 
 
     <div class="container">
-      <div class="row"  style="margin-top: 200px !important; margin-left:-200px">
+      <div class="row"  style="margin-top: 100px !important; margin-left:-200px">
         <div class="col-md-12" style="margin-top: 100px !important;">
           <h2 class="mt-3"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de tickets de EEMP</h2>
           <table id="admin_eemp" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5;">
