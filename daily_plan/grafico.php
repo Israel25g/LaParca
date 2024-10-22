@@ -183,7 +183,7 @@
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico import -->
             <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 275%;"></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 280%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
@@ -465,17 +465,6 @@
                 },
                 data: clienteData[0].data // Recibido
             });
-
-            // Añadir datos de "En espera"
-            // series.push({
-            //     name: cliente, 
-            //     type: 'bar',
-            //     stack: 'total', 
-            //     label: {
-            //         show: true 
-            //     },
-            //     data: clienteData[1].data 
-            // });
         });
 
         // Configurar el gráfico de barras
@@ -484,7 +473,7 @@
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                    type: 'shadow' 
                 }
             },
             legend: {},
@@ -501,7 +490,7 @@
                 type: 'category',
                 data: ['recibido', 'en espera']
             },
-            series: series // Reemplazar la parte de series con la nueva estructura
+            series: series // se reemplaza la parte de series con la nueva estructura
         };
 
         // Establecer la opción en el gráfico
