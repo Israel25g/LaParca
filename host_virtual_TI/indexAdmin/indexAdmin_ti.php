@@ -16,6 +16,18 @@
      
 </head>
 <body style=" margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png');font-family:montserrat;">
+    <!-- Header -->
+    <div class="header-error">
+    <div class="logo-container">
+      <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
+    </div>
+    <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
+    <div class="cuadroFecha-error">
+      <p id="fecha-actual"></p>
+      <p id="hora-actual"></p>
+    </div>
+  </div>
+  <!-- Fin del Header -->
 
     <?php
     session_start();
