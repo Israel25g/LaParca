@@ -157,8 +157,8 @@
         new DataTable('#admin_ti', {
           paging: false,
           scrollCollapse: true,
-          scrollY: '350px',
-          scrollX: '1700px',
+          scrollY: '450px',
+          scrollX: '900px',
 
           initComplete: function() {
             this.api()
