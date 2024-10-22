@@ -183,7 +183,7 @@
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico import -->
             <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 325%;"></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 300%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
