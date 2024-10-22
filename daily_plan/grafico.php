@@ -484,7 +484,7 @@
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'line' // 'shadow' as default; can also be 'line' or 'shadow'
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
                 }
             },
             legend: {},
