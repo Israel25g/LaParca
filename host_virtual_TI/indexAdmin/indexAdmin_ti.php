@@ -169,7 +169,7 @@
           paging: false,
           scrollCollapse: true,
           scrollY: '450px',
-          scrollX: '1750px',
+          scrollX: '1700px',
 
           initComplete: function() {
             this.api()
