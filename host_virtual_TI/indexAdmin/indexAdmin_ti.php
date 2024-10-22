@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sistema de tickets</title>
     <link rel="stylesheet" href="../../main-global.css">
-    <!--Datatable-->
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css">
-  <link rel="stylesheet" href="https://code.jquery.com/jquery-3.7.1.js">
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-  <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.css" rel="stylesheet">
-  <!--Datatable-->
+<?php include '../../daily_plan/datatable.php' ?>
     <link rel="shortcut icon" href="../images/ICO.png">
      
 </head>
@@ -75,7 +69,7 @@
       <div class="row">
         <div class="col-md-12">
           <h2 class="mt-3"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de tickets de TI</h2>
-          <table id="admin_ti" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5;">
+          <table id="admin_ti" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: .5; ">
             <thead>
             <tr>
                 <th>TID</th>
@@ -139,6 +133,21 @@
               }
               ?>
             <tbody>
+              <tfoot>
+              <tr>
+                <th>TID</th>
+                <th>Solicitante</th>
+                <th>Correo</th>
+                <th>Departamento</th>
+                <th>Tipo de problema</th>
+                <th>Nivel de urgencia</th>
+                <th>Respuesta</th>
+                <th>Estado</th>
+                <th>Fecha de creacion</th>
+                <th>Ultima actualizacion</th>
+                <th>Acciones</th>
+              </tr>
+              </tfoot>
           </table>
         </div>
       </div>
@@ -158,7 +167,7 @@
           paging: false,
           scrollCollapse: true,
           scrollY: '450px',
-          scrollX: '900px',
+          scrollX: '1400px',
 
           initComplete: function() {
             this.api()
