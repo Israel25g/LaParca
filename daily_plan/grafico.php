@@ -480,6 +480,7 @@
 
         // Configurar el gráfico de barras
         const option = {
+          title: {text: 'Import',subtext: '',left: 'center'},
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
