@@ -476,7 +476,7 @@
                     type: 'shadow' 
                 }
             },
-            legend: {left: 'bottom'},
+            legend: {left: 'left', orient: 'vertical',},
             grid: {
                 left: '3%',
                 right: '4%',
