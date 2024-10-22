@@ -74,7 +74,7 @@
 
 
 
-    <div class="container" style="margin-top: 200px !important; margin-left:200px">
+    <div class="container" style="margin-top: 200px !important; margin-left:-400px">
       <div class="row">
         <div class="col-md-12">
           <h2 class="mt-3"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de tickets de TI</h2>
