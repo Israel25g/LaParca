@@ -39,7 +39,7 @@
     }
     ?>
 
-    <?php include "../templates/header.php"; ?>
+    
 
     <?php
     if ($error) {
