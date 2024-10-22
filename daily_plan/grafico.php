@@ -183,7 +183,7 @@
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico import -->
             <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 280%;"></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 290%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
@@ -202,7 +202,7 @@
              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
-                    <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
+                    <div id="grafico-gauge" style="width: 100%; height: 400px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
         </div>
