@@ -164,7 +164,7 @@
     <?php include "../../daily_plan/datatable.php" ?>
     <script>
       $(document).ready(function() {
-        new DataTable('#admin_ti', {
+        new DataTable('#admin_m', {
           paging: false,
           scrollCollapse: true,
           scrollY: '450px',
