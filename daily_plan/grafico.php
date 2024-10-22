@@ -481,6 +481,7 @@
                 left: '10%',
                 right: '4%',
                 bottom: '3%',
+                top: '30%',
                 containLabel: true
             },
             xAxis: {
