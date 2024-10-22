@@ -142,7 +142,7 @@
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico import -->
             <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 325%;"></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 290%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
@@ -158,10 +158,10 @@
                 </div>    
             </div>
         <!-- grafico de gauge -->
-             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
+        <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 450px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
-                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
-                    <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
+                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
+                    <div id="grafico-gauge" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
                 </div>
             </div>
         </div>
@@ -394,6 +394,8 @@
                         }]
                     });
                 });
+
+
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
@@ -418,32 +420,23 @@
                 },
                 data: clienteData[0].data // Recibido
             });
-
-            // Añadir datos de "En espera"
-            // series.push({
-            //     name: cliente, 
-            //     type: 'bar',
-            //     stack: 'total', 
-            //     label: {
-            //         show: true 
-            //     },
-            //     data: clienteData[1].data 
-            // });
         });
 
         // Configurar el gráfico de barras
         const option = {
+          title: {text: 'Import',subtext: '',left: 'center'},
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                    type: 'shadow' 
                 }
             },
-            legend: {},
+            legend: {left: 'left', orient: 'vertical',},
             grid: {
-                left: '3%',
+                left: '10%',
                 right: '4%',
                 bottom: '3%',
+                top: '30%',
                 containLabel: true
             },
             xAxis: {
@@ -451,14 +444,15 @@
             },
             yAxis: {
                 type: 'category',
-                data: ['recibido', 'en espera']
+                data: ['Recibido', 'En espera']
             },
-            series: series // Reemplazar la parte de series con la nueva estructura
+            series: series // se reemplaza la parte de series con la nueva estructura
         };
 
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
                 fetch('get_data_porcen.php')
         .then(response => response.json())
