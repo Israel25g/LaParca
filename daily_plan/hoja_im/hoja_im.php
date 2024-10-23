@@ -43,7 +43,7 @@
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
                 { data: 1, type: 'select',
-                    source:['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA','BENSHERMAN', 
+                    selectOptions:['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA','BENSHERMAN', 
                     'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
                      'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
                        'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
