@@ -43,7 +43,7 @@ include("apertura_sesion.php")
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
                 <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
                 <?php
-                if ($_SESSION['rol'] === 'Admin') {
+                if ($_SESSION['rol'] === 'Admin'|| $_SESSION['rol'] === 'EEMP') {
                     echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
                 }
                 ?>

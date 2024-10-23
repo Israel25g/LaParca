@@ -1,6 +1,6 @@
 <?php
 include("../../apertura_sesion.php");
-if ($_SESSION['rol'] != 'Admin') {
+if ($_SESSION['rol'] !== 'Admin' && $_SESSION['rol'] !== 'EEMP') {
   header("Location: ../../index.php?error=Acesso no autorizado");
 }
 ?>
@@ -92,7 +92,7 @@ JOIN estados ON users.estado_id = estados.id;
   <br>
 
 
-  <div class="tabla-container">
+  <div class="tabla-container espacio">
     <div class="row">
       <div class="col-md-12">
         <h2>Listado de Usuarios</h2>
@@ -157,7 +157,6 @@ JOIN estados ON users.estado_id = estados.id;
                         </div>
                     <!--modal -->
                 </form>
-                <a class="btn btn-outline-success d-block m-1"  href="<?='actualizar_user.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
                 </td>
                 </tr>
               <?php
@@ -233,6 +232,13 @@ JOIN estados ON users.estado_id = estados.id;
             });
           });
       },
+      fixedColumns: true,
+      columnDefs: [{
+        width: 5,
+        targets: [0],
+        className: 'dt-body-center'
+      }],
+
     });
     $('#container').css('display', 'block');
     table.columns.adjust().draw();

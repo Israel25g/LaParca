@@ -54,8 +54,14 @@ include("../apertura_sesion.php");
 
     <div class="form-container">
         <form id="formRegistro" action="registro.php" method="POST">
-            <label for="text"><i class="fa-solid fa-user"></i> Usuario / Correo</label>
+            <label for="text"><i class="fa-solid fa-user"></i> Nombre</label>
+            <input type="text" name="name" id="name" required>
+
+            <label for="text"><i class="fa-solid fa-user"></i> Usuario</label>
             <input type="text" name="user" id="user" required>
+            
+            <label for="email"><i class="fa-solid fa-user"></i> Correo electrónico</label>
+            <input type="email" name="email" id="email" required>
             
             <?php
                 $sql = "SELECT * FROM roles";
