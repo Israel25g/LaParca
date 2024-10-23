@@ -42,8 +42,8 @@
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'select', 
-                    selectOptions: ['Brapan Optical', 'Delta Fashion', 'Go Outdoors', 'Owl', 'Bensherman', 'Miniso', 
+                { data: 1, type: 'dropdown', 
+                    source: [<?php ?>'Brapan Optical', 'Delta Fashion', 'Go Outdoors', 'Owl', 'Bensherman', 'Miniso', 
                     'AMPS Middle East', 'AP GROUP', 'Cps', 'Cesa', 'Gulf', 'Incaso', 'Adiplatinum', 'Cool Hunter', 
                     'Juki', 'Kashima', 'Parawa', 'Promocean', 'Saint Gobain', 'Tania', 'USOpanthalic', 'Energy Brands', 
                     'Knipex' ,'Pentel', 'IMSA'], // Opciones del selector de clientes
