@@ -90,7 +90,7 @@ try {
                     source: [                <?php
                 // Recorrer los clientes y generar las opciones del selector
                 foreach ($clientes as $cliente) {
-                    echo '"'.$cliente['nombre_cliente'].',"';
+                    echo $cliente['nombre_cliente'].',';
                 }
                 ?>], // Opciones del selector de clientes
                     strict: true }, // cliente
