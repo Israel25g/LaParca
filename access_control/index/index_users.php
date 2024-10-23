@@ -104,7 +104,8 @@ JOIN estados ON users.estado_id = estados.id;
             <tr>
               <th class="border-end">UID</th>
               <th class="border-end">Usuario</th>
-              <!-- <th>correo</th> -->
+              <th class="border-end">Nombre de usuario</th>
+              <th class="border-end">Correo</th>
               <th class="border-end">Departamento</th>
               <th class="border-end">Estado</th>
               <th class="border-end">Acciones</th>
@@ -124,7 +125,8 @@ JOIN estados ON users.estado_id = estados.id;
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["user"]); ?></td>
-                  <!-- <td><?php #echo escapar($fila["correo"]);?></td> -->
+                  <td class="text-break"><?php echo escapar($fila["usuario"]);?></td>
+                  <td class="text-break"><?php echo escapar($fila["email"]);?></td>
                   <td class="text-break"><?php echo escapar($fila["nombre_rol"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
                   <!-- <td class="text-break"><?php #echo escapar($fila["descripcion"]); ?></td> -->
@@ -168,7 +170,8 @@ JOIN estados ON users.estado_id = estados.id;
           <tr>
               <th class="border-end">UID</th>
               <th class="border-end">Usuario</th>
-              <!-- <th>correo</th> -->
+              <th class="border-end">Nombre de usuario</th>
+              <th class="border-end">Correo</th>
               <th class="border-end">Departamento</th>
               <th class="border-end">Estado</th>
               <!-- <th class="border-end">Descripción del problema</th>
@@ -200,7 +203,7 @@ JOIN estados ON users.estado_id = estados.id;
         },
         topEnd: {
           search: {
-            placeholder: 'Busca un ticket'
+            placeholder: 'Busca un usuario'
           }
         },
 
