@@ -42,13 +42,15 @@
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'dropdown',
-                    surse:['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA','BENSHERMAN', 
+                { data: 1, type: 'autocomplete',  // Cambiado de 'dropdown' a 'autocomplete' para selector con búsqueda
+                    source: ['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA', 'BENSHERMAN', 
                     'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
-                     'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
-                       'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
-                       'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes
-                     }, // cliente
+                    'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
+                    'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
+                    'TANIA', 'USOPANTHALIC', 'OWL'],  // Opciones del selector de clientes
+                    strict: true, // Limita la entrada a los valores en la lista (opcional)
+                    filter: false // Desactiva el filtrado automático de la lista (opcional)
+                }, // cliente
                 { data: 2, type: 'text' }, // vehiculo/placa
                 { data: 3, type: 'text' }, // tipo de vehículo
                 { data: 4, type: 'text' }, // bl
