@@ -62,14 +62,14 @@
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'autocomplete',  // Cambiado de 'dropdown' a 'autocomplete' para selector con búsqueda
+                { data: 1, type: 'dropdown',  // Cambiado a 'dropdown' para evitar escritura
                     source: ['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA', 'BENSHERMAN', 
                     'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
                     'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
                     'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
                     'TANIA', 'USOPANTHALIC', 'OWL'],  // Opciones del selector de clientes
-                    strict: true, // Limita la entrada a los valores en la lista (opcional)
-                    filter: false // Desactiva el filtrado automático de la lista (opcional)
+                    strict: true, // Solo permite valores de la lista
+                    allowInvalid: false // No permite valores no válidos (fuera de la lista)
                 }, // cliente
                 { data: 2, type: 'numeric' }, // paletas
                 { data: 3, type: 'numeric' }, // cajas
