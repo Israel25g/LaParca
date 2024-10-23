@@ -1,3 +1,29 @@
+<?php
+$config = include '../../daily_plan/funcionalidades/config_DP.php';
+
+try {
+    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+    // Consulta para obtener los clientes desde la tabla "clientes"
+    $sql = "SELECT nombre_cliente FROM clientes";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);  // Guardar los resultados en un array
+
+    // Convertir los nombres de los clientes en un formato que Handsontable pueda usar
+    $clientes_js = implode(", ", array_map(function($cliente) {
+        return "'" . $cliente['nombre_cliente'] . "'";
+    }, $clientes));
+
+} catch (PDOException $error) {
+    $resultado['error'] = true;
+    $resultado['mensaje'] = "Error al conectar a la base de datos: " . $error->getMessage();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,15 +68,11 @@
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'dropdown',  // Cambiado a 'dropdown' para evitar escritura
-                    source: ['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA', 'BENSHERMAN', 
-                    'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
-                    'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
-                    'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
-                    'TANIA', 'USOPANTHALIC', 'OWL'],  // Opciones del selector de clientes
-                    strict: true, // Solo permite valores de la lista
-                    allowInvalid: false // No permite valores no válidos (fuera de la lista)
-                }, // cliente
+                { data: 1, type: 'dropdown', 
+        source: [<?php echo $clientes_js; ?>], // Opciones del selector de clientes generadas por PHP
+        strict: true,
+        allowInvalid: false // No permite valores no válidos (fuera de la lista)
+    }, // cliente
                 { data: 2, type: 'text' }, // vehiculo/placa
                 { data: 3, type: 'text' }, // tipo de vehículo
                 { data: 4, type: 'text' }, // bl
