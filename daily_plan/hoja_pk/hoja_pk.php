@@ -1,3 +1,27 @@
+
+<?php $config = include '../../daily_plan/funcionalidades/'; 
+
+try {
+    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+        // Consulta para obtener los clientes desde la tabla "clientes" al cargar la página
+        $sql = "SELECT id, nombre_cliente FROM clientes";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+        $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);  // Guardar los resultados en un array
+    
+
+} catch (PDOException $error) {
+    $resultado['error'] = true;
+    $resultado['mensaje'] = "Error al conectar a la base de datos: " . $error->getMessage();}
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -63,11 +87,12 @@
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
                 { data: 1, type: 'dropdown', 
-                    source: ['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'BENSHERMAN', 
-                    'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
-                     'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
-                      'METRO TRADING', 'MILLICOM', 'MINISO', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
-                       'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes
+                    source: [                <?php
+                // Recorrer los clientes y generar las opciones del selector
+                foreach ($clientes as $cliente) {
+                    echo '"'.$cliente['nombre_cliente'].',"';
+                }
+                ?>], // Opciones del selector de clientes
                     strict: true }, // cliente
                 { data: 2, type: 'numeric' }, // paletas
                 { data: 3, type: 'numeric' }, // cajas
