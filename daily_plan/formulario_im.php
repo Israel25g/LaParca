@@ -92,6 +92,19 @@ if (isset($_POST['submit'])) {
                 <div class="col-md-12">
                     <h3 class="mb-2"><a href="../daily_plan/tabla_im.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Import</h3>
                     <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_im.php" style="margin-top: 2%">Volver a la tabla</a>
+                    <?php
+    if (isset($resultado)) {
+    ?>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-12" style="margin-top: -1050px; margin-left:30%">
+                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:10%">
+                        <?= $resultado['mensaje'] ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
                     <hr>
 <form method="post">
     <div class="form-row">
@@ -197,19 +210,7 @@ if (isset($_POST['submit'])) {
     </div>
     </div>
     <script src="../host_virtual_TI/js/script.js"></script>
-    <?php
-    if (isset($resultado)) {
-    ?>
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-12" style="margin-top: -1050px; margin-left:30%">
-                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:10%">
-                        <?= $resultado['mensaje'] ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
+
 </body>
 
 </html>
