@@ -145,7 +145,6 @@ if (isset($_POST['submit'])) {
                                 <option value="carga suelta">FTL</option>
                                 <option value="contenerizada">LTL</option>
                                 <option value="carga suelta">AIR</option>
-                                
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
