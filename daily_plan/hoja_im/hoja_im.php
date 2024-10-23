@@ -42,11 +42,11 @@
             
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'dropdown', 
-                    source:['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'BENSHERMAN', 
+                { data: 1, type: 'select',
+                    source:['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'ASTERA', 'AMARA','BENSHERMAN', 
                     'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
                      'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
-                      'METRO TRADING', 'MILLICOM', 'MINISO', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
+                       'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
                        'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes
                     strict: true }, // cliente
                 { data: 2, type: 'text' }, // vehiculo/placa
