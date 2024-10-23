@@ -63,10 +63,11 @@
             const columns = [
                 { data: 0, type: 'text' }, // aid_oid
                 { data: 1, type: 'dropdown', 
-                    source: ['Brapan Optical', 'Delta Fashion', 'Go Outdoors', 'Owl', 'Bensherman', 'Miniso', 
-                    'AMPS Middle East', 'AP GROUP', 'Cps', 'Cesa', 'Gulf', 'Incaso', 'Adiplatinum', 'Cool Hunter', 
-                    'Juki', 'Kashima', 'Parawa', 'Promocean', 'Saint Gobain', 'Tania', 'USOpanthalic', 'Energy Brands', 
-                    'Knipex' ,'Pentel', 'IMSA'], // Opciones del selector de clientes
+                    source: ['ADIPLATINUM', 'ADOC', 'AMPS MIDDLE EAST', 'AP GROUP', 'BENSHERMAN', 
+                    'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
+                     'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
+                      'METRO TRADING', 'MILLICOM', 'MINISO', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
+                       'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes
                     strict: true }, // cliente
                 { data: 2, type: 'numeric' }, // paletas
                 { data: 3, type: 'numeric' }, // cajas
@@ -83,9 +84,9 @@
                 colHeaders: colHeaders,
                 columns: columns,
                 filters: true,
-                dropdownMenu: false,
+                dropdownMenu: true,
                 minSpareRows: 0,
-                contextMenu: false,
+                contextMenu: true,
                 manualColumnResize: true,
                 manualRowResize: true,
                 stretchH: 'all',

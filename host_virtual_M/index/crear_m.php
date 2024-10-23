@@ -42,7 +42,13 @@ if (isset($_POST['submit'])) {
         );
 
         // Guardar datos en la base de datos
-        $consultaSQL = "INSERT INTO tickets (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL = "INSERT INTO tickets_m (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($tickets);
+
+        // Guardar datos en la base de datos de registro
+        $consultaSQL = "INSERT INTO tickets_m_r (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
         $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
@@ -121,6 +127,7 @@ if (isset($_POST['submit'])) {
                         <select class="form-control" name="ubicacion[]" id="ubicacion" required>
                             <option>Seleccione una ubicación...</option>
                             <option>Administracion</option>
+                            <option>Atencion al cliente</option>
                             <option>Mezzanine</option>
                             <option>Bodega</option>
                             <option>Baño de mujeres administrativo</option>

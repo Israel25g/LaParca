@@ -43,7 +43,7 @@ include("apertura_sesion.php")
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
                 <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
                 <?php
-                if ($_SESSION['rol'] === 'Admin') {
+                if ($_SESSION['rol'] === 'Admin'|| $_SESSION['rol'] === 'EEMP') {
                     echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
                 }
                 ?>
@@ -114,10 +114,7 @@ include("apertura_sesion.php")
             <!-- Fín de sobretiempo -->
 
             <!-- Compras -->
-            <a href="https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUM1FEV0xDUEU5SkZDM1JTMFdVSk01S0FYMC4u
-Microsoft Forms
-Easily create surveys, quizzes, and polls.
- " target="_blank" rel="noopener noreferrer">
+            <a href="https://forms.office.com/r/JSRrVt475n" target="_blank" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_cotización">
                     <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="https://consultorfinancontable.com/wp-content/uploads/2024/03/mujer-asiatica-trabajando-traves-papeleo_53876-138148.jpg" alt="">
                     <div class="text-overlay">

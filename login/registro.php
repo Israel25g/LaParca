@@ -12,7 +12,9 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
         $data = htmlspecialchars($data);
         return $data;
     }
+    $nombre = validate($_POST['name']);
     $user = validate($_POST['user']);
+    $email = validate($_POST['email']);
     $password = $_POST['password'];
     $departamento = $_POST['departamento'];
     $password_hash = password_hash($_POST['password2'], PASSWORD_DEFAULT);
@@ -25,7 +27,7 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
         exit();
     } else {
         if (password_verify($password, $password_hash)) {
-            $sql = "INSERT INTO users(user, pass, rol_id, estado_id)  VALUES('$user', '$password_hash', '$departamento',1)";
+            $sql = "INSERT INTO users(user, usuario, email, pass, rol_id, estado_id)  VALUES('$user','$nombre','$email', '$password_hash', '$departamento',1)";
             $result = mysqli_query($conexion, $sql);
     
             if ($result) {

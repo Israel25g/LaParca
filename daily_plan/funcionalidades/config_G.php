@@ -2,6 +2,9 @@
 // Archivo de conexión a la base de datos (config_G.php)
 
 // Configuración de la conexión
+// Archivo de conexión a la base de datos (config_G.php)
+
+// Configuración de la conexión
 $servername = "localhost";
 $database = "u366386740_db_dailyplan";
 $username = "u366386740_adminDP";

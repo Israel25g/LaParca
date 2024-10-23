@@ -17,9 +17,9 @@ return [
 // return [
 //   'db' => [
 //     'host' => 'localhost',
-//     'user' => 'u366386740_admin123',
+//     'user' => 'u366386740_adminDP',
 //     'pass' => '1plGr0up01*',
-//     'name' => 'u366386740_db_mainbase',
+//     'name' => 'u366386740_db_dailyplan',
 //     'options' => [
 //       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 //     ]

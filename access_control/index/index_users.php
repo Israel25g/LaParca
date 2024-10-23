@@ -1,6 +1,6 @@
 <?php
 include("../../apertura_sesion.php");
-if ($_SESSION['rol'] != 'Admin') {
+if ($_SESSION['rol'] !== 'Admin' && $_SESSION['rol'] !== 'EEMP') {
   header("Location: ../../index.php?error=Acesso no autorizado");
 }
 ?>
@@ -92,7 +92,7 @@ JOIN estados ON users.estado_id = estados.id;
   <br>
 
 
-  <div class="tabla-container">
+  <div class="tabla-container espacio">
     <div class="row">
       <div class="col-md-12">
         <h2>Listado de Usuarios</h2>
@@ -104,7 +104,8 @@ JOIN estados ON users.estado_id = estados.id;
             <tr>
               <th class="border-end">UID</th>
               <th class="border-end">Usuario</th>
-              <!-- <th>correo</th> -->
+              <th class="border-end">Nombre de usuario</th>
+              <th class="border-end">Correo</th>
               <th class="border-end">Departamento</th>
               <th class="border-end">Estado</th>
               <th class="border-end">Acciones</th>
@@ -124,7 +125,8 @@ JOIN estados ON users.estado_id = estados.id;
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["user"]); ?></td>
-                  <!-- <td><?php #echo escapar($fila["correo"]);?></td> -->
+                  <td class="text-break"><?php echo escapar($fila["usuario"]);?></td>
+                  <td class="text-break"><?php echo escapar($fila["email"]);?></td>
                   <td class="text-break"><?php echo escapar($fila["nombre_rol"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
                   <!-- <td class="text-break"><?php #echo escapar($fila["descripcion"]); ?></td> -->
@@ -157,7 +159,6 @@ JOIN estados ON users.estado_id = estados.id;
                         </div>
                     <!--modal -->
                 </form>
-                <a class="btn btn-outline-success d-block m-1"  href="<?='actualizar_user.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
                 </td>
                 </tr>
               <?php
@@ -169,7 +170,8 @@ JOIN estados ON users.estado_id = estados.id;
           <tr>
               <th class="border-end">UID</th>
               <th class="border-end">Usuario</th>
-              <!-- <th>correo</th> -->
+              <th class="border-end">Nombre de usuario</th>
+              <th class="border-end">Correo</th>
               <th class="border-end">Departamento</th>
               <th class="border-end">Estado</th>
               <!-- <th class="border-end">Descripción del problema</th>
@@ -201,7 +203,7 @@ JOIN estados ON users.estado_id = estados.id;
         },
         topEnd: {
           search: {
-            placeholder: 'Busca un ticket'
+            placeholder: 'Busca un usuario'
           }
         },
 
@@ -233,6 +235,13 @@ JOIN estados ON users.estado_id = estados.id;
             });
           });
       },
+      fixedColumns: true,
+      columnDefs: [{
+        width: 5,
+        targets: [0],
+        className: 'dt-body-center'
+      }],
+
     });
     $('#container').css('display', 'block');
     table.columns.adjust().draw();
