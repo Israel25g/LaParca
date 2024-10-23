@@ -1,23 +1,25 @@
-
-<?php $config = include '../../daily_plan/funcionalidades/'; 
+<?php
+$config = include '../../daily_plan/funcionalidades/config_DP.php';
 
 try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-        // Consulta para obtener los clientes desde la tabla "clientes" al cargar la página
-        $sql = "SELECT id, nombre_cliente FROM clientes";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute();
-        $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);  // Guardar los resultados en un array
-    
+    // Consulta para obtener los clientes desde la tabla "clientes"
+    $sql = "SELECT nombre_cliente FROM clientes";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);  // Guardar los resultados en un array
+
+    // Convertir los nombres de los clientes en un formato que Handsontable pueda usar
+    $clientes_js = implode(", ", array_map(function($cliente) {
+        return "'" . $cliente['nombre_cliente'] . "'";
+    }, $clientes));
 
 } catch (PDOException $error) {
     $resultado['error'] = true;
-    $resultado['mensaje'] = "Error al conectar a la base de datos: " . $error->getMessage();}
-
-
-
+    $resultado['mensaje'] = "Error al conectar a la base de datos: " . $error->getMessage();
+}
 ?>
 
 
@@ -85,22 +87,18 @@ try {
             const colHeaders = ['Oid*', 'Cliente*', 'Paletas', 'Cajas', 'Unidades por pickear*', 'Fecha estimada de salida*', 'Prioridad de Picking*','Comentario Oficina'];
             
             const columns = [
-                { data: 0, type: 'text' }, // aid_oid
-                { data: 1, type: 'dropdown', 
-                    source: [                <?php
-                // Recorrer los clientes y generar las opciones del selector
-                foreach ($clientes as $cliente) {
-                    echo $cliente['nombre_cliente'].',';
-                }
-                ?>], // Opciones del selector de clientes
-                    strict: true }, // cliente
-                { data: 2, type: 'numeric' }, // paletas
-                { data: 3, type: 'numeric' }, // cajas
-                { data: 4, type: 'numeric' }, // unidades por pickear
-                { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
-                { data: 8, type: 'text' },  // comentario oficina
-                { data: 7, type: 'text' }  // prioridad de picking
-            ];
+    { data: 0, type: 'text' }, // aid_oid
+    { data: 1, type: 'dropdown', 
+        source: [<?php echo $clientes_js; ?>], // Opciones del selector de clientes generadas por PHP
+        strict: true
+    }, // cliente
+    { data: 2, type: 'numeric' }, // paletas
+    { data: 3, type: 'numeric' }, // cajas
+    { data: 4, type: 'numeric' }, // unidades por pickear
+    { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
+    { data: 8, type: 'text' },  // comentario oficina
+    { data: 7, type: 'text' }  // prioridad de picking
+];
 
             // Configuración de Handsontable
             const hot = new Handsontable(container, {
