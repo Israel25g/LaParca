@@ -48,7 +48,7 @@
                      'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
                        'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
                        'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes
-                    strict: true }, // cliente
+                     }, // cliente
                 { data: 2, type: 'text' }, // vehiculo/placa
                 { data: 3, type: 'text' }, // tipo de vehículo
                 { data: 4, type: 'text' }, // bl

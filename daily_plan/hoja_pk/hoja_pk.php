@@ -67,8 +67,8 @@
                     'BRAPAN OPTICAL', 'CESA', 'COOL HUNTER', 'CPS', 'DELTA FASHION', 'ENERGY BRANDS',
                      'GO OUTDOORS', 'GULF', 'IMSA', 'INCASO', 'JUKI', 'KASHIMA', 'KNIPEX', 'MASTER RETAIL',
                        'NWPD', 'PARAWA', 'PENTEL', 'PROMOCEAN', 'SAINT GOBAIN',
-                       'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes
-                    strict: true }, // cliente
+                       'TANIA', 'USOPANTHALIC', 'OWL'], // Opciones del selector de clientes 
+                       }, // cliente
                 { data: 2, type: 'numeric' }, // paletas
                 { data: 3, type: 'numeric' }, // cajas
                 { data: 4, type: 'numeric' }, // unidades por pickear
