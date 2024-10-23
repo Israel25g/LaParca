@@ -86,7 +86,7 @@
             background-color: #f4f4f4;
         }
 
-  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVO*/
+  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVONO SE TOCA, PRODUCTIVO*/
   .bloquess {
     display: grid !important;
     grid-template-columns: auto auto !important;
@@ -115,7 +115,7 @@
             background-color: #f4f4f4;
         }
 
-  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
+  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
@@ -199,7 +199,7 @@
                 </div>    
             </div>
         <!-- grafico de gauge -->
-             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 450px;border-radius: 15px; overflow: hidden;" >
+             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
                     <div id="grafico-gauge" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
@@ -440,6 +440,8 @@
                         }]
                     });
                 });
+
+
 
                 fetch('get_data_im.php')
     .then(response => response.json())

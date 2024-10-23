@@ -1,4 +1,6 @@
-<?php
+
+     <!--tabla export-->
+     <?php
 include("../apertura_sesion.php");
 ?>
 
@@ -53,9 +55,9 @@ include("../apertura_sesion.php");
     $error = false;
     $config = include '../daily_plan/funcionalidades/config_DP.php';
 
-    try {
-      $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-      $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+      try {
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
       // Consulta para la tabla 'datos'
       $consultaSQL = "SELECT * FROM picking";
@@ -65,7 +67,7 @@ include("../apertura_sesion.php");
     } catch (PDOException $error) {
       $error = $error->getMessage();
     }
-    ?>
+      ?>
 
 
 <!-- Tabla 'datos' -->
@@ -91,27 +93,28 @@ include("../apertura_sesion.php");
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/formulario_pk.php">Formulario singular</a></li>
                     <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_pk/hoja_pk.php">Hoja de datos</a></li>
                   </ul>
-          <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;" href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;" style="margin-bottom: 10px;" href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <br/>
-          <table id="tablaPicking" class="table shadow p-3 mt-2 mb-5 bg-body-tertiary rounded table-striped border" style="background-color:#fff;  margin-top: 1%">
-            <thead>
-              <tr>
-                <th class="border end">#</th>
-                <th class="border end">OID</th>
-                <th class="border end">Cliente</th>
-                <th class="border end">Unidades por pickear</th>
-                <th class="border end">paletas</th>
-                <th class="border end">Unidades pickeadas</th>
-                <th class="border end">Cajas</th>
-                <th class="border end">Fecha de requerido</th>
-                <th class="border end">Prioridad de picking</th>
-                <th class="border end">Porcentaje de avance</th>
-                <th class="border end">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php if ($datos && $sentencia->rowCount() > 0): ?>
-                <?php foreach ($datos as $fila): ?>
+                <br/>
+                <table id="tablaPicking" class="display table shadow p-3 mt-2 mb-5 bg-body-tertiary rounded table-striped border" style="background-color: #fff;  margin-top: 2%">
+                  <thead>
+                      <tr>
+                        <th class="border end">#</th>
+                        <th class="border end">OID</th>
+                        <th class="border end">Cliente</th>
+                        <th class="border end">Unidades por pickear</th>
+                        <th class="border end">paletas</th>
+                        <th class="border end">Unidades pickeadas</th>
+                        <th class="border end">Cajas</th>
+                        <th class="border end">Fecha de requerido</th>
+                        <th class="border end">Prioridad de picking</th>
+                        <th class="border end">Porcentaje de avance</th>
+                        <th class="border end">Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <?php if ($datos && $sentencia->rowCount() > 0): ?>
+                      <?php foreach ($datos as $fila): ?>
                   <tr>
                     <td class="border end"><?php echo escapar($fila["id"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -152,6 +155,7 @@ include("../apertura_sesion.php");
     </div>
     <?php include "../daily_plan/datatable.php" ?>
     <script src="../host_virtual_TI/js/script.js"></script>
+
     <script>
       $(document).ready(function() {
         new DataTable('#tablaPicking', {
@@ -161,54 +165,89 @@ include("../apertura_sesion.php");
           scrollX: '1700px',
 
           initComplete: function() {
-        this.api()
-          .columns()
-          .every(function() {
-            let column = this;
-            let title = column.footer().textContent;
+            this.api()
+              .columns()
+              .every(function() {
+                let column = this;
+                let title = column.footer().textContent;
 
-            // Create input element
-            let input = document.createElement('input');
-            input.placeholder = title;
-            column.footer().replaceChildren(input);
+                // Create input element
+                let input = document.createElement('input');
+                input.placeholder = title;
+                column.footer().replaceChildren(input);
 
-            // Event listener for user input
-            input.addEventListener('keyup', () => {
-              if (column.search() !== this.value) {
-                column.search(input.value).draw();
-              }
-            });
-          });
-      },
+                // Event listener for user input
+                input.addEventListener('keyup', () => {
+                  if (column.search() !== this.value) {
+                    column.search(input.value).draw();
+                  }
+                });
+              });
+          },
+                  buttons: [
+                    {
+                      extend: 'copy',
+                      text: 'Copiar',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8] 
 
-          buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-          dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
-          info: false,
-          language: {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "No se encontraron resultados",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-              "first": "<◀",
-              "last": "▶> ",
-              "next": "▶",
-              "previous": "◀"
-            },
-            "buttons": {
-              "copy": "Copiar",
-              "csv": "CSV",
-              "excel": "Excel",
-              "pdf": "PDF",
-              "print": "Imprimir"
-            }
-          }
-        });
-      });
-    </script>
-  </div>
-</body>
-
+                      }
+                    },
+                    {
+                      extend: 'csv',
+                      text: 'CSV',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'excel',
+                      text: 'Excel',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'pdf',
+                      text: 'PDF',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'print',
+                      text: 'Imprimir',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    }
+                  ],
+                  dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+                  info: false,
+                  language: {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                      "first": "<◀",
+                      "last": "▶> ",
+                      "next": "▶",
+                      "previous": "◀"
+                    },
+                    "buttons": {
+                      "copy": "Copiar",
+                      "csv": "CSV",
+                      "excel": "Excel",
+                      "pdf": "PDF",
+                      "print": "Imprimir"
+                    }
+                  }
+                });
+              });
+          </script>
+      </div>
+  </body>
 </html>

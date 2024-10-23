@@ -28,19 +28,41 @@ if (isset($_POST['submit'])) {
 
         // Actualización de los datos del ticket
         $tickets = [
-            "id"        => $_GET['id'],
+            "id" => $_GET['id'],
             "respuesta" => $_POST['respuesta'],
             "estado"    => $_POST['estado'],
         ];
 
         $consultaSQL = "UPDATE tickets SET
-            respuesta = :respuesta,
-            estado = :estado,
-            updated_at = NOW()
+        respuesta = :respuesta,
+        estado = :estado,
+        updated_at = NOW()
             WHERE id = :id";
 
         $consulta = $conexion->prepare($consultaSQL);
         $consulta->execute($tickets);
+
+         // Obtener toda la información del ticket desde la primera tabla (para insertar en la segunda tabla)
+         $consultaInfo = "SELECT * FROM tickets WHERE id = :id";
+         $consultaInfoStmt = $conexion->prepare($consultaInfo);
+         $consultaInfoStmt->execute(['id' => $_GET['id']]);
+         $ticketInfo = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
+ 
+         // Insertar en la segunda tabla todos los datos del ticket
+         $consultaSQL = "INSERT INTO tickets_r (estado, respuesta, nombrecompleto, descripcion, correo, ubicacion, urgencia, updated_at) 
+                         VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo, :ubicacion, :urgencia, NOW())";
+ 
+         // Asegurarse de que todos los valores se incluyan correctamente
+         $consulta = $conexion->prepare($consultaSQL);
+         $consulta->execute([
+             'estado' => $_POST['estado'],  // Estado actualizado
+             'respuesta' => $_POST['respuesta'],  // Respuesta actualizada
+             'nombrecompleto' => $ticketInfo['nombrecompleto'],  // Datos originales
+             'descripcion' => $ticketInfo['descripcion'],  // Datos originales
+             'correo' => $ticketInfo['correo'],  // Datos originales
+             'ubicacion' => $ticketInfo['ubicacion'],  // Datos originales
+             'urgencia' => $ticketInfo['urgencia'],  // Datos originales
+         ]);
 
         // Obtener el correo y nombrecompleto
         $consultaInfo = "SELECT correo, nombrecompleto FROM tickets WHERE id = :id";
@@ -65,7 +87,7 @@ if (isset($_POST['submit'])) {
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de TI');
             $mail->addAddress($info['correo'], $info['nombrecompleto']);  // Enviar al correo del solicitante
-            $mail->addCC('ricaurte@iplgsc.com');  // Copia a un correo adicional si es necesario
+            $mail->addCC('garayaalcibiades@gmail.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
             $mail->isHTML(true);

@@ -1,3 +1,4 @@
+
 <?php
 include("../apertura_sesion.php");
 ?>
@@ -53,9 +54,9 @@ include("../apertura_sesion.php");
     $error = false;
     $config = include '../daily_plan/funcionalidades/config_DP.php';
 
-    try {
-      $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-      $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+      try {
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
       // Consulta para la tabla 'export'
       $consultaSQL = "SELECT * FROM export";
@@ -64,8 +65,8 @@ include("../apertura_sesion.php");
       $datos = $sentencia->fetchAll();
     } catch (PDOException $error) {
       $error = $error->getMessage();
-    }
-    ?>
+      }
+      ?>
 
 
 <!-- Tabla 'datos' -->
@@ -104,108 +105,143 @@ include("../apertura_sesion.php");
                 <th class="border end">Llegada a rampa</th>
                 <th class="border end">Salida de rampa</th>
                 <th class="border end">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php if ($datos && $sentencia->rowCount() > 0): ?>
-                <?php foreach ($datos as $fila): ?>
-                  <tr>
-                    <td class="border end"><?php echo escapar($fila["id"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
-                    <td class="border end">
-                      <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_ex.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
-                      <a class="btn btn-outline-danger fs-6 bi bi-trash3-fill border end" href="<?= './funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
-                    </td>
-                  </tr>
-                <?php endforeach; ?>
-              <?php endif; ?>
-            </tbody>
-            <tfoot>
-            <tr>
-                <th class="border end">#</th>
-                <th class="border end">OID</th>
-                <th class="border end">Cliente</th>
-                <th class="border end"># Vehículo / Placa</th>
-                <th class="border end">Pedidos en proceso</th>
-                <th class="border end">Pedidos despachados</th>
-                <th class="border end">Fecha estimada de salida</th>
-                <th class="border end">Llegada a rampa</th>
-                <th class="border end">Salida de rampa</th>
-                <th class="border end">Acciones</th>
-              </tr>
-          </tfoot>
-          </table>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php if ($datos && $sentencia->rowCount() > 0): ?>
+                      <?php foreach ($datos as $fila): ?>
+                        <tr>
+                            <td class="border end"><?php echo escapar($fila["id"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["cliente"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["vehiculo"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["pedidos_en_proceso"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["pedidos_despachados"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
+                            <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
+                            <td class="border end">
+                              <a class="btn btn-outline-warning fs-6 border end" href="<?= './editar_ex.php?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
+                              <a class="btn btn-outline-danger fs-6 bi bi-trash3-fill border end" href="<?= './funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
+                        </tr>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                        <th class="border end">#</th>
+                        <th class="border end">OID</th>
+                        <th class="border end">Cliente</th>
+                        <th class="border end"># Vehículo / Placa</th>
+                        <th class="border end">Pedidos en proceso</th>
+                        <th class="border end">Pedidos despachados</th>
+                        <th class="border end">Fecha estimada de salida</th>
+                        <th class="border end">Llegada a rampa</th>
+                        <th class="border end">Salida de rampa</th>
+                        <th class="border end">Acciones</th>
+                    </tr>
+                   </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scripts -->
+          <?php include "../daily_plan/datatable.php" ?>
+          <script src="../host_virtual_TI/js/script.js"></script>
+          <script>
+                  new DataTable('#tablaExport', {
+                  paging: false,
+                  scrollCollapse: true,
+                  scrollY: '500px',
+                  scrollX: '1700px',
+                  initComplete: function() {
+                    this.api()
+                      .columns()
+                      .every(function() {
+                        let column = this;
+                        let footer = column.footer();
+
+                        if (footer) { 
+                          let title = footer.textContent;
+                          let input = document.createElement('input');
+                          input.placeholder = title;
+                          column.footer().replaceChildren(input);
+
+                          input.addEventListener('keyup', () => {
+                            if (column.search() !== this.value) {
+                              column.search(input.value).draw();
+                            }
+                          });
+                        }
+                      });
+                  },
+                  buttons: [
+                    {
+                      extend: 'copy',
+                      text: 'Copiar',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8] 
+
+                      }
+                    },
+                    {
+                      extend: 'csv',
+                      text: 'CSV',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'excel',
+                      text: 'Excel',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'pdf',
+                      text: 'PDF',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'print',
+                      text: 'Imprimir',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    }
+                  ],
+                  dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+                  info: false,
+                  language: {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                      "first": "<◀",
+                      "last": "▶> ",
+                      "next": "▶",
+                      "previous": "◀"
+                    },
+                    "buttons": {
+                      "copy": "Copiar",
+                      "csv": "CSV",
+                      "excel": "Excel",
+                      "pdf": "PDF",
+                      "print": "Imprimir"
+                    }
+                  }
+                });
+
+          </script>
         </div>
-      </div>
-    </div>
+      </body>
 
-    <!-- Scripts -->
-    <?php include "../daily_plan/datatable.php" ?> <!-- Esto Trae las librerías de las tablas de datos -->
-    <script src="../host_virtual_TI/js/script.js"></script>
-    <script>
-      $(document).ready(function() {
-        new DataTable('#tablaExport', {
-          paging: false,
-          scrollCollapse: true,
-          scrollY: '400px',
-          scrollX: '1700px',
-          
-          initComplete: function() {
-        this.api()
-          .columns()
-          .every(function() {
-            let column = this;
-            let title = column.footer().textContent;
-
-            // Create input element
-            let input = document.createElement('input');
-            input.placeholder = title;
-            column.footer().replaceChildren(input);
-
-            // Event listener for user input
-            input.addEventListener('keyup', () => {
-              if (column.search() !== this.value) {
-                column.search(input.value).draw();
-              }
-            });
-          });
-      },
-          buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-          dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
-          info: false,
-          language: {
-            "lengthMenu": "Mostrar _MENU_ registros por página",
-            "zeroRecords": "No se encontraron resultados",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "No data available in table":"No hay datos en esta tabla",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar:",
-            "paginate": {
-              "first": "<◀",
-              "last": "▶> ",
-              "next": "▶",
-              "previous": "◀"
-            },
-            "buttons": {
-              "copy": "Copiar",
-              "csv": "CSV",
-              "excel": "Excel",
-              "pdf": "PDF",
-              "print": "Imprimir"
-            }
-          }
-        });
-      });
-    </script>
-  </div>
-  <script src="host_virtual_TI/js/script.js"></script>
-</body>
-</html>
+      </html>

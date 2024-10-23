@@ -81,7 +81,7 @@ include("../../apertura_sesion.php")
         <div class="col-md-12">
           <a href="crear_eemp.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
           <?php
-          if ($_SESSION['rol'] === 'EEMP') {
+          if ($_SESSION['rol'] === 'EEMP' && $_SESSION['user'] === 'igondola') {
             echo '<a href="../indexAdmin/indexAdmin_eemp.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de EEMP</a>';
           }
           ?>

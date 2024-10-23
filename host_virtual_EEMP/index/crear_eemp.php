@@ -51,6 +51,12 @@ if (isset($_POST['submit'])) {
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
 
+        // Guardar datos en la base de datos de registro
+        $consultaSQL = "INSERT INTO tickets_eemp_r (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($tickets);
+
        // echo "Datos guardados en la base de datos.<br>"; // Debug
 
         // Configuración del correo
@@ -68,7 +74,8 @@ if (isset($_POST['submit'])) {
 
         $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento EEMP');
         $mail->addAddress($tickets['correo']);
-        $mail->addAddress('israel@iplgsc.com','alcibiades@iplgsc.com'); // Correo adicional
+        $mail->addAddress('israel@iplgsc.com'); // Correo adicional
+        $mail->addAddress('alcibiades@iplgsc.com');//correo adicional si es necesario
 
         $mail->isHTML(false);
         $mail->Subject = 'Confirmación de recepción del ticket';
