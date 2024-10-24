@@ -98,7 +98,7 @@ if (isset($_POST['submit'])) {
 <div style="margin-left: 15px">
             <div class="row">
                 <div>
-                <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:10%">
+                <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
                         <?= $resultado['mensaje'] ?>
                     </div>
                 </div>
