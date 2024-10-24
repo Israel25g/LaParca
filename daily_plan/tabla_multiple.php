@@ -55,7 +55,9 @@ try {
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 <body>
-<div class="col-m-12" style="margin-top: 150px;">
+<div class="" style="margin-top: 150px;">
+    <div class="row">
+    <div class="col col-lg">
     <!-- Header -->
     <div class="header-error">
         <h1>Daily plan</h1>
@@ -178,7 +180,8 @@ try {
             });
         });
     </script>
-
+</div>
+</div>
 </div>
 </body>
 </html>
