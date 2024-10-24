@@ -4,21 +4,16 @@ include '../daily_plan/funcionalidades/funciones.php';
 $config = include '../daily_plan/funcionalidades/config_DP.php';
 $error = false;
 
-
-  try {
+try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
 
-    if ($filtro == 'import') {
-        $consultaSQL = "SELECT * FROM import WHERE division_dp < 1.00";
-    } elseif ($filtro == 'export') {
-        $consultaSQL = "SELECT * FROM export WHERE division_dp < 1.00";
-    } elseif ($filtro == 'picking') {
+    if ($filtro == 'incompletos') {
         $consultaSQL = "SELECT * FROM picking WHERE division_dp < 1.00";
     } else {
-        $consultaSQL = NULL; // Cambiar a lo que necesites
+        $consultaSQL = "SELECT * FROM import";
     }
 
     $sentencia = $conexion->prepare($consultaSQL);
@@ -27,7 +22,6 @@ $error = false;
 } catch (PDOException $error) {
     $error = $error->getMessage();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -64,11 +58,10 @@ $error = false;
     
     <!-- Filtro para la consulta -->
     <form method="GET" class="mb-3">
-      <label for="filtro">Elegir operacion</label>
+      <label for="filtro">Elige el filtro:</label>
       <select name="filtro" id="filtro" class="form-control">
-        <option value="todos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'todos' ? 'selected' : '' ?>>import</option>
-        <option value="incompletos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'incompletos' ? 'selected' : '' ?>>Export</option>
-        <option value="incompletos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'incompletos' ? 'selected' : '' ?>>Picking</option>
+        <option value="todos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'todos' ? 'selected' : '' ?>>Mostrar todos</option>
+        <option value="incompletos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'incompletos' ? 'selected' : '' ?>>Mostrar incompletos</option>
       </select>
       <button type="submit" class="btn btn-primary mt-2">Aplicar Filtro</button>
     </form>
