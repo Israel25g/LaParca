@@ -11,20 +11,20 @@ try {
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
 
     // Define la consulta SQL y el encabezado según el filtro
-    if ($filtro == 'import') {
-        $consultaSQL = "SELECT * FROM import";
+    if ($filtro == 'picking') {
+        $consultaSQL = "SELECT * FROM picking  WHERE division_dp < 1.00";
         $encabezado = [
-            "#", "OID", "Cliente", "Unidades por pickear", "Paletas",
-            "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de avance", "Acciones"
+            "id", "aid_oid", "cliente", "pedidos_en_proceso", "Paletas",
+            "pedidos_despachados", "Cajas", "Fecha_objetivo", "vacio_lleno", "division_dp", "Acciones"
         ];
     } elseif ($filtro == 'export') {
-        $consultaSQL = "SELECT * FROM export";
+        $consultaSQL = "SELECT * FROM export  WHERE division_dp < 1.00";
         $encabezado = [
             "#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso",
             "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"
         ];
-    } elseif ($filtro == 'picking') {
-        $consultaSQL = "SELECT * FROM picking WHERE division_dp < 1.00";
+    } elseif ($filtro == 'import') {
+        $consultaSQL = "SELECT * FROM import WHERE division_dp < 1.00";
         $encabezado = [
             "#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir",
             "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades",
@@ -55,7 +55,7 @@ try {
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 <body>
-<div style="margin-top: 90px;">
+<div class="col-m-12" style="margin-top: 150px;">
     <!-- Header -->
     <div class="header-error">
         <h1>Daily plan</h1>
@@ -102,7 +102,7 @@ try {
                 <?php foreach ($datos as $fila): ?>
                     <tr>
                         <td class="border end"><?= $fila['id'] ?></td>
-                        <?php if ($filtro == 'import'): ?>
+                        <?php if ($filtro == 'picking'): ?>
                             <td class="border end"><?= $fila['oid'] ?></td>
                             <td class="border end"><?= $fila['cliente'] ?></td>
                             <td class="border end"><?= $fila['unidades_por_pickear'] ?></td>
@@ -121,7 +121,7 @@ try {
                             <td class="border end"><?= $fila['fecha_estimada_salida'] ?></td>
                             <td class="border end"><?= $fila['llegada_a_rampa'] ?></td>
                             <td class="border end"><?= $fila['salida_de_rampa'] ?></td>
-                        <?php elseif ($filtro == 'picking'): ?>
+                        <?php elseif ($filtro == 'import'): ?>
                             <td class="border end"><?= $fila['aid'] ?></td>
                             <td class="border end"><?= $fila['cliente'] ?></td>
                             <td class="border end"><?= $fila['vehiculo'] ?></td>
@@ -178,5 +178,7 @@ try {
             });
         });
     </script>
+
+</div>
 </body>
 </html>
