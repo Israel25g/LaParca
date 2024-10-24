@@ -48,16 +48,15 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Plan - Picking</title>
+    <title>Daily Plan - Operaciones</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../main-global.css">
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 <body>
-<div class="" style="margin-top: 150px;">
-    <div class="row">
-    <div class="col col-lg">
+<div class="container-lg" style="margin-top: 150px;">
+
     <!-- Header -->
     <div class="header-error">
         <h1>Daily plan</h1>
@@ -180,8 +179,7 @@ try {
             });
         });
     </script>
-</div>
-</div>
+
 </div>
 </body>
 </html>
