@@ -77,20 +77,35 @@ if (isset($_POST['submit'])) {
         <div class="header">
             <div class="logo-container">
                 <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
-            </div>
-            <h1 href="../daily_plan/index_DP.php">Daily plan</h1>
-            <div class="cuadroFecha">
-                <p id="fecha-actual"></p>
-                <p id="hora-actual">prueba</p>
-            </div>
-        </div>
-        <!-- Fin del Header -->
+                </div>
+                <h1 href="../daily_plan/index_DP.php">Daily plan</h1>
+                <div class="cuadroFecha">
+                    <p id="fecha-actual"></p>
+                    <p id="hora-actual">prueba</p>
+                    </div>
+                    </div>
+                    <!-- Fin del Header -->
+                    
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="mb-2"><a href="../daily_plan/tabla_ex.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Export</h3>
+                                <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla </a>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 class="mb-2"><a href="../daily_plan/tabla_ex.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Export</h3>
-                    <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla </a>
+                    <?php
+                    if (isset($resultado)) {
+                    ?>
+                        <div class="container mt-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
+                                        <?= $resultado['mensaje'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+
                     <hr>
                     <form method="post">
                         <div class="form-row">
@@ -188,19 +203,6 @@ if (isset($_POST['submit'])) {
     </div>
     </div>
     <script src="../host_virtual_TI/js/script.js"></script>
-    <?php
-    if (isset($resultado)) {
-    ?>
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-md-12" style="margin-top: -1000px; margin-left:30%">
-                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert">
-                        <?= $resultado['mensaje'] ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
 </body>
 
 </html>
