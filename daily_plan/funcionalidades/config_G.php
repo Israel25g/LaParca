@@ -6,8 +6,8 @@
 
 // Configuración de la conexión
 $servername = "localhost";
-$database = "u366386740_db_dailyplan";
-$username = "u366386740_adminDP";
+$database = "u366386740_db_test_dp";
+$username = "u366386740_adminTestDP";
 $password = "1plGr0up01*"; 
 
 // Crear la conexión
