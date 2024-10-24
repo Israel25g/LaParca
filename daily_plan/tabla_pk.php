@@ -27,6 +27,7 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Plan - Picking</title>
@@ -40,7 +41,8 @@ try {
   <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
   <link rel="stylesheet" href="../main-global.css">
   <link rel="shortcut icon" href="../images/ICO.png">
-  </head>
+
+</head>
 <body>
   <div style="margin-top: 90px;">
     <!-- Header -->
@@ -181,7 +183,7 @@ try {
                   }
                 });
               });
-          </script>
-      </div>
-  </body>
+    </script>
+  </div>
+</body>
 </html>
