@@ -60,7 +60,7 @@ include("../apertura_sesion.php");
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
       // Consulta para la tabla 'datos'
-      $consultaSQL = "SELECT * FROM picking";
+      $consultaSQL = "SELECT * FROM picking WHERE division_dp < 1.00";
       $sentencia = $conexion->prepare($consultaSQL);
       $sentencia->execute();
       $datos = $sentencia->fetchAll();
