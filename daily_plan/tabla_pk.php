@@ -27,21 +27,27 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Plan - Picking</title>
+
+  <!-- Incluye jQuery antes de otros scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
-  <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-  <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="../main-global.css">
   <link rel="shortcut icon" href="../images/ICO.png">
-
 </head>
 <body>
   <div style="margin-top: 90px;">
@@ -77,21 +83,37 @@ try {
 
       <table id="tablaPicking" class="display table ...">
         <thead>
-          <!-- Cabecera de la tabla -->
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Division DP</th>
+            <!-- Añade aquí las demás cabeceras de tu tabla -->
+          </tr>
         </thead>
         <tbody>
           <?php if ($datos && $sentencia->rowCount() > 0): ?>
             <?php foreach ($datos as $fila): ?>
               <tr>
-                <!-- Celdas de la tabla con los datos -->
+                <td><?= htmlspecialchars($fila['id']) ?></td>
+                <td><?= htmlspecialchars($fila['nombre']) ?></td>
+                <td><?= htmlspecialchars($fila['division_dp']) ?></td>
+                <!-- Añade aquí las demás celdas de tu tabla -->
               </tr>
             <?php endforeach; ?>
+          <?php else: ?>
+            <tr>
+              <td colspan="3" class="text-center">No hay registros disponibles.</td>
+            </tr>
           <?php endif; ?>
         </tbody>
       </table>
     </div>
 
-    <script src="../host_virtual_TI/js/script.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script>
       $(document).ready(function() {
         new DataTable('#tablaPicking', {
@@ -114,75 +136,74 @@ try {
 
                 // Event listener for user input
                 input.addEventListener('keyup', () => {
-                  if (column.search() !== this.value) {
+                  if (column.search() !== input.value) {
                     column.search(input.value).draw();
                   }
                 });
               });
           },
-                  buttons: [
-                    {
-                      extend: 'copy',
-                      text: 'Copiar',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8] 
-
-                      }
-                    },
-                    {
-                      extend: 'csv',
-                      text: 'CSV',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    },
-                    {
-                      extend: 'excel',
-                      text: 'Excel',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    },
-                    {
-                      extend: 'pdf',
-                      text: 'PDF',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    },
-                    {
-                      extend: 'print',
-                      text: 'Imprimir',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    }
-                  ],
-                  dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
-                  info: false,
-                  language: {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "Buscar:",
-                    "paginate": {
-                      "first": "<◀",
-                      "last": "▶> ",
-                      "next": "▶",
-                      "previous": "◀"
-                    },
-                    "buttons": {
-                      "copy": "Copiar",
-                      "csv": "CSV",
-                      "excel": "Excel",
-                      "pdf": "PDF",
-                      "print": "Imprimir"
-                    }
-                  }
-                });
-              });
+          buttons: [
+            {
+              extend: 'copy',
+              text: 'Copiar',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+              }
+            },
+            {
+              extend: 'csv',
+              text: 'CSV',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+              }
+            },
+            {
+              extend: 'excel',
+              text: 'Excel',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+              }
+            },
+            {
+              extend: 'pdf',
+              text: 'PDF',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+              }
+            },
+            {
+              extend: 'print',
+              text: 'Imprimir',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+              }
+            }
+          ],
+          dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+          info: false,
+          language: {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar:",
+            "paginate": {
+              "first": "<◀",
+              "last": "▶> ",
+              "next": "▶",
+              "previous": "◀"
+            },
+            "buttons": {
+              "copy": "Copiar",
+              "csv": "CSV",
+              "excel": "Excel",
+              "pdf": "PDF",
+              "print": "Imprimir"
+            }
+          }
+        });
+      });
     </script>
   </div>
 </body>
