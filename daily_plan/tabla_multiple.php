@@ -90,7 +90,7 @@ try {
             <div class="alert alert-danger"><?= $error ?></div>
         <?php endif; ?>
 
-        <table id="tablaPicking" class="display table">
+        <table id="tabla_MOP" class="display table">
             <thead>
             <tr>
                 <?php foreach ($encabezado as $titulo): ?>
@@ -148,21 +148,87 @@ try {
                 </tr>
             <?php endif; ?>
             </tbody>
+            <tfoot>
+            <tr>
+                <?php foreach ($encabezado as $titulo): ?>
+                    <th class="border end"><?= $titulo ?></th>
+                <?php endforeach; ?>
+            </tr>
+            </tfoot>
         </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../host_virtual_TI/js/script.js"></script>
     <script>
-        $(document).ready(function() {
-            new DataTable('#tablaPicking', {
-                paging: false,
-                scrollCollapse: true,
-                scrollY: '350px',
-                scrollX: '1700px',
-                dom: 'Bfrtip',
-                info: false,
-                language: {
+      $(document).ready(function() {
+        new DataTable('#tabla_MOP', {
+          paging: false,
+          scrollCollapse: true,
+          scrollY: '350px',
+          scrollX: '1700px',
+
+          initComplete: function() {
+            this.api()
+              .columns()
+              .every(function() {
+                let column = this;
+                let title = column.footer().textContent;
+
+                // Create input element
+                let input = document.createElement('input');
+                input.placeholder = title;
+                column.footer().replaceChildren(input);
+
+                // Event listener for user input
+                input.addEventListener('keyup', () => {
+                  if (column.search() !== this.value) {
+                    column.search(input.value).draw();
+                  }
+                });
+              });
+          },
+                  buttons: [
+                    {
+                      extend: 'copy',
+                      text: 'Copiar',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8] 
+
+                      }
+                    },
+                    {
+                      extend: 'csv',
+                      text: 'CSV',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'excel',
+                      text: 'Excel',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'pdf',
+                      text: 'PDF',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    },
+                    {
+                      extend: 'print',
+                      text: 'Imprimir',
+                      exportOptions: {
+                        columns: [0, 1, 2,3,4,5,6,7,8]
+                      }
+                    }
+                  ],
+                  dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
+                  info: false,
+                  language: {
                     "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No se encontraron resultados",
                     "info": "Mostrando página _PAGE_ de _PAGES_",
@@ -170,15 +236,22 @@ try {
                     "infoFiltered": "(filtrado de _MAX_ registros totales)",
                     "search": "Buscar:",
                     "paginate": {
-                        "first": "<◀",
-                        "last": "▶> ",
-                        "next": "▶",
-                        "previous": "◀"
+                      "first": "<◀",
+                      "last": "▶> ",
+                      "next": "▶",
+                      "previous": "◀"
+                    },
+                    "buttons": {
+                      "copy": "Copiar",
+                      "csv": "CSV",
+                      "excel": "Excel",
+                      "pdf": "PDF",
+                      "print": "Imprimir"
                     }
-                }
-            });
-        });
-    </script>
+                  }
+                });
+              });
+          </script>
 
 </div>
 </body>
