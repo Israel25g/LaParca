@@ -87,18 +87,19 @@ try {
             const colHeaders = ['Oid*', 'Cliente*', 'Paletas', 'Cajas', 'Unidades por pickear*', 'Fecha estimada de salida*', 'Prioridad de Picking*','Comentario Oficina'];
             
             const columns = [
-    { data: 0, type: 'text' }, // aid_oid
-    { data: 1, type: 'dropdown', 
+                { data: 0, type: 'text' }, // aid_oid
+                { data: 1, type: 'dropdown', 
         source: [<?php echo $clientes_js; ?>], // Opciones del selector de clientes generadas por PHP
-        strict: true
+        strict: true,
+        allowInvalid: false // No permite valores no válidos (fuera de la lista)
     }, // cliente
-    { data: 2, type: 'numeric' }, // paletas
-    { data: 3, type: 'numeric' }, // cajas
-    { data: 4, type: 'numeric' }, // unidades por pickear
-    { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
-    { data: 8, type: 'text' },  // comentario oficina
-    { data: 7, type: 'text' }  // prioridad de picking
-];
+                { data: 2, type: 'numeric' }, // paletas
+                { data: 3, type: 'numeric' }, // cajas
+                { data: 4, type: 'numeric' }, // unidades por pickear
+                { data: 6, type: 'date', dateFormat: 'YYYY-MM-DD' }, // fecha objetivo
+                { data: 8, type: 'text' },  // comentario oficina
+                { data: 7, type: 'text' }  // prioridad de picking
+            ];
 
             // Configuración de Handsontable
             const hot = new Handsontable(container, {
