@@ -95,10 +95,10 @@ if (isset($_POST['submit'])) {
                     <?php
     if (isset($resultado)) {
     ?>
-        <div class="container mt-3">
+<div style="margin-left: 15px">
             <div class="row">
-                <div class="col-md-12" style="margin-left:30%">
-                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:10%">
+                <div>
+                <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex; margin-top:10%">
                         <?= $resultado['mensaje'] ?>
                     </div>
                 </div>
