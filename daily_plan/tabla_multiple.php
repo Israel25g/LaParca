@@ -50,7 +50,13 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Plan - Operaciones</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
+  <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="../main-global.css">
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
@@ -76,11 +82,11 @@ try {
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
     <div class="alert alert-info mt-2">
         <?php if ($filtro == 'import'): ?>
-            <p>Mostrando datos de import.</p>
+            <p>Mostrando datos de Import.</p>
         <?php elseif ($filtro == 'export'): ?>
-            <p>Mostrando datos de export.</p>
+            <p>Mostrando datos de Export.</p>
         <?php elseif ($filtro == 'picking'): ?>
-            <p>Mostrando solo los registros con avance incompleto (division_dp < 1.00).</p>
+            <p>Mostrando los datos de Picking.</p>
         <?php endif; ?>
     </div>
 
@@ -157,7 +163,7 @@ try {
             </tfoot>
         </table>
     </div>
-
+<?php include '../daily_plan/datatable.php'?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../host_virtual_TI/js/script.js"></script>
     <script>
