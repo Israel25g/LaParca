@@ -60,7 +60,7 @@ try {
     <link rel="stylesheet" href="../main-global.css">
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
-<body>
+<body background="../images/Motivo2.png">
 <div class="container-lg" style="margin-top: 150px;">
 
     <!-- Header -->
