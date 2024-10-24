@@ -16,11 +16,25 @@ $result = mysqli_query($conexion2, $sql);
 $result2 = mysqli_query($conexion2, $sql2);
 ?>
 
-<form action="POST">
+<form action="access_control\index\actualizar_usuario.php" method="POST">
     <div class="row">
-        <div class="col-md-4 p-3">
+        <div class="col-md-4 ps-3">
+            <h4>Nombre de Usuario</h4>
+            <input type="text" name="usuario" id="usuario" class="form-control" placeholder="<?= escapar($fila["usuario"]); ?>">
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 ps-3">
             <h4>Usuario</h4>
             <input type="text" name="user" id="user" class="form-control" placeholder="<?= escapar($fila["user"]); ?>">
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4 ps-3">
+            <h4>Correo</h4>
+            <input type="email" name="email" id="email" class="form-control" placeholder="<?= escapar($fila["email"]); ?>">
         </div>
     </div>
 
@@ -29,7 +43,7 @@ $result2 = mysqli_query($conexion2, $sql2);
     if (mysqli_num_rows($result) > 0) {
     ?>
         <div class="row">
-            <div class="col-md-4 p-3">
+            <div class="col-md-4 ps-3">
                 <h4>Departamento</h4>
                 <select type="text" name="departamento" id="departamento">
                     <option value=" ">Anterior: <?php echo $fila['nombre_rol'] ?></option>
@@ -52,7 +66,7 @@ $result2 = mysqli_query($conexion2, $sql2);
     if (mysqli_num_rows($result2) > 0) {
     ?>
         <div class="row">
-            <div class="col-md-4 p-3">
+            <div class="col-md-4 ps-3">
                 <h4>Estado</h4>
                 <select type="text" name="estado" id="estado">
                     <option value=" ">Anterior: <?php echo $fila['estado'] ?></option>
