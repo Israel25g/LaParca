@@ -2,6 +2,24 @@
 <?php
 include("../apertura_sesion.php");
 ?>
+    <?php
+    include '../daily_plan/funcionalidades/funciones.php';
+    $error = false;
+    $config = include '../daily_plan/funcionalidades/config_DP.php';
+
+      try {
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+      // Consulta para la tabla 'export'
+      $consultaSQL = "SELECT * FROM export WHERE division_dp < 1.00";
+      $sentencia = $conexion->prepare($consultaSQL);
+      $sentencia->execute();
+      $datos = $sentencia->fetchAll();
+    } catch (PDOException $error) {
+      $error = $error->getMessage();
+      }
+      ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,24 +67,6 @@ include("../apertura_sesion.php");
       </div>
     </div>
   </div> -->
-    <?php
-    include '../daily_plan/funcionalidades/funciones.php';
-    $error = false;
-    $config = include '../daily_plan/funcionalidades/config_DP.php';
-
-      try {
-        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-      // Consulta para la tabla 'export'
-      $consultaSQL = "SELECT * FROM export";
-      $sentencia = $conexion->prepare($consultaSQL);
-      $sentencia->execute();
-      $datos = $sentencia->fetchAll();
-    } catch (PDOException $error) {
-      $error = $error->getMessage();
-      }
-      ?>
 
 
 <!-- Tabla 'datos' -->

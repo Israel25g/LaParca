@@ -11,7 +11,7 @@ try {
   $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
   // Consulta para la tabla 'datos'
-  $consultaSQL = "SELECT * FROM import";
+  $consultaSQL = "SELECT * FROM import WHERE division_dp < 1.00";
   $sentencia = $conexion->prepare($consultaSQL);
   $sentencia->execute();
   $import = $sentencia->fetchAll();
