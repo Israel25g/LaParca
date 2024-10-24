@@ -14,8 +14,8 @@ try {
     if ($filtro == 'picking') {
         $consultaSQL = "SELECT * FROM picking  WHERE division_dp < 1.00";
         $encabezado = [
-            "id", "aid_oid", "cliente", "pedidos_en_proceso", "Paletas",
-            "pedidos_despachados", "Cajas", "Fecha_objetivo", "vacio_lleno", "division_dp", "Acciones"
+            "#", "OID", "Cliente", "Unidades por pickear", "Paletas",
+            "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"
         ];
     } elseif ($filtro == 'export') {
         $consultaSQL = "SELECT * FROM export  WHERE division_dp < 1.00";
@@ -108,19 +108,20 @@ try {
             <?php if ($datos && $sentencia->rowCount() > 0): ?>
                 <?php foreach ($datos as $fila): ?>
                     <tr>
-                        <td class="border end"><?= $fila['id'] ?></td>
                         <?php if ($filtro == 'picking'): ?>
-                            <td class="border end"><?= $fila['oid'] ?></td>
+                            <td class="border end"><?= $fila['id'] ?></td>
+                            <td class="border end"><?= $fila['aid_oid'] ?></td>
                             <td class="border end"><?= $fila['cliente'] ?></td>
-                            <td class="border end"><?= $fila['unidades_por_pickear'] ?></td>
+                            <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
                             <td class="border end"><?= $fila['paletas'] ?></td>
-                            <td class="border end"><?= $fila['unidades_pickeadas'] ?></td>
+                            <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
                             <td class="border end"><?= $fila['cajas'] ?></td>
-                            <td class="border end"><?= $fila['fecha_de_requerido'] ?></td>
-                            <td class="border end"><?= $fila['prioridad_de_picking'] ?></td>
-                            <td class="border end"><?= $fila['porcentaje_de_avance'] ?></td>
+                            <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end"><?= $fila['vacio_lleno'] ?></td>
+                            <td class="border end"><?= $fila['division_dp'] ?></td>
                         <?php elseif ($filtro == 'export'): ?>
-                            <td class="border end"><?= $fila['oid'] ?></td>
+                            <td class="border end"><?= $fila['id'] ?></td>
+                            <td class="border end"><?= $fila['aid_oid'] ?></td>
                             <td class="border end"><?= $fila['cliente'] ?></td>
                             <td class="border end"><?= $fila['vehiculo'] ?></td>
                             <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
@@ -129,7 +130,8 @@ try {
                             <td class="border end"><?= $fila['llegada_a_rampa'] ?></td>
                             <td class="border end"><?= $fila['salida_de_rampa'] ?></td>
                         <?php elseif ($filtro == 'import'): ?>
-                            <td class="border end"><?= $fila['aid'] ?></td>
+                            <td class="border end"><?= $fila['id'] ?></td>
+                            <td class="border end"><?= $fila['aid_oid'] ?></td>
                             <td class="border end"><?= $fila['cliente'] ?></td>
                             <td class="border end"><?= $fila['vehiculo'] ?></td>
                             <td class="border end"><?= $fila['contenedor_a_recibir'] ?></td>
