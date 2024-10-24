@@ -4,16 +4,21 @@ include '../daily_plan/funcionalidades/funciones.php';
 $config = include '../daily_plan/funcionalidades/config_DP.php';
 $error = false;
 
-try {
+
+  try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
 
-    if ($filtro == 'incompletos') {
+    if ($filtro == 'import') {
+        $consultaSQL = "SELECT * FROM import WHERE division_dp < 1.00";
+    } elseif ($filtro == 'export') {
+        $consultaSQL = "SELECT * FROM export WHERE division_dp < 1.00";
+    } elseif ($filtro == 'picking') {
         $consultaSQL = "SELECT * FROM picking WHERE division_dp < 1.00";
     } else {
-        $consultaSQL = "SELECT * FROM picking";
+        $consultaSQL = NULL; // Cambiar a lo que necesites
     }
 
     $sentencia = $conexion->prepare($consultaSQL);
@@ -22,6 +27,7 @@ try {
 } catch (PDOException $error) {
     $error = $error->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +64,11 @@ try {
     
     <!-- Filtro para la consulta -->
     <form method="GET" class="mb-3">
-      <label for="filtro">Elige el filtro:</label>
+      <label for="filtro">Elegir operacion</label>
       <select name="filtro" id="filtro" class="form-control">
-        <option value="todos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'todos' ? 'selected' : '' ?>>Mostrar todos</option>
-        <option value="incompletos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'incompletos' ? 'selected' : '' ?>>Mostrar incompletos (division_dp < 1.00)</option>
+        <option value="todos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'todos' ? 'selected' : '' ?>>import</option>
+        <option value="incompletos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'incompletos' ? 'selected' : '' ?>>Export</option>
+        <option value="incompletos" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'incompletos' ? 'selected' : '' ?>>Picking</option>
       </select>
       <button type="submit" class="btn btn-primary mt-2">Aplicar Filtro</button>
     </form>
@@ -84,9 +91,9 @@ try {
       <table id="tablaPicking" class="display table ...">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Division DP</th>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>unidades a Piquear</th>
             <!-- Añade aquí las demás cabeceras de tu tabla -->
           </tr>
         </thead>
