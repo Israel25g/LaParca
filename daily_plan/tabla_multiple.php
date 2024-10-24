@@ -32,7 +32,8 @@ try {
         ];
     } else {
         // En caso de un filtro no reconocido, podrías optar por redirigir a una opción por defecto o mostrar un error.
-        $consultaSQL = "SELECT * FROM picking"; // Cambiar a lo que necesites
+        $consultaSQL = ""; // Cambiar a lo que necesites
+        $mensaje = "seleccione un tipo de operacion";
     }
 
     $sentencia = $conexion->prepare($consultaSQL);
@@ -48,7 +49,15 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Plan - Operaciones</title>
+    <?php if ($filtro == 'import'): ?>
+        <title>Daily Plan - Import</title>
+        <?php elseif ($filtro == 'export'): ?>
+            <title>Daily Plan - Export</title>
+        <?php elseif ($filtro == 'picking'): ?>
+            <title>Daily Plan - Picking</title>
+        <?php elseif ($filtro == NULL): ?>
+            <title>Daily Plan - Operaciones</title>
+        <?php endif; ?>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -69,6 +78,7 @@ try {
     </div>
 
     <!-- Filtro para la consulta -->
+    <h2 class="mt-3 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
         <label for="filtro">Elige el filtro:</label>
         <select name="filtro" id="filtro" class="form-control">
@@ -76,7 +86,7 @@ try {
             <option value="export" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'export' ? 'selected' : '' ?>>Export</option>
             <option value="picking" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'picking' ? 'selected' : '' ?>>Picking</option>
         </select>
-        <button type="submit" class="btn btn-primary mt-2">Aplicar Filtro</button>
+        <button type="submit" class="btn btn-primary mt-2">Seleccionar Operacion</button>
     </form>
 
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
@@ -118,7 +128,7 @@ try {
                             <td class="border end"><?= $fila['cajas'] ?></td>
                             <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
                             <td class="border end"><?= $fila['vacio_lleno'] ?></td>
-                            <td class="border end"><?= $fila['division_dp'] ?></td>
+                            <td class="border end"><?= $fila['division_dp'] *100?>%</td>
                         <?php elseif ($filtro == 'export'): ?>
                             <td class="border end"><?= $fila['id'] ?></td>
                             <td class="border end"><?= $fila['aid_oid'] ?></td>
@@ -126,23 +136,23 @@ try {
                             <td class="border end"><?= $fila['vehiculo'] ?></td>
                             <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
                             <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end"><?= $fila['fecha_estimada_salida'] ?></td>
-                            <td class="border end"><?= $fila['llegada_a_rampa'] ?></td>
-                            <td class="border end"><?= $fila['salida_de_rampa'] ?></td>
+                            <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
+                            <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
                         <?php elseif ($filtro == 'import'): ?>
                             <td class="border end"><?= $fila['id'] ?></td>
                             <td class="border end"><?= $fila['aid_oid'] ?></td>
                             <td class="border end"><?= $fila['cliente'] ?></td>
                             <td class="border end"><?= $fila['vehiculo'] ?></td>
-                            <td class="border end"><?= $fila['contenedor_a_recibir'] ?></td>
-                            <td class="border end"><?= $fila['contenedor_recibido'] ?></td>
-                            <td class="border end"><?= $fila['tipo_carga'] ?></td>
+                            <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end"><?= $fila['t_carga'] ?></td>
                             <td class="border end"><?= $fila['paletas'] ?></td>
                             <td class="border end"><?= $fila['cajas'] ?></td>
                             <td class="border end"><?= $fila['unidades'] ?></td>
-                            <td class="border end"><?= $fila['fecha_estimada_llegada'] ?></td>
-                            <td class="border end"><?= $fila['llegada_a_rampa'] ?></td>
-                            <td class="border end"><?= $fila['salida_de_rampa'] ?></td>
+                            <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
+                            <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
                         <?php endif; ?>
                         <td class="border end">
                             <!-- Aquí puedes añadir las acciones necesarias -->
