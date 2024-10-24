@@ -52,7 +52,6 @@ if (isset($_POST['submit'])) {
         $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($import);
-
     } catch (PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = "Error al insertar los datos: " . $error->getMessage();
@@ -87,45 +86,45 @@ if (isset($_POST['submit'])) {
         </div>
         <!-- Fin del Header -->
 
-       <div class="container">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="mb-2"><a href="../daily_plan/tabla_im.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Import</h3>
                     <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_im.php" style="margin-top: 2%">Volver a la tabla</a>
                     <?php
-    if (isset($resultado)) {
-    ?>
-<div style="margin-left: 15px">
-            <div class="row">
-                <div>
-                <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
-                        <?= $resultado['mensaje'] ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
+                    if (isset($resultado)) {
+                    ?>
+                        <div style="margin-left: 15px">
+                            <div class="row">
+                                <div>
+                                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
+                                        <?= $resultado['mensaje'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                     <hr>
-<form method="post">
-    <div class="form-row">
-        <div class="form-group col-md-3">
-            <label for="aid_oid">AID</label>
-            <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
-        </div>
-        
-        <!-- Selector de Cliente con datos de la base de datos -->
-        <div class="form-group col-md-3">
-            <label for="cliente">Cliente</label>
-            <select name="cliente" id="cliente" class="form-control" required>
-                <option value="" >Seleccione un cliente</option>  <!-- Opción por defecto -->
-                <?php
-                // Recorrer los clientes y generar las opciones del selector
-                foreach ($clientes as $cliente) {
-                    echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
+                    <form method="post">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="aid_oid">AID</label>
+                                <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
+                            </div>
+
+                            <!-- Selector de Cliente con datos de la base de datos -->
+                            <div class="form-group col-md-3">
+                                <label for="cliente">Cliente</label>
+                                <select name="cliente" id="cliente" class="form-control" required>
+                                    <option value="">Seleccione un cliente</option> <!-- Opción por defecto -->
+                                    <?php
+                                    // Recorrer los clientes y generar las opciones del selector
+                                    foreach ($clientes as $cliente) {
+                                        echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group col-md-3">
                                 <label for="vehiculo">Vehículo/Placa</label>
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" required>
@@ -133,7 +132,7 @@ if (isset($_POST['submit'])) {
                             <div class="form-group col-md-3">
                                 <label for="t_vehiculo">Tipo de Vehículo</label>
                                 <select type="text" name="t_vehiculo" list="datalistOptions" id="t_vehiculo" class="form-control">
-                                    <option value="">...</option>  
+                                    <option value="">...</option>
                                     <option value="Contenedor 20">Contenedor 20</option>
                                     <option value="Contenedor 40">Contenedor 40</option>
                                     <option value="Contenedor 45">Contenedor 45</option>
@@ -155,9 +154,13 @@ if (isset($_POST['submit'])) {
                             <div class="form-group col-md-3">
                                 <label for="t_carga">Tipo de carga</label>
                                 <select type="text" name="t_carga" id="t_carga" class="form-control">
-                                <option value="">...</option>
-                                <option value="carga suelta">Carga suelta</option>
-                                <option value="contenerizada">Contenerizada</option>
+                                    <option value="">...</option>
+                                    <option value="">...</option>
+                                    <option value="carga suelta">FCL</option>
+                                    <option value="contenerizada">LCL</option>
+                                    <option value="carga suelta">FTL</option>
+                                    <option value="contenerizada">LTL</option>
+                                    <option value="carga suelta">AIR</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">

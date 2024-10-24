@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
         <!-- Fin del Header -->
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -92,10 +92,10 @@ if (isset($_POST['submit'])) {
                     <?php
                     if (isset($resultado)) {
                     ?>
-                <div style="margin-left: 15px">
+                        <div style="margin-left: 15px">
                             <div class="row">
                                 <div>
-                                <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
+                                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
                                         <?= $resultado['mensaje'] ?>
                                     </div>
                                 </div>
@@ -109,33 +109,33 @@ if (isset($_POST['submit'])) {
                                 <label for="aid_oid">OID</label>
                                 <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
                             </div>
-        <!-- Selector de Cliente con datos de la base de datos -->
-        <div class="form-group col-md-3">
-            <label for="cliente">Cliente</label>
-            <select name="cliente" id="cliente" class="form-control" required>
-                <option value="" >Seleccione un cliente</option>  <!-- Opción por defecto -->
-                <?php
-                // Recorrer los clientes y generar las opciones del selector
-                foreach ($clientes as $cliente) {
-                    echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
+                            <!-- Selector de Cliente con datos de la base de datos -->
+                            <div class="form-group col-md-3">
+                                <label for="cliente">Cliente</label>
+                                <select name="cliente" id="cliente" class="form-control" required>
+                                    <option value="">Seleccione un cliente</option> <!-- Opción por defecto -->
+                                    <?php
+                                    // Recorrer los clientes y generar las opciones del selector
+                                    foreach ($clientes as $cliente) {
+                                        echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group col-md-3">
                                 <label for="t_carga">Tipo de carga</label>
                                 <select type="text" name="t_carga" id="t_carga" class="form-control">
-                                <option value="N/A">...</option>
-                                <option value="carga suelta">Carga suelta</option>
-                                <option value="contenerizada">Contenerizada</option>
+                                    <option value="N/A">...</option>
+                                    <option value="carga suelta">Carga suelta</option>
+                                    <option value="contenerizada">Contenerizada</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="vacio_lleno">Prioridad de picking</label>
                                 <select type="text" name="vacio_lleno" id="vacio_lleno" class="form-control">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
                                 </select>
                             </div>
                         </div>
@@ -167,18 +167,18 @@ if (isset($_POST['submit'])) {
                                 <textarea name="comentario_oficina" id="comentario_oficina" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
-                     </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">
-                        </div>
-                    </form>
-
                 </div>
-                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">
+                </div>
+                </form>
+
             </div>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         </div>
+    </div>
     </div>
     </div>
     <script src="../host_virtual_TI/js/script.js"></script>

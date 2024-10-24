@@ -38,24 +38,25 @@ if (isset($_POST['submit'])) {
             "unidades" => $_POST['unidades'],
             "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
             "fecha_objetivo" => $_POST['fecha_objetivo'],
-            "comentario_oficina" => $_POST['comentario_oficina']);
+            "comentario_oficina" => $_POST['comentario_oficina']
+        );
 
-            $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-            $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :t_carga, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+        $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+        $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :t_carga, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
-            $sentencia = $conexion->prepare($consultaSQL);
-            $sentencia->execute($datos);
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($datos);
 
-            $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-            $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+        $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
+        $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
 
-            $sentencia = $conexion->prepare($consultaSQL);
-            $sentencia->execute($datos);
-        } catch (PDOException $error) {
-            $resultado['error'] = true;
-            $resultado['mensaje'] = $error->getMessage();
-        }
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute($datos);
+    } catch (PDOException $error) {
+        $resultado['error'] = true;
+        $resultado['mensaje'] = $error->getMessage();
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,28 +78,28 @@ if (isset($_POST['submit'])) {
         <div class="header">
             <div class="logo-container">
                 <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
-                </div>
-                <h1 href="../daily_plan/index_DP.php">Daily plan</h1>
-                <div class="cuadroFecha">
-                    <p id="fecha-actual"></p>
-                    <p id="hora-actual">prueba</p>
-                    </div>
-                    </div>
-                    <!-- Fin del Header -->
-                    
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="mb-2"><a href="../daily_plan/tabla_ex.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Export</h3>
-                                <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla </a>
+            </div>
+            <h1 href="../daily_plan/index_DP.php">Daily plan</h1>
+            <div class="cuadroFecha">
+                <p id="fecha-actual"></p>
+                <p id="hora-actual">prueba</p>
+            </div>
+        </div>
+        <!-- Fin del Header -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="mb-2"><a href="../daily_plan/tabla_ex.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Ingrese los datos para crear el Daily plan de Export</h3>
+                    <a class="mb-2 btn btn-success btn-lg" href="../daily_plan/tabla_ex.php" style="margin-top: 2%">Volver a la tabla </a>
 
                     <?php
                     if (isset($resultado)) {
                     ?>
-                <div style="margin-left: 15px">
+                        <div style="margin-left: 15px">
                             <div class="row">
                                 <div>
-                                <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
+                                    <div class="alert alert-<?= $resultado['error'] ? 'danger' : 'success' ?>" role="alert" style="position: flex">
                                         <?= $resultado['mensaje'] ?>
                                     </div>
                                 </div>
@@ -114,17 +115,17 @@ if (isset($_POST['submit'])) {
                                 <input type="text" name="aid_oid" id="aid_oid" class="form-control" required>
                             </div>
                             <div class="form-group col-md-3">
-            <label for="cliente">Cliente</label>
-            <select name="cliente" id="cliente" class="form-control" required>
-                <option value="" >Seleccione un cliente</option>  <!-- Opción por defecto -->
-                <?php
-                // Recorrer los clientes y generar las opciones del selector
-                foreach ($clientes as $cliente) {
-                    echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
-                }
-                ?>
-            </select>
-        </div>
+                                <label for="cliente">Cliente</label>
+                                <select name="cliente" id="cliente" class="form-control" required>
+                                    <option value="">Seleccione un cliente</option> <!-- Opción por defecto -->
+                                    <?php
+                                    // Recorrer los clientes y generar las opciones del selector
+                                    foreach ($clientes as $cliente) {
+                                        echo '<option value="' . $cliente['nombre_cliente'] . '">' . $cliente['nombre_cliente'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                             <div class="form-group col-md-3">
                                 <label for="vehiculo">Vehículo/Placa</label>
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" required>
@@ -132,7 +133,7 @@ if (isset($_POST['submit'])) {
                             <div class="form-group col-md-3">
                                 <label for="t_vehiculo">Tipo de Vehículo</label>
                                 <select type="text" name="t_vehiculo" list="datalistOptions" id="t_vehiculo" class="form-control">
-                                    <option value="">...</option>    
+                                    <option value="">...</option>
                                     <option value="Contenedor 20">Contenedor 20</option>
                                     <option value="Contenedor 40">Contenedor 40</option>
                                     <option value="Contenedor 45">Contenedor 45</option>
@@ -154,9 +155,12 @@ if (isset($_POST['submit'])) {
                             <div class="form-group col-md-3">
                                 <label for="t_carga">Tipo de carga</label>
                                 <select type="text" name="t_carga" id="t_carga" class="form-control">
-                                <option value="">...</option>
-                                <option value="carga suelta">Carga suelta</option>
-                                <option value="contenerizada">Contenerizada</option>
+                                    <option value="">...</option>
+                                    <option value="carga suelta">FCL</option>
+                                    <option value="contenerizada">LCL</option>
+                                    <option value="carga suelta">FTL</option>
+                                    <option value="contenerizada">LTL</option>
+                                    <option value="carga suelta">AIR</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">

@@ -9,7 +9,7 @@ $resultado = [
 ];
 if (!isset($_GET['id'])) {
   $resultado['error'] = true;
-  $resultado['mensaje'] = 'El Ticket no existe';
+  $resultado['mensaje'] = 'El usuario no existe';
 }
 
 if (isset($_POST['submit'])) {
