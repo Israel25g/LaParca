@@ -2,6 +2,20 @@
       session_start();
       include '../funciones.php';
       $error = false;
+      $config = include '../config_DP.php';
+
+
+    $consultaSQL = "UPDATE import SET
+    cumplimiento_im = :cumplimiento_im,
+    WHERE id = :id";
+
+    $consultaSQL = "UPDATE export SET
+    cumplimiento_ex = :cumplimiento_ex,
+    WHERE id = :id";
+
+    $consultaSQL = "UPDATE picking SET
+    cumplimiento_pk = :cumplimiento_pk,
+    WHERE id = :id";
 ?>
 
 <?php
@@ -260,11 +274,11 @@
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
