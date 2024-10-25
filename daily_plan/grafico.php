@@ -9,11 +9,6 @@ $database = "u366386740_db_dailyplan";
 $username = "u366386740_adminDP";
 $password = "1plGr0up01*"; 
 
-
-      $consultaSQL_import = "UPDATE import SET cumplimiento_im = :cumplimiento_im WHERE id = :id";
-      $consultaSQL_export = "UPDATE export SET cumplimiento_ex = :cumplimiento_ex WHERE id = :id";
-      $consultaSQL_picking = "UPDATE picking SET cumplimiento_pk = :cumplimiento_pk WHERE id = :id";
-      
 ?>
 
 <?php
