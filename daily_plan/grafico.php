@@ -2,20 +2,6 @@
       session_start();
       include '../funciones.php';
       $error = false;
-      $config = include '../config_DP.php';
-
-
-    $consultaSQL = "UPDATE import SET
-    cumplimiento_im = :cumplimiento_im,
-    WHERE id = :id";
-
-    $consultaSQL = "UPDATE export SET
-    cumplimiento_ex = :cumplimiento_ex,
-    WHERE id = :id";
-
-    $consultaSQL = "UPDATE picking SET
-    cumplimiento_pk = :cumplimiento_pk,
-    WHERE id = :id";
 ?>
 
 <?php
