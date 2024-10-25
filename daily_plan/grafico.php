@@ -190,25 +190,24 @@
     </div>
     </div>
 
-            <div class="carousel-item" data-bs-interval="15000">
-            <div class="container" style="margin-top: 0%">
+        <div class="carousel-item" data-bs-interval="15000">
+          <div class="container" style="margin-top: 0%">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
 
 
-        <div class="bloquee " id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
-          <div class="col-md-6 ">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
-                    <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
-                    <div>
+              <div class="bloquee " id="export" style="position:relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >        
+                <div class="col-md-6 ">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
+                          <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
+                          <div>
 
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-
-                    </div>   
+                  </div>   
                 </div>
 
                 <div class="bloquee " id="import" style="position: relative;width: 900px; height: 400px;border-radius: 15px; overflow: hidden;margin-top:2%" >
@@ -232,25 +231,24 @@
                     <div class="row">
                       <div class="col-md-2 " style="  width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                                                      <!-- Tabla 1 -->
-                        <div  id="tablapicking" class=" display table shadow p-3 mb-5 bg-body-info rounded table-striped border"  style="  margin-left: 25% !important">
+
 
                         </div>
                       </div>
                     </div>
                   </div>
                     </div>
-                </div>
-
-<!-- porcentaje tablas -->
-                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
-                    <div class="col-md-6 " >
-                        <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
+                    <!-- porcentaje tablas -->
+                    <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
+                        <div class="col-md-6 " >
+                            <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+                            <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            </div>
+                </div>
+          </div>
+
 
     </div>
     <div class="carousel-item" data-bs-interval="7500">
@@ -276,11 +274,11 @@
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
