@@ -20,7 +20,7 @@ try {
 }
 
 // Consulta para obtener los datos de clientes
-$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo, t_vehiculo,bl,destino,t_carga,paletas,cajas,unidades FROM import');
+$stmt = $pdo->query('SELECT aid_oid, cliente, pedidos_en_proceso, pedidos_despachados FROM import');
 $clientes = $stmt->fetchAll();
 
 // Devolver los datos en formato JSON
