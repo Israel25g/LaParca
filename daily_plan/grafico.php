@@ -200,8 +200,8 @@
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
                     <div>
-                    <table id="clientes-table" border="1" class="bg-light text-dark">
-                              <thead>
+                    <table id="clientes-table_TEX" border="1" class="bg-light text-dark">
+                              <thead class=" bg-danger">
                                   <tr>
                                       <th>OID</th>
                                       <th>Cliente</th>
@@ -228,8 +228,8 @@
                           <div class="row">
                             <div class="col-md-3 " style=" width: 700px; height: 60%; margin-left: 250px">
                               <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                              <table id="clientes-table" border="1" class="bg-light text-dark">
-                              <thead>
+                              <table id="clientes-table_TIM" border="1" class="bg-light text-dark">
+                              <thead  class="bg-info">
                                   <tr>
                                       <th>AID</th>
                                       <th>Cliente</th>
@@ -254,8 +254,8 @@
                     <div class="row">
                       <div class="col-md-2 " style="  width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                        <table id="clientes-table" border="1" class="bg-light text-dark">
-                              <thead>
+                        <table id="clientes-table_TPK" border="1" class="bg-light text-dark">
+                              <thead class="bg-warning">
                                   <tr>
                                       <th>OID</th>
                                       <th>Cliente</th>
@@ -329,7 +329,7 @@
                 dataType: 'json',
                 success: function(data) {
                     // Limpiar las filas actuales
-                    $('#clientes-table tbody').empty();
+                    $('#clientes-table_TIM tbody').empty();
                     
                     // Recorrer los datos y agregarlos a la tabla
                     $.each(data, function(index, cliente) {
@@ -368,7 +368,7 @@
                 dataType: 'json',
                 success: function(data) {
                     // Limpiar las filas actuales
-                    $('#clientes-table tbody').empty();
+                    $('#clientes-table_TEX tbody').empty();
                     
                     // Recorrer los datos y agregarlos a la tabla
                     $.each(data, function(index, cliente) {
@@ -407,7 +407,7 @@
                 dataType: 'json',
                 success: function(data) {
                     // Limpiar las filas actuales
-                    $('#clientes-table tbody').empty();
+                    $('#clientes-table_TPK tbody').empty();
                     
                     // Recorrer los datos y agregarlos a la tabla
                     $.each(data, function(index, cliente) {
