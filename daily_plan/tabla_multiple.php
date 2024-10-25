@@ -272,8 +272,5 @@ try {
           </script>
 
 </div>
-<?php $test = include '../daily_plan/funcionalidades/config_DP.php';
-var_dump($test)
-?>
 </body>
 </html>

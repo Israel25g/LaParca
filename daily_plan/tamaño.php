@@ -74,5 +74,10 @@
             location.reload();
         }, 10000);
     </script>
+    <?php $test = include '../daily_plan/funcionalidades/config_DP.php';
+    var_dump($test)
+    ?>
 </body>
 </html>
+
+
