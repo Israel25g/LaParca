@@ -1,5 +1,5 @@
 <?php
-// Conexión a la base de datos
+// Configuración de la conexión a la base de datos
 $host = 'localhost';
 $db = 'u366386740_db_test_dp';
 $user = 'u366386740_adminTestDP';
@@ -15,19 +15,26 @@ $options = [
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
+    // Verificar conexión exitosa
+    echo json_encode(["status" => "Conexión exitosa a la base de datos TIM"]);
 } catch (\PDOException $e) {
     echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
     exit;
 }
 
-// Consulta para obtener los datos de Import
-$stmt = $pdo->query('SELECT aid_oid, cliente, contenedores_recibidos, contenedores_cerrados FROM import WHERE fecha_objetivo = CURDATE()');
-$clientes = $stmt->fetchAll();
+// Consulta SQL
+$query = 'SELECT aid_oid, cliente, contenedores_recibidos, contenedores_cerrados FROM import WHERE fecha_objetivo = CURDATE()';
+try {
+    $stmt = $pdo->query($query);
+    $clientes = $stmt->fetchAll();
 
-if (empty($clientes)) {
-    echo json_encode(["error" => "Sin resultados en la tabla Import para la fecha actual."]);
-} else {
-    echo json_encode($clientes);
+    // Verificar si la consulta devolvió resultados
+    if (empty($clientes)) {
+        echo json_encode(["error" => "Sin resultados en la tabla Import para la fecha actual."]);
+    } else {
+        echo json_encode($clientes);
+    }
+} catch (\PDOException $e) {
+    echo json_encode(["error" => "Error en la consulta SQL: " . $e->getMessage()]);
 }
 ?>
-
