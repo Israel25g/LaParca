@@ -200,19 +200,14 @@
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
                     <div>
-                    <table id="clientes-table" border="1">
+                    <table id="clientes-table" border="1" class="bg-light text-dark">
                               <thead>
                                   <tr>
                                       <th>OID</th>
                                       <th>Cliente</th>
                                       <th>vehiculo</th>
-                                      <th>tipo de veiculo</th>
-                                      <th>destino</th>
-                                      <th>tipo de carga </th>
-                                      <th>paletas</th>
-                                      <th>cajas</th>
-                                      <th>unidades</th>
-                                      
+                                      <th>Pedidos en proceso</th>
+                                      <th>Pedidos despachados</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -233,7 +228,7 @@
                           <div class="row">
                             <div class="col-md-3 " style=" width: 700px; height: 60%; margin-left: 250px">
                               <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                              <table id="clientes-table" border="1">
+                              <table id="clientes-table" border="1" class="bg-light text-dark">
                               <thead>
                                   <tr>
                                       <th>AID</th>
@@ -253,13 +248,28 @@
                     </div>
                 </div>   
 
-                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
+                <div class="bloquee " id="picking" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
                     <div class="col-md-6 " >
                     <div class="container">
                     <div class="row">
                       <div class="col-md-2 " style="  width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-
+                        <table id="clientes-table" border="1" class="bg-light text-dark">
+                              <thead>
+                                  <tr>
+                                      <th>OID</th>
+                                      <th>Cliente</th>
+                                      <th>vehiculo</th>
+                                      <th>Prioridad de Picking</th>
+                                      <th>Unidades por Pickear</th>
+                                      <th>Porcentaje de avance</th>
+                                      <th>Fecha de requerido</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- Las filas se llenarán dinámicamente -->
+                              </tbody>
+                          </table>
 
                       </div>
                     </div>
@@ -271,7 +281,7 @@
                 <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
                     <div class="col-md-6 " >
                         <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
+                        <div id="grafico-gauge_d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
                     </div>
                 </div>
             </div>
@@ -315,6 +325,84 @@
         function cargarClientes() {
             $.ajax({
                 url: 'get_data_TIM.php', // Archivo PHP que devuelve los datos
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Limpiar las filas actuales
+                    $('#clientes-table tbody').empty();
+                    
+                    // Recorrer los datos y agregarlos a la tabla
+                    $.each(data, function(index, cliente) {
+                        $('#clientes-table tbody').append(
+                            '<tr>' +
+                            '<td>' + cliente.aid_oid + '</td>' +
+                            '<td>' + cliente.cliente + '</td>' +
+                            '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                            '<td>' + cliente.pedidos_despachados + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error al obtener los datos:", error);
+                }
+            });
+        }
+
+        // Cargar los datos cuando la página se carga por primera vez
+        $(document).ready(function() {
+            cargarClientes();
+
+            // Opción 1: Actualizar automáticamente cada 10 segundos
+            setInterval(cargarClientes, 5000);
+
+        });
+    </script>
+
+<script type="text/javascript">
+        // Función para cargar y actualizar la tabla de clientes
+        function cargarClientes() {
+            $.ajax({
+                url: 'get_data_TEX.php', // Archivo PHP que devuelve los datos
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Limpiar las filas actuales
+                    $('#clientes-table tbody').empty();
+                    
+                    // Recorrer los datos y agregarlos a la tabla
+                    $.each(data, function(index, cliente) {
+                        $('#clientes-table tbody').append(
+                            '<tr>' +
+                            '<td>' + cliente.aid_oid + '</td>' +
+                            '<td>' + cliente.cliente + '</td>' +
+                            '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                            '<td>' + cliente.pedidos_despachados + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error al obtener los datos:", error);
+                }
+            });
+        }
+
+        // Cargar los datos cuando la página se carga por primera vez
+        $(document).ready(function() {
+            cargarClientes();
+
+            // Opción 1: Actualizar automáticamente cada 10 segundos
+            setInterval(cargarClientes, 5000);
+
+        });
+    </script>
+
+<script type="text/javascript">
+        // Función para cargar y actualizar la tabla de clientes
+        function cargarClientes() {
+            $.ajax({
+                url: 'get_data_TPK.php', // Archivo PHP que devuelve los datos
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
