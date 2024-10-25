@@ -1,8 +1,10 @@
 <?php
-      session_start();
-      include '../daily_plan/funcionalidades/funciones.php';
-      $error = false;
-      $config = include '../daily_plan/funcionalidades/config_DP.php';
+header("Refresh:81");
+session_start();
+include '../daily_plan/funcionalidades/funciones.php';
+$error = false;
+$config = include '../daily_plan/funcionalidades/config_DP.php';
+
 
 
       $consultaSQL_import = "UPDATE import SET cumplimiento_im = :cumplimiento_im WHERE id = :id";
@@ -12,35 +14,31 @@
 ?>
 
 <?php
-      try {
-          $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-          $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+try {
+  $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+  $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-          // Consulta para la tabla 'import'
-          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-          $sentencia_i = $conexion->prepare($consultaSQL_i);
-          $sentencia_i->execute();
-          $import = $sentencia_i->fetchAll();
+  // Ejecución de consultas
+  $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
+  $sentencia_i = $conexion->prepare($consultaSQL_i);
+  $sentencia_i->execute();
+  $import = $sentencia_i->fetchAll();
 
+  $consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
+  $sentencia_e = $conexion->prepare($consultaSQL_e);
+  $sentencia_e->execute();
+  $export = $sentencia_e->fetchAll();
 
-          // Consulta para la tabla 'export'
-          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-          $sentencia_e = $conexion->prepare($consultaSQL_e);
-          $sentencia_e->execute();
-          $export = $sentencia_e->fetchAll();
+  $consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
+  $sentencia_pk = $conexion->prepare($consultaSQL_pk);
+  $sentencia_pk->execute();
+  $picking = $sentencia_pk->fetchAll();
 
-          // Consulta para la tabla 'datos'
-          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
-          $sentencia_pk->execute();
-          $picking = $sentencia_pk->fetchAll();
-        } catch (PDOException $error) {
-            $error = $error->getMessage();
-        }
-        ?>
-      <?php
-      header("Refresh:81");
-      ?>
+} catch (PDOException $e) {
+  $error = $e->getMessage();
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
