@@ -275,11 +275,11 @@
       <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
   </div>
-  <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="height: 90% !important;">
+  <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="padding-top: 500px !important;">
     <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next" style="height: 90% !important;">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next" style="padding-top: 500px !important;">
     <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
