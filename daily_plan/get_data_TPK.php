@@ -16,13 +16,17 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
+    exit;
 }
 
-// Consulta para obtener los datos de clientes
-$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo,vacio_lleno, pedidos_en_proceso, pedidos_despachados, division_dp, fecha_objetivo FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente');
+// Consulta para obtener los datos de Picking
+$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo, vacio_lleno, pedidos_en_proceso, pedidos_despachados, division_dp, fecha_objetivo FROM picking WHERE fecha_objetivo = CURDATE()');
 $clientes = $stmt->fetchAll();
 
-// Devolver los datos en formato JSON
-echo json_encode($clientes);
+if (empty($clientes)) {
+    echo json_encode(["error" => "Sin resultados en la tabla Picking para la fecha actual."]);
+} else {
+    echo json_encode($clientes);
+}
 ?>

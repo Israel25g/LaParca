@@ -16,13 +16,18 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
+    exit;
 }
 
-// Consulta para obtener los datos de clientes
-$stmt = $pdo->query('SELECT aid_oid, cliente, pedidos_en_proceso, pedidos_despachados FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid');
+// Consulta para obtener los datos de Import
+$stmt = $pdo->query('SELECT aid_oid, cliente, contenedores_recibidos, contenedores_cerrados FROM import WHERE fecha_objetivo = CURDATE()');
 $clientes = $stmt->fetchAll();
 
-// Devolver los datos en formato JSON
-echo json_encode($clientes);
+if (empty($clientes)) {
+    echo json_encode(["error" => "Sin resultados en la tabla Import para la fecha actual."]);
+} else {
+    echo json_encode($clientes);
+}
 ?>
+
