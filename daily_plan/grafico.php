@@ -305,7 +305,7 @@
         // Función para cargar y actualizar la tabla de clientes
         function cargarClientes() {
             $.ajax({
-                url: 'api_tabla_jquery.php', // Archivo PHP que devuelve los datos
+                url: 'get_data_TIM.php', // Archivo PHP que devuelve los datos
                 method: 'GET',
                 dataType: 'json',
                 success: function(data) {
