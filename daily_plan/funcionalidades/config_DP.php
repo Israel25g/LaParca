@@ -12,5 +12,5 @@ return [
   ]
 ];
 
-echo 'db'();
+echo ('db');
 ?>
