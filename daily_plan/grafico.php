@@ -45,9 +45,6 @@
             $error = $error->getMessage();
         }
         ?>
-      <?php
-      header("Refresh:81");
-      ?>
 
 <!DOCTYPE html>
 <html lang="en">
