@@ -20,7 +20,7 @@ try {
 }
 
 // Consulta para obtener los datos de clientes
-$stmt = $pdo->query('SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid');
+$stmt = $pdo->query('SELECT aid_oid, cliente, pedidos_en_proceso, pedidos_despachados FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid');
 $clientes = $stmt->fetchAll();
 
 // Devolver los datos en formato JSON
