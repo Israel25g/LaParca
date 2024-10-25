@@ -156,7 +156,7 @@
   <div class="carousel-inner">
     <!--data-bs-interval ajusta el tiempo de las graficas en pantalla -->
     <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
-    <div class="container" style="margin-top: 0%">
+    <div class="container">
 
         <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -190,8 +190,8 @@
     </div>
     </div>
 
-        <div class="carousel-item" data-bs-interval="15000">
-          <div class="container" style="margin-top: 0%">
+        <!-- <div class="carousel-item" data-bs-interval="15000">
+          <div class="container">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
 
 
@@ -225,7 +225,7 @@
                     </div>
                 </div>   
 
-                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60%px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
+                <div class="bloquee " id="barras" style="position: relative;width: 900px; height: 60px;border-radius: 15px; overflow: hidden;; margin-top:0%" >
                     <div class="col-md-6 " >
                     <div class="container">
                     <div class="row">
@@ -238,7 +238,7 @@
                     </div>
                   </div>
                     </div>
-                    <!-- porcentaje tablas -->
+              
                     <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
                         <div class="col-md-6 " >
                             <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
@@ -247,7 +247,7 @@
                     </div>
                 </div>
                 </div>
-          </div>
+          </div> -->
 
 
     </div>
@@ -274,11 +274,11 @@
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="carousel-control-next-icon" aria-hidden="false"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
