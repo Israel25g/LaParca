@@ -2,7 +2,7 @@
       session_start();
       include '../daily_plan/funcionalidades/funciones.php';
       $error = false;
-      $config = include '../config_DP.php';
+      $config = include '';
 
 
     $consultaSQL = "UPDATE import SET
