@@ -242,14 +242,14 @@
                     </div>
                 </div>
 
-                          <!-- porcentaje tablas -->
-                  <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
-                      <div class="col-md-6 " >
-                          <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                          <div id="grafico-gauge-d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
-                      </div>
-                  </div>
-               </div>
+<!-- porcentaje tablas -->
+                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
+                    <div class="col-md-6 " >
+                        <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+                        <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
+                    </div>
+                </div>
+            </div>
             </div>
 
     </div>
