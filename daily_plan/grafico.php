@@ -19,32 +19,53 @@
 ?>
 
 <?php
-      try {
-          $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-          $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+// Configuración de la conexión con MySQLi
+$servername = "localhost";
+$database = "u366386740_db_dailyplan";
+$username = "u366386740_adminDP";
+$password = "1plGr0up01*"; 
 
-          // Consulta para la tabla 'import'
-          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-          $sentencia_i = $conexion->prepare($consultaSQL_i);
-          $sentencia_i->execute();
-          $import = $sentencia_i->fetchAll();
+// Crear la conexión MySQLi
+$conn = new mysqli($servername, $username, $password, $database);
 
+// Verificar la conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
 
-          // Consulta para la tabla 'export'
-          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-          $sentencia_e = $conexion->prepare($consultaSQL_e);
-          $sentencia_e->execute();
-          $export = $sentencia_e->fetchAll();
+try {
+    // Consulta para la tabla 'import'
+    $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
+    $sentencia_i = $conn->query($consultaSQL_i);
+    if ($sentencia_i === false) {
+        throw new Exception("Error en la consulta import: " . $conn->error);
+    }
+    $import = $sentencia_i->fetch_all(MYSQLI_ASSOC);
 
-          // Consulta para la tabla 'datos'
-          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
-          $sentencia_pk->execute();
-          $picking = $sentencia_pk->fetchAll();
-        } catch (PDOException $error) {
-            $error = $error->getMessage();
-        }
-        ?>
+    // Consulta para la tabla 'export'
+    $consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
+    $sentencia_e = $conn->query($consultaSQL_e);
+    if ($sentencia_e === false) {
+        throw new Exception("Error en la consulta export: " . $conn->error);
+    }
+    $export = $sentencia_e->fetch_all(MYSQLI_ASSOC);
+
+    // Consulta para la tabla 'picking'
+    $consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
+    $sentencia_pk = $conn->query($consultaSQL_pk);
+    if ($sentencia_pk === false) {
+        throw new Exception("Error en la consulta picking: " . $conn->error);
+    }
+    $picking = $sentencia_pk->fetch_all(MYSQLI_ASSOC);
+
+} catch (Exception $error) {
+    $error = $error->getMessage();
+}
+
+// Cerrar la conexión
+$conn->close();
+?>
+
       <?php
       header("Refresh:81");
       ?>
@@ -213,7 +234,7 @@
                         </tr>
                       </thea class="table-container ">
                       <tbody>
-                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
+                        <?php if ($export && Count($export) > 0): ?>
                           <?php foreach ($export as $fila): ?>
                             <tr style="font-family: montserrat; font-size: 14px">
                               <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -250,7 +271,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
+                              <?php if ($import && Count($import) > 0): ?>
                                     <?php foreach ($import as $fila): ?>
                                       <tr style="font-family: montserrat; font-size: 14px">
                                         <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -276,7 +297,6 @@
                     <div class="row">
                       <div class="col-md-2 " style="  width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                                                      <!-- Tabla 1 -->
                         <div  id="tablapicking" class=" display table shadow p-3 mb-5 bg-body-info rounded table-striped border"  style="  margin-left: 25% !important">
                             <table>
                             <thead>
@@ -291,7 +311,7 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
+                                <?php if ($picking && count($picking) > 0): ?>
                                     <?php foreach ($picking as $fila): ?>
                                       <tr>
                                         <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
