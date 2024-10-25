@@ -1,5 +1,4 @@
 <?php
-      session_start();
       include '../daily_plan/funcionalidades/funciones.php';
       $error = false;
       $config = include '../daily_plan/funcionalidades/config_DP.php';
