@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamaño de la pantalla</title>
+    <?php $test = include '../daily_plan/funcionalidades/config_DP.php';
+    var_dump($test)
+    ?>
     <style>
         body {
             font-family: montserrat, sans-serif;
@@ -74,9 +77,7 @@
             location.reload();
         }, 10000);
     </script>
-    <?php $test = include '../daily_plan/funcionalidades/config_DP.php';
-    var_dump($test)
-    ?>
+
 </body>
 </html>
 
