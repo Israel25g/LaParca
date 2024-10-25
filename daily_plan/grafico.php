@@ -2,7 +2,7 @@
       session_start();
       include '../daily_plan/funcionalidades/funciones.php';
       $error = false;
-      $config = include '../daily_plan/funcionalidades/config_G.php';
+      $config = include '../daily_plan/funcionalidades/config_DP.php';
 
 
     $consultaSQL = "UPDATE import SET
@@ -19,53 +19,32 @@
 ?>
 
 <?php
-// Configuración de la conexión con MySQLi
-$servername = "localhost";
-$database = "u366386740_db_dailyplan";
-$username = "u366386740_adminDP";
-$password = "1plGr0up01*"; 
+      try {
+          $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+          $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-// Crear la conexión MySQLi
-$conn = new mysqli($servername, $username, $password, $database);
+          // Consulta para la tabla 'import'
+          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
+          $sentencia_i = $conexion->prepare($consultaSQL_i);
+          $sentencia_i->execute();
+          $import = $sentencia_i->fetchAll();
 
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
-}
 
-try {
-    // Consulta para la tabla 'import'
-    $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-    $sentencia_i = $conn->query($consultaSQL_i);
-    if ($sentencia_i === false) {
-        throw new Exception("Error en la consulta import: " . $conn->error);
-    }
-    $import = $sentencia_i->fetch_all(MYSQLI_ASSOC);
+          // Consulta para la tabla 'export'
+          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
+          $sentencia_e = $conexion->prepare($consultaSQL_e);
+          $sentencia_e->execute();
+          $export = $sentencia_e->fetchAll();
 
-    // Consulta para la tabla 'export'
-    $consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-    $sentencia_e = $conn->query($consultaSQL_e);
-    if ($sentencia_e === false) {
-        throw new Exception("Error en la consulta export: " . $conn->error);
-    }
-    $export = $sentencia_e->fetch_all(MYSQLI_ASSOC);
-
-    // Consulta para la tabla 'picking'
-    $consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-    $sentencia_pk = $conn->query($consultaSQL_pk);
-    if ($sentencia_pk === false) {
-        throw new Exception("Error en la consulta picking: " . $conn->error);
-    }
-    $picking = $sentencia_pk->fetch_all(MYSQLI_ASSOC);
-
-} catch (Exception $error) {
-    $error = $error->getMessage();
-}
-
-// Cerrar la conexión
-$conn->close();
-?>
-
+          // Consulta para la tabla 'datos'
+          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
+          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
+          $sentencia_pk->execute();
+          $picking = $sentencia_pk->fetchAll();
+        } catch (PDOException $error) {
+            $error = $error->getMessage();
+        }
+        ?>
       <?php
       header("Refresh:81");
       ?>
@@ -86,7 +65,7 @@ $conn->close();
 
 
     <style>
-  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVONO SE TOCA, PRODUCTIVO*/
+  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVO*/
   .bloquess {
     display: grid !important;
     grid-template-columns: auto auto !important;
@@ -95,27 +74,7 @@ $conn->close();
     margin-left: 45% !important;
   }
 
-  .table-container {
-            width: 50%; /* Puedes ajustar el tamaño */
-            height: 300px; /* Altura fija con scroll */
-            overflow-y: auto; /* Activa el scroll vertical */
-            border: 1px solid #ccc;
-            margin-bottom: 20px; /* Espaciado entre tablas */
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-
-  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ NO PASAR A MAS DE AQUÍ */
+  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
@@ -183,7 +142,7 @@ $conn->close();
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <!-- Gráfico import -->
             <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 290%;"></div>
+                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 325%;"></div>
                 </div>   
             </div>
                 <!-- grafico piking -->
@@ -201,8 +160,8 @@ $conn->close();
         <!-- grafico de gauge -->
              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
-                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
+                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento.</p>
+                    <div id="grafico-gauge" style="width: 90%; height: 350px;margin-top:0px;margin-left:50px"></div>
                 </div>
             </div>
         </div>
@@ -222,8 +181,7 @@ $conn->close();
                 <div class="row">
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
-                    <div>
-                    <table id="tablaExport" class="  display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                    <table id="tablaExport" class=" tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                       <thead>
                         <tr style="font-family: montserrat; font-size: 15px">
                           <th class="border end" style="background-color: #dc3545">OID</th>
@@ -232,9 +190,9 @@ $conn->close();
                           <th class="border end" style="background-color: #dc3545">Pedidos en proceso</th>
                           <th class="border end" style="background-color: #dc3545">Pedidos despachados</th>
                         </tr>
-                      </thea class="table-container ">
+                      </thead>
                       <tbody>
-                        <?php if ($export && Count($export) > 0): ?>
+                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
                           <?php foreach ($export as $fila): ?>
                             <tr style="font-family: montserrat; font-size: 14px">
                               <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -250,7 +208,6 @@ $conn->close();
                   </div>
                 </div>
               </div>
-            </div>
 
                     </div>   
                 </div>
@@ -259,9 +216,9 @@ $conn->close();
                     <div class="col-md-6">
                     <div class="container">
                           <div class="row">
-                            <div class="col-md-3 " style=" width: 700px; height: 60%; margin-left: 250px">
+                            <div class="col-md-3" style=" width: 700px; height: 60%; margin-left: 250px">
                               <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-                              <table id="tablaImport" class="   display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
+                              <table id="tablaImport" class="tabla-ajustada  display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style=" margin-left: 25% !important">
                           <thead>
                             <tr  style="font-family: montserrat; font-size: 15px">
                               <th class="border end" style="background-color: #0dcaf0">AID</th>
@@ -271,7 +228,7 @@ $conn->close();
                             </tr>
                           </thead>
                           <tbody>
-                              <?php if ($import && Count($import) > 0): ?>
+                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
                                     <?php foreach ($import as $fila): ?>
                                       <tr style="font-family: montserrat; font-size: 14px">
                                         <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -295,11 +252,10 @@ $conn->close();
                     <div class="col-md-6 " >
                     <div class="container">
                     <div class="row">
-                      <div class="col-md-2 " style="  width: 700px; height: 60%; margin-left: 250px">
+                      <div class="col-md-2" style=" width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                        <div  id="tablapicking" class=" display table shadow p-3 mb-5 bg-body-info rounded table-striped border"  style="  margin-left: 25% !important">
-                            <table>
-                            <thead>
+                        <table   id="tablapicking" class="tabla-ajustada display table shadow p-3 mb-5 bg-body-info rounded table-striped border" style="  margin-left: 25% !important">
+                                <thead>
                                   <tr style="font-family: montserrat; font-size: 14px">
                                     <th class="border end" style="background-color: #ffc107">OID</th>
                                     <th class="border end" style="background-color: #ffc107">Cliente</th>
@@ -311,7 +267,7 @@ $conn->close();
                                   </tr>
                                 </thead>
                                 <tbody>
-                                <?php if ($picking && count($picking) > 0): ?>
+                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
                                     <?php foreach ($picking as $fila): ?>
                                       <tr>
                                         <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -325,19 +281,18 @@ $conn->close();
                                     <?php endforeach; ?>
                                   <?php endif; ?>
                                 </tbody>
-                            </table>
-                        </div>
+                              </table>
                       </div>
                     </div>
                   </div>
                     </div>
                 </div>
 
-<!-- porcentaje tablas -->
+
                 <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
                     <div class="col-md-6 " >
                         <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
+                        <div  id="grafico-gauge_d" style="width: 900%; height: 400px;margin-top:0px;margin-left:5% !important"></div>
                     </div>
                 </div>
             </div>
@@ -439,9 +394,6 @@ $conn->close();
                         }]
                     });
                 });
-
-
-
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
@@ -466,23 +418,32 @@ $conn->close();
                 },
                 data: clienteData[0].data // Recibido
             });
+
+            // Añadir datos de "En espera"
+            // series.push({
+            //     name: cliente, 
+            //     type: 'bar',
+            //     stack: 'total', 
+            //     label: {
+            //         show: true 
+            //     },
+            //     data: clienteData[1].data 
+            // });
         });
 
         // Configurar el gráfico de barras
         const option = {
-          title: {text: 'Import',subtext: '',left: 'center'},
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow' 
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
                 }
             },
-            legend: {left: 'left', orient: 'vertical',},
+            legend: {},
             grid: {
-                left: '10%',
+                left: '3%',
                 right: '4%',
                 bottom: '3%',
-                top: '30%',
                 containLabel: true
             },
             xAxis: {
@@ -490,9 +451,9 @@ $conn->close();
             },
             yAxis: {
                 type: 'category',
-                data: ['Recibido', 'En espera']
+                data: ['recibido', 'en espera']
             },
-            series: series // se reemplaza la parte de series con la nueva estructura
+            series: series // Reemplazar la parte de series con la nueva estructura
         };
 
         // Establecer la opción en el gráfico
