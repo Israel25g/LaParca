@@ -321,126 +321,96 @@
 </div>
 
 <script type="text/javascript">
-        // Función para cargar y actualizar la tabla de clientes
-        function cargarClientes() {
-            $.ajax({
-                url: 'get_data_TIM.php', // Archivo PHP que devuelve los datos
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Limpiar las filas actuales
-                    $('#clientes-table_TIM tbody').empty();
-                    
-                    // Recorrer los datos y agregarlos a la tabla
-                    $.each(data, function(index, cliente) {
-                        $('#clientes-table_TIM tbody').append(
-                            '<tr>' +
-                            '<td>' + cliente.aid_oid + '</td>' +
-                            '<td>' + cliente.cliente + '</td>' +
-                            '<td>' + cliente.pedidos_en_proceso + '</td>' +
-                            '<td>' + cliente.pedidos_despachados + '</td>' +
-                            '</tr>'
-                        );
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error al obtener los datos:", error);
-                }
-            });
-        }
-
-        // Cargar los datos cuando la página se carga por primera vez
-        $(document).ready(function() {
-            cargarClientes();
-
-            // Opción 1: Actualizar automáticamente cada 10 segundos
-            setInterval(cargarClientes, 5000);
-
+    function cargarClientesTIM() {
+        $.ajax({
+            url: 'get_data_TIM.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#clientes-table_TIM tbody').empty();
+                $.each(data, function(index, cliente) {
+                    $('#clientes-table_TIM tbody').append(
+                        '<tr>' +
+                        '<td>' + cliente.aid_oid + '</td>' +
+                        '<td>' + cliente.cliente + '</td>' +
+                        '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                        '<td>' + cliente.pedidos_despachados + '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los datos de TIM:", error);
+            }
         });
-    </script>
-
-<script type="text/javascript">
-        // Función para cargar y actualizar la tabla de clientes
-        function cargarClientes() {
-            $.ajax({
-                url: 'get_data_TEX.php', // Archivo PHP que devuelve los datos
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Limpiar las filas actuales
-                    $('#clientes-table_TEX tbody').empty();
-                    
-                    // Recorrer los datos y agregarlos a la tabla
-                    $.each(data, function(index, cliente) {
-                        $('#clientes-table_TEX tbody').append(
-                            '<tr>' +
-                            '<td>' + cliente.aid_oid + '</td>' +
-                            '<td>' + cliente.cliente + '</td>' +
-                            '<td>' + cliente.vehiculo + '</td>' +
-                            '<td>' + cliente.pedidos_en_proceso + '</td>' +
-                            '<td>' + cliente.pedidos_despachados + '</td>' +
-                            '</tr>'
-                        );
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error al obtener los datos:", error);
-                }
-            });
-        }
-
-        // Cargar los datos cuando la página se carga por primera vez
-        $(document).ready(function() {
-            cargarClientes();
-
-            // Opción 1: Actualizar automáticamente cada 10 segundos
-            setInterval(cargarClientes, 5000);
-
+    }
+    
+    function cargarClientesTEX() {
+        $.ajax({
+            url: 'get_data_TEX.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#clientes-table_TEX tbody').empty();
+                $.each(data, function(index, cliente) {
+                    $('#clientes-table_TEX tbody').append(
+                        '<tr>' +
+                        '<td>' + cliente.aid_oid + '</td>' +
+                        '<td>' + cliente.cliente + '</td>' +
+                        '<td>' + cliente.vehiculo + '</td>' +
+                        '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                        '<td>' + cliente.pedidos_despachados + '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los datos de TEX:", error);
+            }
         });
-    </script>
+    }
 
-<script type="text/javascript">
-        // Función para cargar y actualizar la tabla de clientes
-        function cargarClientes() {
-            $.ajax({
-                url: 'get_data_TPK.php', // Archivo PHP que devuelve los datos
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Limpiar las filas actuales
-                    $('#clientes-table_TPK tbody').empty();
-                    
-                    // Recorrer los datos y agregarlos a la tabla
-                    $.each(data, function(index, cliente) {
-                        $('#clientes-table_TPK tbody').append(
-                            '<tr>' +
-                            '<td>' + cliente.aid_oid + '</td>' +
-                            '<td>' + cliente.cliente + '</td>' +
-                            '<td>' + cliente.vehiculo + '</td>' +
-                            '<td>' + cliente.vacio_lleno + '</td>' +
-                            '<td>' + cliente.pedidos_en_proceso + '</td>' +
-                            '<td>' + cliente.pedidos_despachados + '</td>' +
-                            '<td>' + cliente.division_dp + '</td>' +
-                            '<td>' + cliente.fecha_objetivo + '</td>' +
-                            '</tr>'
-                        );
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error al obtener los datos:", error);
-                }
-            });
-        }
-
-        // Cargar los datos cuando la página se carga por primera vez
-        $(document).ready(function() {
-            cargarClientes();
-
-            // Opción 1: Actualizar automáticamente cada 10 segundos
-            setInterval(cargarClientes, 5000);
-
+    function cargarClientesTPK() {
+        $.ajax({
+            url: 'get_data_TPK.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#clientes-table_TPK tbody').empty();
+                $.each(data, function(index, cliente) {
+                    $('#clientes-table_TPK tbody').append(
+                        '<tr>' +
+                        '<td>' + cliente.aid_oid + '</td>' +
+                        '<td>' + cliente.cliente + '</td>' +
+                        '<td>' + cliente.vehiculo + '</td>' +
+                        '<td>' + cliente.vacio_lleno + '</td>' +
+                        '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                        '<td>' + cliente.pedidos_despachados + '</td>' +
+                        '<td>' + cliente.division_dp + '</td>' +
+                        '<td>' + cliente.fecha_objetivo + '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los datos de TPK:", error);
+            }
         });
-    </script>
+    }
+
+    // Cargar los datos cuando la página se carga por primera vez
+    $(document).ready(function() {
+        cargarClientesTIM();
+        cargarClientesTEX();
+        cargarClientesTPK();
+
+        // Actualizar automáticamente cada 5 segundos
+        setInterval(cargarClientesTIM, 5000);
+        setInterval(cargarClientesTEX, 5000);
+        setInterval(cargarClientesTPK, 5000);
+    });
+</script>
+
 
     <script>
         // Inicializar los gráficos de ECharts
