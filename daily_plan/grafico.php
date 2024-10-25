@@ -192,53 +192,53 @@
             <div class="container" style="margin-top: 0%">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
             <div class="container">
-                  <h2>Export</h2>
-                  <table id="clientes-table_TEX" border="1" class="bg-light text-dark">
-                    <thead class="bg-danger">
-                      <tr>
-                        <th>OID</th>
-                        <th>Cliente</th>
-                        <th>Vehículo</th>
-                        <th>Pedidos en Proceso</th>
-                        <th>Pedidos Despachados</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
-                </div>
+                <h2>Export</h2>
+                <table id="clientes-table_TEX" border="1" class="bg-light text-dark">
+                  <thead class="bg-danger">
+                    <tr>
+                      <th>OID</th>
+                      <th>Cliente</th>
+                      <th>Vehículo</th>
+                      <th>Pedidos en Proceso</th>
+                      <th>Pedidos Despachados</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
 
-                <div class="container">
-                  <h2>Import</h2>
-                  <table id="clientes-table_TIM" border="1" class="bg-light text-dark">
-                    <thead class="bg-info">
-                      <tr>
-                        <th>AID</th>
-                        <th>Cliente</th>
-                        <th>Contenedores Recibidos</th>
-                        <th>Contenedores Cerrados</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
-                </div>
+              <div class="container">
+                <h2>Import</h2>
+                <table id="clientes-table_TIM" border="1" class="bg-light text-dark">
+                  <thead class="bg-info">
+                    <tr>
+                      <th>AID</th>
+                      <th>Cliente</th>
+                      <th>Contenedores Recibidos</th>
+                      <th>Contenedores Cerrados</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
 
-                <div class="container">
-                  <h2>Picking</h2>
-                  <table id="clientes-table_TPK" border="1" class="bg-light text-dark">
-                    <thead class="bg-warning">
-                      <tr>
-                        <th>OID</th>
-                        <th>Cliente</th>
-                        <th>Vehículo</th>
-                        <th>Prioridad de Picking</th>
-                        <th>Unidades por Pickear</th>
-                        <th>Porcentaje de Avance</th>
-                        <th>Fecha de Requerido</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
-                </div>
+              <div class="container">
+                <h2>Picking</h2>
+                <table id="clientes-table_TPK" border="1" class="bg-light text-dark">
+                  <thead class="bg-warning">
+                    <tr>
+                      <th>OID</th>
+                      <th>Cliente</th>
+                      <th>Vehículo</th>
+                      <th>Prioridad de Picking</th>
+                      <th>Unidades por Pickear</th>
+                      <th>Porcentaje de Avance</th>
+                      <th>Fecha de Requerido</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
 
 
 <!-- porcentaje tablas -->
@@ -285,100 +285,94 @@
 </div>
 
 <script type="text/javascript">
-          // Función para cargar la tabla de Export
-      function cargarClientes_TEX() {
-          $.ajax({
-              url: 'get_data_TEX.php',
-              method: 'GET',
-              dataType: 'json',
-              success: function(data) {
-                  console.log("Datos de Export:", data);
-                  $('#clientes-table_TEX tbody').empty();
-                  $.each(data, function(index, cliente) {
-                      $('#clientes-table_TEX tbody').append(
-                          '<tr>' +
-                          '<td>' + cliente.aid_oid + '</td>' +
-                          '<td>' + cliente.cliente + '</td>' +
-                          '<td>' + cliente.vehiculo + '</td>' +
-                          '<td>' + cliente.pedidos_en_proceso + '</td>' +
-                          '<td>' + cliente.pedidos_despachados + '</td>' +
-                          '</tr>'
-                      );
-                  });
-              },
-              error: function(xhr, status, error) {
-                  console.error("Error al obtener los datos de Export:", error);
-              }
-          });
-      }
+    function cargarClientesTIM() {
+        $.ajax({
+            url: 'get_data_TIM.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#clientes-table_TIM tbody').empty();
+                $.each(data, function(index, cliente) {
+                    $('#clientes-table_TIM tbody').append(
+                        '<tr>' +
+                        '<td>' + cliente.aid_oid + '</td>' +
+                        '<td>' + cliente.cliente + '</td>' +
+                        '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                        '<td>' + cliente.pedidos_despachados + '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los datos de TIM:", error);
+            }
+        });
+    }
+    
+    function cargarClientesTEX() {
+        $.ajax({
+            url: 'get_data_TEX.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#clientes-table_TEX tbody').empty();
+                $.each(data, function(index, cliente) {
+                    $('#clientes-table_TEX tbody').append(
+                        '<tr>' +
+                        '<td>' + cliente.aid_oid + '</td>' +
+                        '<td>' + cliente.cliente + '</td>' +
+                        '<td>' + cliente.vehiculo + '</td>' +
+                        '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                        '<td>' + cliente.pedidos_despachados + '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los datos de TEX:", error);
+            }
+        });
+    }
 
-      // Función para cargar la tabla de Import
-      function cargarClientes_TIM() {
-          $.ajax({
-              url: 'get_data_TIM.php',
-              method: 'GET',
-              dataType: 'json',
-              success: function(data) {
-                  console.log("Datos de Import:", data);
-                  $('#clientes-table_TIM tbody').empty();
-                  $.each(data, function(index, cliente) {
-                      $('#clientes-table_TIM tbody').append(
-                          '<tr>' +
-                          '<td>' + cliente.aid_oid + '</td>' +
-                          '<td>' + cliente.cliente + '</td>' +
-                          '<td>' + cliente.contenedores_recibidos + '</td>' +
-                          '<td>' + cliente.contenedores_cerrados + '</td>' +
-                          '</tr>'
-                      );
-                  });
-              },
-              error: function(xhr, status, error) {
-                  console.error("Error al obtener los datos de Import:", error);
-              }
-          });
-      }
+    function cargarClientesTPK() {
+        $.ajax({
+            url: 'get_data_TPK.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                $('#clientes-table_TPK tbody').empty();
+                $.each(data, function(index, cliente) {
+                    $('#clientes-table_TPK tbody').append(
+                        '<tr>' +
+                        '<td>' + cliente.aid_oid + '</td>' +
+                        '<td>' + cliente.cliente + '</td>' +
+                        '<td>' + cliente.vehiculo + '</td>' +
+                        '<td>' + cliente.vacio_lleno + '</td>' +
+                        '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                        '<td>' + cliente.pedidos_despachados + '</td>' +
+                        '<td>' + cliente.division_dp + '</td>' +
+                        '<td>' + cliente.fecha_objetivo + '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error al obtener los datos de TPK:", error);
+            }
+        });
+    }
 
-      // Función para cargar la tabla de Picking
-      function cargarClientes_TPK() {
-          $.ajax({
-              url: 'get_data_TPK.php',
-              method: 'GET',
-              dataType: 'json',
-              success: function(data) {
-                  console.log("Datos de Picking:", data);
-                  $('#clientes-table_TPK tbody').empty();
-                  $.each(data, function(index, cliente) {
-                      $('#clientes-table_TPK tbody').append(
-                          '<tr>' +
-                          '<td>' + cliente.aid_oid + '</td>' +
-                          '<td>' + cliente.cliente + '</td>' +
-                          '<td>' + cliente.vehiculo + '</td>' +
-                          '<td>' + cliente.vacio_lleno + '</td>' +
-                          '<td>' + cliente.pedidos_en_proceso + '</td>' +
-                          '<td>' + cliente.pedidos_despachados + '</td>' +
-                          '<td>' + cliente.division_dp + '</td>' +
-                          '<td>' + cliente.fecha_objetivo + '</td>' +
-                          '</tr>'
-                      );
-                  });
-              },
-              error: function(xhr, status, error) {
-                  console.error("Error al obtener los datos de Picking:", error);
-              }
-          });
-      }
+    // Cargar los datos cuando la página se carga por primera vez
+    $(document).ready(function() {
+        cargarClientesTIM();
+        cargarClientesTEX();
+        cargarClientesTPK();
 
-      // Inicializar la carga de datos al cargar la página y establecer actualizaciones automáticas
-      $(document).ready(function() {
-          cargarClientes_TEX();
-          cargarClientes_TIM();
-          cargarClientes_TPK();
-
-          setInterval(cargarClientes_TEX, 5000);
-          setInterval(cargarClientes_TIM, 5000);
-          setInterval(cargarClientes_TPK, 5000);
-      });
-
+        // Actualizar automáticamente cada 5 segundos
+        setInterval(cargarClientesTIM, 5000);
+        setInterval(cargarClientesTEX, 5000);
+        setInterval(cargarClientesTPK, 5000);
+    });
 </script>
 
 
