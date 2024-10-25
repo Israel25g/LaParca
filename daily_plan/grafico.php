@@ -18,7 +18,12 @@ if ($conexion->connect_error) {
 }
 
 // Ejecución de consultas
+
 // Consulta para 'import'
+$consultaSQL_import = "UPDATE import SET cumplimiento_im = :cumplimiento_im WHERE id = :id";
+$consultaSQL_export = "UPDATE export SET cumplimiento_ex = :cumplimiento_ex WHERE id = :id";
+$consultaSQL_picking = "UPDATE picking SET cumplimiento_pk = :cumplimiento_pk WHERE id = :id";
+
 $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
 $result_i = $conexion->query($consultaSQL_i);
 $import = $result_i->fetch_array(MYSQLI_ASSOC); // Usa el resultado de la consulta
