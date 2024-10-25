@@ -203,7 +203,25 @@
                   <div class="col-md-3"  style=" width: 700px; height: 60%; margin-left: 250px">
                     <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Export</h2>
                     <div>
-
+                    <table id="clientes-table" border="1">
+                              <thead>
+                                  <tr>
+                                      <th>OID</th>
+                                      <th>Cliente</th>
+                                      <th>vehiculo</th>
+                                      <th>tipo de veiculo</th>
+                                      <th>destino</th>
+                                      <th>tipo de carga </th>
+                                      <th>paletas</th>
+                                      <th>cajas</th>
+                                      <th>unidades</th>
+                                      
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- Las filas se llenarán dinámicamente -->
+                              </tbody>
+                          </table>
                   </div>
                 </div>
               </div>
@@ -223,14 +241,8 @@
                                   <tr>
                                       <th>AID</th>
                                       <th>Cliente</th>
-                                      <th>vehiculo</th>
-                                      <th>tipo de veiculo</th>
-                                      <th>destino</th>
-                                      <th>tipo de carga </th>
-                                      <th>paletas</th>
-                                      <th>cajas</th>
-                                      <th>unidades</th>
-                                      
+                                      <th>Contenedores recibidos</th>
+                                      <th>Contenedores cerrados</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -318,14 +330,8 @@
                             '<tr>' +
                             '<td>' + cliente.aid_oid + '</td>' +
                             '<td>' + cliente.cliente + '</td>' +
-                            '<td>' + cliente.vehiculo + '</td>' +
-                            '<td>' + cliente.t_vehiculo + '</td>' +
-                            '<td>' + cliente.bl + '</td>' +
-                            '<td>' + cliente.destino + '</td>' +
-                            '<td>' + cliente.t_carga + '</td>' +
-                            '<td>' + cliente.paletas + '</td>' +
-                            '<td>' + cliente.cajas + '</td>' +
-                            '<td>' + cliente.unidades + '</td>' +
+                            '<td>' + cliente.pedidos_en_proceso + '</td>' +
+                            '<td>' + cliente.pedidos_despachados + '</td>' +
                             '</tr>'
                         );
                     });
