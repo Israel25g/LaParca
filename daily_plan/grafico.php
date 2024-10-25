@@ -1,53 +1,37 @@
 <?php
-      session_start();
-      include '../funciones.php';
-      $error = false;
-      $config = include '../config_DP.php';
-
-
-    $consultaSQL = "UPDATE import SET
-    cumplimiento_im = :cumplimiento_im,
-    WHERE id = :id";
-
-    $consultaSQL = "UPDATE export SET
-    cumplimiento_ex = :cumplimiento_ex,
-    WHERE id = :id";
-
-    $consultaSQL = "UPDATE picking SET
-    cumplimiento_pk = :cumplimiento_pk,
-    WHERE id = :id";
+header("Refresh:81");
+session_start();
+include '../daily_plan/funcionalidades/funciones.php';
+$error = false; 
 ?>
 
 <?php
-      try {
-          $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-          $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+try {
+  $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+  $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-          // Consulta para la tabla 'import'
-          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-          $sentencia_i = $conexion->prepare($consultaSQL_i);
-          $sentencia_i->execute();
-          $import = $sentencia_i->fetchAll();
+  // Ejecución de consultas
+  $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
+  $sentencia_i = $conexion->prepare($consultaSQL_i);
+  $sentencia_i->execute();
+  $import = $sentencia_i->fetchAll();
 
+  $consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
+  $sentencia_e = $conexion->prepare($consultaSQL_e);
+  $sentencia_e->execute();
+  $export = $sentencia_e->fetchAll();
 
-          // Consulta para la tabla 'export'
-          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-          $sentencia_e = $conexion->prepare($consultaSQL_e);
-          $sentencia_e->execute();
-          $export = $sentencia_e->fetchAll();
+  $consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
+  $sentencia_pk = $conexion->prepare($consultaSQL_pk);
+  $sentencia_pk->execute();
+  $picking = $sentencia_pk->fetchAll();
 
-          // Consulta para la tabla 'datos'
-          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
-          $sentencia_pk->execute();
-          $picking = $sentencia_pk->fetchAll();
-        } catch (PDOException $error) {
-            $error = $error->getMessage();
-        }
-        ?>
-      <?php
-      header("Refresh:81");
-      ?>
+} catch (PDOException $e) {
+  $error = $e->getMessage();
+  var_dump($error);
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,14 +42,17 @@
     <!-- Incluir Bootstrap desde el CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="../estilos.css">
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>  
 
 
     <style>
-  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVONO SE TOCA, PRODUCTIVO*/
+  /* Estilo general para pantallas grandes NO SE TOCA, PRODUCTIVO*/
   .bloquess {
     display: grid !important;
     grid-template-columns: auto auto !important;
@@ -74,27 +61,7 @@
     margin-left: 45% !important;
   }
 
-  .table-container {
-            width: 50%; /* Puedes ajustar el tamaño */
-            height: 300px; /* Altura fija con scroll */
-            overflow-y: auto; /* Activa el scroll vertical */
-            border: 1px solid #ccc;
-            margin-bottom: 20px; /* Espaciado entre tablas */
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-
-  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ NO PASAR A MAS DE AQUÍ */
+  /* Consulta de medios para pantallas pequeñas NO PASAR A MAS DE AQUÍ */
   @media (max-width: 1280px) and (max-height: 620px) {
     .bloquess {
       display: grid !important;
@@ -158,42 +125,7 @@
     <div class="carousel-item active "data-bs-interval="15000" style="height: 50%; height: 100%;position: fixed;">
     <div class="container" style="margin-top: 0%">
 
-        <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <!-- Gráfico import -->
-            <div class="col-md-6 " >
-                    <div id="grafico-barras" class="bg-white " style="width: 200%; height: 290%;"></div>
-                </div>   
-            </div>
-                <!-- grafico piking -->
-            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
-                <div class="col-md-6">
-                    <div id="grafico-pastel2" class="bg-white " style="width: 200%; height: 300%;"></div>
-                    </div>
-            </div>   
-            <!-- grafico de export -->
-            <div class="bloquee border border-5 border-danger" id="export" style="position: relative;width: 800px; height: 350px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
-            <div class="col-md-6 ">
-                    <div id="grafico-pastel1" class="bg-white " href="../daily_plan/tabla_ex.php" style="width: 200%; height: 350%;"></div>
-                </div>    
-            </div>
-        <!-- grafico de gauge -->
-             <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
-                <div class="col-md-6 " >
-                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    </div>
-
-      <div class="carousel-item" data-bs-interval="15000">
-      <div class="container" style="margin-top: 0%">
-
-<div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
+    <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
     <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     <!-- Gráfico import -->
     <div class="col-md-6 " >
@@ -222,35 +154,62 @@
 </div>
 
 
-</div>
-           
-
-
-
+    </div>
     </div>
 
+    <div class="carousel-item" data-bs-interval="15000">
 
+    <div class="container" style="margin-top: 0%">
 
-    <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
+        <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <!-- tabla import -->
+            <div class="col-md-6 " >
+                    <table id="table_im"></table>
+            </div>
+                <!-- tabla piking -->
+            <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
+                <div class="col-md-6">
+                   <table id="table_pk"></table>
+                    </div>
+            </div>   
+            <!-- tabla de export -->
+            <div class="bloquee border border-5 border-danger" id="export" style="position: relative;width: 800px; height: 350px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
+            <div class="col-md-6 ">
+                    <table id="table_ex"></table>
+                </div>    
+            </div>
+        <!-- grafico de gauge -->
+        <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 450px;border-radius: 15px; overflow: hidden;" >
+                <div class="col-md-6 " >
+                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
+                    <div id="grafico-gauge_d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
+                </div>
+            </div>
+        </div>
+            
+
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;z-index: 999;">
+      <img src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+    </div>
+    <div class="carousel-item" data-bs-interval="7500">
+      <img src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
@@ -262,8 +221,13 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-    <?php
-    ?>
+
+
+        <!-- Incluir Bootstrap JS y dependencias -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../host_virtual_TI/js/script.js"></script>
 
     <script>
         // Inicializar los gráficos de ECharts
@@ -328,7 +292,6 @@
                 });
 
 
-
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
@@ -386,6 +349,7 @@
         barChart.setOption(option);
     });
 
+
                 fetch('get_data_porcen.php')
         .then(response => response.json())
         .then(gaugeData => {
@@ -440,14 +404,6 @@
         setInterval(fetchData, 5000);
 
     </script>
-
-
-    <!-- Incluir Bootstrap JS y dependencias -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../host_virtual_TI/js/script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>
