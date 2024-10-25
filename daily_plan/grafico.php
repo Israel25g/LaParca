@@ -18,23 +18,20 @@ $password = "1plGr0up01*";
 
 <?php
 
-  $conn = new mysqli($servername, $username, $password, $database);
+  $conexion = new mysqli($servername, $username, $password, $database);
 
   // Ejecución de consultas
   $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-  $sentencia_i = $conexion->prepare($consultaSQL_i);
-  $sentencia_i->execute();
-  $import = $sentencia_i->fetchAll();
+  $result = $conexion->query($consultaSQL_i);
+  $import = $sentencia_i->fetch_array();
 
   $consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-  $sentencia_e = $conexion->prepare($consultaSQL_e);
-  $sentencia_e->execute();
-  $export = $sentencia_e->fetchAll();
+  $result = $conexion->query($consultaSQL_e);
+  $export = $sentencia_e->fetch_array();
 
   $consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-  $sentencia_pk = $conexion->prepare($consultaSQL_pk);
-  $sentencia_pk->execute();
-  $picking = $sentencia_pk->fetchAll();
+  $result = $conexion->query($consultaSQL_pk);
+  $picking = $sentencia_pk->fetch_array();
 
   if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
@@ -185,7 +182,7 @@ $password = "1plGr0up01*";
                         </tr>
                       </thead>
                       <tbody>
-                        <?php if ($export && $sentencia_e->rowCount() > 0): ?>
+                        <?php if ($export && Count($export) > 0): ?>
                           <?php foreach ($export as $fila): ?>
                             <tr style="font-family: montserrat; font-size: 14px">
                               <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -221,7 +218,7 @@ $password = "1plGr0up01*";
                             </tr>
                           </thead>
                           <tbody>
-                              <?php if ($import && $sentencia_i->rowCount() > 0): ?>
+                              <?php if ($import && Count($import) > 0): ?>
                                     <?php foreach ($import as $fila): ?>
                                       <tr style="font-family: montserrat; font-size: 14px">
                                         <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
@@ -260,7 +257,7 @@ $password = "1plGr0up01*";
                                   </tr>
                                 </thead>
                                 <tbody>
-                                <?php if ($picking && $sentencia_pk->rowCount() > 0): ?>
+                                <?php if ($picking && Count($picking) > 0): ?>
                                     <?php foreach ($picking as $fila): ?>
                                       <tr>
                                         <td class="border end"><?php echo escapar($fila["aid_oid"]); ?></td>
