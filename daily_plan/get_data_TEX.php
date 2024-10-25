@@ -20,7 +20,7 @@ try {
 }
 
 // Consulta para obtener los datos de clientes
-$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo; pedidos_en_proceso, pedidos_despachados FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo ');
+$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo, pedidos_en_proceso, pedidos_despachados FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo ');
 $clientes = $stmt->fetchAll();
 
 // Devolver los datos en formato JSON
