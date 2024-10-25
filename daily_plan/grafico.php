@@ -190,18 +190,47 @@
     </div>
     </div>
 
-            <div class="carousel-item" data-bs-interval="15000">
+      <div class="carousel-item" data-bs-interval="15000">
+      <div class="container" style="margin-top: 0%">
+
+<div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
+    <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <!-- Gráfico import -->
+    <div class="col-md-6 " >
            
-              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
-                      <div class="col-md-6 " >
-                          <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                          <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
-                      </div>
-                  </div>
-              </div>
+        </div>   
+    </div>
+        <!-- grafico piking -->
+    <div class="bloquee border border-5 border-warning" id="picking" style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
+        <div class="col-md-6">
+           
+            </div>
+    </div>   
+    <!-- grafico de export -->
+    <div class="bloquee border border-5 border-danger" id="export" style="position: relative;width: 800px; height: 350px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" >
+    <div class="col-md-6 ">
+            
+        </div>    
+    </div>
+<!-- grafico de gauge -->
+      <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
+          <div class="col-md-6 " >
+              <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
+              <div  id="grafico-gauge_d" style="width: 1200px; height: 600px;margin-top:0px;margin-left:5% !important"></div>
+          </div>
+      </div>
+</div>
+
+
+</div>
+           
+
 
 
     </div>
+
+
+
     <div class="carousel-item" data-bs-interval="7500">
       <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
     </div>
