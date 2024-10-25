@@ -9,29 +9,32 @@ $database = "u366386740_db_dailyplan";
 $username = "u366386740_adminDP";
 $password = "1plGr0up01*"; 
 
-?>
+// Crear conexión
+$conexion = new mysqli($servername, $username, $password, $database);
 
-<?php
-
-  $conexion = new mysqli($servername, $username, $password, $database);
-
-  // Ejecución de consultas
-  $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-  $result = $conexion->query($consultaSQL_i);
-  $import = $sentencia_i->fetch_array();
-
-  $consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-  $result = $conexion->query($consultaSQL_e);
-  $export = $sentencia_e->fetch_array();
-
-  $consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-  $result = $conexion->query($consultaSQL_pk);
-  $picking = $sentencia_pk->fetch_array();
-
-  if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+// Verificar conexión
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
 }
 
+// Ejecución de consultas
+// Consulta para 'import'
+$consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
+$result_i = $conexion->query($consultaSQL_i);
+$import = $result_i->fetch_array(MYSQLI_ASSOC); // Usa el resultado de la consulta
+
+// Consulta para 'export'
+$consultaSQL_e = "SELECT * FROM export WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
+$result_e = $conexion->query($consultaSQL_e);
+$export = $result_e->fetch_array(MYSQLI_ASSOC); // Usa el resultado de la consulta
+
+// Consulta para 'picking'
+$consultaSQL_pk = "SELECT * FROM picking WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
+$result_pk = $conexion->query($consultaSQL_pk);
+$picking = $result_pk->fetch_array(MYSQLI_ASSOC); // Usa el resultado de la consulta
+
+// Cerrar la conexión si no la necesitas más
+$conexion->close();
 ?>
 
 <!DOCTYPE html>
