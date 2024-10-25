@@ -333,7 +333,7 @@
                     
                     // Recorrer los datos y agregarlos a la tabla
                     $.each(data, function(index, cliente) {
-                        $('#clientes-table tbody').append(
+                        $('#clientes-table_TIM tbody').append(
                             '<tr>' +
                             '<td>' + cliente.aid_oid + '</td>' +
                             '<td>' + cliente.cliente + '</td>' +
@@ -372,10 +372,11 @@
                     
                     // Recorrer los datos y agregarlos a la tabla
                     $.each(data, function(index, cliente) {
-                        $('#clientes-table tbody').append(
+                        $('#clientes-table_TEX tbody').append(
                             '<tr>' +
                             '<td>' + cliente.aid_oid + '</td>' +
                             '<td>' + cliente.cliente + '</td>' +
+                            '<td>' + cliente.vehiculo + '</td>' +
                             '<td>' + cliente.pedidos_en_proceso + '</td>' +
                             '<td>' + cliente.pedidos_despachados + '</td>' +
                             '</tr>'
@@ -411,12 +412,16 @@
                     
                     // Recorrer los datos y agregarlos a la tabla
                     $.each(data, function(index, cliente) {
-                        $('#clientes-table tbody').append(
+                        $('#clientes-table_TPK tbody').append(
                             '<tr>' +
                             '<td>' + cliente.aid_oid + '</td>' +
                             '<td>' + cliente.cliente + '</td>' +
+                            '<td>' + cliente.vehiculo + '</td>' +
+                            '<td>' + cliente.vacio_lleno + '</td>' +
                             '<td>' + cliente.pedidos_en_proceso + '</td>' +
                             '<td>' + cliente.pedidos_despachados + '</td>' +
+                            '<td>' + cliente.division_dp + '</td>' +
+                            '<td>' + cliente.fecha_objetivo + '</td>' +
                             '</tr>'
                         );
                     });
