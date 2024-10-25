@@ -3,8 +3,11 @@ header("Refresh:81");
 session_start();
 include '../daily_plan/funcionalidades/funciones.php';
 $error = false;
-$config = include '../daily_plan/funcionalidades/config_DP.php';
 
+$servername = "localhost";
+$database = "u366386740_db_dailyplan";
+$username = "u366386740_adminDP";
+$password = "1plGr0up01*"; 
 
 
       $consultaSQL_import = "UPDATE import SET cumplimiento_im = :cumplimiento_im WHERE id = :id";
@@ -14,9 +17,8 @@ $config = include '../daily_plan/funcionalidades/config_DP.php';
 ?>
 
 <?php
-try {
-  $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-  $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+  $conn = new mysqli($servername, $username, $password, $database);
 
   // Ejecución de consultas
   $consultaSQL_i = "SELECT * FROM import WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
@@ -34,9 +36,8 @@ try {
   $sentencia_pk->execute();
   $picking = $sentencia_pk->fetchAll();
 
-} catch (PDOException $e) {
-  $error = $e->getMessage();
-  var_dump($error);
+  if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
 }
 
 ?>
@@ -324,13 +325,8 @@ try {
 </div>
 
 
-        <!-- Incluir Bootstrap JS y dependencias -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../host_virtual_TI/js/script.js"></script>
 
-    <script>
+<script>
         // Inicializar los gráficos de ECharts
         var chart1 = echarts.init(document.getElementById('grafico-pastel1'));
         var chart2 = echarts.init(document.getElementById('grafico-pastel2'));
@@ -505,6 +501,12 @@ try {
         setInterval(fetchData, 5000);
 
     </script>
+
+<!-- Incluir Bootstrap JS y dependencias -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="../host_virtual_TI/js/script.js"></script>
 
 </body>
 </html>
