@@ -62,6 +62,7 @@
     <link rel="shortcut icon" href="../images/ICO.png">
     <!-- Incluir ECharts desde el CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <style>
@@ -217,8 +218,25 @@
                           <div class="row">
                             <div class="col-md-3 " style=" width: 700px; height: 60%; margin-left: 250px">
                               <h2 class="mt-3" style="margin-bottom: 10px; font-size:30px; margin-left: 25% !important">Import</h2>
-
-
+                              <table id="clientes-table" border="1">
+                              <thead>
+                                  <tr>
+                                      <th>AID</th>
+                                      <th>Cliente</th>
+                                      <th>vehiculo</th>
+                                      <th>tipo de veiculo</th>
+                                      <th>destino</th>
+                                      <th>tipo de carga </th>
+                                      <th>paletas</th>
+                                      <th>cajas</th>
+                                      <th>unidades</th>
+                                      
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- Las filas se llenarán dinámicamente -->
+                              </tbody>
+                          </table>
                             </div>
                           </div>
                         </div> 
@@ -232,10 +250,8 @@
                     <div class="row">
                       <div class="col-md-2 " style="  width: 700px; height: 60%; margin-left: 250px">
                         <h2 class="mt-2" style="margin-bottom: 10px; font-size:30px ; margin-left: 25% !important">Picking</h2>
-                                                      <!-- Tabla 1 -->
-                        <div  id="tablapicking" class=" display table shadow p-3 mb-5 bg-body-info rounded table-striped border"  style="  margin-left: 25% !important">
 
-                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -284,8 +300,51 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-    <?php
-    ?>
+
+<script type="text/javascript">
+        // Función para cargar y actualizar la tabla de clientes
+        function cargarClientes() {
+            $.ajax({
+                url: 'api_tabla_jquery.php', // Archivo PHP que devuelve los datos
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Limpiar las filas actuales
+                    $('#clientes-table tbody').empty();
+                    
+                    // Recorrer los datos y agregarlos a la tabla
+                    $.each(data, function(index, cliente) {
+                        $('#clientes-table tbody').append(
+                            '<tr>' +
+                            '<td>' + cliente.aid_oid + '</td>' +
+                            '<td>' + cliente.cliente + '</td>' +
+                            '<td>' + cliente.vehiculo + '</td>' +
+                            '<td>' + cliente.t_vehiculo + '</td>' +
+                            '<td>' + cliente.bl + '</td>' +
+                            '<td>' + cliente.destino + '</td>' +
+                            '<td>' + cliente.t_carga + '</td>' +
+                            '<td>' + cliente.paletas + '</td>' +
+                            '<td>' + cliente.cajas + '</td>' +
+                            '<td>' + cliente.unidades + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error al obtener los datos:", error);
+                }
+            });
+        }
+
+        // Cargar los datos cuando la página se carga por primera vez
+        $(document).ready(function() {
+            cargarClientes();
+
+            // Opción 1: Actualizar automáticamente cada 10 segundos
+            setInterval(cargarClientes, 5000);
+
+        });
+    </script>
 
     <script>
         // Inicializar los gráficos de ECharts
@@ -465,11 +524,10 @@
 
 
     <!-- Incluir Bootstrap JS y dependencias -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../host_virtual_TI/js/script.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 </html>
