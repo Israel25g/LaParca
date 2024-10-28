@@ -480,10 +480,10 @@
         .then(response => response.json())
         .then(gaugeData => {
           // Configuración del gráfico de porcentaje de cumplimiento
-          gaugeChart_d.setOption({
+          grafico_gauge_d.setOption({
             series: [{
               name:'Porcentaje',
-              type: 'gauge',
+              type: 'pie',
               startAngle: 180,
               endAngle: 0,
               color:['#0dcaf0', '#DC143C ', ' #FFA500'],
