@@ -217,7 +217,7 @@
     </div>
     <div class="carousel-item" data-bs-interval="7500">
       <div style="height: 1100px;padding-top: 0px;">
-      <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
