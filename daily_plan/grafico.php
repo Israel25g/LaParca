@@ -453,7 +453,30 @@
         barChart.setOption(option);
     });
 
-                fetch('get_data_porcen.php')
+    fetch('get_data_porcen.php')
+    .then(response => response.json())
+    .then(gaugeData => {
+          // Configuración del gráfico de porcentaje de cumplimiento
+          grafico_gauge_d.setOption({
+            series: [{
+              name:'Porcentaje',
+              type: 'gauge',
+              startAngle: 180,
+              endAngle: 0,
+              color:['#0dcaf0', '#DC143C ', ' #FFA500'],
+              pointer: { show: false },
+              progress: { show: true, clip: true ,overlap: false, roundCap: true, itemStyle: { borderWidth: 0, borderColor: '#fff',borderRadius: [1,50,50,1], } },
+              axisLine: { lineStyle: { width: 30 } },
+              splitLine: { show: false },
+              axisTick: {show: false},
+              axisLabel: { show: true },
+              data: gaugeData,
+              title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
+              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,10,10], borderWidth: 1,},
+            }]
+          });
+        });
+        fetch('get_data_porcen.php')
         .then(response => response.json())
         .then(gaugeData => {
           // Configuración del gráfico de porcentaje de cumplimiento
@@ -473,29 +496,6 @@
               data: gaugeData,
               title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
               detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,1000,10], borderWidth: 1,},
-            }]
-          });
-        });
-        fetch('get_data_porcen.php')
-        .then(response => response.json())
-        .then(gaugeData => {
-          // Configuración del gráfico de porcentaje de cumplimiento
-          grafico_gauge_d.setOption({
-            series: [{
-              name:'Porcentaje',
-              type: 'pie',
-              startAngle: 180,
-              endAngle: 0,
-              color:['#0dcaf0', '#DC143C ', ' #FFA500'],
-              pointer: { show: false },
-              progress: { show: true, clip: true ,overlap: false, roundCap: true, itemStyle: { borderWidth: 0, borderColor: '#fff',borderRadius: [1,50,50,1], } },
-              axisLine: { lineStyle: { width: 30 } },
-              splitLine: { show: false },
-              axisTick: {show: false},
-              axisLabel: { show: true },
-              data: gaugeData,
-              title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
-              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,10,10], borderWidth: 1,},
             }]
           });
         });
