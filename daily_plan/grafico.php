@@ -355,7 +355,7 @@
                             legend: {orient: 'vertical',left: 'left'},
                         series: [{
                             name: 'Export',
-                            type: 'gauge',
+                            type: 'pie',
                             radius: ['30%', '80%'],
                             label: {formatter: '{c}',position: 'inside',fontSize: 25},
                             data: data,
@@ -460,7 +460,7 @@
           grafico_gauge_d.setOption({
             series: [{
               name:'Porcentaje',
-              type: 'gauge',
+              type: 'pie',
               startAngle: 180,
               endAngle: 0,
               color:['#0dcaf0', '#DC143C ', ' #FFA500'],
@@ -483,7 +483,7 @@
           gaugeChart.setOption({
             series: [{
               name:'Porcentaje',
-              type: 'gauge',
+              type: 'pie',
               startAngle: 180,
               endAngle: 0,
               color:['#0dcaf0', '#DC143C ', ' #FFA500'],
