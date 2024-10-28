@@ -196,11 +196,11 @@
                 <table id="clientes-table_TEX" border="1" class="bg-light text-dark">
                   <thead class="bg-danger">
                     <tr>
-                      <th>OID</th>
-                      <th>Cliente</th>
-                      <th>Vehículo</th>
-                      <th>Pedidos en Proceso</th>
-                      <th>Pedidos Despachados</th>
+                      <th class="text-bg-danger">OID</th>
+                      <th class="text-bg-danger">Cliente</th>
+                      <th class="text-bg-danger">Vehículo</th>
+                      <th class="text-bg-danger">Pedidos en Proceso</th>
+                      <th class="text-bg-danger">Pedidos Despachados</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
@@ -212,10 +212,10 @@
                 <table id="clientes-table_TIM" border="1" class="bg-light text-dark">
                   <thead class="bg-info">
                     <tr>
-                      <th>AID</th>
-                      <th>Cliente</th>
-                      <th>Contenedores Recibidos</th>
-                      <th>Contenedores Cerrados</th>
+                      <th class="text-bg-info">AID</th>
+                      <th class="text-bg-info">Cliente</th>
+                      <th class="text-bg-info">Contenedores Recibidos</th>
+                      <th class="text-bg-info">Contenedores Cerrados</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
@@ -227,13 +227,13 @@
                 <table id="clientes-table_TPK" border="1" class="bg-light text-dark">
                   <thead class="bg-warning">
                     <tr>
-                      <th>OID</th>
-                      <th>Cliente</th>
-                      <th>Vehículo</th>
-                      <th>Prioridad de Picking</th>
-                      <th>Unidades por Pickear</th>
-                      <th>Porcentaje de Avance</th>
-                      <th>Fecha de Requerido</th>
+                      <th class="text-bg-warning">OID</th>
+                      <th class="text-bg-warning">Cliente</th>
+                      <th class="text-bg-warning">Vehículo</th>
+                      <th class="text-bg-warning">Prioridad de Picking</th>
+                      <th class="text-bg-warning">Unidades por Pickear</th>
+                      <th class="text-bg-warning">Porcentaje de Avance</th>
+                      <th class="text-bg-warning">Fecha de Requerido</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
@@ -242,12 +242,12 @@
 
 
 <!-- porcentaje tablas -->
-                <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden; margin-top:-5%" >
-                    <div class="col-md-6 " >
-                        <p style="font-family: montserrat; font-size:180%; margin-top: 30px !important;margin-left: 20% !important;font-weight: bold;">Porcentaje de cumplimiento</p>
-                        <div id="grafico-gauge_d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
-                    </div>
+              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
+                <div class="col-md-6 " >
+                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
+                    <div id="grafico-gauge_d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
                 </div>
+            </div>
             </div>
             </div>
 
@@ -349,7 +349,6 @@
                         '<td>' + cliente.vehiculo + '</td>' +
                         '<td>' + cliente.vacio_lleno + '</td>' +
                         '<td>' + cliente.pedidos_en_proceso + '</td>' +
-                        '<td>' + cliente.pedidos_despachados + '</td>' +
                         '<td>' + cliente.division_dp + '</td>' +
                         '<td>' + cliente.fecha_objetivo + '</td>' +
                         '</tr>'
