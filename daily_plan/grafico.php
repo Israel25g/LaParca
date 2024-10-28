@@ -1,51 +1,6 @@
 <?php
       session_start();
-      include '../funciones.php';
-      $error = false;
-      $config = include '../config_DP.php';
-
-
-    $consultaSQL = "UPDATE import SET
-    cumplimiento_im = :cumplimiento_im,
-    WHERE id = :id";
-
-    $consultaSQL = "UPDATE export SET
-    cumplimiento_ex = :cumplimiento_ex,
-    WHERE id = :id";
-
-    $consultaSQL = "UPDATE picking SET
-    cumplimiento_pk = :cumplimiento_pk,
-    WHERE id = :id";
 ?>
-
-<?php
-      try {
-          $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-          $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-          // Consulta para la tabla 'import'
-          $consultaSQL_i = "SELECT * FROM import  WHERE fecha_objetivo = CURDATE() GROUP BY aid_oid";
-          $sentencia_i = $conexion->prepare($consultaSQL_i);
-          $sentencia_i->execute();
-          $import = $sentencia_i->fetchAll();
-
-
-          // Consulta para la tabla 'export'
-          $consultaSQL_e = "SELECT * FROM export  WHERE fecha_objetivo = CURDATE() GROUP BY vehiculo";
-          $sentencia_e = $conexion->prepare($consultaSQL_e);
-          $sentencia_e->execute();
-          $export = $sentencia_e->fetchAll();
-
-          // Consulta para la tabla 'datos'
-          $consultaSQL_pk = "SELECT * FROM picking  WHERE fecha_objetivo = CURDATE() GROUP BY cliente";
-          $sentencia_pk = $conexion->prepare($consultaSQL_pk);
-          $sentencia_pk->execute();
-          $picking = $sentencia_pk->fetchAll();
-        } catch (PDOException $error) {
-            $error = $error->getMessage();
-        }
-        ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
