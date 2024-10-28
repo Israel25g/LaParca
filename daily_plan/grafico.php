@@ -191,9 +191,10 @@
             <div class="carousel-item" data-bs-interval="15000">
             <div class="container" style="margin-top: 0%">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
+
             <div class="container">
                 <h2>Export</h2>
-                <table id="clientes-table_TEX" border="1" class="bg-light text-dark">
+                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped">
                   <thead class="bg-danger">
                     <tr>
                       <th class="text-bg-danger">OID</th>
@@ -209,7 +210,7 @@
 
               <div class="container">
                 <h2>Import</h2>
-                <table id="clientes-table_TIM" border="1" class="bg-light text-dark">
+                <table id="clientes-table_TIM" border="1" class="table table-info table-striped">
                   <thead class="bg-info">
                     <tr>
                       <th class="text-bg-info">AID</th>
@@ -224,7 +225,7 @@
 
               <div class="container">
                 <h2>Picking</h2>
-                <table id="clientes-table_TPK" border="1" class="bg-light text-dark">
+                <table id="clientes-table_TPK" border="1" class="table table-warning table-striped">
                   <thead class="bg-warning">
                     <tr>
                       <th class="text-bg-warning">OID</th>
