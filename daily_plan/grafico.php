@@ -338,7 +338,7 @@
         var chart2 = echarts.init(document.getElementById('grafico-pastel2'));
         var barChart = echarts.init(document.getElementById('grafico-barras'));
         var gaugeChart = echarts.init(document.getElementById('grafico-gauge'));
-        var gaugeChart_d = echarts.init(document.getElementById('grafico-gauge_d'));
+        var grafico_gauge_d = echarts.init(document.getElementById('grafico-gauge_d'));
         
 
         // Función para obtener los datos del servidor y actualizar los gráficos
