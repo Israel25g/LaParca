@@ -157,8 +157,8 @@
     <div class="container" style="margin-top: 0%">
 
         <div class="bloquess" style="margin-left:-0% !important;margin-top:5% !important; display: grid; grid-template-columns: auto auto; gap: 50px !important">
+          <!-- Gráfico import -->
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <!-- Gráfico import -->
             <div class="col-md-6 " >
                     <div id="grafico-barras" class="bg-white " style="width: 200%; height: 290%;"></div>
                 </div>   
@@ -191,7 +191,8 @@
             <div class="carousel-item" data-bs-interval="15000">
             <div class="container" style="margin-top: 0%">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
-
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-6 " >
             <div class="container">
                 <h2>Export</h2>
                 <table id="clientes-table_TEX" border="1" class="table table-danger table-striped">
@@ -207,7 +208,10 @@
                   <tbody></tbody>
                 </table>
               </div>
-
+            </div>
+            </div>
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-6 " >
               <div class="container">
                 <h2>Import</h2>
                 <table id="clientes-table_TIM" border="1" class="table table-info table-striped">
@@ -222,7 +226,11 @@
                   <tbody></tbody>
                 </table>
               </div>
-
+            </div>
+            </div>
+            
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-6 " >
               <div class="container">
                 <h2>Picking</h2>
                 <table id="clientes-table_TPK" border="1" class="table table-warning table-striped">
@@ -240,6 +248,8 @@
                   <tbody></tbody>
                 </table>
               </div>
+            </div>
+            </div>
 
 
 <!-- porcentaje tablas -->
@@ -275,11 +285,11 @@
       <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
     </div>
   </div>
-  <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="padding-top: 500px !important;">
+  <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="width: 100px;height: 1000px;padding-top: 500px !important;">
     <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next" style="padding-top: 500px !important;">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="next" style="width: 100px;height: 1000px;padding-top: 500px !important;">
     <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
