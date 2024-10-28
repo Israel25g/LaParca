@@ -332,7 +332,7 @@
 </script>
 
 
-    <script>
+<script>
         // Inicializar los gráficos de ECharts
         var chart1 = echarts.init(document.getElementById('grafico-pastel1'));
         var chart2 = echarts.init(document.getElementById('grafico-pastel2'));
@@ -476,8 +476,7 @@
             }]
           });
         });
-
-                fetch('get_data_porcen.php')
+        fetch('get_data_porcen.php')
         .then(response => response.json())
         .then(gaugeData => {
           // Configuración del gráfico de porcentaje de cumplimiento
