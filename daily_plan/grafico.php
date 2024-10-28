@@ -200,10 +200,10 @@
               </div>
             </div>
             </div>
-            <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
-                <div class="col-md-6 " >
+            <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 800; height: 450px;border-radius: 15px; overflow: hidden;" >
+                <div style="position: relative; width: 800px; height: 800px; padding: 10px; margin-left: -80px; margin-top: -100px; border-width: 10px;">
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge_d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
+                    <div id="grafico-gauge_d" style="position: relative; width: 900px; height: 450px; padding: 10px; margin-top: -100px; border-width: 10px;"></div>
                 </div>
             </div>
               </div>
