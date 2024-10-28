@@ -495,7 +495,7 @@
               axisLabel: { show: true },
               data: gaugeData,
               title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
-              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,1000,10], borderWidth: 1,},
+              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,10,10], borderWidth: 1,},
             }]
           });
         });
