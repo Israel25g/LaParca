@@ -196,7 +196,7 @@
             <div class="col-md-4" >
             <div class="container col-3 p-3 mb-2" style="margin-left: 250px;" >
                 <h2>Export</h2>
-                <table id="clientes-table_TEX"  class="table table-danger table-striped" style="width: 80%;" >
+                <table id="clientes-table_TEX"  class="table table-danger table-striped" st >
                   <thead class="bg-danger">
                     <tr>
                       <th class="text-bg-danger">OID</th>
@@ -215,7 +215,7 @@
             <div class="col-md-4" >
               <div class="container col-3 p-3 mb-2" style="margin-left: 250px;" >
                 <h2>Import</h2>
-                <table id="clientes-table_TIM"  class="table table-info table-striped" style="width: 80%;" >
+                <table id="clientes-table_TIM"  class="table table-info table-striped" >
                   <thead class="bg-info">
                     <tr>
                       <th class="text-bg-info">AID</th>
