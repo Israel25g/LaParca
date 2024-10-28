@@ -68,8 +68,7 @@
     display: grid !important;
     grid-template-columns: auto auto !important;
     gap: 10px!important;
-    margin-top: 10% !important;
-    margin-left: 45% !important;
+    margin-top: 8% !important;
   }
 
   .table-container {
