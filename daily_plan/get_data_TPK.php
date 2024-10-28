@@ -1,8 +1,8 @@
 <?php
 // Conexión a la base de datos
 $host = 'localhost';
-$db = 'u366386740_db_test_dp';
-$user = 'u366386740_adminTestDP';
+$db = 'u366386740_db_dailyplan';
+$user = 'u366386740_adminDP';
 $pass = '1plGr0up01*';
 $charset = 'utf8mb4';
 
@@ -21,7 +21,7 @@ try {
 }
 
 // Consulta para obtener los datos de Picking
-$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo, vacio_lleno, pedidos_en_proceso, pedidos_despachados, division_dp, fecha_objetivo FROM picking WHERE fecha_objetivo = CURDATE()');
+$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo, vacio_lleno, pedidos_en_proceso, division_dp, fecha_objetivo FROM picking WHERE fecha_objetivo = CURDATE()');
 $clientes = $stmt->fetchAll();
 
 if (empty($clientes)) {

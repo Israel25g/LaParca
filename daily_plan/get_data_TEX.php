@@ -1,8 +1,8 @@
 <?php
 // Conexión a la base de datos
 $host = 'localhost';
-$db = 'u366386740_db_test_dp';
-$user = 'u366386740_adminTestDP';
+$db = 'u366386740_db_dailyplan';
+$user = 'u366386740_adminDP';
 $pass = '1plGr0up01*';
 $charset = 'utf8mb4';
 
