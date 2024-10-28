@@ -211,7 +211,7 @@
           </div>
 
     <div class="carousel-item" data-bs-interval="7500">
-      <div  style="height: 1100px;padding-top: 0px;">
+      <div  style="height: 1100px;padding-top: 0px; margin: top 4%;">
       <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
       </div>
     </div>
