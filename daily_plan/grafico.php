@@ -201,7 +201,6 @@
             </div>
             </div>
 
-
 <!-- porcentaje tablas -->
               <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-9 " >
@@ -211,8 +210,8 @@
             </div>
             </div>
             </div>
+            </div>
 
-    </div>
     <div class="carousel-item" data-bs-interval="7500">
       <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
     </div>
