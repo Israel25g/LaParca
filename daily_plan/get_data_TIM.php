@@ -16,7 +16,6 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     // Verificar conexión exitosa
-    echo json_encode("");
 } catch (\PDOException $e) {
     echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
     exit;
