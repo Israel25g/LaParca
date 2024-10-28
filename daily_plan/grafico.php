@@ -202,12 +202,10 @@
             </div>
 
 <!-- porcentaje tablas -->
-                <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 800px; height: 450px;border-radius: 15px; overflow: hidden;" >
-                  <div class="col-md-9 " >
+
                       <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
                       <div id="grafico-gauge" style="width: 900; height: 450px;"></div>
-                  </div>
-                </div>
+
               </div>
             </div>
           </div>
