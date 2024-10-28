@@ -143,7 +143,7 @@
     </div>
 
             <div class="carousel-item" data-bs-interval="15000">
-            <div class="container" style="margin-top: 8%">
+            <div class="container" >
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 5px">
 
             <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
