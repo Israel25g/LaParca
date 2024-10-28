@@ -196,7 +196,7 @@
             <div class="col-md-6 " >
             <div class="container" style="margin-left: 100px;">
                 <h2>Export</h2>
-                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped">
+                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped" style="width: 70%;">
                   <thead class="bg-danger">
                     <tr>
                       <th class="text-bg-danger">OID</th>
@@ -215,7 +215,7 @@
             <div class="col-md-6 " >
               <div class="container" style="margin-left: 100px;">
                 <h2>Import</h2>
-                <table id="clientes-table_TIM" border="1" class="table table-info table-striped">
+                <table id="clientes-table_TIM" border="1" class="table table-info table-striped" style="width: 70%;">
                   <thead class="bg-info">
                     <tr>
                       <th class="text-bg-info">AID</th>
@@ -232,9 +232,9 @@
 
             <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-6 " >
-              <div class="container" style="margin-left: 100px;">
+              <div class="container" style="margin-left: 200px;">
                 <h2>Picking</h2>
-                <table id="clientes-table_TPK" border="1" class="table table-warning table-striped">
+                <table id="clientes-table_TPK" border="1" class="table table-warning table-striped" >
                   <thead class="bg-warning">
                     <tr>
                       <th class="text-bg-warning">OID</th>
