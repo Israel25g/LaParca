@@ -192,7 +192,7 @@
             <div class="container" style="margin-top: 20%">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: 10% !important;  margin-top: 10% !important">
 
-            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 600px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-12" >
             <div class="container" >
                 <h2>Export</h2>
@@ -211,7 +211,7 @@
               </div>
             </div>
             </div>
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 600px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-12 " >
               <div class="container" >
                 <h2>Import</h2>
@@ -230,7 +230,7 @@
             </div>
             </div>
 
-            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 600px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-12 " >
               <div class="container" >
                 <h2>Picking</h2>
