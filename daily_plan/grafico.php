@@ -180,7 +180,7 @@
               </div>
             </div>
 
-            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 450px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <h2 style="margin-left:45%">Picking</h2>
             <div class="col-md-12" >
               <div class="container" >
