@@ -460,7 +460,7 @@
           grafico_gauge_d.setOption({
             series: [{
               name:'Porcentaje',
-              type: 'pie',
+              type: 'gauge',
               startAngle: 180,
               endAngle: 0,
               color:['#0dcaf0', '#DC143C ', ' #FFA500'],
@@ -483,7 +483,7 @@
           gaugeChart.setOption({
             series: [{
               name:'Porcentaje',
-              type: 'pie',
+              type: 'gauge',
               startAngle: 180,
               endAngle: 0,
               color:['#0dcaf0', '#DC143C ', ' #FFA500'],
