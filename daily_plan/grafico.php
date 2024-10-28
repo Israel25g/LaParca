@@ -203,7 +203,7 @@
             <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
                 <div class="col-md-6 " >
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge_d" style="width: 800; height: 450px;margin-top:-50px;margin-left:50px"></div>
+                    <div id="grafico-gauge_d"></div>
                 </div>
             </div>
               </div>
