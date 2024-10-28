@@ -202,15 +202,15 @@
             </div>
 
 <!-- porcentaje tablas -->
-              <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 200px; height: 400px;border-radius: 15px; overflow: hidden;" >
-                <div class="col-md-9 " >
-                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge_d" style="width: 900; height: 450px;"></div>
+                <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 800px; height: 450px;border-radius: 15px; overflow: hidden;" >
+                  <div class="col-md-9 " >
+                      <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
+                      <div id="grafico-gauge_d" style="width: 900; height: 450px;"></div>
+                  </div>
                 </div>
+              </div>
             </div>
-            </div>
-            </div>
-            </div>
+          </div>
 
     <div class="carousel-item" data-bs-interval="7500">
       <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
