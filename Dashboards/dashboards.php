@@ -119,7 +119,7 @@
     <script src="https://cdn.jsdelivr.net/npm/danfojs@1.1.2/lib/bundle.min.js"></script>
 
 
-    <script>
+    <!-- <script>
         // temporizador
 
         let registrarInactividad = function() {
@@ -146,7 +146,7 @@
         }
 
         registrarInactividad();
-    </script>
+    </script> -->
 
 </body>
 
