@@ -194,9 +194,9 @@
 
             <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-4" >
-            <div class="container" style="margin-left: 300px;" >
+            <div class="container" style="margin-left: 250px;" >
                 <h2>Export</h2>
-                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped" style="width: 70%;">
+                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped" >
                   <thead class="bg-danger">
                     <tr>
                       <th class="text-bg-danger">OID</th>
@@ -213,9 +213,9 @@
             </div>
             <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-4" >
-              <div class="container" style="margin-left: 300px;" >
+              <div class="container" style="margin-left: 250px;" >
                 <h2>Import</h2>
-                <table id="clientes-table_TIM" border="1" class="table table-info table-striped" style="width: 70%;">
+                <table id="clientes-table_TIM" border="1" class="table table-info table-striped" >
                   <thead class="bg-info">
                     <tr>
                       <th class="text-bg-info">AID</th>
