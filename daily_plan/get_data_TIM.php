@@ -23,7 +23,7 @@ try {
 }
 
 // Consulta SQL
-$query = 'SELECT aid_oid, cliente, contenedores_recibidos, contenedores_cerrados FROM import WHERE fecha_objetivo = CURDATE()';
+$query = 'SELECT aid_oid, cliente, pedidos_despachados, pedidos_en_proceso FROM import WHERE fecha_objetivo = CURDATE()';
 try {
     $stmt = $pdo->query($query);
     $clientes = $stmt->fetchAll();
