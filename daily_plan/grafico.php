@@ -200,10 +200,10 @@
               </div>
             </div>
             </div>
-            <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 800; height: 450px;border-radius: 15px; overflow: hidden;" >
-                <div style="position: relative; width: 800px; height: 800px; padding: 10px; margin-left: -80px; margin-top: -100px; border-width: 10px;">
+            <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
+                <div class="col-md-6 " >
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge_d" style="position: relative; width: 800px; height: 800px; padding: 10px; margin-top: -100px; border-width: 10px;"></div>
+                    <div id="grafico-gauge" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
                 </div>
             </div>
               </div>
@@ -495,7 +495,7 @@
               axisLabel: { show: true },
               data: gaugeData,
               title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
-              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,1000,10], borderWidth: 1,},
+              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,10,10], borderWidth: 1,},
             }]
           });
         });
