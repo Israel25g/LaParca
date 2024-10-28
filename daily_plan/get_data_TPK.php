@@ -21,7 +21,7 @@ try {
 }
 
 // Consulta para obtener los datos de Picking
-$stmt = $pdo->query('SELECT aid_oid, cliente, vehiculo, vacio_lleno, pedidos_en_proceso, division_dp, fecha_objetivo FROM picking WHERE fecha_objetivo = CURDATE()');
+$stmt = $pdo->query('SELECT aid_oid, cliente, vacio_lleno, pedidos_en_proceso, division_dp, fecha_objetivo FROM picking WHERE fecha_objetivo = CURDATE()');
 $clientes = $stmt->fetchAll();
 
 if (empty($clientes)) {
