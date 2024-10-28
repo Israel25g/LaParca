@@ -201,7 +201,7 @@
             </div>
             </div>
 
-<!-- porcentaje tablas -->
+                      <!-- porcentaje tablas -->
 
                       <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
                       <div id="grafico-gauge" style="width: 900; height: 450px;"></div>
