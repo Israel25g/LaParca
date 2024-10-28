@@ -189,14 +189,14 @@
     </div>
 
             <div class="carousel-item" data-bs-interval="15000">
-            <div class="container" style="margin-top: 0%">
-            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
+            <div class="container" style="margin-top: 20%">
+            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: 10% !important;  margin-top: 10% !important">
 
-            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="col-md-6 " >
-            <div class="container" style="margin-left: 100px;">
+            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-12" >
+            <div class="container" >
                 <h2>Export</h2>
-                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped" style="width: 7;">
+                <table id="clientes-table_TEX" border="1" class="table table-danger table-striped" style="width: 70%;">
                   <thead class="bg-danger">
                     <tr>
                       <th class="text-bg-danger">OID</th>
@@ -211,11 +211,11 @@
               </div>
             </div>
             </div>
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="col-md-6 " >
-              <div class="container" style="margin-left: 100px;">
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-12 " >
+              <div class="container" >
                 <h2>Import</h2>
-                <table id="clientes-table_TIM" border="1" class="table table-info table-striped">
+                <table id="clientes-table_TIM" border="1" class="table table-info table-striped" style="width: 70%;">
                   <thead class="bg-info">
                     <tr>
                       <th class="text-bg-info">AID</th>
@@ -230,16 +230,15 @@
             </div>
             </div>
 
-            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="col-md-6 " >
-              <div class="container" style="margin-left: 100px;">
+            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="col-md-12 " >
+              <div class="container" >
                 <h2>Picking</h2>
-                <table id="clientes-table_TPK" border="1" class="table table-warning table-striped">
+                <table id="clientes-table_TPK" border="1" class="table table-warning table-striped" >
                   <thead class="bg-warning">
                     <tr>
                       <th class="text-bg-warning">OID</th>
                       <th class="text-bg-warning">Cliente</th>
-                      <th class="text-bg-warning">Vehículo</th>
                       <th class="text-bg-warning">Prioridad de Picking</th>
                       <th class="text-bg-warning">Unidades por Pickear</th>
                       <th class="text-bg-warning">Porcentaje de Avance</th>
@@ -358,7 +357,6 @@
                         '<tr>' +
                         '<td>' + cliente.aid_oid + '</td>' +
                         '<td>' + cliente.cliente + '</td>' +
-                        '<td>' + cliente.vehiculo + '</td>' +
                         '<td>' + cliente.vacio_lleno + '</td>' +
                         '<td>' + cliente.pedidos_en_proceso + '</td>' +
                         '<td>' + cliente.division_dp + '</td>' +
