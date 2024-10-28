@@ -191,7 +191,8 @@
             <div class="carousel-item" data-bs-interval="15000">
             <div class="container" style="margin-top: 0%">
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: -10% !important;  margin-top: 0% !important">
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-6 " >
             <div class="container">
                 <h2>Export</h2>
@@ -228,8 +229,8 @@
               </div>
             </div>
             </div>
-            
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 300px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="col-md-6 " >
               <div class="container">
                 <h2>Picking</h2>
@@ -530,7 +531,8 @@
             }]
           });
         });
-        fetch('get_data_porcen.php')
+
+                fetch('get_data_porcen.php')
         .then(response => response.json())
         .then(gaugeData => {
           // Configuración del gráfico de porcentaje de cumplimiento
