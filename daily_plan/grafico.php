@@ -189,13 +189,11 @@
     </div>
 
             <div class="carousel-item" data-bs-interval="15000">
-            <div class="container" style="margin-top: 20%">
-            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 10px; margin-left: 10% !important;  margin-top: 10% !important">
 
-            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="col-md-12" >
-            <div class="container" >
-                <h2>Export</h2><br/>
+              <div class="container text-center">
+              <div class="row align-items-start">
+                <div class="col">
+                <h2>Export</h2>
                 <table id="clientes-table_TEX" border="1" class="table table-danger table-striped" style="width: 70%;">
                   <thead class="bg-danger">
                     <tr>
@@ -208,13 +206,9 @@
                   </thead>
                   <tbody></tbody>
                 </table>
-              </div>
-            </div>
-            </div>
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="col-md-12 " >
-              <div class="container" >
-                <h2>Import</h2><br/>
+                </div>
+                <div class="col">
+                <h2>Import</h2>
                 <table id="clientes-table_TIM" border="1" class="table table-info table-striped" style="width: 70%;">
                   <thead class="bg-info">
                     <tr>
@@ -226,13 +220,8 @@
                   </thead>
                   <tbody></tbody>
                 </table>
-              </div>
-            </div>
-            </div>
-
-            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <div class="col-md-12 " >
-              <div class="container" >
+                </div>
+                <div class="col">
                 <h2>Picking</h2>
                 <table id="clientes-table_TPK" border="1" class="table table-warning table-striped" >
                   <thead class="bg-warning">
@@ -247,19 +236,8 @@
                   </thead>
                   <tbody></tbody>
                 </table>
-              </div>
-            </div>
-            </div>
-
-
-<!-- porcentaje tablas -->
-              <div class="bloquee" id="porcentaje" style="position: relative;width: 200%; height: 400px;border-radius: 15px; overflow: hidden;" >
-                <div class="col-md-6 " >
-                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge_d" style="width: 900; height: 450px;margin-top:-50px;margin-left:50px"></div>
                 </div>
-            </div>
-            </div>
+              </div>
             </div>
 
     </div>
