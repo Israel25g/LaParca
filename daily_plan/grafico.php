@@ -200,7 +200,7 @@
               </div>
             </div>
             </div>
-            <div class="bloquee border border-5 border-dark" id="porcentaje" style="position: relative;width: 800; height: 450px;border-radius: 15px; overflow: hidden;" >
+            <div class="bloquee" id="porcentaje" style="position: relative;width: 800; height: 450px;border-radius: 15px; overflow: hidden;" >
                 <div style="position: relative; width: 800px; height: 800px; padding: 10px; margin-left: -80px;  border-width: 10px;">
                     <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;margin-left:150px">Porcentaje de cumplimiento</p>
                     <div id="grafico-gauge_d" style="position: relative; width: 900px; height: 450px; padding: 10px;  border-width: 10px;"></div>
@@ -211,25 +211,39 @@
           </div>
 
     <div class="carousel-item" data-bs-interval="7500">
+      <div style="margin-top: 100px;">
       <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
+      </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
+      <div>
       <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 100%;display: flex;z-index: 999;">
+      </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
+      <div>
       <img loading="lazy" src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
+      <div>
       <img loading="lazy" src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
+    <div>
       <img loading="lazy" src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
+      <div>
       <img loading="lazy" src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
+      <div>
       <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="width: 100px;height: 1000px;padding-top: 500px !important;">
