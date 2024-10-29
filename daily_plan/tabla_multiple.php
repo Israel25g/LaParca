@@ -80,12 +80,17 @@ try {
     <!-- Filtro para la consulta -->
     <h2 class="mt-3 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
-        <label for="filtro">Elige la operacion:</label>
-        <select name="filtro" id="filtro" class="form-control">
-            <option value="import" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'import' ? 'selected' : '' ?>>Import</option>
-            <option value="export" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'export' ? 'selected' : '' ?>>Export</option>
-            <option value="picking" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'picking' ? 'selected' : '' ?>>Picking</option>
-        </select>
+    <label for="filtro">Elige la operacion:</label>
+          <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Action
+        </button>
+        <ul name="filtro" id="filtro" class="dropdown-menu">
+          <li value="import" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'import' ? 'selected' : '' ?>><a class="dropdown-item" >Import</a></li>
+          <li value="export" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'export' ? 'selected' : '' ?>><a class="dropdown-item" >Export</a></li>
+          <li value="picking" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'picking' ? 'selected' : '' ?>><a class="dropdown-item" >Picking</a></li>
+        </ul>
+      </div>
         <button type="submit" class="btn btn-primary mt-2">Seleccionar Operacion</button>
     </form>
 
