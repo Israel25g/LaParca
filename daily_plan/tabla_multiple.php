@@ -87,8 +87,8 @@ try {
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
-    <div class="dropdown bg bg-success">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <!-- Texto del botón que muestra la opción seleccionada -->
             <?= isset($_GET['filtro']) ? ucfirst($_GET['filtro']) : 'Selecciona una opción' ?>
         </button>
