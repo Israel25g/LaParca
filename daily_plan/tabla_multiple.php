@@ -70,7 +70,7 @@ try {
     <link rel="shortcut icon" href="../images/ICO.png">
 </head>
 <body background="../images/Motivo2.png">
-<div class="container-lg" style="margin-top: 150px;">
+<div class="container-lg start-0" style="margin-top: 150px;">
 
     <!-- Header -->
     <div class="header-error">
