@@ -87,24 +87,24 @@ try {
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown bg bg-success">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <!-- Texto del botón que muestra la opción seleccionada -->
             <?= isset($_GET['filtro']) ? ucfirst($_GET['filtro']) : 'Selecciona una opción' ?>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
+                <a class="dropdown-item bg bg-info " href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
                     Import
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
+                <a class="dropdown-item bg bg-danger"  href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
                     Export
                 </a>
             </li>
             <li>
-                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
+                <a class="dropdown-item bg bg-warning" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
                     Picking
                 </a>
             </li>
