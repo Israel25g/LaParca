@@ -83,6 +83,7 @@ try {
       <p id="hora-actual">prueba</p>
     </div>
   </div>
+  <div class="container  start-0">
     <!-- Filtro para la consulta -->
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
@@ -126,7 +127,7 @@ try {
             <p>Mostrando los datos de Picking.</p>
         <?php endif; ?>
     </div>
-
+  </div>
     <!-- Tabla 'datos' -->
     <div class="tabla-container">
         <?php if ($error): ?>
