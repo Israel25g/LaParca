@@ -80,7 +80,7 @@ try {
     <!-- Filtro para la consulta -->
     <h2 class="mt-3 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
-        <label for="filtro">Elige el filtro:</label>
+        <label for="filtro">Elige la operacion:</label>
         <select name="filtro" id="filtro" class="form-control">
             <option value="import" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'import' ? 'selected' : '' ?>>Import</option>
             <option value="export" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'export' ? 'selected' : '' ?>>Export</option>
