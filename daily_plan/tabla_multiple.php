@@ -80,15 +80,35 @@ try {
     <!-- Filtro para la consulta -->
     <h2 class="mt-3 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
-      
-        <label for="filtro">Elige la operacion:</label>
-        <select name="filtro" id="filtro" class="form-control">
-            <option value="import" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'import' ? 'selected' : '' ?>>Import</option>
-            <option value="export" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'export' ? 'selected' : '' ?>>Export</option>
-            <option value="picking" <?= isset($_GET['filtro']) && $_GET['filtro'] == 'picking' ? 'selected' : '' ?>>Picking</option>
-        </select>
-        <button type="submit" class="btn btn-primary mt-2">Seleccionar Operacion</button>
-    </form>
+    <label for="filtro">Elige la operación:</label>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Texto del botón que muestra la opción seleccionada -->
+            <?= isset($_GET['filtro']) ? ucfirst($_GET['filtro']) : 'Selecciona una opción' ?>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
+                    Import
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
+                    Export
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
+                    Picking
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Campo oculto para almacenar el valor seleccionado -->
+    <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
+</form>
+
 
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
     <div class="alert alert-info mt-2">
