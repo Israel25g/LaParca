@@ -117,7 +117,7 @@ try {
 
 
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
-    <div class="alert alert-info d-inline p-20">
+    <div class="alert alert-info w-25 p3">
         <?php if ($filtro == 'import'): ?>
             <p>Mostrando datos de Import.</p>
         <?php elseif ($filtro == 'export'): ?>
