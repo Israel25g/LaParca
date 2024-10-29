@@ -446,7 +446,7 @@
             },
             legend: {left: 'left', orient: 'vertical',},
             grid: {
-                left: '10%',
+                left: '15%',
                 right: '8%',
                 bottom: '3%',
                 top: '30%',
