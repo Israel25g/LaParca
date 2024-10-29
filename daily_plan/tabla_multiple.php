@@ -88,11 +88,11 @@ try {
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
-        <button class="btn btn-secundary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-outline-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <!-- Texto del botón que muestra la opción seleccionada -->
             <?= isset($_GET['filtro']) ? ucfirst($_GET['filtro']) : 'Selecciona una opción' ?>
         </button>
-        <ul class="dropdown-menu bg bg-secundary" aria-labelledby="dropdownMenuButton">
+        <ul class="dropdown-menu bg bg-outline-secondary " aria-labelledby="dropdownMenuButton">
             <li>
                 <a class="dropdown-item bg bg-info " href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
                     Import
