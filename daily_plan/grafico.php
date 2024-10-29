@@ -437,16 +437,16 @@
                 stack: 'total',
                 label: {
                     show: mostrarNumeros, // Control de visibilidad de números
-                    position: 'top', // Posición 'top' para fuera de la barra
-                    fontSize: 12,
-                    color: '#333'
+                    // position: 'top', // Posición 'top' para fuera de la barra
+                    // fontSize: 12,
+                    // color: '#333'
                 },
                 data: clienteValues.map((value, index) => ({
                     value: value,
                     itemStyle: {
                         borderRadius: index === 0
-                            ? (value === maxRecibido ? [0, 10, 50, 0] : 0) // Bordes superiores redondeados
-                            : (value === maxEspera ? [0, 50, 10, 0] : 0) // Bordes inferiores redondeados
+                            ? (value === maxRecibido ? [0, 40, 40, 0] : 0) // Bordes superiores redondeados
+                            : (value === maxEspera ? [0, 40, 40, 0] : 0) // Bordes inferiores redondeados
                     }
                 }))
             });
