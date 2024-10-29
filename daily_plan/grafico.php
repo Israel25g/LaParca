@@ -418,16 +418,17 @@
         // Agrupar los datos en la estructura esperada
         const clientes = [...new Set(data.map(item => item.name))]; // Obtener clientes únicos
 
+        // Obtener todos los valores de los datos para encontrar el valor máximo global
+        const allValues = data.flatMap(item => item.data); // Aplanar todos los datos en un solo array
+        const globalMaxValue = Math.max(...allValues); // Encontrar el máximo entre todos los clientes y datos
+
         // Iterar sobre cada cliente para construir la serie
         clientes.forEach(cliente => {
             // Filtrar datos para el cliente actual
-            const clienteData = data.filter(item => item.name === cliente);
-            const clienteValues = clienteData[0].data;
+            const clienteData = data.find(item => item.name === cliente);
+            const clienteValues = clienteData.data;
 
-            // Encontrar el valor máximo en los datos del cliente actual
-            const maxValue = Math.max(...clienteValues);
-
-            // Añadir datos de "Recibido" con borde redondeado en el valor máximo
+            // Añadir datos de "Recibido" con borde redondeado en el valor máximo global
             series.push({
                 name: cliente, // Nombre del cliente
                 type: 'bar',
@@ -438,7 +439,7 @@
                 data: clienteValues.map(value => ({
                     value: value,
                     itemStyle: {
-                        borderRadius: value === maxValue ? 10 : 0 // Redondear solo el valor máximo
+                        borderRadius: value === globalMaxValue ? 10 : 0 // Redondear solo el valor máximo global
                     }
                 }))
             });
@@ -474,6 +475,7 @@
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
 
     fetch('get_data_porcen.php')
