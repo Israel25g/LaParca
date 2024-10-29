@@ -73,12 +73,18 @@ try {
 <div class="container-lg" style="margin-top: 150px;">
 
     <!-- Header -->
-    <div class="header-error">
-        <h1>Daily plan</h1>
+    <div class="header">
+    <div class="logo-container">
+      <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
     </div>
-
+    <h1>Daily Plan</h1>
+    <div class="cuadroFecha">
+      <p id="fecha-actual"></p>
+      <p id="hora-actual">prueba</p>
+    </div>
+  </div>
     <!-- Filtro para la consulta -->
-    <h2 class="mt-3 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
+    <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
