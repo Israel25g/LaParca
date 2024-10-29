@@ -433,7 +433,7 @@
                 type: 'bar',
                 stack: 'total',
                 label: {
-                    show: true
+                    show: false
                 },
                 data: clienteValues.map((value, index) => ({
                     value: value,
