@@ -369,7 +369,6 @@
                         series: [{
                             name: 'Export',
                             type: 'pie',
-                            roseType:'area',
                             radius: ['30%', '80%'],
                             label: {formatter: '{c}',position: 'inside',fontSize: 25},
                             data: data,
@@ -428,7 +427,8 @@
             series.push({
                 name: cliente, // Nombre del cliente
                 type: 'bar',
-                stack: 'total', // Para apilar
+                coordinateSystem: 'polar', // Usar coordenadas polares
+                stack: 'total', // Para apilar las barras
                 label: {
                     show: true // Mostrar etiquetas
                 },
@@ -436,36 +436,32 @@
             });
         });
 
-        // Configurar el gráfico de barras
+        // Configurar el gráfico de barras polares
         const option = {
-          title: {text: 'Import',subtext: '',left: 'center'},
+            title: {text: 'Import', subtext: '', left: 'center'},
             tooltip: {
-                trigger: 'axis',
+                trigger: 'item', // Cambiar el disparador para polares
                 axisPointer: {
                     type: 'shadow' 
                 }
             },
-            legend: {left: 'left', orient: 'vertical',},
-            grid: {
-                left: '15%',
-                right: '4%',
-                bottom: '3%',
-                top: '30%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'value'
-            },
-            yAxis: {
+            legend: { left: 'left', orient: 'vertical' },
+            polar: {},  // Configuración básica del sistema polar
+            angleAxis: {
                 type: 'category',
-                data: ['Recibido', 'En espera']
+                data: ['Recibido', 'En espera'], // Usar categorías en el eje angular
+                startAngle: 90 // Ajustar el ángulo de inicio si lo deseas
             },
-            series: series // se reemplaza la parte de series con la nueva estructura
+            radiusAxis: {
+                type: 'value' // El valor se muestra en el radio
+            },
+            series: series // Asignar la estructura de series creada anteriormente
         };
 
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
     fetch('get_data_porcen.php')
     .then(response => response.json())
