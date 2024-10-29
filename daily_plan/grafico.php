@@ -413,17 +413,20 @@
     .then(response => response.json())
     .then(data => {
         const series = [];
-        const clientes = [...new Set(data.map(item => item.name))]; // Obtener clientes únicos
+        const clientes = [...new Set(data.map(item => item.name))];
+
+        // Configuración para mostrar u ocultar números
+        const mostrarNumeros = true; // Cambiar a 'false' para ocultar los números
 
         // Obtener los valores de las dos categorías por separado
-        const recibidoValues = data.map(item => item.data[0]); // Valores de 'Recibido' (suponiendo que es el primer elemento)
-        const esperaValues = data.map(item => item.data[1]); // Valores de 'En espera' (suponiendo que es el segundo elemento)
+        const recibidoValues = data.map(item => item.data[0]); // Valores de 'Recibido'
+        const esperaValues = data.map(item => item.data[1]); // Valores de 'En espera'
 
         // Encontrar el valor máximo en cada categoría
         const maxRecibido = Math.max(...recibidoValues);
         const maxEspera = Math.max(...esperaValues);
 
-        // Construir la serie con los bordes redondeados en función del valor máximo de cada categoría
+        // Construir la serie con los bordes redondeados y etiquetas externas
         clientes.forEach(cliente => {
             const clienteData = data.find(item => item.name === cliente);
             const clienteValues = clienteData.data;
@@ -433,14 +436,17 @@
                 type: 'bar',
                 stack: 'total',
                 label: {
-                    show: false
+                    show: mostrarNumeros, // Control de visibilidad de números
+                    position: 'top', // Posición 'top' para fuera de la barra
+                    fontSize: 12,
+                    color: '#333'
                 },
                 data: clienteValues.map((value, index) => ({
                     value: value,
                     itemStyle: {
                         borderRadius: index === 0
-                            ? (value === maxRecibido ? [0, 50, 50, 0] : 0) // Bordes superiores redondeados en 'Recibido' 
-                            : (value === maxEspera ? [0, 50, 50, 0] : 0) // Bordes inferiores redondeados en 'En espera'
+                            ? (value === maxRecibido ? [0, 10, 50, 0] : 0) // Bordes superiores redondeados
+                            : (value === maxEspera ? [0, 50, 10, 0] : 0) // Bordes inferiores redondeados
                     }
                 }))
             });
@@ -476,6 +482,7 @@
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
 
 
