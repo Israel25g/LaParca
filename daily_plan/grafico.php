@@ -216,32 +216,32 @@
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <div style="height: 1150px;padding-top: 88px;margin: top 4%;">
+      <div style="height: 1200px;padding-top: 88px;margin: top 4%;">
       <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <div style="height: 1150px;padding-top: 88px;margin: top 4%;">
+      <div style="height: 1200px;padding-top: 88px;margin: top 4%;">
       <img loading="lazy" src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <div style="height: 1150px;padding-top: 88px;margin: top 4%;">
+      <div style="height: 1200px;padding-top: 88px;margin: top 4%;">
       <img loading="lazy" src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-    <div style="height: 1150px;padding-top: 88px;margin: top 4%;">
+    <div style="height: 1200px;padding-top: 88px;margin: top 4%;">
       <img loading="lazy" src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <div style="height: 1150px;padding-top: 88px;margin: top 4%;">
+      <div style="height: 1200px;padding-top: 88px;margin: top 4%;">
       <img loading="lazy" src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <div style="height: 1150px;padding-top: 88px;margin: top 4%;">
+      <div style="height: 1200px;padding-top: 88px;margin: top 4%;">
       <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
