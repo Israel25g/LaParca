@@ -439,8 +439,8 @@
                     value: value,
                     itemStyle: {
                         borderRadius: index === 0
-                            ? (value === maxRecibido ? [0, 20, 20, 0] : 0) // Bordes superiores redondeados en 'Recibido' 
-                            : (value === maxEspera ? [0, 20, 20, 0] : 0) // Bordes inferiores redondeados en 'En espera'
+                            ? (value === maxRecibido ? [0, 50, 50, 0] : 0) // Bordes superiores redondeados en 'Recibido' 
+                            : (value === maxEspera ? [0, 50, 50, 0] : 0) // Bordes inferiores redondeados en 'En espera'
                     }
                 }))
             });
