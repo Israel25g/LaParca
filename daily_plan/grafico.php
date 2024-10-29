@@ -430,7 +430,7 @@
                 coordinateSystem: 'polar', // Usar coordenadas polares
                 stack: 'total', // Para apilar las barras
                 label: {
-                    show: true // Mostrar etiquetas
+                    show: false // Mostrar etiquetas
                 },
                 data: clienteData[0].data // Recibido
             });
