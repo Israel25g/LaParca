@@ -23,7 +23,6 @@
     display: grid !important;
     grid-template-columns: auto auto !important;
     gap: 10px!important;
-    margin-top: 8% !important;
   }
 
   .table-container {
