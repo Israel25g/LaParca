@@ -428,7 +428,7 @@
                 name: cliente, // Nombre del cliente
                 type: 'bar',
                 coordinateSystem: 'polar', // Usar coordenadas polares
-                stack: 'total', // Para apilar las barras
+                // stack: 'total', // Para apilar las barras
                 label: {
                     show: false // Mostrar etiquetas
                 },
