@@ -412,34 +412,35 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
-        // Crear la estructura de series según el formato deseado
         const series = [];
-
-        // Agrupar los datos en la estructura esperada
         const clientes = [...new Set(data.map(item => item.name))]; // Obtener clientes únicos
 
-        // Obtener todos los valores de los datos para encontrar el valor máximo global
-        const allValues = data.flatMap(item => item.data); // Aplanar todos los datos en un solo array
-        const globalMaxValue = Math.max(...allValues); // Encontrar el máximo entre todos los clientes y datos
+        // Obtener los valores de las dos categorías por separado
+        const recibidoValues = data.map(item => item.data[0]); // Valores de 'Recibido' (suponiendo que es el primer elemento)
+        const esperaValues = data.map(item => item.data[1]); // Valores de 'En espera' (suponiendo que es el segundo elemento)
 
-        // Iterar sobre cada cliente para construir la serie
+        // Encontrar el valor máximo en cada categoría
+        const maxRecibido = Math.max(...recibidoValues);
+        const maxEspera = Math.max(...esperaValues);
+
+        // Construir la serie con los bordes redondeados en función del valor máximo de cada categoría
         clientes.forEach(cliente => {
-            // Filtrar datos para el cliente actual
             const clienteData = data.find(item => item.name === cliente);
             const clienteValues = clienteData.data;
 
-            // Añadir datos de "Recibido" con borde redondeado en el valor máximo global
             series.push({
-                name: cliente, // Nombre del cliente
+                name: cliente,
                 type: 'bar',
-                stack: 'total', // Para apilar las barras
+                stack: 'total',
                 label: {
-                    show: true // Mostrar etiquetas
+                    show: true
                 },
-                data: clienteValues.map(value => ({
+                data: clienteValues.map((value, index) => ({
                     value: value,
                     itemStyle: {
-                        borderRadius: value === globalMaxValue ? 10 : 0 // Redondear solo el valor máximo global
+                        borderRadius: index === 0
+                            ? (value === maxRecibido ? [10, 10, 0, 0] : 0) // Bordes superiores redondeados en 'Recibido' 
+                            : (value === maxEspera ? [0, 0, 10, 10] : 0) // Bordes inferiores redondeados en 'En espera'
                     }
                 }))
             });
@@ -451,7 +452,7 @@
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow' 
+                    type: 'shadow'
                 }
             },
             legend: { left: 'left', orient: 'vertical' },
@@ -469,12 +470,13 @@
                 type: 'category',
                 data: ['Recibido', 'En espera']
             },
-            series: series // se reemplaza la parte de series con la nueva estructura
+            series: series
         };
 
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
 
 
