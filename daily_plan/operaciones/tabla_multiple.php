@@ -137,9 +137,19 @@ try {
         <table id="tabla_MOP" class="display table">
             <thead>
             <tr>
-                <?php foreach ($encabezado as $titulo): ?>
-                    <th class="border end"><?= $titulo ?></th>
+            <?php if ($filtro == 'import'): ?>
+              <?php foreach ($encabezado as $titulo): ?>
+                    <th class="border end text-bg-info "><?= $titulo ?></th>
                 <?php endforeach; ?>
+        <?php elseif ($filtro == 'export'): ?>
+          <?php foreach ($encabezado as $titulo): ?>
+                    <th class="border end text-bg-danger"><?= $titulo ?></th>
+                <?php endforeach; ?>
+        <?php elseif ($filtro == 'picking'): ?>
+          <?php foreach ($encabezado as $titulo): ?>
+                    <th class="border end text-bg-warning"><?= $titulo ?></th>
+                <?php endforeach; ?>
+        <?php endif; ?>
             </tr>
             </thead>
             <tbody>
