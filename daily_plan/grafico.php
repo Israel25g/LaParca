@@ -427,41 +427,44 @@
             series.push({
                 name: cliente, // Nombre del cliente
                 type: 'bar',
-                coordinateSystem: 'polar', // Usar coordenadas polares
-                // stack: 'total', // Para apilar las barras
+                stack: 'total', // Para apilar
                 label: {
-                    show: false // Mostrar etiquetas
+                    show: true // Mostrar etiquetas
                 },
                 data: clienteData[0].data // Recibido
             });
         });
 
-        // Configurar el gráfico de barras polares
+        // Configurar el gráfico de barras
         const option = {
-            title: {text: 'Import', subtext: '', left: 'center'},
+          title: {text: 'Import',subtext: '',left: 'center'},
             tooltip: {
-                trigger: 'item', // Cambiar el disparador para polares
+                trigger: 'axis',
                 axisPointer: {
                     type: 'shadow' 
                 }
             },
-            legend: { left: 'left', orient: 'vertical' },
-            polar: {},  // Configuración básica del sistema polar
-            angleAxis: {
+            legend: {left: 'left', orient: 'vertical',},
+            grid: {
+                left: '15%',
+                right: '4%',
+                bottom: '3%',
+                top: '30%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
                 type: 'category',
-                data: ['Recibido', 'En espera'], // Usar categorías en el eje angular
-                startAngle: 90 // Ajustar el ángulo de inicio si lo deseas
+                data: ['Recibido', 'En espera']
             },
-            radiusAxis: {
-                type: 'value' // El valor se muestra en el radio
-            },
-            series: series // Asignar la estructura de series creada anteriormente
+            series: series // se reemplaza la parte de series con la nueva estructura
         };
 
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
-
 
     fetch('get_data_porcen.php')
     .then(response => response.json())
