@@ -9,32 +9,39 @@ try {
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
-
-    // Define la consulta SQL y el encabezado según el filtro
+    $mostrarTodo = isset($_GET['mostrar_todo']);
+    
+    // Define la consulta SQL y el encabezado según el filtro y el estado del checkbox
     if ($filtro == 'picking') {
-        $consultaSQL = "SELECT * FROM picking  WHERE division_dp < 1.00";
+        $consultaSQL = $mostrarTodo 
+            ? "SELECT * FROM picking" 
+            : "SELECT * FROM picking WHERE division_dp < 1.00";
         $encabezado = [
             "#", "OID", "Cliente", "Unidades por pickear", "Paletas",
             "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"
         ];
     } elseif ($filtro == 'export') {
-        $consultaSQL = "SELECT * FROM export  WHERE division_dp < 1.00";
+        $consultaSQL = $mostrarTodo 
+            ? "SELECT * FROM export" 
+            : "SELECT * FROM export WHERE division_dp < 1.00";
         $encabezado = [
             "#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso",
             "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"
         ];
     } elseif ($filtro == 'import') {
-        $consultaSQL = "SELECT * FROM import WHERE division_dp < 1.00";
+        $consultaSQL = $mostrarTodo 
+            ? "SELECT * FROM import" 
+            : "SELECT * FROM import WHERE division_dp < 1.00";
         $encabezado = [
             "#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir",
             "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades",
             "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"
         ];
     } else {
-        // En caso de un filtro no reconocido, podrías optar por redirigir a una opción por defecto o mostrar un error.
-        $consultaSQL = ""; // Cambiar a lo que necesites
-        $mensaje = "seleccione un tipo de operacion";
+        $consultaSQL = " NULL ";
+        $mensaje = "Seleccione un tipo de operación";
     }
+    
 
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
@@ -89,18 +96,17 @@ try {
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
-        <button class="btn btn-outline-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <!-- Texto del botón que muestra la opción seleccionada -->
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <?= isset($_GET['filtro']) ? ucfirst($_GET['filtro']) : 'Selecciona una opción' ?>
         </button>
-        <ul class="dropdown-menu bg bg-outline-secondary " aria-labelledby="dropdownMenuButton">
+        <ul class="dropdown-menu bg bg-outline-secondary" aria-labelledby="dropdownMenuButton">
             <li>
-                <a class="dropdown-item bg bg-info " href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
+                <a class="dropdown-item bg bg-info" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
                     Import
                 </a>
             </li>
             <li>
-                <a class="dropdown-item bg bg-danger"  href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
+                <a class="dropdown-item bg bg-danger" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
                     Export
                 </a>
             </li>
@@ -112,9 +118,16 @@ try {
         </ul>
     </div>
 
+    <!-- Checkbox para mostrar toda la tabla -->
+    <div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
+        <label class="form-check-label" for="mostrar_todo">Mostrar toda la tabla</label>
+    </div>
+
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
+
 
 
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
