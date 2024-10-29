@@ -83,7 +83,7 @@ try {
       <p id="hora-actual">prueba</p>
     </div>
   </div>
-  <div class="container" style="margin-left:-400px">
+  <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
     <form method="GET" class="mb-3">
@@ -118,13 +118,15 @@ try {
 
 
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
-    <div class="alert alert-info w-25 p3">
         <?php if ($filtro == 'import'): ?>
-            <p class="text-bg-info">Mostrando datos de Import.</p>
+          <div class="alert alert-info w-25 p3">
+            <p >Mostrando datos de Import.</p>
         <?php elseif ($filtro == 'export'): ?>
-            <p class="text-bg-danger">Mostrando datos de Export.</p>
+          <div class="alert alert-danger w-25 p3">
+            <p >Mostrando datos de Export.</p>
         <?php elseif ($filtro == 'picking'): ?>
-            <p class="text-bg-warning">Mostrando los datos de Picking.</p>
+          <div class="alert alert-warning w-25 p3">
+            <p >Mostrando los datos de Picking.</p>
         <?php endif; ?>
     </div>
   </div>
