@@ -1,7 +1,7 @@
 <?php
-include("../apertura_sesion.php");
-include '../daily_plan/funcionalidades/funciones.php';
-$config = include '../daily_plan/funcionalidades/config_DP.php';
+include("../../apertura_sesion.php");
+include '../funcionalidades/funciones.php';
+$config = include '../funcionalidades/config_DP.php';
 $error = false;
 
 try {
@@ -66,10 +66,10 @@ try {
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
   <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
-    <link rel="stylesheet" href="../main-global.css">
-    <link rel="shortcut icon" href="../images/ICO.png">
+    <link rel="stylesheet" href="../../main-global.css">
+    <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
-<body background="../images/Motivo2.png">
+<body background="../../images/Motivo2.png">
 <div class="container-lg start-0" style="margin-top: 150px;">
 
     <!-- Header -->
@@ -202,9 +202,9 @@ try {
             </tfoot>
         </table>
     </div>
-<?php include '../daily_plan/datatable.php'?>
+<?php include '../../daily_plan/datatable.php'?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../host_virtual_TI/js/script.js"></script>
+    <script src="../../host_virtual_TI/js/script.js"></script>
     <script>
       $(document).ready(function() {
         new DataTable('#tabla_MOP', {
