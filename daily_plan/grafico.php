@@ -422,29 +422,38 @@
         clientes.forEach(cliente => {
             // Filtrar datos para el cliente actual
             const clienteData = data.filter(item => item.name === cliente);
-            
-            // Añadir datos de "Recibido"
+            const clienteValues = clienteData[0].data;
+
+            // Encontrar el valor máximo en los datos del cliente actual
+            const maxValue = Math.max(...clienteValues);
+
+            // Añadir datos de "Recibido" con borde redondeado en el valor máximo
             series.push({
                 name: cliente, // Nombre del cliente
                 type: 'bar',
-                stack: 'total', // Para apilar
+                stack: 'total', // Para apilar las barras
                 label: {
                     show: true // Mostrar etiquetas
                 },
-                data: clienteData[0].data // Recibido
+                data: clienteValues.map(value => ({
+                    value: value,
+                    itemStyle: {
+                        borderRadius: value === maxValue ? 10 : 0 // Redondear solo el valor máximo
+                    }
+                }))
             });
         });
 
         // Configurar el gráfico de barras
         const option = {
-          title: {text: 'Import',subtext: '',left: 'center'},
+            title: { text: 'Import', subtext: '', left: 'center' },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
                     type: 'shadow' 
                 }
             },
-            legend: {left: 'left', orient: 'vertical',},
+            legend: { left: 'left', orient: 'vertical' },
             grid: {
                 left: '15%',
                 right: '4%',
@@ -465,6 +474,7 @@
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
+
 
     fetch('get_data_porcen.php')
     .then(response => response.json())
