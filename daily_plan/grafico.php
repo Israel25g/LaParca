@@ -145,7 +145,7 @@
             <div class="container" >
             <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 5px">
 
-            <div class="bloquee " id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <h2 style="margin-left:45%">Export</h2>
             <div class="container">
                 <table id="clientes-table_TEX"  class="table table-danger table-striped" style="width: 800px;" >
@@ -162,7 +162,7 @@
                 </table>
               </div>
             </div>
-            <div class="bloquee" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
               <h2 style="margin-left:45%">Import</h2>
               <div class="container">
                 <table id="clientes-table_TIM"  class="table table-info table-striped" style="width: 800px;">
@@ -179,7 +179,7 @@
               </div>
             </div>
 
-            <div class="bloquee " id="import"  style="position: relative;width: 800px; height: 450px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 450px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <h2 style="margin-left:45%">Picking</h2>
             <div class="col-md-12" >
               <div class="container" >
@@ -369,7 +369,6 @@
                         series: [{
                             name: 'Export',
                             type: 'pie',
-                            roseType:'area',
                             radius: ['30%', '80%'],
                             label: {formatter: '{c}',position: 'inside',fontSize: 25},
                             data: data,
@@ -413,58 +412,41 @@
                 fetch('get_data_im.php')
     .then(response => response.json())
     .then(data => {
+        // Crear la estructura de series según el formato deseado
         const series = [];
-        const clientes = [...new Set(data.map(item => item.name))];
 
-        // Configuración para mostrar u ocultar números
-        const mostrarNumeros = true; // Cambiar a 'false' para ocultar los números
+        // Agrupar los datos en la estructura esperada
+        const clientes = [...new Set(data.map(item => item.name))]; // Obtener clientes únicos
 
-        // Obtener los valores de las dos categorías por separado
-        const recibidoValues = data.map(item => item.data[0]); // Valores de 'Recibido'
-        const esperaValues = data.map(item => item.data[1]); // Valores de 'En espera'
-
-        // Encontrar el valor máximo en cada categoría
-        const maxRecibido = Math.max(...recibidoValues);
-        const maxEspera = Math.max(...esperaValues);
-
-        // Construir la serie con los bordes redondeados y etiquetas externas
+        // Iterar sobre cada cliente para construir la serie
         clientes.forEach(cliente => {
-            const clienteData = data.find(item => item.name === cliente);
-            const clienteValues = clienteData.data;
-
+            // Filtrar datos para el cliente actual
+            const clienteData = data.filter(item => item.name === cliente);
+            
+            // Añadir datos de "Recibido"
             series.push({
-                name: cliente,
+                name: cliente, // Nombre del cliente
                 type: 'bar',
-                stack: 'total',
+                stack: 'total', // Para apilar
                 label: {
-                    show: mostrarNumeros, // Control de visibilidad de números
-                    // position: 'top', // Posición 'top' para fuera de la barra
-                    // fontSize: 12,
-                    // color: '#333'
+                    show: true // Mostrar etiquetas
                 },
-                data: clienteValues.map((value, index) => ({
-                    value: value,
-                    itemStyle: {
-                        borderRadius: index === 0
-                            ? (value === maxRecibido ? [0, 40, 40, 0] : 0) // Bordes superiores redondeados
-                            : (value === maxEspera ? [0, 40, 40, 0] : 0) // Bordes inferiores redondeados
-                    }
-                }))
+                data: clienteData[0].data // Recibido
             });
         });
 
         // Configurar el gráfico de barras
         const option = {
-            title: { text: 'Import', subtext: '', left: 'center' },
+          title: {text: 'Import',subtext: '',left: 'center'},
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow'
+                    type: 'shadow' 
                 }
             },
-            legend: { left: 'left', orient: 'vertical' },
+            legend: {left: 'left', orient: 'vertical',},
             grid: {
-                left: '15%',
+                left: '10%',
                 right: '4%',
                 bottom: '3%',
                 top: '30%',
@@ -477,16 +459,12 @@
                 type: 'category',
                 data: ['Recibido', 'En espera']
             },
-            series: series
+            series: series // se reemplaza la parte de series con la nueva estructura
         };
 
         // Establecer la opción en el gráfico
         barChart.setOption(option);
     });
-
-
-
-
 
     fetch('get_data_porcen.php')
     .then(response => response.json())
