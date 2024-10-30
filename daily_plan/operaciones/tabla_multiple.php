@@ -119,7 +119,7 @@ try {
         <?php endif; ?>
     
 
-        <div class="container mt-3">
+        <div class="container mt-3" style="margin-left: -25px;">
         <form method="GET" class="p-2 mb-2 bg-light rounded-3 border">
             <div class="row align-items-center g-2">
                 
@@ -188,7 +188,7 @@ try {
                       <li><a class="dropdown-item bg-danger text-light" href="../formulario_ex.php">Formulario singular</a></li>
                       <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
-                  <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                  <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
                 <?php elseif ($filtro == 'picking'): ?>
                   <button class="btn btn-warning ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
