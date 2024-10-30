@@ -4,55 +4,51 @@ include '../funcionalidades/funciones.php';
 $config = include '../funcionalidades/config_DP.php';
 $error = false;
 
-
 try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
     $mostrarTodo = isset($_GET['mostrar_todo']);
-    $fechaEstimacionLlegada = isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '';
-    $condiciones = [];
-
-    if (!$mostrarTodo) {
-        $condiciones[] = "division_dp < 1.00";
-    }
-
-    if ($fechaEstimacionLlegada) {
-        $condiciones[] = "fecha_objetivo = :fecha_objetivo";
-    }
-
+    
+    // Define la consulta SQL y el encabezado según el filtro y el estado del checkbox
     if ($filtro == 'picking') {
-        $consultaSQL = "SELECT * FROM picking";
+        $consultaSQL = $mostrarTodo 
+            ? "SELECT * FROM picking" 
+            : "SELECT * FROM picking WHERE division_dp < 1.00";
+        $encabezado = [
+            "#", "OID", "Cliente", "Unidades por pickear", "Paletas",
+            "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"
+        ];
     } elseif ($filtro == 'export') {
-        $consultaSQL = "SELECT * FROM export";
+        $consultaSQL = $mostrarTodo 
+            ? "SELECT * FROM export" 
+            : "SELECT * FROM export WHERE division_dp < 1.00";
+        $encabezado = [
+            "#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso",
+            "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"
+        ];
     } elseif ($filtro == 'import') {
-        $consultaSQL = "SELECT * FROM import";
+        $consultaSQL = $mostrarTodo 
+            ? "SELECT * FROM import" 
+            : "SELECT * FROM import WHERE division_dp < 1.00";
+        $encabezado = [
+            "#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir",
+            "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades",
+            "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"
+        ];
     } else {
         $consultaSQL = " NULL ";
         $mensaje = "Seleccione un tipo de operación";
     }
-
-    if (!empty($condiciones)) {
-        $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
-    }
+    
 
     $sentencia = $conexion->prepare($consultaSQL);
-    if ($fechaEstimacionLlegada) {
-        $sentencia->bindValue(':fecha_objetivo', $fechaEstimacionLlegada, PDO::PARAM_STR);
-    }
-
     $sentencia->execute();
     $datos = $sentencia->fetchAll();
-
-    // Verificar si hay datos en la consulta
-    $hayDatos = !empty($datos);
 } catch (PDOException $error) {
     $error = $error->getMessage();
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -98,8 +94,6 @@ try {
   <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
-
-    <!-- fomulario de filtros -->
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
@@ -125,12 +119,6 @@ try {
         </ul>
     </div>
 
-    <!-- Filtro de fecha para fecha estimada de llegada -->
-    <div class="form-group mt-2">
-        <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
-        <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
-    </div>
-
     <!-- Checkbox para mostrar toda la tabla -->
     <div class="form-check mt-2">
         <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
@@ -140,8 +128,6 @@ try {
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
-
-
 
 
 
@@ -158,7 +144,6 @@ try {
         <?php endif; ?>
     </div>
   </div>
-  
     <!-- Tabla 'datos' -->
     <div class="tabla-container">
         <?php if ($error): ?>
