@@ -217,7 +217,7 @@ try {
                             <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
                             <td class="border end">
                               <a class="btn btn-outline-warning fs-6 border end"href="<?='./operaciones/editar_im.php ?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
-                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
+                              
                             </td>
                             </td>
                         <?php endif; ?>
