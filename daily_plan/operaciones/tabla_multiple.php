@@ -135,7 +135,7 @@ try {
                 <div class="col-auto">
                     <label for="filtro" class="form-label mb-0 small">Operación</label>
                     <div class="dropdown">
-                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle w-100" type="button" 
+                        <button class="btn btn-secondary btn-sm dropdown-toggle w-100" type="button" 
                                 id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             Consultar
                         </button>
@@ -177,8 +177,8 @@ try {
                       <?php if ($filtro == 'import'): ?>
                   <button class="btn btn-info ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
                     <ul class="dropdown-menu bg-info">
-                      <li><a class="dropdown-item bg-info text-light" href="../formulario_im.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-info text-light" href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-info " href="../formulario_im.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-info " href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -193,8 +193,8 @@ try {
                 <?php elseif ($filtro == 'picking'): ?>
                   <button class="btn btn-warning ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
                     <ul class="dropdown-menu bg-warning">
-                      <li><a class="dropdown-item bg-warning text-light" href="../formulario_pk.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-warning text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-warning " href="../formulario_pk.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-warning " href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -253,7 +253,6 @@ try {
                             <td class="border end"><?= $fila['vacio_lleno'] ?></td>
                             <td class="border end"><?= $fila['division_dp'] *100?>%</td>
                             <td class="border end">
-                            <td class="border end">
                               <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_pk.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
                               <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
                             </td>
@@ -267,8 +266,7 @@ try {
                             <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
                             <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
                             <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
-                            <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
-                            <td class="border end">
+                            <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
                             <td class="border end">
                               <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_ex.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
                               <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
@@ -287,7 +285,7 @@ try {
                             <td class="border end"><?= $fila['unidades'] ?></td>
                             <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
                             <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
-                            <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
+                            <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
                             <td class="border end">
                               <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_im.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
                               <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
