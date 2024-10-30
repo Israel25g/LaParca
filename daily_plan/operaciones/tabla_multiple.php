@@ -101,7 +101,7 @@ try {
         </div>
         <h1><a href="../../helpdesk.php">Daily Plan</a></h1>
         <div class="cuadroFecha">
-          <p id="fecha-actual"></p>
+          <p id="fecha-actual" style="font-size: small;"></p>
           <p id="hora-actual"></p>
         </div>
       </div>
