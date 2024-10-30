@@ -173,6 +173,7 @@ try {
                 </div>
 
                 <div class="col-auto">
+                  <div class="form-check mt-4">
                       <?php if ($filtro == 'import'): ?>
                   <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
                     <ul class="dropdown-menu bg-success">
@@ -202,6 +203,7 @@ try {
               <?php if ($error): ?>
                   <div class="alert alert-danger"><?= $error ?></div>
               <?php endif; ?>
+                </div>
                 </div>
                 
                 <!-- Campo oculto para almacenar el valor seleccionado -->
