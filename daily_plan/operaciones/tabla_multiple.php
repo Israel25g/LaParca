@@ -108,7 +108,16 @@ try {
 
   <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
-    <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
+    <?php if ($filtro == 'import'): ?>
+      <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
+        <?php elseif ($filtro == 'export'): ?>
+          <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
+        <?php elseif ($filtro == 'picking'): ?>
+          <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Picking</h2>
+        <?php elseif ($filtro == NULL): ?>
+          <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
+        <?php endif; ?>
+    
 
     <form method="GET" class="mb-3">
     <div class="container text-left">
