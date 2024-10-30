@@ -175,28 +175,28 @@ try {
                 <div class="col-auto">
                   <div class="form-check mt-4">
                       <?php if ($filtro == 'import'): ?>
-                  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
-                    <ul class="dropdown-menu bg-success">
-                      <li><a class="dropdown-item bg-success text-light" href="../formulario_im.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-success text-light" href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
+                  <button class="btn btn-info ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
+                    <ul class="dropdown-menu bg-info">
+                      <li><a class="dropdown-item bg-info text-light" href="../formulario_im.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-info text-light" href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
                     </ul>
-                  <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                  <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
                 <?php elseif ($filtro == 'export'): ?>
-                  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
-                    <ul class="dropdown-menu bg-success">
-                      <li><a class="dropdown-item bg-success text-light" href="../formulario_ex.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-success text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                  <button class="btn btn-danger ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
+                    <ul class="dropdown-menu bg-danger">
+                      <li><a class="dropdown-item bg-danger text-light" href="../formulario_ex.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
                 <?php elseif ($filtro == 'picking'): ?>
-                  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
-                    <ul class="dropdown-menu bg-success">
-                      <li><a class="dropdown-item bg-success text-light" href="../formulario_pk.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-success text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                  <button class="btn btn-warning ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
+                    <ul class="dropdown-menu bg-warning">
+                      <li><a class="dropdown-item bg-warning text-light" href="../formulario_pk.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-warning text-light" href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
-                  <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                  <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
                 <?php endif; ?>
 
