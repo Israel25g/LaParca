@@ -10,45 +10,74 @@ try {
 
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
     $mostrarTodo = isset($_GET['mostrar_todo']);
-    
-    // Define la consulta SQL y el encabezado según el filtro y el estado del checkbox
+
+    // Filtros de fecha adicionales
+    $fechaEstimacionLlegada = isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '';
+    $llegadaRampa = isset($_GET['llegada_rampa']) ? $_GET['llegada_rampa'] : '';
+    $salidaRampa = isset($_GET['salida_rampa']) ? $_GET['salida_rampa'] : '';
+
+    // Condiciones adicionales
+    $condiciones = [];
+
+    if (!$mostrarTodo) {
+        $condiciones[] = "division_dp < 1.00";
+    }
+
+    // Agrega condiciones para los filtros de fecha
+    if ($fechaEstimacionLlegada) {
+        $condiciones[] = "fecha_estimacion_llegada = :fecha_estimacion_llegada";
+    }
+    if ($llegadaRampa) {
+        $condiciones[] = "llegada_rampa = :llegada_rampa";
+    }
+    if ($salidaRampa) {
+        $condiciones[] = "salida_rampa = :salida_rampa";
+    }
+
+    // Construye la consulta SQL según el filtro y condiciones
     if ($filtro == 'picking') {
-        $consultaSQL = $mostrarTodo 
-            ? "SELECT * FROM picking" 
-            : "SELECT * FROM picking WHERE division_dp < 1.00";
-        $encabezado = [
-            "#", "OID", "Cliente", "Unidades por pickear", "Paletas",
-            "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"
-        ];
+        $consultaSQL = "SELECT * FROM picking";
+        if (!empty($condiciones)) {
+            $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
+        }
+        $encabezado = ["#", "OID", "Cliente", "Unidades por pickear", "Paletas", "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"];
     } elseif ($filtro == 'export') {
-        $consultaSQL = $mostrarTodo 
-            ? "SELECT * FROM export" 
-            : "SELECT * FROM export WHERE division_dp < 1.00";
-        $encabezado = [
-            "#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso",
-            "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"
-        ];
+        $consultaSQL = "SELECT * FROM export";
+        if (!empty($condiciones)) {
+            $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
+        }
+        $encabezado = ["#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso", "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } elseif ($filtro == 'import') {
-        $consultaSQL = $mostrarTodo 
-            ? "SELECT * FROM import" 
-            : "SELECT * FROM import WHERE division_dp < 1.00";
-        $encabezado = [
-            "#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir",
-            "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades",
-            "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"
-        ];
+        $consultaSQL = "SELECT * FROM import";
+        if (!empty($condiciones)) {
+            $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
+        }
+        $encabezado = ["#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades", "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } else {
         $consultaSQL = " NULL ";
         $mensaje = "Seleccione un tipo de operación";
     }
-    
 
+    // Preparar y ejecutar la consulta
     $sentencia = $conexion->prepare($consultaSQL);
+
+    // Asignación de valores de los filtros adicionales
+    if ($fechaEstimacionLlegada) {
+        $sentencia->bindValue(':fecha_estimacion_llegada', $fechaEstimacionLlegada, PDO::PARAM_STR);
+    }
+    if ($llegadaRampa) {
+        $sentencia->bindValue(':llegada_rampa', $llegadaRampa, PDO::PARAM_STR);
+    }
+    if ($salidaRampa) {
+        $sentencia->bindValue(':salida_rampa', $salidaRampa, PDO::PARAM_STR);
+    }
+
     $sentencia->execute();
     $datos = $sentencia->fetchAll();
 } catch (PDOException $error) {
     $error = $error->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +123,8 @@ try {
   <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
+
+    <!-- fomulario de filtros -->
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
@@ -119,6 +150,22 @@ try {
         </ul>
     </div>
 
+    <!-- Filtros adicionales de fecha -->
+    <div class="form-group mt-2">
+        <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
+        <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+    </div>
+
+    <div class="form-group mt-2">
+        <label for="llegada_rampa">Llegada a rampa:</label>
+        <input type="date" name="llegada_rampa" id="llegada_rampa" class="form-control" value="<?= isset($_GET['llegada_rampa']) ? $_GET['llegada_rampa'] : '' ?>">
+    </div>
+
+    <div class="form-group mt-2">
+        <label for="salida_rampa">Salida de rampa:</label>
+        <input type="date" name="salida_rampa" id="salida_rampa" class="form-control" value="<?= isset($_GET['salida_rampa']) ? $_GET['salida_rampa'] : '' ?>">
+    </div>
+
     <!-- Checkbox para mostrar toda la tabla -->
     <div class="form-check mt-2">
         <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
@@ -128,6 +175,7 @@ try {
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
+
 
 
 
@@ -144,6 +192,7 @@ try {
         <?php endif; ?>
     </div>
   </div>
+  
     <!-- Tabla 'datos' -->
     <div class="tabla-container">
         <?php if ($error): ?>
