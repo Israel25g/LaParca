@@ -127,32 +127,32 @@ try {
             <div class="form-group sm-3">
                 <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
                 <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+                <label for="filtro">Elige la operación:</label>
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Consultar
+                    </button>
+                    <ul class="dropdown-menu bg bg-outline-secondary" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <a class="dropdown-item bg bg-info" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
+                                Import
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item bg bg-danger" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
+                                Export
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item bg bg-warning" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
+                                Picking
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
       
           </div>
-    <label for="filtro">Elige la operación:</label>
-    <div class="dropdown">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Consultar
-        </button>
-        <ul class="dropdown-menu bg bg-outline-secondary" aria-labelledby="dropdownMenuButton">
-            <li>
-                <a class="dropdown-item bg bg-info" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
-                    Import
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item bg bg-danger" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
-                    Export
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-item bg bg-warning" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
-                    Picking
-                </a>
-            </li>
-        </ul>
-    </div>
       
     </div>
 </div>
