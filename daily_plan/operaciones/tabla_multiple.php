@@ -10,45 +10,60 @@ try {
 
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
     $mostrarTodo = isset($_GET['mostrar_todo']);
-    
-    // Define la consulta SQL y el encabezado según el filtro y el estado del checkbox
+
+    // Filtro de fecha estimada de llegada
+    $fechaEstimacionLlegada = isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '';
+
+    // Condiciones adicionales
+    $condiciones = [];
+
+    if (!$mostrarTodo) {
+        $condiciones[] = "division_dp < 1.00";
+    }
+
+    // Condición para fecha estimada de llegada
+    if ($fechaEstimacionLlegada) {
+        $condiciones[] = "fecha_objetivo = :fecha_objetivo";
+    }
+
+    // Construye la consulta SQL según el filtro y condiciones
     if ($filtro == 'picking') {
-        $consultaSQL = $mostrarTodo 
-            ? "SELECT * FROM picking" 
-            : "SELECT * FROM picking WHERE division_dp < 1.00";
-        $encabezado = [
-            "#", "OID", "Cliente", "Unidades por pickear", "Paletas",
-            "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"
-        ];
+        $consultaSQL = "SELECT * FROM picking";
+        if (!empty($condiciones)) {
+            $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
+        }
+        $encabezado = ["#", "OID", "Cliente", "Unidades por pickear", "Paletas", "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"];
     } elseif ($filtro == 'export') {
-        $consultaSQL = $mostrarTodo 
-            ? "SELECT * FROM export" 
-            : "SELECT * FROM export WHERE division_dp < 1.00";
-        $encabezado = [
-            "#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso",
-            "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"
-        ];
+        $consultaSQL = "SELECT * FROM export";
+        if (!empty($condiciones)) {
+            $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
+        }
+        $encabezado = ["#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso", "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } elseif ($filtro == 'import') {
-        $consultaSQL = $mostrarTodo 
-            ? "SELECT * FROM import" 
-            : "SELECT * FROM import WHERE division_dp < 1.00";
-        $encabezado = [
-            "#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir",
-            "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades",
-            "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"
-        ];
+        $consultaSQL = "SELECT * FROM import";
+        if (!empty($condiciones)) {
+            $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
+        }
+        $encabezado = ["#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades", "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } else {
         $consultaSQL = " NULL ";
         $mensaje = "Seleccione un tipo de operación";
     }
-    
 
+    // Preparar y ejecutar la consulta
     $sentencia = $conexion->prepare($consultaSQL);
+
+    // Asignación del valor para el filtro de fecha
+    if ($fechaEstimacionLlegada) {
+        $sentencia->bindValue(':fecha_objetivo', $fechaEstimacionLlegada, PDO::PARAM_STR);
+    }
+
     $sentencia->execute();
     $datos = $sentencia->fetchAll();
 } catch (PDOException $error) {
     $error = $error->getMessage();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +109,7 @@ try {
   <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
+
     <form method="GET" class="mb-3">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
@@ -119,6 +135,12 @@ try {
         </ul>
     </div>
 
+    <!-- Filtro de fecha para fecha estimada de llegada -->
+    <div class="form-group mt-2">
+        <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
+        <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+    </div>
+
     <!-- Checkbox para mostrar toda la tabla -->
     <div class="form-check mt-2">
         <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
@@ -128,6 +150,7 @@ try {
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
+
 
 
 
