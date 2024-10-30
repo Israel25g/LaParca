@@ -195,7 +195,7 @@ try {
                       extend: 'copy',
                       text: 'Copiar',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8] 
+                        columns: [0, 1, 2,3,4,5,6,7,8,9,10,11] 
 
                       }
                     },
@@ -203,28 +203,28 @@ try {
                       extend: 'csv',
                       text: 'CSV',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
+                        columns: [0, 1, 2,3,4,5,6,7,8,9,10,11]
                       }
                     },
                     {
                       extend: 'excel',
                       text: 'Excel',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
+                        columns: [0, 1, 2,3,4,5,6,7,8,9,10,11]
                       }
                     },
                     {
                       extend: 'pdf',
                       text: 'PDF',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
+                        columns: [0, 1, 2,3,4,5,6,7,8,9,10,11]
                       }
                     },
                     {
                       extend: 'print',
                       text: 'Imprimir',
                       exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
+                        columns: [0, 1, 2,3,4,5,6,7,8,9,10,11]
                       }
                     }
                   ],

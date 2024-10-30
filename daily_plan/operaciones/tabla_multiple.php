@@ -124,9 +124,13 @@ try {
         <div class="form-group col-md-3">
           <div class="form-group col-md-3">
             <!-- Filtro de fecha para fecha estimada de llegada -->
+             
             <div class="form-group sm-3">
-                <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
+
+              <!--Boton de filtro de fecha -->
                 <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+            </div>
+                <div class="form-group sm-3">
                 <label for="filtro">Elige la operación:</label>
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
