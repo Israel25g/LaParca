@@ -11,10 +11,8 @@ try {
     $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'todos';
     $mostrarTodo = isset($_GET['mostrar_todo']);
 
-    // Filtros de fecha adicionales
-    $fechaEstimacionLlegada = isset($_GET['fecha_objetivo']) ? $_GET['fecha_objetivo'] : '';
-    $llegadaRampa = isset($_GET['fecha_lleg_rampa']) ? $_GET['fecha_lleg_rampa'] : '';
-    $salidaRampa = isset($_GET['fecha_sal_rampa']) ? $_GET['fecha_sal_rampa'] : '';
+    // Filtro de fecha estimada de llegada
+    $fechaEstimacionLlegada = isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '';
 
     // Condiciones adicionales
     $condiciones = [];
@@ -23,15 +21,9 @@ try {
         $condiciones[] = "division_dp < 1.00";
     }
 
-    // Agrega condiciones para los filtros de fecha
+    // Condición para fecha estimada de llegada
     if ($fechaEstimacionLlegada) {
         $condiciones[] = "fecha_objetivo = :fecha_objetivo";
-    }
-    if ($llegadaRampa) {
-        $condiciones[] = "fecha_lleg_rampa = :fecha_lleg_rampa";
-    }
-    if ($salidaRampa) {
-        $condiciones[] = "fecha_sal_rampa = :fecha_sal_rampa";
     }
 
     // Construye la consulta SQL según el filtro y condiciones
@@ -61,15 +53,9 @@ try {
     // Preparar y ejecutar la consulta
     $sentencia = $conexion->prepare($consultaSQL);
 
-    // Asignación de valores de los filtros adicionales
+    // Asignación del valor para el filtro de fecha
     if ($fechaEstimacionLlegada) {
         $sentencia->bindValue(':fecha_objetivo', $fechaEstimacionLlegada, PDO::PARAM_STR);
-    }
-    if ($llegadaRampa) {
-        $sentencia->bindValue(':fecha_lleg_rampa', $llegadaRampa, PDO::PARAM_STR);
-    }
-    if ($salidaRampa) {
-        $sentencia->bindValue(':fecha_sal_rampa', $salidaRampa, PDO::PARAM_STR);
     }
 
     $sentencia->execute();
@@ -77,6 +63,7 @@ try {
 } catch (PDOException $error) {
     $error = $error->getMessage();
 }
+
 
 ?>
 
@@ -150,20 +137,10 @@ try {
         </ul>
     </div>
 
-    <!-- Filtros adicionales de fecha -->
+    <!-- Filtro de fecha para fecha estimada de llegada -->
     <div class="form-group mt-2">
-        <label for=":fecha_objetivo">Fecha estimada de llegada:</label>
-        <input type="date" name=":fecha_objetivo" id=":fecha_objetivo" class="form-control" value="<?= isset($_GET[':fecha_objetivo']) ? $_GET[':fecha_objetivo'] : '' ?>">
-    </div>
-
-    <div class="form-group mt-2">
-        <label for="fecha_lleg_rampa">Llegada a rampa:</label>
-        <input type="date" name="fecha_lleg_rampa" id="llegada_rampa" class="form-control" value="<?= isset($_GET[':fecha_lleg_rampa']) ? $_GET['fecha_lleg_rampa'] : '' ?>">
-    </div>
-
-    <div class="form-group mt-2">
-        <label for="fecha_sal_rampa">Salida de rampa:</label>
-        <input type="date" name="fecha_sal_rampa" id="fecha_sal_rampa" class="form-control" value="<?= isset($_GET['fecha_sal_rampa']) ? $_GET['fecha_sal_rampa'] : '' ?>">
+        <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
+        <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
     </div>
 
     <!-- Checkbox para mostrar toda la tabla -->
@@ -175,6 +152,7 @@ try {
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
+
 
 
 
