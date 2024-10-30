@@ -80,7 +80,7 @@ try {
 <div class="container-lg start-0" style="margin-top: 150px;">
 
     <!-- Header -->
-    <div class="header">
+    <div class="header-error">
             <div class="logo-container">
                 <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
             </div>
