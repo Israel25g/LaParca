@@ -111,7 +111,7 @@ try {
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
 
     <form method="GET" class="mb-3">
-    <div class="container text-center">
+    <div class="container text-left">
   <div class="row">
     <div class="col">
     <label for="filtro">Elige la operación:</label>
