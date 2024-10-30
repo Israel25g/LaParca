@@ -124,7 +124,7 @@ try {
         <div class="form-group col-md-3">
           <div class="form-group col-md-3">
             <!-- Filtro de fecha para fecha estimada de llegada -->
-            <div class="form-group sm-2">
+            <div class="form-group sm-3">
                 <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
                 <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
             </div>
