@@ -111,6 +111,9 @@ try {
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
 
     <form method="GET" class="mb-3">
+    <div class="container text-center">
+  <div class="row">
+    <div class="col">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -134,25 +137,29 @@ try {
             </li>
         </ul>
     </div>
-
-    <!-- Filtro de fecha para fecha estimada de llegada -->
-    <div class="form-group mt-2">
-        <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
-        <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+      
     </div>
+    <div class="col">
+      <!-- Filtro de fecha para fecha estimada de llegada -->
+      <div class="form-group sm-2">
+          <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
+          <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+      </div>
 
-    <!-- Checkbox para mostrar toda la tabla -->
-    <div class="form-check mt-2">
-        <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
-        <label class="form-check-label" for="mostrar_todo">Mostrar toda la tabla</label>
     </div>
+    <div class="col">
+      <!-- Checkbox para mostrar toda la tabla -->
+      <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
+          <label class="form-check-label" for="mostrar_todo">Mostrar toda la tabla</label>
+      </div>
 
+    </div>
+  </div>
+</div>
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
-
-
-
 
     <!-- Mostrar el mensaje sobre el filtro aplicado -->
         <?php if ($filtro == 'import'): ?>
