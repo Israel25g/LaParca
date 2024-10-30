@@ -171,6 +171,38 @@ try {
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary btn-sm mt-3">Filtrar</button>
                 </div>
+
+                <div class="col-auto">
+                      <?php if ($filtro == 'import'): ?>
+                  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
+                    <ul class="dropdown-menu bg-success">
+                      <li><a class="dropdown-item bg-success text-light" href="../formulario_im.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-success text-light" href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
+                    </ul>
+                  <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                  <br/>
+                <?php elseif ($filtro == 'export'): ?>
+                  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
+                    <ul class="dropdown-menu bg-success">
+                      <li><a class="dropdown-item bg-success text-light" href="../formulario_ex.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-success text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                    </ul>
+                  <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                  <br/>
+                <?php elseif ($filtro == 'picking'): ?>
+                  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
+                    <ul class="dropdown-menu bg-success">
+                      <li><a class="dropdown-item bg-success text-light" href="../formulario_pk.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-success text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                    </ul>
+                  <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+                  <br/>
+                <?php endif; ?>
+
+              <?php if ($error): ?>
+                  <div class="alert alert-danger"><?= $error ?></div>
+              <?php endif; ?>
+                </div>
                 
                 <!-- Campo oculto para almacenar el valor seleccionado -->
                 <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
@@ -183,35 +215,7 @@ try {
 <div class="tabla-container" style="margin-bottom: 150px;">
       <!-- botones de acceso a formularios y tablas -->
        
-          <?php if ($filtro == 'import'): ?>
-            <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
-              <ul class="dropdown-menu bg-success">
-                <li><a class="dropdown-item bg-success text-light" href="../formulario_im.php">Formulario singular</a></li>
-                <li><a class="dropdown-item bg-success text-light" href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
-              </ul>
-            <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
-            <br/>
-          <?php elseif ($filtro == 'export'): ?>
-            <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
-              <ul class="dropdown-menu bg-success">
-                <li><a class="dropdown-item bg-success text-light" href="../formulario_ex.php">Formulario singular</a></li>
-                <li><a class="dropdown-item bg-success text-light" href="../hoja_ex.php">Hoja de datos</a></li>
-              </ul>
-            <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
-            <br/>
-          <?php elseif ($filtro == 'picking'): ?>
-            <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
-              <ul class="dropdown-menu bg-success">
-                <li><a class="dropdown-item bg-success text-light" href="../formulario_pk.php">Formulario singular</a></li>
-                <li><a class="dropdown-item bg-success text-light" href="../hoja_ex.php">Hoja de datos</a></li>
-              </ul>
-            <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
-            <br/>
-          <?php endif; ?>
-
-        <?php if ($error): ?>
-            <div class="alert alert-danger"><?= $error ?></div>
-        <?php endif; ?>
+          
 
         <table id="tabla_MOP" class="display table">
             <thead>
