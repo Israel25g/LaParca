@@ -154,13 +154,12 @@ if (isset($_POST['submit'])) {
                             <div class="form-group col-md-3">
                                 <label for="t_carga">Tipo de carga</label>
                                 <select type="text" name="t_carga" id="t_carga" class="form-control">
-                                    <option value="">...</option>
-                                    <option value="">...</option>
-                                    <option value="carga suelta">FCL</option>
-                                    <option value="contenerizada">LCL</option>
-                                    <option value="carga suelta">FTL</option>
-                                    <option value="contenerizada">LTL</option>
-                                    <option value="carga suelta">AIR</option>
+                                <option value="">...</option>
+                                    <option value="FCL">FCL</option>
+                                    <option value="LCL">LCL</option>
+                                    <option value="FTL">FTL</option>
+                                    <option value="LTL">LTL</option>
+                                    <option value="AIR">AIR</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3">

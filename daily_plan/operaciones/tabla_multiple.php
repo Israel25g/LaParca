@@ -167,6 +167,13 @@ try {
         <?php endif; ?>
     </div>
   </div>
+  <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../daily_plan/formulario_ex.php">Ingresar datos de Export</button>
+            <ul class="dropdown-menu bg-success">
+              <li><a class="dropdown-item bg-success text-light" href="../">Formulario singular</a></li>
+              <li><a class="dropdown-item bg-success text-light" href="../daily_plan/hoja_ex/hoja_ex.php">Hoja de datos</a></li>
+            </ul>
+          <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../daily_plan/grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
+          <br/>
     <!-- Tabla 'datos' -->
     <div class="tabla-container">
         <?php if ($error): ?>
