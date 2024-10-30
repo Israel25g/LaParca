@@ -147,16 +147,13 @@ try {
       </div>
 
     </div>
-    <div class="col-sm">
+  </div>
+</div>
       <!-- Checkbox para mostrar toda la tabla -->
       <div class="form-check mt-2">
           <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
           <label class="form-check-label" for="mostrar_todo">Mostrar toda la tabla</label>
       </div>
-
-    </div>
-  </div>
-</div>
     <!-- Campo oculto para almacenar el valor seleccionado -->
     <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
 </form>
