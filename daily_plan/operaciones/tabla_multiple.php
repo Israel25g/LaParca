@@ -84,7 +84,7 @@ try {
         <div class="logo-container">
           <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
-        <h1><a href="../../helpdesk.php">Control de Usuarios</a></h1>
+        <h1><a href="../../helpdesk.php">Daily Plan</a></h1>
         <div class="cuadroFecha">
           <p id="fecha-actual"></p>
           <p id="hora-actual"></p>
