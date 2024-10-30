@@ -119,59 +119,68 @@ try {
         <?php endif; ?>
     
 
-    <form method="GET" class="mb-3">
-      <div class="row">
-        <div class="form-group col-md-3">
-          <div class="form-group col-md-3">
-            <!-- Filtro de fecha para fecha estimada de llegada -->
-             
-            <div class="form-group sm-3">
-
-              <!--Boton de filtro de fecha -->
-                <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
-            </div>
-                <div class="form-group sm-3">
-                <label for="filtro">Elige la operación:</label>
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Consultar
-                    </button>
-                    <ul class="dropdown-menu bg bg-outline-secondary" aria-labelledby="dropdownMenuButton">
-                        <li>
-                            <a class="dropdown-item bg bg-info" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
-                                Import
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item bg bg-danger" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
-                                Export
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item bg bg-warning" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
-                                Picking
-                            </a>
-                        </li>
-                    </ul>
+        <div class="container mt-3">
+        <form method="GET" class="p-2 mb-2 bg-light rounded-3 border">
+            <div class="row align-items-center g-2">
+                
+                <!-- Filtro de fecha para fecha estimada de llegada -->
+                <div class="col-auto">
+                    <label for="fecha_estimacion_llegada" class="form-label mb-0 small">Fecha de Llegada</label>
+                    <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" 
+                           class="form-control form-control-sm" 
+                           value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
                 </div>
+
+                <!-- Menú desplegable para elegir operación -->
+                <div class="col-auto">
+                    <label for="filtro" class="form-label mb-0 small">Operación</label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle w-100" type="button" 
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Consultar
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
+                                    Import
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
+                                    Export
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
+                                    Picking
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Checkbox para mostrar toda la tabla -->
+                <div class="col-auto">
+                    <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
+                        <label class="form-check-label small" for="mostrar_todo">Mostrar toda la tabla</label>
+                    </div>
+                </div>
+
+                <!-- Botón de filtro -->
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-sm mt-3">Filtrar</button>
+                </div>
+                
+                <!-- Campo oculto para almacenar el valor seleccionado -->
+                <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
             </div>
-      
-          </div>
-      
+        </form>
     </div>
-</div>
-      <!-- Checkbox para mostrar toda la tabla -->
-      <div class="form-group col-md-3">
-          <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
-          <label class="form-check-label" for="mostrar_todo">Mostrar toda la tabla</label>
-      </div>
-    <!-- Campo oculto para almacenar el valor seleccionado -->
-    <input type="hidden" name="filtro" id="filtro" value="<?= isset($_GET['filtro']) ? $_GET['filtro'] : '' ?>">
-</form>
 
 </div>
 <!-- Tabla 'datos' -->
-<div class="tabla-container">
+<div class="tabla-container" style="margin-bottom: 150px;">
       <!-- botones de acceso a formularios y tablas -->
        
           <?php if ($filtro == 'import'): ?>
