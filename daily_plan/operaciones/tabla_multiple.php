@@ -12,9 +12,9 @@ try {
     $mostrarTodo = isset($_GET['mostrar_todo']);
 
     // Filtros de fecha adicionales
-    $fechaEstimacionLlegada = isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '';
-    $llegadaRampa = isset($_GET['llegada_rampa']) ? $_GET['llegada_rampa'] : '';
-    $salidaRampa = isset($_GET['salida_rampa']) ? $_GET['salida_rampa'] : '';
+    $fechaEstimacionLlegada = isset($_GET['fecha_objetivo']) ? $_GET['fecha_objetivo'] : '';
+    $llegadaRampa = isset($_GET['fecha_lleg_rampa']) ? $_GET['fecha_lleg_rampa'] : '';
+    $salidaRampa = isset($_GET['fecha_sal_rampa']) ? $_GET['fecha_sal_rampa'] : '';
 
     // Condiciones adicionales
     $condiciones = [];
@@ -25,13 +25,13 @@ try {
 
     // Agrega condiciones para los filtros de fecha
     if ($fechaEstimacionLlegada) {
-        $condiciones[] = "fecha_estimacion_llegada = :fecha_estimacion_llegada";
+        $condiciones[] = "fecha_objetivo = :fecha_objetivo";
     }
     if ($llegadaRampa) {
-        $condiciones[] = "llegada_rampa = :llegada_rampa";
+        $condiciones[] = "fecha_lleg_rampa = :fecha_lleg_rampa";
     }
     if ($salidaRampa) {
-        $condiciones[] = "salida_rampa = :salida_rampa";
+        $condiciones[] = "fecha_sal_rampa = :fecha_sal_rampa";
     }
 
     // Construye la consulta SQL según el filtro y condiciones
@@ -63,13 +63,13 @@ try {
 
     // Asignación de valores de los filtros adicionales
     if ($fechaEstimacionLlegada) {
-        $sentencia->bindValue(':fecha_estimacion_llegada', $fechaEstimacionLlegada, PDO::PARAM_STR);
+        $sentencia->bindValue(':fecha_objetivo', $fechaEstimacionLlegada, PDO::PARAM_STR);
     }
     if ($llegadaRampa) {
-        $sentencia->bindValue(':llegada_rampa', $llegadaRampa, PDO::PARAM_STR);
+        $sentencia->bindValue(':fecha_lleg_rampa', $llegadaRampa, PDO::PARAM_STR);
     }
     if ($salidaRampa) {
-        $sentencia->bindValue(':salida_rampa', $salidaRampa, PDO::PARAM_STR);
+        $sentencia->bindValue(':fecha_sal_rampa', $salidaRampa, PDO::PARAM_STR);
     }
 
     $sentencia->execute();
@@ -152,18 +152,18 @@ try {
 
     <!-- Filtros adicionales de fecha -->
     <div class="form-group mt-2">
-        <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
-        <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+        <label for=":fecha_objetivo">Fecha estimada de llegada:</label>
+        <input type="date" name=":fecha_objetivo" id=":fecha_objetivo" class="form-control" value="<?= isset($_GET[':fecha_objetivo']) ? $_GET[':fecha_objetivo'] : '' ?>">
     </div>
 
     <div class="form-group mt-2">
-        <label for="llegada_rampa">Llegada a rampa:</label>
-        <input type="date" name="llegada_rampa" id="llegada_rampa" class="form-control" value="<?= isset($_GET['llegada_rampa']) ? $_GET['llegada_rampa'] : '' ?>">
+        <label for="fecha_lleg_rampa">Llegada a rampa:</label>
+        <input type="date" name="fecha_lleg_rampa" id="llegada_rampa" class="form-control" value="<?= isset($_GET[':fecha_lleg_rampa']) ? $_GET['fecha_lleg_rampa'] : '' ?>">
     </div>
 
     <div class="form-group mt-2">
-        <label for="salida_rampa">Salida de rampa:</label>
-        <input type="date" name="salida_rampa" id="salida_rampa" class="form-control" value="<?= isset($_GET['salida_rampa']) ? $_GET['salida_rampa'] : '' ?>">
+        <label for="fecha_sal_rampa">Salida de rampa:</label>
+        <input type="date" name="fecha_sal_rampa" id="fecha_sal_rampa" class="form-control" value="<?= isset($_GET['fecha_sal_rampa']) ? $_GET['fecha_sal_rampa'] : '' ?>">
     </div>
 
     <!-- Checkbox para mostrar toda la tabla -->
