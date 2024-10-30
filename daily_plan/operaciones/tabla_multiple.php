@@ -4,6 +4,7 @@ include '../funcionalidades/funciones.php';
 $config = include '../funcionalidades/config_DP.php';
 $error = false;
 
+
 try {
     $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
     $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
