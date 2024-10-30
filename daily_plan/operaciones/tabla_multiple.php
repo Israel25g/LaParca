@@ -122,6 +122,14 @@ try {
     <form method="GET" class="mb-3">
       <div class="row">
         <div class="form-group col-md-3">
+          <div class="form-group col-md-3">
+            <!-- Filtro de fecha para fecha estimada de llegada -->
+            <div class="form-group sm-2">
+                <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
+                <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+            </div>
+      
+          </div>
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,14 +155,6 @@ try {
     </div>
       
     </div>
-    <div class="form-group col-md-3">
-      <!-- Filtro de fecha para fecha estimada de llegada -->
-      <div class="form-group sm-2">
-          <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
-          <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" class="form-control" value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
-      </div>
-
-    </div>
 </div>
       <!-- Checkbox para mostrar toda la tabla -->
       <div class="form-group col-md-3">
@@ -169,6 +169,7 @@ try {
 <!-- Tabla 'datos' -->
 <div class="tabla-container">
       <!-- botones de acceso a formularios y tablas -->
+       
           <?php if ($filtro == 'import'): ?>
             <button class="btn btn-success ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
               <ul class="dropdown-menu bg-success">
