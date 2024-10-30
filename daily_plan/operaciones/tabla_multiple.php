@@ -184,6 +184,7 @@ try {
           <a class="btn btn-warning ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
           <br/>
         <?php endif; ?>
+      </div>
     <!-- Tabla 'datos' -->
     <div class="tabla-container">
         <?php if ($error): ?>
