@@ -98,7 +98,7 @@ try {
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <?= isset($_GET['filtro']) ? ucfirst($_GET['filtro']) : 'Selecciona una opción' ?>
+            Consultar
         </button>
         <ul class="dropdown-menu bg bg-outline-secondary" aria-labelledby="dropdownMenuButton">
             <li>
@@ -183,6 +183,10 @@ try {
                             <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
                             <td class="border end"><?= $fila['vacio_lleno'] ?></td>
                             <td class="border end"><?= $fila['division_dp'] *100?>%</td>
+                            <td class="border end">
+                            <!-- Aquí puedes añadir las acciones necesarias -->
+                            <button class="btn btn-primary">Acción</button>
+                        </td>
                         <?php elseif ($filtro == 'export'): ?>
                             <td class="border end"><?= $fila['id'] ?></td>
                             <td class="border end"><?= $fila['aid_oid'] ?></td>
@@ -193,6 +197,10 @@ try {
                             <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
                             <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
                             <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
+                            <td class="border end">
+                            <!-- Aquí puedes añadir las acciones necesarias -->
+                            <button class="btn btn-primary">Acción</button>
+                        </td>
                         <?php elseif ($filtro == 'import'): ?>
                             <td class="border end"><?= $fila['id'] ?></td>
                             <td class="border end"><?= $fila['aid_oid'] ?></td>
@@ -207,11 +215,13 @@ try {
                             <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
                             <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
                             <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
+                            <td class="border end">
+                            <td class="border end">
+                              <a class="btn btn-outline-warning fs-6 border end" href="<?= '../editar_im.php ?id=' . escapar($fila["id"]) ?>"><i class="bi bi-envelope-fill"></i></a>
+                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
+                            </td>
                         <?php endif; ?>
-                        <td class="border end">
-                            <!-- Aquí puedes añadir las acciones necesarias -->
-                            <button class="btn btn-primary">Acción</button>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
