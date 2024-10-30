@@ -80,16 +80,16 @@ try {
 <div class="container-lg start-0" style="margin-top: 150px;">
 
     <!-- Header -->
-    <div class="header-error">
-    <div class="logo-container">
-      <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
-    </div>
-    <h1>Daily Plan</h1>
-    <div class="cuadroFecha">
-      <p id="fecha-actual"></p>
-      <p id="hora-actual">prueba</p>
-    </div>
-  </div>
+    <div class="header">
+            <div class="logo-container">
+                <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
+            </div>
+            <h1 href="../../daily_plan/index_DP.php">Daily plan</h1>
+            <div class="cuadroFecha">
+                <p id="fecha-actual"></p>
+                <p id="hora-actual">prueba</p>
+            </div>
+        </div>
   <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
     <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Operaciones</h2>
