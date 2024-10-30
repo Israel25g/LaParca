@@ -113,7 +113,7 @@ try {
     <form method="GET" class="mb-3">
     <div class="container text-left">
   <div class="row">
-    <div class="col">
+    <div class="col-sm">
     <label for="filtro">Elige la operación:</label>
     <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -139,7 +139,7 @@ try {
     </div>
       
     </div>
-    <div class="col">
+    <div class="col-sm">
       <!-- Filtro de fecha para fecha estimada de llegada -->
       <div class="form-group sm-2">
           <label for="fecha_estimacion_llegada">Fecha estimada de llegada:</label>
@@ -147,7 +147,7 @@ try {
       </div>
 
     </div>
-    <div class="col">
+    <div class="col-sm">
       <!-- Checkbox para mostrar toda la tabla -->
       <div class="form-check mt-2">
           <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
