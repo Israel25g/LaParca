@@ -185,8 +185,8 @@ try {
                 <?php elseif ($filtro == 'export'): ?>
                   <button class="btn btn-danger ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
                     <ul class="dropdown-menu bg-danger">
-                      <li><a class="dropdown-item bg-danger text-light" href="../formulario_ex.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-danger " href="../formulario_ex.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-danger " href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -253,8 +253,10 @@ try {
                             <td class="border end"><?= $fila['vacio_lleno'] ?></td>
                             <td class="border end"><?= $fila['division_dp'] *100?>%</td>
                             <td class="border end">
-                            <!-- Aquí puedes añadir las acciones necesarias -->
-                            <button class="btn btn-primary">Acción</button>
+                            <td class="border end">
+                              <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_pk.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
                         </td>
                         <?php elseif ($filtro == 'export'): ?>
                             <td class="border end"><?= $fila['id'] ?></td>
@@ -267,8 +269,10 @@ try {
                             <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
                             <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
                             <td class="border end">
-                            <!-- Aquí puedes añadir las acciones necesarias -->
-                            <button class="btn btn-primary">Acción</button>
+                            <td class="border end">
+                              <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_ex.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
                         </td>
                         <?php elseif ($filtro == 'import'): ?>
                             <td class="border end"><?= $fila['id'] ?></td>
@@ -286,7 +290,7 @@ try {
                             <td class="border end"><?= $fila['fech_sal_rampa'] ?></td>
                             <td class="border end">
                               <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_im.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
-                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
+                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
                             </td>
                             </td>
                         <?php endif; ?>
