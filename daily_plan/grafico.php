@@ -369,6 +369,7 @@
                         series: [{
                             name: 'Export',
                             type: 'pie',
+                            roseType:'area',
                             radius: ['30%', '80%'],
                             label: {formatter: '{c}',position: 'inside',fontSize: 25},
                             data: data,
