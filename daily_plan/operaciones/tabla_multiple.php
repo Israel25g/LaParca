@@ -219,7 +219,7 @@ try {
 
 </div>
 <!-- Tabla 'datos' -->
-<div class="tabla-container" style="margin-bottom: 150px;">
+<div class="tabla-container">
       <!-- botones de acceso a formularios y tablas -->
        
           
@@ -331,7 +331,7 @@ try {
       $(document).ready(function() {
         new DataTable('#tabla_MOP', {
           paging: false,
-          scrollCollapse: true,
+          scrollCollapse: false,
           scrollY: '350px',
           scrollX: '1700px',
 
