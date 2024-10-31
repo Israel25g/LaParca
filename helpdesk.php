@@ -1,5 +1,5 @@
 <?php
-include("apertura_sesion.php")
+    include 'apertura_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

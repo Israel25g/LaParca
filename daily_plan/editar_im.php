@@ -1,3 +1,6 @@
+<?php
+  include("../apertura_sesion.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,16 +57,15 @@
               "bl"=> $_POST['bl'],
               "destino"=> $_POST['destino'],
               "t_carga" => $_POST['t_carga'],  // Añadido
-            "paletas" => $_POST['paletas'],  // Añadido
-            "cajas" => $_POST['cajas'],      // Añadido
-            "unidades" => $_POST['unidades'],// Añadido
+              "paletas" => $_POST['paletas'],  // Añadido
+              "cajas" => $_POST['cajas'],      // Añadido
+              "unidades" => $_POST['unidades'],// Añadido
               "fecha_objetivo"=> $_POST['fecha_objetivo'],
               "fecha_lleg_rampa"=> $_POST['fecha_lleg_rampa'],
               "fecha_sal_rampa"=> $_POST['fecha_sal_rampa'],
               "comentario_oficina"=> $_POST['comentario_oficina'],
               "comentario_bodega"=> $_POST['comentario_bodega'],
           ];
-
           $consultaSQL = "UPDATE import SET
               aid_oid = :aid_oid,
               cliente = :cliente,
@@ -86,7 +88,6 @@
 
           $consulta = $conexion->prepare($consultaSQL);
           $consulta->execute($datos);
-
           // Inserción en la tabla export_r
           $exportRecord = [
               "aid_oid" => $_POST['aid_oid'],  // Asegúrate de que estén estos datos
@@ -195,7 +196,9 @@
               <div class="form-group col-md-3">
                 <label for="pedidos_despachados">Entrada recibida</label>
                 <input name="pedidos_despachados" id="pedidos_despachados" rows="1" class="form-control" placeholder="<?= escapar($export['pedidos_despachados']) ?>"></input>
+                
               </div>
+              
 
               <div class="form-group col-md-3">
                 <label for="vehiculo">Vehículo / Placa</label>
