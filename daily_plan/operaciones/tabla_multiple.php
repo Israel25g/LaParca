@@ -123,54 +123,59 @@ try {
         <form method="GET" class="p-2 mb-2 bg-light rounded-3 border">
             <div class="row align-items-center g-2">
                 
-                <!-- Filtro de fecha para fecha estimada de llegada -->
-                <div class="col-auto">
-                    <label for="fecha_estimacion_llegada" class="form-label mb-0 small">Fecha de Llegada</label>
-                    <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" 
-                           class="form-control form-control-sm" 
-                           value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
-                </div>
-
-                <!-- Menú desplegable para elegir operación -->
-                <div class="col-auto">
-                    <label for="filtro" class="form-label mb-0 small">Operación</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary btn-sm dropdown-toggle w-100" type="button" 
-                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Consultar
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
+              
+              <!-- Menú desplegable para elegir operación -->
+              <div class="col-auto">
+                <label for="filtro" class="form-label mb-0 small">Operación</label>
+                <div class="dropdown">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle w-100" type="button" 
+                  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php echo($filtro)?>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='import'; this.closest('form').submit(); return false;">
                                     Import
-                                </a>
-                            </li>
-                            <li>
+                                  </a>
+                                </li>
+                                <li>
                                 <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='export'; this.closest('form').submit(); return false;">
-                                    Export
+                                  Export
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
-                                    Picking
-                                </a>
+                              <a class="dropdown-item" href="#" onclick="document.getElementById('filtro').value='picking'; this.closest('form').submit(); return false;">
+                                Picking
+                              </a>
                             </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Checkbox para mostrar toda la tabla -->
-                <div class="col-auto">
-                    <div class="form-check mt-4">
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      <!-- Filtro de fecha para fecha estimada de llegada -->
+                      <div class="col-auto">
+                          <label for="fecha_estimacion_llegada" class="form-label mb-0 small">Fecha de Llegada</label>
+                          <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" 
+                                 class="form-control form-control-sm" 
+                                 value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
+                      </div>
+                      
+                      <!-- Checkbox para mostrar toda la tabla -->
+                      <div class="col-auto">
+                        <div class="form-check mt-4">
                         <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
                         <label class="form-check-label small" for="mostrar_todo">Mostrar toda la tabla</label>
-                    </div>
+                      </div>
                 </div>
 
                 <!-- Botón de filtro -->
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary btn-sm mt-3">Filtrar</button>
-                </div>
+                  </div>
+                  
+                  <div class=" col-auto d-flex" style="height: 70px;">
+                    <div class="vr"></div>
+                  </div>
 
                 <div class="col-auto">
                   <div class="form-check mt-4">
@@ -219,95 +224,105 @@ try {
        
           
 
-        <table id="tabla_MOP" class="display table">
-            <thead>
-            <tr>
-            <?php if ($filtro == 'import'): ?>
-              <?php foreach ($encabezado as $titulo): ?>
-                    <th class="border end text-bg-info "><?= $titulo ?></th>
-                <?php endforeach; ?>
-        <?php elseif ($filtro == 'export'): ?>
-          <?php foreach ($encabezado as $titulo): ?>
-                    <th class="border end text-bg-danger"><?= $titulo ?></th>
-                <?php endforeach; ?>
-        <?php elseif ($filtro == 'picking'): ?>
-          <?php foreach ($encabezado as $titulo): ?>
-                    <th class="border end text-bg-warning"><?= $titulo ?></th>
-                <?php endforeach; ?>
-        <?php endif; ?>
-            </tr>
-            </thead>
-            <tbody>
+      <table id="tabla_MOP" class="display table">
+    <thead>
+        <tr>
             <?php if ($datos && $sentencia->rowCount() > 0): ?>
-                <?php foreach ($datos as $fila): ?>
-                    <tr>
-                        <?php if ($filtro == 'picking'): ?>
-                            <td class="border end"><?= $fila['id'] ?></td>
-                            <td class="border end"><?= $fila['aid_oid'] ?></td>
-                            <td class="border end"><?= $fila['cliente'] ?></td>
-                            <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
-                            <td class="border end"><?= $fila['paletas'] ?></td>
-                            <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end"><?= $fila['cajas'] ?></td>
-                            <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
-                            <td class="border end"><?= $fila['vacio_lleno'] ?></td>
-                            <td class="border end"><?= $fila['division_dp'] *100?>%</td>
-                            <td class="border end">
-                              <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_pk.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
-                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
-                            </td>
-                        </td>
-                        <?php elseif ($filtro == 'export'): ?>
-                            <td class="border end"><?= $fila['id'] ?></td>
-                            <td class="border end"><?= $fila['aid_oid'] ?></td>
-                            <td class="border end"><?= $fila['cliente'] ?></td>
-                            <td class="border end"><?= $fila['vehiculo'] ?></td>
-                            <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
-                            <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
-                            <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
-                            <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
-                            <td class="border end">
-                              <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_ex.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
-                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
-                            </td>
-                        </td>
-                        <?php elseif ($filtro == 'import'): ?>
-                            <td class="border end"><?= $fila['id'] ?></td>
-                            <td class="border end"><?= $fila['aid_oid'] ?></td>
-                            <td class="border end"><?= $fila['cliente'] ?></td>
-                            <td class="border end"><?= $fila['vehiculo'] ?></td>
-                            <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
-                            <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end"><?= $fila['t_carga'] ?></td>
-                            <td class="border end"><?= $fila['paletas'] ?></td>
-                            <td class="border end"><?= $fila['cajas'] ?></td>
-                            <td class="border end"><?= $fila['unidades'] ?></td>
-                            <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
-                            <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
-                            <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
-                            <td class="border end">
-                              <a class="btn btn-outline-warning fs-6 border end"href="<?='../editar_im.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
-                              <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
-                            </td>
-                            </td>
-                        <?php endif; ?>
-                    </tr>
-                <?php endforeach; ?>
+                <?php if ($filtro == 'import'): ?>
+                    <?php foreach ($encabezado as $titulo): ?>
+                        <th class="border end text-bg-info"><?= $titulo ?></th>
+                    <?php endforeach; ?>
+                <?php elseif ($filtro == 'export'): ?>
+                    <?php foreach ($encabezado as $titulo): ?>
+                        <th class="border end text-bg-danger"><?= $titulo ?></th>
+                    <?php endforeach; ?>
+                <?php elseif ($filtro == 'picking'): ?>
+                    <?php foreach ($encabezado as $titulo): ?>
+                        <th class="border end text-bg-warning"><?= $titulo ?></th>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php else: ?>
-                <tr>
-                    <td colspan="<?= count($encabezado) ?>" class="text-center">No hay registros disponibles.</td>
-                </tr>
+                <!-- Si no hay datos, se muestra solo una cabecera que abarca toda la fila -->
+                <th colspan="1" class="border end text-center text-bg-secondary">No se encontraron resultados</th>
             <?php endif; ?>
-            </tbody>
-            <tfoot>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <?php if ($datos && $sentencia->rowCount() > 0): ?>
+            <?php foreach ($datos as $fila): ?>
+                <tr>
+                    <?php if ($filtro == 'picking'): ?>
+                        <td class="border end"><?= $fila['id'] ?></td>
+                        <td class="border end"><?= $fila['aid_oid'] ?></td>
+                        <td class="border end"><?= $fila['cliente'] ?></td>
+                        <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
+                        <td class="border end"><?= $fila['paletas'] ?></td>
+                        <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
+                        <td class="border end"><?= $fila['cajas'] ?></td>
+                        <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
+                        <td class="border end"><?= $fila['vacio_lleno'] ?></td>
+                        <td class="border end"><?= $fila['division_dp'] * 100 ?>%</td>
+                        <td class="border end">
+                            <a class="btn btn-outline-warning fs-6 border end" href="<?='../editar_pk.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
+                        </td>
+                    <?php elseif ($filtro == 'export'): ?>
+                        <td class="border end"><?= $fila['id'] ?></td>
+                        <td class="border end"><?= $fila['aid_oid'] ?></td>
+                        <td class="border end"><?= $fila['cliente'] ?></td>
+                        <td class="border end"><?= $fila['vehiculo'] ?></td>
+                        <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
+                        <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
+                        <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
+                        <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
+                        <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
+                        <td class="border end">
+                            <a class="btn btn-outline-warning fs-6 border end" href="<?='../editar_ex.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
+                        </td>
+                    <?php elseif ($filtro == 'import'): ?>
+                        <td class="border end"><?= $fila['id'] ?></td>
+                        <td class="border end"><?= $fila['aid_oid'] ?></td>
+                        <td class="border end"><?= $fila['cliente'] ?></td>
+                        <td class="border end"><?= $fila['vehiculo'] ?></td>
+                        <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
+                        <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
+                        <td class="border end"><?= $fila['t_carga'] ?></td>
+                        <td class="border end"><?= $fila['paletas'] ?></td>
+                        <td class="border end"><?= $fila['cajas'] ?></td>
+                        <td class="border end"><?= $fila['unidades'] ?></td>
+                        <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
+                        <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
+                        <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
+                        <td class="border end">
+                            <a class="btn btn-outline-warning fs-6 border end" href="<?='../editar_im.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
+                        </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <!-- Si no hay datos, muestra una fila única con el mensaje -->
             <tr>
+                <td colspan="1" class="text-center">No se encontraron resultados</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <?php if ($datos && $sentencia->rowCount() > 0): ?>
                 <?php foreach ($encabezado as $titulo): ?>
                     <th class="border end"><?= $titulo ?></th>
                 <?php endforeach; ?>
-            </tr>
-            </tfoot>
-        </table>
+            <?php else: ?>
+                <th colspan="1" class="border end text-center text-bg-secondary">No se encontraron resultados</th>
+            <?php endif; ?>
+        </tr>
+    </tfoot>
+</table>
+
     </div>
 <?php include '../../daily_plan/datatable.php'?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
