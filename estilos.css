@@ -111,23 +111,20 @@ h4{
     font-weight: 500;
 }
 
-.logo-container{
-    position: absolute !important;
-    top: 8px !important;
-    left: 20px !important;
-    background-color: #fff !important;
-    padding: 5px !important;
-    border-radius: 10px 10px 10px 40px !important;
-}
 
-.logo{
-    
-    max-width: 200px!important;
-    height: auto!important;
-    width: auto!important;
-    padding: 10px!important;
-}
-
+.logo-container {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    background-color: #fff;
+    /* padding: 2px; */
+    border-radius: 10px 10px 10px 40px;
+    overflow: hidden;
+  }
+  .logo {
+    width: 250px;
+    padding: 0px;
+  }
 
 .cuadroFecha{
     position: absolute!important;
@@ -547,3 +544,4 @@ form #btn:hover{
 .dashboards-container{
     margin: 150px !important;
 }
+
