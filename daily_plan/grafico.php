@@ -143,11 +143,6 @@
 
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
-      </div>
-    </div>
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
       <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
