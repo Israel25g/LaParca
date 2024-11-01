@@ -164,7 +164,7 @@ try {
                       <div class="col-auto">
                         <div class="form-check mt-4">
                         <input class="form-check-input" type="checkbox" name="mostrar_todo" id="mostrar_todo" <?= isset($_GET['mostrar_todo']) ? 'checked' : '' ?>>
-                        <label class="form-check-label small" for="mostrar_todo">Mostrar toda la tabla</label>
+                        <label class="form-check-label small" for="mostrar_todo">Mostrar operaciones completadas</label>
                       </div>
                 </div>
 
