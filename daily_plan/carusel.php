@@ -17,7 +17,7 @@
      <!-- Header -->
      <div class="headerr" style="width: 100%;background-color: var(--color1);display: flex;justify-content: space-between;align-items: center;padding: 1.5%;position: fixed;top: 0;left: 0;z-index: 1000;border-radius: 0 0 0px 50px;">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/Salida2.gif" alt="Logo_IPL_Group" ></a>
         </div>
         <h1><a style="color: #fff; text-decoration:none" href="../daily_plan/index_DP.php">IPL Group</a></h1>
         <div class="cuadroFecha">
