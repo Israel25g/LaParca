@@ -264,7 +264,7 @@ try {
                         <td class="border end"><?= $fila['vacio_lleno'] ?></td>
                         <td class="border end"><?= $fila['division_dp'] * 100 ?>%</td>
                         <td class="border end">
-                            <a class="btn btn-outline-warning fs-6 border end" href="<?='../editar_pk.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                            <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=picking"><i class="bi bi-envelope-fill"></i></a>
                             <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
                         </td>
                     <?php elseif ($filtro == 'export'): ?>
@@ -278,7 +278,7 @@ try {
                         <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
                         <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
                         <td class="border end">
-                            <a class="btn btn-outline-warning fs-6 border end" href="<?='../editar_ex.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                            <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=export"><i class="bi bi-envelope-fill"></i></a>
                             <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
                         </td>
                     <?php elseif ($filtro == 'import'): ?>
@@ -296,7 +296,7 @@ try {
                         <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
                         <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
                         <td class="border end">
-                            <a class="btn btn-outline-warning fs-6 border end" href="<?='../editar_im.php?id='.escapar($fila["id"])?>"><i class="bi bi-envelope-fill"></i></a>
+                            <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=import"><i class="bi bi-envelope-fill"></i></a>
                             <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
                         </td>
                     <?php endif; ?>

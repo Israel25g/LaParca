@@ -1,28 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Plan - Import</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../estilos.css">
-    <link rel="shortcut icon" href="../images/ICO.png">
-  </head>
-  <body style="background-image:url('../images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
-    <div style="margin-top: 90px;">
-      <!-- Header -->
-      <div class="header">
-          <div class="logo-container">
-              <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/Salida2.gif" alt="Logo_IPL_Group" ></a>
-          </div>
-          <h1>Daily plan</h1>
-          <div class="cuadroFecha">
-              <p id="fecha-actual"></p>
-              <p id="hora-actual"></p>
-          </div>
-      </div>
-
     <?php
     include './funcionalidades/funciones.php';
     $config = include './funcionalidades/config_DP.php';
@@ -126,6 +101,31 @@
         $resultado['mensaje'] = $error->getMessage();
     }
     ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Plan - Import</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="shortcut icon" href="../images/ICO.png">
+  </head>
+  <body style="background-image:url('../images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
+    <div style="margin-top: 90px;">
+      <!-- Header -->
+      <div class="header">
+          <div class="logo-container">
+              <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/Salida2.gif" alt="Logo_IPL_Group" ></a>
+          </div>
+          <h1>Daily plan</h1>
+          <div class="cuadroFecha">
+              <p id="fecha-actual"></p>
+              <p id="hora-actual"></p>
+          </div>
+      </div>
+
 
     <?php if ($resultado['error']) { ?>
       <div class="container mt-2">
