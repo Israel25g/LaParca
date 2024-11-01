@@ -143,34 +143,46 @@
 
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_1.jpg"  alt="cumpleaños"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>
+      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_2.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>   
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_3.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>   
+    </div>
+
+    <div class="carousel-item" data-bs-interval="7500">
+      <div >
+      <img loading="lazy" src="../daily_plan/imagenes/seguridad.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
     <div >
-      <img loading="lazy" src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/proposito.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/vision.png"  alt="vision"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div>
-      <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/mision.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="width: 100px;height: 1000px;padding-top: 500px !important;">
     <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
