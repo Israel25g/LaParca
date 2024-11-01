@@ -94,14 +94,13 @@ h4 {
   top: 8px;
   left: 20px;
   background-color: #fff;
-  padding: 5px;
+  /* padding: 2px; */
   border-radius: 10px 10px 10px 40px;
+  overflow: hidden;
 }
 .logo {
-  max-width: 200px;
-  height: auto;
-  width: auto;
-  padding: 10px;
+  width: 250px;
+  padding: 0px;
 }
 
 /* ======================== Fecha ======================== */
@@ -449,3 +448,49 @@ tfoot input{
   box-sizing: border-box;
 }
 
+/* ======================== Nuevo daily plan ======================== */
+body .nuevo_daily{
+  background: rgb(7,144,72);
+  background: linear-gradient(45deg, rgba(7,144,72,1) 0%, rgba(39,39,69,1) 100%);
+}
+
+.aside{
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 25%;
+  height: 100vh;
+  font-weight:800;
+}
+
+.aside_nav{
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.new_active {
+  background-color: #260058;
+  transition: all 0.3s;
+  color: #fff;
+  border-radius: 0 10px 10px 0;
+  margin-left: -40%;
+  padding-left: 40%;
+}
+
+.aside_nav:hover{
+  background-color: #260058;
+  transition: all .2s;
+  color: #fff;
+  border-radius: 0 10px 10px 0;
+  margin-left: -40%;
+  padding-left: 40%;
+}
+
+/* ======================== Tarjetas ======================== */
+
+.data_tarjetas{
+  display: grid;
+  justify-items: center;
+}
