@@ -191,7 +191,7 @@ try {
                   <button class="btn btn-danger ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
                     <ul class="dropdown-menu bg-danger">
                       <li><a class="dropdown-item bg-danger text-light " href="./formulario_m.php?filtro=export">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex/hoja_ex.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -199,7 +199,7 @@ try {
                   <button class="btn btn-warning ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
                     <ul class="dropdown-menu bg-warning">
                       <li><a class="dropdown-item bg-warning " href="./formulario_m.php?filtro=picking">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-warning " href="../hoja_ex.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-warning " href="../hoja_pk/hoja_pk.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
