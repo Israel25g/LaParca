@@ -68,7 +68,7 @@ include("../apertura_sesion.php");
       <div class="container-block">
         <div class="bloques-grid">
 
-          <a href="../daily_plan/tabla_im.php" rel="noopener noreferrer" style="color:black">
+          <a href="./operaciones/tabla_multiple.php?fecha_estimacion_llegada=&filtro=import" rel="noopener noreferrer" style="color:black">
             <div class="bloque" id="bloque_cotización">
               <img src="../images/Import.jpg" alt="">
               <div class="text-overlay" style="height: 100%;width: 100%;">
@@ -79,7 +79,7 @@ include("../apertura_sesion.php");
           </a>
           <!-- Fin de import -->
           <!--export-->
-          <a href="../daily_plan/tabla_ex.php" rel="noopener noreferrer" style="color:black">
+          <a href="./operaciones/tabla_multiple.php?fecha_estimacion_llegada=&filtro=export" rel="noopener noreferrer" style="color:black">
             <div class="bloque" id="bloque_cotización">
               <img src="../images/export.jpg" alt="">
               <div class="text-overlay" style="height: 100%;width: 100%;">
@@ -91,7 +91,7 @@ include("../apertura_sesion.php");
           <!-- Fin de export -->
 
           <!-- picking -->
-          <a href="../daily_plan/tabla_pk.php" rel="noopener noreferrer" style="color:black">
+          <a href="./operaciones/tabla_multiple.php?fecha_estimacion_llegada=&filtro=picking" rel="noopener noreferrer" style="color:black">
             <div class="bloque" id="bloque_cotización">
               <img class="img_helpdesk" id="img_cotizacion" src="../images/picking.jpg" alt="">
               <div class="text-overlay" style="height: 100%;width: 100%;">

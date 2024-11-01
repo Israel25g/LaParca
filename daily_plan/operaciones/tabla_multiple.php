@@ -99,7 +99,7 @@ try {
         <div class="logo-container">
           <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
-        <h1><a href="../../helpdesk.php">Daily Plan</a></h1>
+        <h1><a href="../index_DP.php">Daily Plan</a></h1>
         <div class="cuadroFecha">
           <p id="fecha-actual" style="font-size: small;"></p>
           <p id="hora-actual"></p>
@@ -109,13 +109,13 @@ try {
   <div class="container" style="margin-left:-200px">
     <!-- Filtro para la consulta -->
     <?php if ($filtro == 'import'): ?>
-      <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
+      <h2 class="mt-4 nombre-tabla"><a href="../index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
         <?php elseif ($filtro == 'export'): ?>
-          <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
+          <h2 class="mt-4 nombre-tabla"><a href="../index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Export</h2>
         <?php elseif ($filtro == 'picking'): ?>
-          <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Picking</h2>
+          <h2 class="mt-4 nombre-tabla"><a href="../index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Picking</h2>
         <?php elseif ($filtro == NULL): ?>
-            <h2 class="mt-4 nombre-tabla"><a href="../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
+            <h2 class="mt-4 nombre-tabla"><a href="../index_DP.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Import</h2>
         <?php endif; ?>
     
 
@@ -182,7 +182,7 @@ try {
                       <?php if ($filtro == 'import'): ?>
                   <button class="btn btn-info ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
                     <ul class="dropdown-menu bg-info">
-                      <li><a class="dropdown-item bg-info " href="../formulario_im.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-info " href="./formulario_m.php?filtro=import">Formulario singular</a></li>
                       <li><a class="dropdown-item bg-info " href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
@@ -190,15 +190,15 @@ try {
                 <?php elseif ($filtro == 'export'): ?>
                   <button class="btn btn-danger ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
                     <ul class="dropdown-menu bg-danger">
-                      <li><a class="dropdown-item bg-danger " href="../formulario_ex.php">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-danger " href="../hoja_ex.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-danger text-light " href="./formulario_m.php?filtro=export">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
                 <?php elseif ($filtro == 'picking'): ?>
                   <button class="btn btn-warning ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
                     <ul class="dropdown-menu bg-warning">
-                      <li><a class="dropdown-item bg-warning " href="../formulario_pk.php">Formulario singular</a></li>
+                      <li><a class="dropdown-item bg-warning " href="./formulario_m.php?filtro=picking">Formulario singular</a></li>
                       <li><a class="dropdown-item bg-warning " href="../hoja_ex.php">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
