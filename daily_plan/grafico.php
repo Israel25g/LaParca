@@ -141,109 +141,48 @@
     </div>
     </div>
 
-            <div class="carousel-item" data-bs-interval="15000">
-            <div class="container" >
-            <div class="bloquess"style=";display: grid;grid-template-columns: auto auto;gap: 5px">
-
-            <div class="bloquee border border-5 border-danger" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <h2 style="margin-left:45%">Export</h2>
-            <div class="container">
-                <table id="clientes-table_TEX"  class="table table-danger table-striped" style="width: 800px;" >
-                  <thead class="bg-danger">
-                    <tr>
-                      <th class="text-bg-danger">OID</th>
-                      <th class="text-bg-danger">Cliente</th>
-                      <th class="text-bg-danger">Vehículo</th>
-                      <th class="text-bg-danger">Pedidos en Proceso</th>
-                      <th class="text-bg-danger">Pedidos Despachados</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
-            <div class="bloquee border border-5 border-info" id="import"  style="position: relative;width: 800px; height: 400px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-              <h2 style="margin-left:45%">Import</h2>
-              <div class="container">
-                <table id="clientes-table_TIM"  class="table table-info table-striped" style="width: 800px;">
-                  <thead class="bg-info">
-                    <tr>
-                      <th class="text-bg-info">AID</th>
-                      <th class="text-bg-info">Cliente</th>
-                      <th class="text-bg-info">Contenedores Recibidos</th>
-                      <th class="text-bg-info">Contenedores Cerrados</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="bloquee border border-5 border-warning" id="import"  style="position: relative;width: 800px; height: 450px;border-radius: 15px; overflow: hidden;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <h2 style="margin-left:45%">Picking</h2>
-            <div class="col-md-12" >
-              <div class="container" >
-                <table id="clientes-table_TPK"  class="table table-warning table-striped" >
-                  <thead class="bg-warning">
-                    <tr>
-                      <th class="text-bg-warning">OID</th>
-                      <th class="text-bg-warning">Cliente</th>
-                      <th class="text-bg-warning">Prioridad de Picking</th>
-                      <th class="text-bg-warning">Unidades por Pickear</th>
-                      <th class="text-bg-warning">Porcentaje de Avance</th>
-                      <th class="text-bg-warning">Fecha de Requerido</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
-            </div>
-            <div class="bloquee" id="porcentaje" style="position: relative;width: 800; height: 450px;border-radius: 15px; overflow: hidden;" >
-                <div style="position: relative; width: 800px; height: 800px; padding: 10px; margin-left: -80px;  border-width: 10px;">
-                    <p class="titulo_gauge" style="font-family: montserrat; font-size:200%; font-weight: bold;margin-left:150px">Porcentaje de cumplimiento</p>
-                    <div id="grafico-gauge_d" style="position: relative; width: 900px; height: 450px; padding: 10px;  border-width: 10px;"></div>
-                </div>
-            </div>
-              </div>
-            </div>
-          </div>
+    <div class="carousel-item" data-bs-interval="7500">
+      <div >
+      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_1.jpg"  alt="cumpleaños"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>
+    </div>
 
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../images/ADOC.jpg"  alt="ADOC" style="width: 100%; height:90% !important; position: flex; z-index: 999;">
-      </div>
+      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_2.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>   
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/3.jpg"  alt="cumpleaños2"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>
+      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_3.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      </div>   
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/4.jpg"  alt="cumpleaños" style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/seguridad.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
-      <img loading="lazy" src="../daily_plan/imagenes/13.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>
-    </div>
+
     <div class="carousel-item" data-bs-interval="7500">
     <div >
-      <img loading="lazy" src="../daily_plan/imagenes/2.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/proposito.png"  alt="Proposito"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/12.png"  alt="cumpleaños1"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/vision.png"  alt="vision"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
     <div class="carousel-item" data-bs-interval="7500">
       <div>
-      <img loading="lazy" src="../daily_plan/imagenes/5.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
+      <img loading="lazy" src="../daily_plan/imagenes/mision.png" alt="mision"   style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
+
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev" style="width: 100px;height: 1000px;padding-top: 500px !important;">
     <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
@@ -351,7 +290,6 @@
         var chart2 = echarts.init(document.getElementById('grafico-pastel2'));
         var barChart = echarts.init(document.getElementById('grafico-barras'));
         var gaugeChart = echarts.init(document.getElementById('grafico-gauge'));
-        var grafico_gauge_d = echarts.init(document.getElementById('grafico-gauge_d'));
         
 
         // Función para obtener los datos del servidor y actualizar los gráficos
@@ -466,29 +404,7 @@
         barChart.setOption(option);
     });
 
-    fetch('get_data_porcen.php')
-    .then(response => response.json())
-    .then(gaugeData => {
-          // Configuración del gráfico de porcentaje de cumplimiento
-          grafico_gauge_d.setOption({
-            series: [{
-              name:'Porcentaje',
-              type: 'gauge',
-              startAngle: 180,
-              endAngle: 0,
-              color:['#0dcaf0', '#DC143C ', ' #FFA500'],
-              pointer: { show: false },
-              progress: { show: true, clip: true ,overlap: false, roundCap: true, itemStyle: { borderWidth: 0, borderColor: '#fff',borderRadius: [1,50,50,1], } },
-              axisLine: { lineStyle: { width: 30 } },
-              splitLine: { show: false },
-              axisTick: {show: false},
-              axisLabel: { show: true },
-              data: gaugeData,
-              title: { text: 'Porcentaje de cumplimiento', fontFamily: 'montserrat'},
-              detail: { formatter: '{value}%', fontSize: 20, color: 'inherit', borderColor: 'inherit', borderRadius: [10,10,10,10], borderWidth: 1,},
-            }]
-          });
-        });
+    
         fetch('get_data_porcen.php')
         .then(response => response.json())
         .then(gaugeData => {
