@@ -46,7 +46,7 @@ try {
         }
         $encabezado = ["#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades", "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } else {
-        $consultaSQL = " NULL ";
+        $consultaSQL = "SELECT * FROM import WHERE 1 = 0";
         $mensaje = "Seleccione un tipo de operación";
     }
 
@@ -183,7 +183,7 @@ try {
                   <button class="btn btn-info ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_im.php">Ingresar datos de Import</button>
                     <ul class="dropdown-menu bg-info">
                       <li><a class="dropdown-item bg-info " href="./formulario_m.php?filtro=import">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-info " href="../hoja_im/hoja_im.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-info " href="./hoja_m/hoja_m.php?filtro=import">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -191,7 +191,7 @@ try {
                   <button class="btn btn-danger ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_ex.php">Ingresar datos de Export</button>
                     <ul class="dropdown-menu bg-danger">
                       <li><a class="dropdown-item bg-danger text-light " href="./formulario_m.php?filtro=export">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-danger text-light" href="../hoja_ex/hoja_ex.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-danger text-light" href="./hoja_m/hoja_m.php?filtro=export">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -199,7 +199,7 @@ try {
                   <button class="btn btn-warning ingreso-data dropdown-toggle" style="margin-bottom: 10px;" data-bs-toggle="dropdown" aria-expanded="false"  href="../formulario_pk.php">Ingresar datos de Picking</button>
                     <ul class="dropdown-menu bg-warning">
                       <li><a class="dropdown-item bg-warning " href="./formulario_m.php?filtro=picking">Formulario singular</a></li>
-                      <li><a class="dropdown-item bg-warning " href="../hoja_pk/hoja_pk.php">Hoja de datos</a></li>
+                      <li><a class="dropdown-item bg-warning " href="./hoja_m/hoja_m.php?filtro=picking">Hoja de datos</a></li>
                     </ul>
                   <a class="btn btn-primary ingreso-data" style="margin-bottom: 10px;"mb-5 href="../grafico.php"><i class="bi bi-pie-chart-fill"></i> Ir a Gráficos</a>
                   <br/>
@@ -265,7 +265,7 @@ try {
                         <td class="border end"><?= $fila['division_dp'] * 100 ?>%</td>
                         <td class="border end">
                             <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=picking"><i class="bi bi-envelope-fill"></i></a>
-                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_pk.php?id=' . escapar($fila["id"]) ?>"></a>
+                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=picking&id=' . escapar($fila["id"]) ?>"></a>
                         </td>
                     <?php elseif ($filtro == 'export'): ?>
                         <td class="border end"><?= $fila['id'] ?></td>
@@ -279,7 +279,7 @@ try {
                         <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
                         <td class="border end">
                             <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=export"><i class="bi bi-envelope-fill"></i></a>
-                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_ex.php?id=' . escapar($fila["id"]) ?>"></a>
+                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=export&id=' . escapar($fila["id"]) ?>"></a>
                         </td>
                     <?php elseif ($filtro == 'import'): ?>
                         <td class="border end"><?= $fila['id'] ?></td>
@@ -297,7 +297,7 @@ try {
                         <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
                         <td class="border end">
                             <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=import"><i class="bi bi-envelope-fill"></i></a>
-                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= '../funcionalidades/borrar_im.php?id=' . escapar($fila["id"]) ?>"></a>
+                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=import&id=' . escapar($fila["id"]) ?>"></a>
                         </td>
                     <?php endif; ?>
                 </tr>
