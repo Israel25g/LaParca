@@ -448,6 +448,10 @@ tfoot input{
   box-sizing: border-box;
 }
 
+.tabla-hover{
+  cursor: pointer;
+}
+
 /* ======================== Nuevo daily plan ======================== */
 body .nuevo_daily{
   background: rgb(7,144,72);
