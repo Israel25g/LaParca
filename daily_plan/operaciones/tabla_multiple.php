@@ -17,6 +17,7 @@ try {
     // Condiciones adicionales
     $condiciones = [];
 
+    // Condición para mostrar solo los registros con division_dp < 1.00
     if (!$mostrarTodo) {
         $condiciones[] = "division_dp < 1.00";
     }
@@ -93,7 +94,7 @@ try {
     <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
 <body background="../../images/Motivo2.png">
-<div class="container-lg start-0" style="margin-top: 150px;">
+<div class="container-lg start-0" style="margin-top: 90px;">
 
     <!-- Header -->
         <div class="header-error">

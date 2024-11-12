@@ -22,7 +22,7 @@
 
      
 </head>
-<body style=" margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png');font-family:montserrat;">
+<body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
     <!-- Header -->
     <div class="header-error">
     <div class="logo-container">
@@ -79,7 +79,7 @@
 
 
     <div class="container">
-      <div class="row"  style="margin-top: 200px !important; margin-left:-200px">
+      <div class="row"  style="margin-left:-200px">
         <div class="col-md-12"  style="margin-top: 100px !important;">
           <h2 class="mt-3"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de tickets de TI</h2>
           <table id="admin_ti" id="tabla_ti" class="table shadow-sm p-3 mb-5 bg-body-tertiary table-striped" style="--bs-border-opacity: 0.5;">
@@ -87,7 +87,6 @@
             <tr>
                 <th>TID</th>
                 <th>Solicitante</th>
-                <th>Correo</th>
                 <th>Departamento</th>
                 <th>Tipo de problema</th>
                 <th>Nivel de urgencia</th>
@@ -106,7 +105,6 @@
                   <tr>
                     <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["nombrecompleto"]); ?></td>
-                    <td class="text-break"><?php echo escapar($fila["correo"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["ubicacion"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["descripcion"]); ?></td>
                     <td class="text-break"><?php echo escapar($fila["urgencia"]); ?></td> 
@@ -150,7 +148,6 @@
               <tr>
                 <th>TID</th>
                 <th>Solicitante</th>
-                <th>Correo</th>
                 <th>Departamento</th>
                 <th>Tipo de problema</th>
                 <th>Nivel de urgencia</th>

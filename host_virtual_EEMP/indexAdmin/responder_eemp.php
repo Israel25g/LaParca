@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -42,27 +43,27 @@ if (isset($_POST['submit'])) {
         $consulta = $conexion->prepare($consultaSQL);
         $consulta->execute($tickets);
 
-         // Obtener toda la información del ticket desde la primera tabla (para insertar en la segunda tabla)
-         $consultaInfo = "SELECT * FROM tickets_eemp WHERE id = :id";
-         $consultaInfoStmt = $conexion->prepare($consultaInfo);
-         $consultaInfoStmt->execute(['id' => $_GET['id']]);
-         $ticketInfo = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
- 
-         // Insertar en la segunda tabla todos los datos del ticket
-         $consultaSQL = "INSERT INTO tickets_eemp_r (estado, respuesta, nombrecompleto, descripcion, correo, ubicacion, urgencia, updated_at) 
+        // Obtener toda la información del ticket desde la primera tabla (para insertar en la segunda tabla)
+        $consultaInfo = "SELECT * FROM tickets_eemp WHERE id = :id";
+        $consultaInfoStmt = $conexion->prepare($consultaInfo);
+        $consultaInfoStmt->execute(['id' => $_GET['id']]);
+        $ticketInfo = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
+
+        // Insertar en la segunda tabla todos los datos del ticket
+        $consultaSQL = "INSERT INTO tickets_eemp_r (estado, respuesta, nombrecompleto, descripcion, correo, ubicacion, urgencia, updated_at) 
                          VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo, :ubicacion, :urgencia, NOW())";
- 
-         // Asegurarse de que todos los valores se incluyan correctamente
-         $consulta = $conexion->prepare($consultaSQL);
-         $consulta->execute([
-             'estado' => $_POST['estado'],  // Estado actualizado
-             'respuesta' => $_POST['respuesta'],  // Respuesta actualizada
-             'nombrecompleto' => $ticketInfo['nombrecompleto'],  // Datos originales
-             'descripcion' => $ticketInfo['descripcion'],  // Datos originales
-             'correo' => $ticketInfo['correo'],  // Datos originales
-             'ubicacion' => $ticketInfo['ubicacion'],  // Datos originales
-             'urgencia' => $ticketInfo['urgencia'],  // Datos originales
-         ]);
+
+        // Asegurarse de que todos los valores se incluyan correctamente
+        $consulta = $conexion->prepare($consultaSQL);
+        $consulta->execute([
+            'estado' => $_POST['estado'],  // Estado actualizado
+            'respuesta' => $_POST['respuesta'],  // Respuesta actualizada
+            'nombrecompleto' => $ticketInfo['nombrecompleto'],  // Datos originales
+            'descripcion' => $ticketInfo['descripcion'],  // Datos originales
+            'correo' => $ticketInfo['correo'],  // Datos originales
+            'ubicacion' => $ticketInfo['ubicacion'],  // Datos originales
+            'urgencia' => $ticketInfo['urgencia'],  // Datos originales
+        ]);
 
         // Obtener el correo y nombrecompleto
         $consultaInfo = "SELECT correo, nombrecompleto FROM tickets_eemp WHERE id = :id";
@@ -87,7 +88,7 @@ if (isset($_POST['submit'])) {
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
             $mail->addAddress($info['correo'], $info['nombrecompleto']);  // Enviar al correo del solicitante
-            $mail->addCC('alcibiades@iplgsc.com','israel@iplgsc.com');  // Copia a un correo adicional si es necesario
+            $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
             $mail->isHTML(true);
@@ -105,12 +106,10 @@ if (isset($_POST['submit'])) {
             // Enviar el correo
             $mail->send();
             $resultado['mensaje'] = 'El Ticket ha sido respondido con éxito y el correo se envió correctamente.';
-
         } catch (Exception $e) {
             $resultado['error'] = true;
             $resultado['mensaje'] = "El Ticket fue actualizado, pero el correo no se pudo enviar. Error: {$mail->ErrorInfo}";
         }
-
     } catch (PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $error->getMessage();
@@ -135,7 +134,6 @@ if (!isset($_POST['submit'])) {
             $resultado['error'] = true;
             $resultado['mensaje'] = 'No se ha encontrado el ticket';
         }
-
     } catch (PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = $error->getMessage();
@@ -150,12 +148,26 @@ if (!isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responder Ticket</title>
-    <link rel="stylesheet" href="../../host_virtual_TI/estilosT.css">
+    <link rel="stylesheet" href="../../main-global.css">
     <link rel="shortcut icon" href="../images/ICO.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 
 <body style="margin: 0; padding: 0; background-image: url('../../host_virtual_TI/images/Motivo2.png'); font-family: montserrat;">
-    <?php include "../templates/header.php"; ?>
+    <!-- Header -->
+    <div class="header-error">
+        <div class="logo-container">
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
+        </div>
+        <h1><a href="../../helpdesk.php">Sistema de Tickets</a></h1>
+        <div class="cuadroFecha-error">
+            <p id="fecha-actual"></p>
+            <p id="hora-actual"></p>
+        </div>
+    </div>
+    <!-- Fin del Header -->
+    <div class="espacio"></div>
 
     <!-- Mostrar mensajes de error o éxito -->
     <?php if ($resultado['error']) { ?>
@@ -187,35 +199,50 @@ if (!isset($_POST['submit'])) {
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-4">Respondiendo al Ticket de <?= escapar($tickets['nombrecompleto']) ?>, sobre: <?= escapar($tickets['descripcion']) ?></h2>
-                    <a class="btn btn-success" href="../indexAdmin/indexAdmin_eemp.php">Regresar al listado</a>
-                    <hr>
-                    <form method="post">
-                        <div class="form-group">
-                            <label for="respuesta">Respuesta del ticket</label>
-                            <textarea type="text" name="respuesta" id="respuesta" rows="3" class="form-control" required><?= escapar($tickets['respuesta']) ?></textarea>
+                    <a class="btn btn-success mb-2" href="../index/index_eemp.php">Regresar al listado</a>
+                    <div class="card text-start">
+                        <div class="card-header">
+                            <h2>Respondiendo al Ticket #<?= escapar($tickets['id'])?> - Usuario: <?= escapar($tickets['nombrecompleto'])?></h2>
+                            <div class="card-body">
+                                <div class="card text-start">
+                                    <div class="card-body">
+                                        <p>Descripción del caso: <br> <?= escapar($tickets['descripcion']) ?></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="estado">Estado del Ticket</label>
-                            <select class="form-control" name="estado" id="estado" required>
-                                <option></option>
-                                <option <?= ($tickets['estado'] == 'No iniciado') ? 'selected' : '' ?>>No iniciado</option>
-                                <option <?= ($tickets['estado'] == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
-                                <option <?= ($tickets['estado'] == 'Terminado') ? 'selected' : '' ?>>Terminado</option>
-                                <option <?= ($tickets['estado'] == 'En espera de aprobación') ? 'selected' : '' ?>>En espera de aprobación</option>
-                                <option <?= ($tickets['estado'] == 'En cotización') ? 'selected' : '' ?>>En cotización</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-primary" value="Responder">
-                        </div>
-                    </form>
+
+                        <hr>
+                        <form method="post">
+                            <div class="card text-start">
+                                <div class="card-header">
+                                    <label for="respuesta">
+                                        <h2>Respuesta del ticket</h2>
+                                    </label>
+                                    <textarea type="text" name="respuesta" id="respuesta" rows="3" class="form-control" required><?= escapar($tickets['respuesta']) ?></textarea>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="card text-start">
+                                <div class="card-header">
+                                    <h2>Estado del Ticket</h2>
+                                    <select class="form-control" name="estado" id="estado" required>
+                                        <option></option>
+                                        <option <?= ($tickets['estado'] == 'No iniciado') ? 'selected' : '' ?>>No iniciado</option>
+                                        <option <?= ($tickets['estado'] == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
+                                        <option <?= ($tickets['estado'] == 'Terminado') ? 'selected' : '' ?>>Terminado</option>
+                                        <option <?= ($tickets['estado'] == 'En espera de aprobación') ? 'selected' : '' ?>>En espera de aprobación</option>
+                                        <option <?= ($tickets['estado'] == 'En cotización') ? 'selected' : '' ?>>En cotización</option>
+                                    </select>
+                                </div>
+                                <input type="submit" name="submit" class="btn btn-primary mt-2 ms-3" value="Responder">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php } ?>
-
-    <?php require "../templates/footer.php"; ?>
+        <?php } ?>
 </body>
 
 </html>
