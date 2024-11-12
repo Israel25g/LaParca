@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
         'error' => false,
         'mensaje' => 'La planificación de ' . $_POST['cliente'] . ' ha sido agregada con éxito'
     ];
-
+$fecha = $_POST['fecha_objetivo'];
     try {
 
       if ($operacion == 'import'){
@@ -43,18 +43,19 @@ if (isset($_POST['submit'])) {
           "unidades" => $_POST['unidades'],
           "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
           "fecha_objetivo" => $_POST['fecha_objetivo'],
+          "eta_etd" => $_POST['fecha_objetivo'],
           "comentario_oficina" => $_POST['comentario_oficina']
       );
 
       // Inserción en la tabla import
-      $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+      $consultaSQL = "INSERT INTO import (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, eta_etd, comentario_oficina) ";
+      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :eta_etd, :comentario_oficina)";
       $sentencia = $conexion->prepare($consultaSQL);
       $sentencia->execute($import);
 
       // Inserción en la tabla import_r
-      $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+      $consultaSQL = "INSERT INTO import_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, eta_etd, comentario_oficina) ";
+      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :eta_etd, :comentario_oficina)";
       $sentencia = $conexion->prepare($consultaSQL);
       $sentencia->execute($import);
        } elseif ($operacion == 'export'){
@@ -71,17 +72,18 @@ if (isset($_POST['submit'])) {
           "unidades" => $_POST['unidades'],
           "pedidos_en_proceso" => $_POST['pedidos_en_proceso'],
           "fecha_objetivo" => $_POST['fecha_objetivo'],
+          "eta_etd" => $_POST['fecha_objetivo'],
           "comentario_oficina" => $_POST['comentario_oficina']
       );
 
-      $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :t_carga, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+      $consultaSQL = "INSERT INTO export (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, eta_etd, comentario_oficina) ";
+      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :paletas, :t_carga, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :eta_etd, :comentario_oficina)";
 
       $sentencia = $conexion->prepare($consultaSQL);
       $sentencia->execute($datos);
 
-      $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, comentario_oficina) ";
-      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :comentario_oficina)";
+      $consultaSQL = "INSERT INTO export_r (aid_oid, cliente, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, pedidos_en_proceso, fecha_objetivo, eta_etd, comentario_oficina) ";
+      $consultaSQL .= "VALUES (:aid_oid, :cliente, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :pedidos_en_proceso, :fecha_objetivo, :eta_etd, :comentario_oficina)";
 
       $sentencia = $conexion->prepare($consultaSQL);
       $sentencia->execute($datos);
@@ -137,7 +139,7 @@ if (isset($_POST['submit'])) {
             <!-- Header -->
             <div class="header">
             <div class="logo-container">
-                <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
+                <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
             </div>
             <h1>Daily plan</h1>
             <div class="cuadroFecha">
@@ -255,7 +257,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="pedidos_en_proceso">Contenedores</label>
-                                <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" required>
+                                <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" min="1" step="1" required>
                             </div>
                         </div>
                         <hr>
@@ -351,7 +353,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="pedidos_en_proceso">Pedidos por despachar</label>
-                                <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" required>
+                                <input type="number" name="pedidos_en_proceso" id="pedidos_en_proceso" class="form-control" min="1" step="1" required>
                             </div>
                         </div>
                         <hr>

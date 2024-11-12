@@ -29,7 +29,7 @@ try {
     // Construye la consulta SQL según el filtro y condiciones
     if ($filtro == 'picking') {
         $consultaSQL = "SELECT * FROM picking";
-        if (!empty($condiciones)) {
+    if (!empty($condiciones)) {
             $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
         }
         $encabezado = ["#", "OID", "Cliente", "Unidades por pickear", "Paletas", "Unidades pickeadas", "Cajas", "Fecha de requerido", "Prioridad de picking", "Porcentaje de cumplimiento", "Acciones"];
@@ -38,13 +38,13 @@ try {
         if (!empty($condiciones)) {
             $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
         }
-        $encabezado = ["#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso", "Pedidos despachados", "Fecha estimada de salida", "Llegada a rampa", "Salida de rampa", "Acciones"];
+        $encabezado = ["#", "OID", "Cliente", "# Vehículo / Placa", "Pedidos en proceso", "Pedidos despachados", "Fecha estimada de salida", "Fecha de programacion", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } elseif ($filtro == 'import') {
         $consultaSQL = "SELECT * FROM import";
         if (!empty($condiciones)) {
             $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
         }
-        $encabezado = ["#", "AID", "Cliente", "Vehículo / Placa", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas", "Cajas", "Unidades", "Fecha estimada de llegada", "Llegada a rampa", "Salida de rampa", "Acciones"];
+        $encabezado = ["#", "AID", "Cliente", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas","Cajas","Unidades", "Fecha estimada de llegada","Fecha programada", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } else {
         $consultaSQL = "SELECT * FROM import WHERE 1 = 0";
         $mensaje = "Seleccione un tipo de operación";
@@ -88,6 +88,7 @@ try {
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
   <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link rel=" https://cdn.datatables.net/2.1.6/css/dataTables.bootstrap5.css">
+  
     <link rel="stylesheet" href="../../main-global.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
 </head>
@@ -154,7 +155,7 @@ try {
                       
                       <!-- Filtro de fecha para fecha estimada de llegada -->
                       <div class="col-auto">
-                          <label for="fecha_estimacion_llegada" class="form-label mb-0 small">Fecha de Llegada</label>
+                          <label for="fecha_estimacion_llegada" class="form-label mb-0 small">Fecha programada</label>
                           <input type="date" name="fecha_estimacion_llegada" id="fecha_estimacion_llegada" 
                                  class="form-control form-control-sm" 
                                  value="<?= isset($_GET['fecha_estimacion_llegada']) ? $_GET['fecha_estimacion_llegada'] : '' ?>">
@@ -220,206 +221,327 @@ try {
 </div>
 <!-- Tabla 'datos' -->
 <div class="tabla-container">
-      <!-- botones de acceso a formularios y tablas -->
-       
-          
-
-      <table id="tabla_MOP" class="display table">
-    <thead>
-        <tr>
-            <?php if ($datos && $sentencia->rowCount() > 0): ?>
-                <?php if ($filtro == 'import'): ?>
-                    <?php foreach ($encabezado as $titulo): ?>
-                        <th class="border end text-bg-info"><?= $titulo ?></th>
-                    <?php endforeach; ?>
-                <?php elseif ($filtro == 'export'): ?>
-                    <?php foreach ($encabezado as $titulo): ?>
-                        <th class="border end text-bg-danger"><?= $titulo ?></th>
-                    <?php endforeach; ?>
-                <?php elseif ($filtro == 'picking'): ?>
-                    <?php foreach ($encabezado as $titulo): ?>
-                        <th class="border end text-bg-warning"><?= $titulo ?></th>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            <?php else: ?>
-                <!-- Si no hay datos, se muestra solo una cabecera que abarca toda la fila -->
-                <th colspan="1" class="border end text-center text-bg-secondary">No se encontraron resultados</th>
-            <?php endif; ?>
-        </tr>
-    </thead>
-    
-    <tbody>
-        <?php if ($datos && $sentencia->rowCount() > 0): ?>
-            <?php foreach ($datos as $fila): ?>
-                <tr>
-                    <?php if ($filtro == 'picking'): ?>
-                        <td class="border end"><?= $fila['id'] ?></td>
-                        <td class="border end"><?= $fila['aid_oid'] ?></td>
-                        <td class="border end"><?= $fila['cliente'] ?></td>
-                        <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
-                        <td class="border end"><?= $fila['paletas'] ?></td>
-                        <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                        <td class="border end"><?= $fila['cajas'] ?></td>
-                        <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
-                        <td class="border end"><?= $fila['vacio_lleno'] ?></td>
-                        <td class="border end"><?= $fila['division_dp'] * 100 ?>%</td>
-                        <td class="border end">
-                            <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=picking"><i class="bi bi-envelope-fill"></i></a>
-                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=picking&id=' . escapar($fila["id"]) ?>"></a>
-                        </td>
-                    <?php elseif ($filtro == 'export'): ?>
-                        <td class="border end"><?= $fila['id'] ?></td>
-                        <td class="border end"><?= $fila['aid_oid'] ?></td>
-                        <td class="border end"><?= $fila['cliente'] ?></td>
-                        <td class="border end"><?= $fila['vehiculo'] ?></td>
-                        <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
-                        <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                        <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
-                        <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
-                        <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
-                        <td class="border end">
-                            <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=export"><i class="bi bi-envelope-fill"></i></a>
-                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=export&id=' . escapar($fila["id"]) ?>"></a>
-                        </td>
-                    <?php elseif ($filtro == 'import'): ?>
-                        <td class="border end"><?= $fila['id'] ?></td>
-                        <td class="border end"><?= $fila['aid_oid'] ?></td>
-                        <td class="border end"><?= $fila['cliente'] ?></td>
-                        <td class="border end"><?= $fila['vehiculo'] ?></td>
-                        <td class="border end"><?= $fila['pedidos_en_proceso'] ?></td>
-                        <td class="border end"><?= $fila['pedidos_despachados'] ?></td>
-                        <td class="border end"><?= $fila['t_carga'] ?></td>
-                        <td class="border end"><?= $fila['paletas'] ?></td>
-                        <td class="border end"><?= $fila['cajas'] ?></td>
-                        <td class="border end"><?= $fila['unidades'] ?></td>
-                        <td class="border end"><?= $fila['fecha_objetivo'] ?></td>
-                        <td class="border end"><?= $fila['fecha_lleg_rampa'] ?></td>
-                        <td class="border end"><?= $fila['fecha_sal_rampa'] ?></td>
-                        <td class="border end">
-                            <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=import"><i class="bi bi-envelope-fill"></i></a>
-                            <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=import&id=' . escapar($fila["id"]) ?>"></a>
-                        </td>
-                    <?php endif; ?>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <!-- Si no hay datos, muestra una fila única con el mensaje -->
+    <!-- Tabla de datos -->
+    <table id="tabla_MOP" class="display table">
+        <thead>
             <tr>
-                <td colspan="1" class="text-center">No se encontraron resultados</td>
+                <?php if ($datos && $sentencia->rowCount() > 0): ?>
+                    <?php foreach ($encabezado as $titulo): ?>
+                        <?php 
+                            $bgClass = $filtro === 'import' ? 'text-bg-info' : ($filtro === 'export' ? 'text-bg-danger' : 'text-bg-warning');
+                        ?>
+                        <th class="border end <?= $bgClass ?>"><?= $titulo ?></th>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <th colspan="1" class="border end text-center text-bg-secondary">No se encontraron resultados</th>
+                <?php endif; ?>
             </tr>
-        <?php endif; ?>
-    </tbody>
-
-    <tfoot>
-        <tr>
+        </thead>
+        
+        <tbody>
             <?php if ($datos && $sentencia->rowCount() > 0): ?>
-                <?php foreach ($encabezado as $titulo): ?>
-                    <th class="border end"><?= $titulo ?></th>
+                <?php foreach ($datos as $fila): ?>
+                    <?php $modalId = "modal_" . $filtro . "_" . $fila['id']; // ID único para cada modal ?>
+                    <tr>
+                        <?php if ($filtro == 'picking'): ?>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['paletas'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cajas'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vacio_lleno'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['division_dp'] * 100 ?>%</td>
+                            <td class="border end">
+                                <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=picking"><i class="bi bi-envelope-fill"></i></a>
+                                <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=picking&id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
+                        <?php elseif ($filtro == 'export'): ?>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vehiculo'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_lleg_rampa'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_sal_rampa'] ?></td>
+                            <td class="border end">
+                                <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=export"><i class="bi bi-envelope-fill"></i></a>
+                                <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=export&id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
+                        <?php elseif ($filtro == 'import'): ?>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <!-- <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vehiculo'] ?></td> -->
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['t_carga'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['paletas'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cajas'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['unidades'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_lleg_rampa'] ?></td>
+                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_sal_rampa'] ?></td>
+                            <td class="border end">
+                                <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=import"><i class="bi bi-envelope-fill"></i></a>
+                                <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=import&id=' . escapar($fila["id"]) ?>"></a>
+                            </td>
+                        <?php endif; ?>
+                    </tr>
                 <?php endforeach; ?>
             <?php else: ?>
-                <th colspan="1" class="border end text-center text-bg-secondary">No se encontraron resultados</th>
+                <tr>
+                    <td colspan="1" class="text-center">No se encontraron resultados</td>
+                </tr>
             <?php endif; ?>
-        </tr>
-    </tfoot>
-</table>
+        </tbody>
+        <tfoot>
+            <tr>
+                <?php if ($datos && $sentencia->rowCount() > 0): ?>
+                    <?php foreach ($encabezado as $titulo): ?>
+                        <?php 
+                            $bgClass = $filtro === 'import' ?  : ($filtro === 'export' ?  : '');
+                        ?>
+                        <th class="border end <?= $bgClass ?>"><?= $titulo ?></th>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <th colspan="1" class="border end text-center text-bg-secondary">No se encontraron resultados</th>
+                <?php endif; ?>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
+<!-- Modales individuales para cada fila -->
+<?php foreach ($datos as $fila): ?>
+    <?php $modalId = "modal_" . $filtro . "_" . $fila['id']; ?>
+    <div class="modal fade" id="<?= $modalId ?>" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <?php if ($filtro == "import"): ?>
+                <div class="modal-header bg bg-info" >
+              <?php elseif ($filtro == "export"): ?>
+                <div class="modal-header bg bg-danger" >
+                <?php elseif ($filtro == "picking"): ?>
+                    <div class="modal-header bg bg-warning" >
+                  <?php else:?>
+                    <div class="modal-header bg bg-secondary" >
+                      <?php endif?>
+
+
+                      <?php if ($filtro == "export"): ?>
+                    <h5 class="modal-title text-light" id="modalTitleId" style="font-weight: 800;">
+                    <?= $fila['cliente'] ?>
+                      <?php else: ?>
+                        <h5 class="modal-title " id="modalTitleId" style="font-weight: 800;">
+                    <?= $fila['cliente'] ?>
+                    <?php endif?>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-row">
+                                <?php if ($filtro == "import"):?>
+                                  <div class="form-group col-md-6">
+                                  <label for="cliente">AID</label>
+                                <?php elseif($filtro == "export"): ?>
+                                  <div class="form-group col-md-6">
+                                  <label for="cliente">OID</label>
+                                  <?php elseif($filtro == "picking"): ?>
+                                  <div class="form-group col-md-12">
+                                  <label for="cliente">OID</label>
+                                <?php endif?>
+                                <?php if ($filtro == "picking"):?>
+                                  <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= escapar($fila['aid_oid']) ?>" readonly>
+                                  </div>
+                                  <?php else:?>
+                                <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= escapar($fila['aid_oid']) ?>" readonly>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="vehiculo">Vehículo/Placa</label>
+                                <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['vehiculo'] ?>" readonly>
+                            </div>
+                            
+                            <div class="form-group col-md-4">
+                              <label for="t_vehiculo">Tipo de vehiculo</label>
+                              <input type="text" name="t_vehiculo" id="t_vehiculo" class="form-control" value="<?= $fila['t_vehiculo'] ?>" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="bl">HBL<br/> </label>
+                              <br/><input type="text" name="bl" id="bl" class="form-control" value="<?= $fila['bl'] ?>" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="destino">Origen<br/> </label>
+                              <br/><input type="text" name="destino" id="destino" class="form-control" value="<?= $fila['destino'] ?>" readonly>
+                            </div>
+                            <?php endif?>
+                            <div class="form-group col-md-4">
+                                <label for="unidades">unidades</label>
+                                <input type="text" name="unidades" id="unidades" class="form-control" value="<?= $fila['unidades'] ?>" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="cajas">cajas</label>
+                                <input type="text" name="cajas" id="cajas" class="form-control" value="<?= $fila['cajas'] ?>" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="paletas">paletas</label>
+                                <input type="text" name="paletras" id="paletas" class="form-control" value="<?= $fila['paletas'] ?>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                    <label for="fecha">fecha de creacion</label>
+                                <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['created_at'] ?>" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                    <label for="fecha">fecha de actualizacion</label>
+                                <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['updated_at'] ?>" readonly>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="comentario">Comentario de oficina</label>
+                                <textarea type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['comentario_oficina'] ?>" readonly></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="comerntario">Comentario de bodega</label>
+                                <textarea type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['comentario_bodega'] ?>" readonly></textarea>
+                            </div>
+                            
+                            <div class="form-group col-md-4">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-<?php include '../../daily_plan/datatable.php'?>
+<?php endforeach; ?>
+
+    
+    <script>
+      var modalId = document.getElementById('modalId');
+    
+      modalId.addEventListener('show.bs.modal', function (event) {
+          // Button that triggered the modal
+          let button = event.relatedTarget;
+          // Extract info from data-bs-* attributes
+          let recipient = button.getAttribute('data-bs-whatever');
+    
+        // Use above variables to manipulate the DOM
+      });
+    </script>
+
+    <?php include '../../daily_plan/datatable.php'?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../host_virtual_TI/js/script.js"></script>
+
     <script>
-      $(document).ready(function() {
-        new DataTable('#tabla_MOP', {
-          paging: false,
-          scrollCollapse: false,
-          scrollY: '350px',
-          scrollX: '1700px',
+  $(document).ready(function() {
+    let table = new DataTable('#tabla_MOP', {
+      paging: false,
+      scrollCollapse: false,
+      scrollY: '350px',
+      scrollX: '1700px',
+      deferRender:    true,
+      scroller:       true,
+      
+      initComplete: function() {
+        this.api()
+          .columns()
+          .every(function() {
+            let column = this;
+            let title = column.footer().textContent;
 
-          initComplete: function() {
-            this.api()
-              .columns()
-              .every(function() {
-                let column = this;
-                let title = column.footer().textContent;
+            // Crear input para filtrar cada columna
+            let input = document.createElement('input');
+            input.placeholder = title;
+            column.footer().replaceChildren(input);
 
-                // Create input element
-                let input = document.createElement('input');
-                input.placeholder = title;
-                column.footer().replaceChildren(input);
+            // Evento para filtrar la columna con el input
+            input.addEventListener('keyup', () => {
+              if (column.search() !== this.value) {
+                column.search(input.value).draw();
+              }
+            });
+          });
+      },
 
-                // Event listener for user input
-                input.addEventListener('keyup', () => {
-                  if (column.search() !== this.value) {
-                    column.search(input.value).draw();
-                  }
-                });
-              });
-          },
-                  buttons: [
-                    {
-                      extend: 'copy',
-                      text: 'Copiar',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8] 
+      // Configuración de botones y layout para visibilidad y exportación
+      buttons: [
+        'colvis',
+        {
+          extend: 'copy',
+          text: '<button class="btn btn-secondary"><i class="bi bi-copy"> Copiar</i></button>',
+          exportOptions: {
+            columns: ':visible'  
+          }
+        },
+        {
+          extend: 'csv',
+          text: '<button class="btn btn-secondary"> <i class="bi bi-filetype-csv"> CSV</i></button>',
+          exportOptions: {
+            columns: ':visible'
+          }
+        },
+        {
+          extend: 'excel',
+          text: '<button class="btn btn-secondary"> <i class="bi bi-file-earmark-excel"> Excel</i></button>',
+          exportOptions: {
+            columns: ':visible'
+          }
+        },
+        {
+          extend: 'pdf',
+          text: '<button class="btn btn-secondary"><i class="bi bi-file-earmark-pdf"> PDF </i></button>',
+          exportOptions: {
+            columns: ':visible'
+          }
+        },
+        {
+          extend: 'print',
+          text: '<button class="btn btn-secondary"><i class="bi bi-printer-fill"> Imprimir</i></button>',
+          exportOptions: {
+            columns: ':visible'
+          }
+        }
+      ],
+      dom: 'Bfrtip',  // Posición de botones y opciones en la interfaz
+      info: false,
 
-                      }
-                    },
-                    {
-                      extend: 'csv',
-                      text: 'CSV',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    },
-                    {
-                      extend: 'excel',
-                      text: 'Excel',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    },
-                    {
-                      extend: 'pdf',
-                      text: 'PDF',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    },
-                    {
-                      extend: 'print',
-                      text: 'Imprimir',
-                      exportOptions: {
-                        columns: [0, 1, 2,3,4,5,6,7,8]
-                      }
-                    }
-                  ],
-                  dom: 'Bfrtip', // Asegura que los botones aparezcan en el lugar correcto
-                  info: false,
-                  language: {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    "search": "Buscar:",
-                    "paginate": {
-                      "first": "<◀",
-                      "last": "▶> ",
-                      "next": "▶",
-                      "previous": "◀"
-                    },
-                    "buttons": {
-                      "copy": "Copiar",
-                      "csv": "CSV",
-                      "excel": "Excel",
-                      "pdf": "PDF",
-                      "print": "Imprimir"
-                    }
-                  }
-                });
-              });
-          </script>
+      // Traducción al español
+      language: {
+        lengthMenu: "Mostrar _MENU_ registros por página",
+        zeroRecords: "No se encontraron resultados",
+        info: "Mostrando página _PAGE_ de _PAGES_",
+        infoEmpty: "No hay registros disponibles",
+        infoFiltered: "(filtrado de _MAX_ registros totales)",
+        search: "Buscar:",
+        buttons: {
+          copy: "Copiar",
+          csv: "CSV",
+          excel: "Excel",
+          pdf: "PDF",
+          print: "Imprimir",
+          colvis: '<button class="btn btn-secondary"> <i class="bi bi-shadows"> Mostrar/Ocultar</i></button>'
+        }
+      }
+    });
+  });
+</script>
 
-</div>
+
+
 </body>
 </html>

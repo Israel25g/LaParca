@@ -80,7 +80,7 @@
               cajas = :cajas,
               unidades = :unidades,
               fecha_objetivo = :fecha_objetivo,
-              fecha_lleg_rampa = :fecha_lleg_rampa,
+              fecha_lleg_rampa = :fecha_objetivo,
               fecha_sal_rampa = :fecha_sal_rampa,
               comentario_oficina = :comentario_oficina,
               comentario_bodega = :comentario_bodega
@@ -112,7 +112,7 @@
           $consultaRecordSQL = "INSERT INTO import_r 
               (aid_oid, cliente, pedidos_en_proceso, pedidos_despachados, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, fecha_objetivo, fecha_lleg_rampa, fecha_sal_rampa, comentario_oficina, comentario_bodega) 
               VALUES 
-              (:aid_oid, :cliente, :pedidos_en_proceso, :pedidos_despachados, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :fecha_objetivo, :fecha_lleg_rampa, :fecha_sal_rampa,:comentario_oficina, :comentario_bodega)";
+              (:aid_oid, :cliente, :pedidos_en_proceso, :pedidos_despachados, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :fecha_objetivo, :fecha_objetivo, :fecha_sal_rampa,:comentario_oficina, :comentario_bodega)";
 
           $consultaRecord = $conexion->prepare($consultaRecordSQL);
           $consultaRecord->execute($exportRecord);
@@ -266,8 +266,13 @@
               </div>
 
               <div class="form-group col-md-3">
-                <label for="fecha_objetivo">Fecha estimada de llegada</label>
-                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($export['fecha_objetivo']) ?>" value="<?= escapar($export['fecha_objetivo']) ?>" ></input>
+                <label for="">Fecha estimada de llegada</label>
+                <input type="date" name="" id="" rows="1" class="form-control" placeholder="<?= escapar($export['eta_etd']) ?>" value="<?= escapar($export['eta_etd']) ?>" readonly ></input>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="fecha_objetivo">Fecha de planificacion</label>
+                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($export['fecha_objetivo']) ?>" value="<?= escapar($export['fecha_objetivo']) ?>"></input>
               </div>
 
               <div class="form-group col-md-3">
