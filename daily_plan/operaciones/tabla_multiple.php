@@ -414,7 +414,7 @@ try {
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['updated_at'] ?>" readonly>
                             </div>
                         </div>
-                        <hr/>aid_oid
+                        <hr/>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="comentario_oficina">Comentario de oficina</label>
