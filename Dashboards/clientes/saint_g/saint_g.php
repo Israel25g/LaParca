@@ -85,7 +85,7 @@
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
         </div>
-        <h1 style="margin-left: 41% !important;">Saint Gobain</h1>
+        <h1 style="margin-left: 35% !important;">Reportes externos</h1>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
@@ -99,146 +99,130 @@
         </div>
     </div>
 
-    <!-- Dashboard STG -->
-    <div class="side_menu" id="side_menu" >
-
-    <div class="bloque_d border border-warning border-5" id="grafico1" style="height: 170px; width: 231px; margin-top: 150px!important; margin: left 200px !important; ">
-        <img loading="lazy" class="img_helpdesk" id="logo-stg" src="../../../images/Saint-Gobain.png" style="height: 170px; width: 231px;" alt="">
-    </div>
-
-    <div class="" role="group" aria-label="Vertical button group" style="margin-top: 50px;" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-success custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" aria-label="Slide 1"><p style="font-family:montserrat !important; font-size:large; color: black;">Import</p></button>
-        <button type="button" class="btn btn-danger custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"><p style="font-family:montserrat !important ; font-size:large; color:black; ">Export</p></button>
-        <button type="button" class="btn btn-info custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"><p style=" font-family:montserrat !important;font-size:large; color:black; ">Varios</p></button>
-        <button type="button" class="btn btn-warning custom-btn" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"><p style="font-family:montserrat !important;font-size:large; color:black; ">Facturación</p></button>
-    </div>
-        
-    </div>
-
-
-<div id="carouselExampleIndicators" class="carousel slide btn-group" role="group">
-
+    <div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="bg bg-dan active bg bg-danger" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="bg bg-success" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="bg bg-warning" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="bg bg-info" aria-label="Slide 4"></button>
+  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-
-    <div class="container_d" style="margin-left: 400px !important" >
-        <div class="bloques_d ">
-
-            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-                <div id="grafico-pastel1" class="bg-white" style="width: 100%; height: 100%;"></div>
-            </div>
-
-            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-          <p>IMPORT</p>
-            </div>
-
-            <div class="bloque_d border border-success-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
-            </div>
+        <div
+            class="row justify-content-center align-items-center g-2"
+        >
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
         </div>
-    </div>
-
-    </div>
-    <div class="carousel-item">
-
-        <div class="container_d" style="margin-left: 250px;">
-        <div class="bloques_d ">
-
-            <div class="bloque_d border border-danger-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-                
-            </div>
-
-            <div class="bloque_d border border-danger-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-            <p>Export</p>
-            </div>
-
-            <div class="bloque_d border border-danger-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
-            </div>
-   
-        </div>
-    </div>
-    </div>
-    <div class="carousel-item">
-
-    <div class="container_d" style="margin-left: 250px;">
-        <div class="bloques_d ">
-
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
-            </div>
-
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-            <p>detalles varios</p>
-            </div>
-
-            <div class="bloque_d border border-info-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
-            </div>
-        </div>
-    </div>
-
-    </div>
-    <div class="carousel-item">
-
-<div class="container_d" style="margin-left: 250px;">
-    <div class="bloques_d ">
-
-        <div class="bloque_d border border-warning-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-        </div>
-
-        <div class="bloque_d border border-warning-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-        <p>facturacion</p>
-        </div>
-
-        <div class="bloque_d border border-warning-subtle border-5" id="grafico1" style="height: 500px; width: 550px;">
-
-        </div>
-    </div>
-</div>
-
-</div>
-  </div>
-
-</div>
-
-
-
-    <script>
-        // Inicializar los gráficos de ECharts
-        var chart1 = echarts.init(document.getElementById('grafico-pastel1'));
-
-        // Función para obtener los datos del servidor y actualizar el gráfico
-        function fetchData() {
-            fetch('get_data_stg.php')
-                .then(response => response.json())
-                .then(data => {
-                    // Configurar el gráfico de export
-                    chart1.setOption({
-                        color:['#2E8B57', '#FF8C33', '#FCEC52', '#ADEEE3', '#995FA3 ', '#F45B69', '#C3E991', '#8EA4D2', '#FFE1C6'],
-                        title: {text: 'Importaciones', subtext: '', left: 'center'},
-                        tooltip: {trigger: 'item'},
-                        legend: {orient: 'vertical', left: 'left'},
-                        series: [{
-                            name: 'Export',
-                            type: 'pie',
-                            radius: ['30%', '80%'],
-                            label: {formatter: '{c}', position: 'inside', fontSize: 25},
-                            data: data,
-                            itemStyle: {
-                                borderRadius: 10,
-                                borderColor:  '#fff',
-                                borderWidth: 3
-                            }
-                        }]
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
         
-        // Llamar a la función fetchData para obtener los datos al cargar la página
-        fetchData();
-    </script>
+        <p>the first slide.</p>
+
+    </div>
+    <div class="carousel-item">
+
+        <p>second slide.</p>
+
+    </div>
+
+    <div class="carousel-item">
+
+        <p>the third slide.</p>
+    </div>
+
+    <div class="carousel-item">
+
+        <p>the fourth slide.</p>
+
+    </div>
+
+  </div>
+  <button class="carousel-control-prev bg-primary" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next bg-primary" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="false"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#Id2"
+        aria-controls="Id1"
+    >
+        Enable both scrolling & backdrop
+    </button>
+    
+    <div
+        class="offcanvas offcanvas-start"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="Id2"
+        aria-labelledby="Enable both scrolling & backdrop"
+    >
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="Enable both scrolling & backdrop">
+                Backdrop with scrolling AAAAAAAAAAA
+            </h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+            ></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>
+                Try scrolling the rest of the page to see this option in
+                action.
+            </p>
+        </div>
+    </div>
+    
+
+    <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#Id1"
+        aria-controls="Id1"
+    >
+        Enable both scrolling & backdrop
+    </button>
+    
+    <div
+        class="offcanvas offcanvas-start"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="Id1"
+        aria-labelledby="Enable both scrolling & backdrop"
+    >
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="Enable both scrolling & backdrop">
+                Backdrop with scrolling
+            </h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+            ></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>
+                Try scrolling the rest of the page to see this option in
+                action.
+            </p>
+        </div>
+    </div>
+    
+
     <script src="../../../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

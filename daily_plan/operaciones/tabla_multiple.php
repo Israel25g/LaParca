@@ -383,11 +383,17 @@ try {
                               <label for="destino">Origen<br/> </label>
                               <br/><input type="text" name="destino" id="destino" class="form-control" value="<?= $fila['destino'] ?>" readonly>
                             </div>
-                            <?php endif?>
+                            <?php endif?><?php if ($filtro == "picking"):?>
                             <div class="form-group col-md-4">
                                 <label for="unidades">unidades</label>
-                                <input type="text" name="unidades" id="unidades" class="form-control" value="<?= $fila['unidades'] ?>" readonly>
+                                <input type="number" name="unidades" id="unidades" class="form-control" value="<?= $fila['pedidos_en_proceso'] ?>" readonly>
                             </div>
+                            <?php else:?>
+                            <div class="form-group col-md-4">
+                                <label for="unidades">unidades</label>
+                                <input type="number" name="unidades" id="unidades" class="form-control" value="<?= $fila['unidades'] ?>" readonly>
+                            </div>
+                                <?php endif?>
                             <div class="form-group col-md-4">
                                 <label for="cajas">cajas</label>
                                 <input type="text" name="cajas" id="cajas" class="form-control" value="<?= $fila['cajas'] ?>" readonly>
@@ -408,15 +414,15 @@ try {
                                 <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['updated_at'] ?>" readonly>
                             </div>
                         </div>
-                        <hr/>
+                        <hr/>aid_oid
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="comentario">Comentario de oficina</label>
-                                <textarea type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['comentario_oficina'] ?>" readonly></textarea>
+                                <label for="comentario_oficina">Comentario de oficina</label>
+                                <textarea type="text" name="comentario_oficina" id="comentario_oficina" class="form-control" value="<?= $fila['comentario_oficina'] ?>" readonly><?= $fila['comentario_oficina'] ?></textarea>
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="comerntario">Comentario de bodega</label>
-                                <textarea type="text" name="vehiculo" id="vehiculo" class="form-control" value="<?= $fila['comentario_bodega'] ?>" readonly></textarea>
+                                <label for="comentario_bodega">Comentario de bodega</label>
+                                <textarea type="text" name="comentario_bodega" id="comentario_bodega" class="form-control" value="<?= $fila['comentario_bodega'] ?>" readonly><?= $fila['comentario_bodega'] ?></textarea>
                             </div>
                             
                             <div class="form-group col-md-4">
