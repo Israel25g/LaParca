@@ -142,46 +142,15 @@ include 'apertura_sesion.php';
         </div>
     </div>
 
-    <!-- API 1 - consulta de variable de versión -->
-    <?php
-    function escapar($html)
-    {
-        return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
-    }
-    $error = false;
-    $config = include 'config.php';
-    $id = $_SESSION['id'];
+    
 
-    try {
-        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-
-        $consultaSQL = "SELECT version_seen FROM users WHERE id = $id";
-
-        $sentencia = $conexion->prepare($consultaSQL);
-        $sentencia->execute();
-        $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $error) {
-        $error = $error->getMessage();
-    }
-
-    $showModal = false;
-    if (count($resultado) > 0) {
-        echo "<script>console.log('No se encontraron resultados');</script>";
-        $fila = $resultado;
-        if ($fila['version_seen'] == 0) {
-            $showModal = true;
-            echo "<script>console.log('No se ha visto la versión');</script>";
-        }
-    }
-    ?>
     <?php
     $tag = shell_exec('git describe --tags'); ?>
+    
     <!-- Notas de la versión -->
     <div class="version-notes" id="version-sistema" data-bs-toggle="modal" data-bs-target="#version">
-        <p>Versión <?php echo $tag; ?></p>
+        <p class="m-0">Versión <?php echo $tag;?></p>
     </div>
-
 
 
     <!-- Modal Body -->
@@ -257,8 +226,8 @@ include 'apertura_sesion.php';
                         <li>Nuevo Menú de Filtros</li>
                         <p>Se ha añadido un menú de filtros rediseñado, que incorpora dos filtros adicionales y atajos hacia otras operaciones.
                             Los botones de ingreso de datos y visualización de gráficos mantienen sus funciones originales, mejorando el flujo de trabajo.</p>
-                        
-                            <br>
+
+                        <br>
                         <div class="col-12">
                             <img loading="lazy" src="./images/Actualizaciones/version1.0/ft_2.gif" alt="" style="width: 1000px;">
                             <br>
@@ -278,13 +247,13 @@ include 'apertura_sesion.php';
                         <p>Esta función despeja la vista de la tabla para mejorar la experiencia visual y permite seleccionar columnas específicas para exportarlas o imprimirlas.
                             Funciona con los botones de exportación a PDF, Excel, y para imprimir, permitiendo mayor control en la selección de datos visibles.</p>
 
-                            <br>
+                        <br>
                         <div class="col-12">
                             <img loading="lazy" src="./images/Actualizaciones/version1.0/ft_5.gif" alt="" style="width: 1000px;">
                             <br>
                             <p class="text-center fst-italic">Control de columnas para visualización de interfaces <br> nota: Estas columnas influyen a la hora de copiar e imprimir los registros seleccionados, es decir, de no aparecer una columna mediante este modo de filtrado, esta no será copiada/preparada para imprimir</p>
                         </div>
-                        
+
                         <li>Interfaz de Visualización de Datos Extra Intuitiva</li>
                         <p>El nuevo menú de visualización de datos se despliega al hacer clic en un registro de la tabla y muestra información adicional que generalmente no es visible, mejorando el acceso a datos clave sin saturar la interfaz.</p>
 
@@ -302,17 +271,23 @@ include 'apertura_sesion.php';
 
                 </div>
                 <div class="modal-footer">
-                    <p class="text-center"><strong>Para ver la imagen con más detalle, haga click derecho sobre ella y luego "Abre la imagen en nueva pestaña"</strong></p>
-                    <button
-                        type="button"
-                        class="btn btn-success"
-                        data-bs-dismiss="modal">
-                        ¡He visto la actualización!
-                    </button>
+                    <p class="text-center">Para ver la imagen con más detalle, haga click derecho sobre ella y luego "Abre la imagen en nueva pestaña"</p>
+                    <br>
+                    
+                    <form action="version.php" method="post">
+                        <input type="hidden" name="version" value="<?php echo $tag; ?>">
+                        <button
+                            type="submit"
+                            class="btn btn-success"
+                            data-bs-dismiss="modal">
+                            ¡He visto la actualización!
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Optional: Place to the bottom of scripts -->
     <!-- <script>

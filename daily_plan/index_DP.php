@@ -39,26 +39,26 @@ include("../apertura_sesion.php");
   </div>
   <!-- Fin del Header -->
 
-    <!-- Navbar -->
-    <div class="container-nav">
-        <div class="my-navbar">
-            <ul class="my-nav" id="detallesOps">
-                <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
-                <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
-                <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
-                <li class="nav-li"><a class="active" href="#">Daily Plan</a></li>
-                <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
-                <?php
-                if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
-                    echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
-                }
-                ?>
-                <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
-            </ul>
-            <div class="sessid"><span class="id_sesion">Usuario: <?php echo ($_SESSION['usuario']) ?></span></div>
-        </div>
+  <!-- Navbar -->
+  <div class="container-nav">
+    <div class="my-navbar">
+      <ul class="my-nav" id="detallesOps">
+        <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
+        <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
+        <li class="nav-li"><a href="../helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
+        <li class="nav-li"><a class="active" href="#"id="liveToastBtn">Daily Plan</a></li>
+        <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
+        <?php
+        if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
+          echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
+        }
+        ?>
+        <li class="nav-li"><a class="cierre" href="../login/CerrarSesion.php">Cerrar Sesión</a></li>
+      </ul>
+      <div class="sessid"><span class="id_sesion">Usuario: <?php echo ($_SESSION['usuario']) ?></span></div>
     </div>
-    <!-- Fin Navbar -->
+  </div>
+  <!-- Fin Navbar -->
 
   <div class="container-descripcion">
     <div class="bloque-descripcion">
@@ -119,6 +119,38 @@ include("../apertura_sesion.php");
           <!-- Fín de graficos -->
         </div>
       </div>
+
+
+      <!-- Flexbox container for aligning the toasts -->
+
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <i class="bi bi-check-all rounded me-2"></i>
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(document).ready(function() {
+          $('.toast').toast('show');
+        });
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+
+        if (toastTrigger) {
+          const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+          toastTrigger.addEventListener('click', () => {
+            toastBootstrap.show()
+          })
+        }
+      </script>
 
       <script src="../host_virtual_TI/js/script.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
