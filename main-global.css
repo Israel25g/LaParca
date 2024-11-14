@@ -43,8 +43,9 @@ h1 a:hover {
 }
 
 h2 {
-  font-size: 50px;
-  margin: 25px 0;
+  font-size: 50px !important;
+  margin: 25px 0 !important;
+  font-weight: 700 !important;
 }
 
 h3.mb-2 {
@@ -56,6 +57,13 @@ h4 {
   font-size: 20px;
   font-weight: 500;
 }
+
+/* ======================== Lista version ======================== */
+
+ul.clean{
+  list-style: square;
+}
+
 
 /* ======================== Encabezado de las páginas ("header" es el div base) ======================== */
 .header {
@@ -165,6 +173,29 @@ h4 {
 
 /* ======================== Fin de encabezado de las páginas ======================== */
 
+
+/* ======================== Notas de la versión ======================== */
+.version-notes{
+  margin-left: 10px;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  box-shadow:  0 0 10px #0000002f;
+  cursor: pointer;
+  border-radius:5px 5px 0 0;
+  transition: all 0.3s;
+}
+
+.version-notes:hover{
+  background-color: #26214b;
+  color: #fff;
+  transition: all 0.3s;
+} 
+
+/* ======================== Fin de Notas de la versión ======================== */
+
 /* ======================== Navegador ("container-nav" es el div base) ======================== */
 
 .container-nav {
@@ -174,7 +205,7 @@ h4 {
   justify-content: center;
 }
 
-.navbar {
+.my-navbar {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -182,7 +213,7 @@ h4 {
   padding: 0;
 }
 
-.nav {
+.my-nav {
   width: auto;
   margin: 0;
   padding: 0;
@@ -193,7 +224,7 @@ h4 {
   overflow: hidden;
 }
 
-.navbar ul {
+.my-navbar ul {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -347,12 +378,12 @@ ul.detallesOps {
   object-fit: cover;
 }
 
-.text-overlay {
+.my-text-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 93.5%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -363,11 +394,11 @@ ul.detallesOps {
   transition: opacity 0.2s;
 }
 
-.text-overlay p {
+.my-text-overlay p {
   text-align: justify;
 }
 
-.bloque:hover .text-overlay {
+.bloque:hover .my-text-overlay {
   opacity: 1;
 }
 
@@ -498,3 +529,5 @@ body .nuevo_daily{
   display: grid;
   justify-items: center;
 }
+
+
