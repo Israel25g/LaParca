@@ -245,50 +245,49 @@ try {
                     <?php $modalId = "modal_" . $filtro . "_" . $fila['id']; // ID único para cada modal ?>
                     <tr>
                         <?php if ($filtro == 'picking'): ?>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['paletas'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cajas'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vacio_lleno'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['division_dp'] * 100 ?>%</td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['paletas'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cajas'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vacio_lleno'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['division_dp'] * 100 ?>%</td>
                             <td class="border end">
                                 <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=picking"><i class="bi bi-envelope-fill"></i></a>
                                 <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=picking&id=' . escapar($fila["id"]) ?>"></a>
                             </td>
                         <?php elseif ($filtro == 'export'): ?>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vehiculo'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_objetivo'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_lleg_rampa'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_sal_rampa'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vehiculo'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_lleg_rampa'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_sal_rampa'] ?></td>
                             <td class="border end">
                                 <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=export"><i class="bi bi-envelope-fill"></i></a>
                                 <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=export&id=' . escapar($fila["id"]) ?>"></a>
                             </td>
                         <?php elseif ($filtro == 'import'): ?>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
-                            <!-- <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vehiculo'] ?></td> -->
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['t_carga'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['paletas'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cajas'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['unidades'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_objetivo'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_lleg_rampa'] ?></td>
-                            <td class="border end" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_sal_rampa'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['t_carga'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['paletas'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cajas'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['unidades'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['eta_etd'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_objetivo'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_lleg_rampa'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['fecha_sal_rampa'] ?></td>
                             <td class="border end">
                                 <a class="btn btn-outline-warning fs-6 border end" href="<?='./editar_m.php?id='.escapar($fila["id"])?>&type=import"><i class="bi bi-envelope-fill"></i></a>
                                 <a class="btn btn-outline-danger fs-6 border end bi bi-trash3-fill" href="<?= './borrar_m.php?filtro=import&id=' . escapar($fila["id"]) ?>"></a>

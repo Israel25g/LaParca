@@ -1,5 +1,5 @@
 <?php
-    include 'apertura_sesion.php';
+include 'apertura_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main-global.css">
     <title>Helpdesk</title>
     <link rel="shortcut icon" href="images\ICO.png">
     <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
@@ -17,11 +16,27 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <!-- estilos -->
+    <link rel="stylesheet" href="main-global.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script>
+        function clickbutton() {
+            // simulamos el click del mouse en el boton del formulario
+            $("#version-sistema").click();
+        }
+        $('#version-sistema').on('click', function() {
+            console.log('action button clicked');
+        });
+
+        setTimeout(clickbutton, 2000);
+    </script>
 </head>
 
 <body style="background-image: url('./images/Motivo2.png')">
     <!-- Header -->
-    <div class="header">
+    <div class="header-error">
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="images/Salida2.gif" alt="Logo_IPL_Group"></a>
         </div>
@@ -35,19 +50,19 @@
 
     <!-- Navbar -->
     <div class="container-nav">
-        <div class="navbar">
-            <ul class="nav" id="detallesOps">
+        <div class="my-navbar">
+            <ul class="my-nav" id="detallesOps">
                 <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
                 <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
                 <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
                 <!-- <li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li> -->
                 <?php
-                if ($_SESSION['rol'] === 'Admin'|| $_SESSION['rol'] === 'EEMP') {
+                if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
                     echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
                 }
                 ?>
-                <li class="nav-li"><a class="cierre" href="./login/CerrarSesion.php">Cerrar Sesión</a></li>
+                <li class="nav-li"><a class="cierre" href="login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
             <div class="sessid"><span class="id_sesion">Usuario: <?php echo ($_SESSION['usuario']) ?></span></div>
         </div>
@@ -68,7 +83,7 @@
             <a href="host_virtual_M\index\index_m.php" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                     <img loading="lazy" class="img_helpdesk" id="img_mantenimiento" src="images\Mantenimiento.webp" alt="">
-                    <div class="text-overlay">
+                    <div class="my-text-overlay">
                         <h3>Soporte de mantenimiento</h3>
                         <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna reparación en la infraestructura de la empresa y/o departamento.</p>
                     </div>
@@ -80,7 +95,7 @@
             <a href="host_virtual_TI/index/index_ti.php">
                 <div class="bloque" id="bloque_IT">
                     <img loading="lazy" class="img_helpdesk" id="img_IT" src="images\Tecnología.jpg" alt="">
-                    <div class="text-overlay">
+                    <div class="my-text-overlay">
                         <h3>Soporte de Tecnología</h3>
                         <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna reparación en el apartado de IT (Reparaciones y mantenimiento de equipos, reparación de software interno, etc...).</p>
                     </div>
@@ -92,7 +107,7 @@
             <a href="host_virtual_EEMP/index/index_eemp.php">
                 <div class="bloque" id="bloque_EEMP">
                     <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://cdn.udax.edu.mx/blog/la-clave-del-exito-en-los-negocios-mejora-continua-y-optimizacion-de-procesos_1.jpg" alt="">
-                    <div class="text-overlay">
+                    <div class="my-text-overlay">
                         <h3>Soporte de Mejoras</h3>
                         <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar solicitudes de mejora/DEPIC's en cuanto al sistema DIPROP</p>
                     </div>
@@ -105,7 +120,7 @@
                 <div class="bloque" id="bloque_sobretiempo">
 
                     <img loading="lazy" class="img_helpdesk" id="img_overtime" src="images\Sobretiempo.jpg" alt="">
-                    <div class="text-overlay">
+                    <div class="my-text-overlay">
                         <h3>Solicitud de Sobretiempo</h3>
                         <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud de sobretiempo.</p>
                     </div>
@@ -117,7 +132,7 @@
             <a href="https://forms.office.com/r/JSRrVt475n" target="_blank" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_cotización">
                     <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="https://consultorfinancontable.com/wp-content/uploads/2024/03/mujer-asiatica-trabajando-traves-papeleo_53876-138148.jpg" alt="">
-                    <div class="text-overlay">
+                    <div class="my-text-overlay">
                         <h3>Solicitud de orden de compra</h3>
                         <p>Este helpdesk es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud cotizaciones.</p>
                     </div>
@@ -127,37 +142,137 @@
         </div>
     </div>
 
+    <!-- API 1 - consulta de variable de versión -->
+    <?php
+    function escapar($html)
+    {
+        return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
+    }
+    $error = false;
+    $config = include 'config.php';
+    $id = $_SESSION['id'];
+
+    try {
+        $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+        $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+
+        $consultaSQL = "SELECT version_seen FROM users WHERE id = $id";
+
+        $sentencia = $conexion->prepare($consultaSQL);
+        $sentencia->execute();
+        $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $error) {
+        $error = $error->getMessage();
+    }
+
+    $showModal = false;
+    if (count($resultado) > 0) {
+        echo "<script>console.log('No se encontraron resultados');</script>";
+        $fila = $resultado;
+        if ($fila['version_seen'] == 0) {
+            $showModal = true;
+            echo "<script>console.log('No se ha visto la versión');</script>";
+        }
+    }
+    ?>
+    <?php
+    $tag = shell_exec('git describe --tags'); ?>
+    <!-- Notas de la versión -->
+    <div class="version-notes" id="version-sistema" data-bs-toggle="modal" data-bs-target="#version">
+        <p>Versión <?php echo $tag; ?></p>
+    </div>
+
+
+
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div
+        class="modal fade"
+        id="version"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-hidden="true">
+        <div
+            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitleId">
+                        Notas de la versión <?php echo $tag ?>
+                    </h3>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Feha de implementación 13 de noviembre de 2024</h3>
+                    <p>Estas son algunas de las actualizaciones/mejoras que se han realizado con el objetivo de optimizar la plataforma y mejorar la calidad de uso de esta:</p>
+                    
+                    <h3>Sistema de Tickets</h3>
+                    
+                    <p>En cuanto al sistema de tickets, se han escuchado las solicitudes por parte de los administradores y parte del personal que requerían mejor visibilidad y opciones de trazabilizad para poder darle mejor seguimiento a los tickets</p>
+                    
+                    <ul class="col-12 clean">
+                        <li>Se añaderon filtros más precisos para busquedas de tickets, esto permitiendo ver el estado de estos y sus respectivas actualizaciones</li>
+                        <li>Se redujeron la cantidad de caracteres que se muestran desde la tabla, esto con el objetivo de mostrar una tabla más limpia. En consecuencia de esto, ahora al presionar sobre el ticket a revisar, se pueden ver todos los detalles de este</li>
+                        <li>Se aumentó el límite de caracteres, pasó de 255 caracteres hasta los necesarios</li>
+                        <br>
+                        <div class="col-6">
+                            <img src="./images/Actualizaciones/version1.0/detalles-del-ticket.gif" alt="" style="width: 750px;">
+                            <br>
+                            <p class="text-center">Nueva previsualización de tickets</p>
+                        </div>
+                        <li>Para los administradores, ahora pueden responder directamente seleccionando el ticket a responder, a estos se les muestra el boton de responder.
+                            <br>Nota: En el apartado de "respuesta del ticket" es donde puede escribir la respuesta del ticket, la descripción del caso no es un campo editable, de igual forma con el estado del ticket, este es una lista desplegable
+                        </li>
+                        <li>Se añadieron elementos estéticos</li>
+                        <hr>
+                    </ul>
+                    <h3>Daily Plan</h3>
+
+                    <p>Para el Daily Plan, tenemos mejores significativas para el uso de la interfaz, desde cambios estéticos para identificar más rápido en qué operación se encuentra, hasta mejoras de funcionalidad. Esta actualización se centra en la mejora de la interfaz de usuario y optimización del sistema de tablas de datos en Daily Plan, con un enfoque en la usabilidad, accesibilidad y rendimiento. A continuación, se presentan los cambios y mejoras clave:</p>
+                    <ol>
+                        <li>Indicadores Visuales de Tipo de operacion</li>
+                        <p></p>
+                    </ol>
+
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-success"
+                        data-bs-dismiss="modal">
+                        ¡He visto la actualización!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional: Place to the bottom of scripts -->
+    <!-- <script>
+        const myModal = new bootstrap.Modal(
+            document.getElementById("version"),
+            options,
+        );
+    </script> -->
+
     <script src="host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-    <!-- <script>
-        // temporizador
-
-        let registrarInactividad = function() {
-            var temporizador;
-            window.onload = resetTimer;
-            // DOM Events
-            document.onmousemove = resetTimer;
-            document.onkeypress = resetTimer;
-            document.onmousedown = resetTimer;
-            document.ontouchstart = resetTimer;
-            document.onclick = resetTimer;
-            document.onscroll = resetTimer;
-
-            function cerrarSesion() {
-                window.location.href = "index.php";
-                toastr.warning("Sesión cerrada por inactividad.");
-            }
-
-            function resetTimer() {
-                clearTimeout(temporizador);
-                temporizador = setTimeout(cerrarSesion, 100000); // 1000 milisegundos = 1 segundo
-            }
-            console.log(temporizador);
-        }
-
-        registrarInactividad();
-    </script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/2.1.8/dataRender/datetime.js"></script>
+    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
 </body>
 
 </html>
