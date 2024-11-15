@@ -187,7 +187,6 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
         // Configuramos cURL para que nos devuelva el resultado como cadena
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: token '.$token]);
         curl_setopt($ch, CURLOPT_USERAGENT, 'IPL_Group');
 
         // Ejecutamos la petición
