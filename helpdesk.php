@@ -1,6 +1,35 @@
 <?php
 include 'apertura_sesion.php';
+include 'config.php';
+
+// Jala el id del usuario
+$id_usuario = $_SESSION['id'];
+
+// Jala la versión ingresada
+$getLastVersion = "SELECT version_number FROM u366386740_versions order by version_number desc limit 1";
+$result = mysqli_query($conexion, $getLastVersion);
+
+if($result && mysqli_num_rows($result) > 0){
+    $lastVersion = mysqli_fetch_array($result)['version_number'];
+} else {
+    $lastVersion = 0.0;
+}
+
+// version del usuario
+$getUserVersion = "SELECT last_seen_version_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_version_id DESC LIMIT 1";
+$userResult = mysqli_query($conexion, $getUserVersion);
+
+if($userResult && mysqli_num_rows($userResult) > 0){
+    $userVersion = mysqli_fetch_array($userResult)['last_seen_version_id'];
+} else {
+    $userVersion = 0.0;
+}
+
+// mostrar modal
+$showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $lastVersion;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,17 +49,19 @@ include 'apertura_sesion.php';
     <link rel="stylesheet" href="main-global.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <script>
-        function clickbutton() {
-            // simulamos el click del mouse en el boton del formulario
-            $("#version-sistema").click();
-        }
-        $('#version-sistema').on('click', function() {
-            console.log('action button clicked');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado completamente');
+            var showModal = <?php echo $showModal ? 'true' : 'false'; ?>;
+            if(showModal){
+                var myModal = new bootstrap.Modal(document.getElementById('version'), {
+                    keyboard: false
+                });
+                myModal.show();
+            } else {
+                console.log('No se muestra el modal');
+            }
         });
-
-        setTimeout(clickbutton, 2000);
     </script>
 </head>
 
@@ -145,11 +176,40 @@ include 'apertura_sesion.php';
     
 
     <?php
-    $tag = shell_exec('git describe --tags'); ?>
+        $url = $url = "https://api.github.com/repos/Israel25g/LaParca/tags";
+
+        // Inicializamos cURL
+        $ch = curl_init($url);
+
+        // token
+        $token = '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';
+
+        // Configuramos cURL para que nos devuelva el resultado como cadena
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: token '.$token]);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'IPL_Group');
+
+        // Ejecutamos la petición
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Decodificamos el JSON
+        $tags = json_decode($response,true);
+
+
+        // verificar los tags recibidos
+
+        if(!empty($tags)){
+            $lastTag = $tags[0]['name'];
+        } else {
+            echo "No se encontraron tags";
+        }
+    ?>
     
     <!-- Notas de la versión -->
     <div class="version-notes" id="version-sistema" data-bs-toggle="modal" data-bs-target="#version">
-        <p class="m-0">Versión <?php echo $tag;?></p>
+        <p class="m-0">Versión <?php echo $lastTag;?></p>
     </div>
 
 
@@ -170,7 +230,7 @@ include 'apertura_sesion.php';
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="modalTitleId">
-                        Notas de la versión <?php echo $tag ?>
+                        Notas de la versión <?php echo $lastTag ?>
                     </h3>
                     <button
                         type="button"
@@ -275,7 +335,7 @@ include 'apertura_sesion.php';
                     <br>
                     
                     <form action="version.php" method="post">
-                        <input type="hidden" name="version" value="<?php echo $tag; ?>">
+                        <input type="hidden" name="version" value="<?php echo $lastTag; ?>">
                         <button
                             type="submit"
                             class="btn btn-success"
