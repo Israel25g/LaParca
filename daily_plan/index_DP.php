@@ -135,7 +135,7 @@ include("../apertura_sesion.php");
             Hello, world! This is a toast message.
           </div>
         </div>
-      </div>
+      </div>    
 
       <script>
         $(document).ready(function() {

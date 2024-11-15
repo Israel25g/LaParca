@@ -334,7 +334,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                     <br>
                     
                     <form action="version.php" method="post">
-                        <input type="hidden" name="version" value="<?php echo $lastTag; ?>">
+                        <input type="hidden" name="version" value= "<?php echo $lastTag ?>">
                         <button
                             type="submit"
                             class="btn btn-success"

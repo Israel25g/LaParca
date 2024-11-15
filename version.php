@@ -23,7 +23,7 @@ if (isset($_POST['version'])) {
                     } elseif ($versionIngresada < $lastVersion) {
                         $consultaVersionBD = "SELECT * FROM u366386740_versions_user";
                         $consultaBD = mysqli_query($conexion, $consultaVersionBD);
-                        if (mysqli_num_rows($consultaBD) > 0) {
+                        if (mysqli_num_rows($consultaBD) >= 0) {
                             $insertVersion = "INSERT INTO u366386740_versions_user (user_id,last_seen_version_id) VALUES ('$id_usuario', '2')";
                             $result = mysqli_query($conexion, $insertVersion);
                             if ($result) {
