@@ -162,8 +162,6 @@ include("../apertura_sesion.php");
         tabindex="-1"
         role="dialog"
         aria-labelledby="modalTitleId"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
         aria-hidden="true">
         <div
             class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl"
@@ -173,6 +171,13 @@ include("../apertura_sesion.php");
                     <h3 class="modal-title" id="modalTitleId">
                         Notas de la versión <?php echo $lastTag ?>
                     </h3>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close">
+                      </button>
                 </div>
                 <div class="modal-body">
                     <h3>Feha de implementación 13 de noviembre de 2024</h3>
