@@ -80,7 +80,7 @@
               cajas = :cajas,
               unidades = :unidades,
               fecha_objetivo = :fecha_objetivo,
-              fecha_lleg_rampa = :fecha_lleg_rampa,
+              fecha_lleg_rampa = :fecha_objetivo,
               fecha_sal_rampa = :fecha_sal_rampa,
               comentario_oficina = :comentario_oficina,
               comentario_bodega = :comentario_bodega
@@ -112,7 +112,7 @@
           $consultaRecordSQL = "INSERT INTO import_r 
               (aid_oid, cliente, pedidos_en_proceso, pedidos_despachados, vehiculo, t_vehiculo, bl, destino, t_carga, paletas, cajas, unidades, fecha_objetivo, fecha_lleg_rampa, fecha_sal_rampa, comentario_oficina, comentario_bodega) 
               VALUES 
-              (:aid_oid, :cliente, :pedidos_en_proceso, :pedidos_despachados, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :fecha_objetivo, :fecha_lleg_rampa, :fecha_sal_rampa,:comentario_oficina, :comentario_bodega)";
+              (:aid_oid, :cliente, :pedidos_en_proceso, :pedidos_despachados, :vehiculo, :t_vehiculo, :bl, :destino, :t_carga, :paletas, :cajas, :unidades, :fecha_objetivo, :fecha_objetivo, :fecha_sal_rampa,:comentario_oficina, :comentario_bodega)";
 
           $consultaRecord = $conexion->prepare($consultaRecordSQL);
           $consultaRecord->execute($exportRecord);
@@ -145,6 +145,31 @@
         $resultado['mensaje'] = $error->getMessage();
     }
     ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Plan - Import</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../estilos.css">
+    <link rel="shortcut icon" href="../images/ICO.png">
+  </head>
+  <body style="background-image:url('../images/Motivo2.png')!important;margin: 0;padding: 0; font-family:montserrat;">
+    <div style="margin-top: 90px;">
+      <!-- Header -->
+      <div class="header">
+          <div class="logo-container">
+              <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
+          </div>
+          <h1>Daily plan</h1>
+          <div class="cuadroFecha">
+              <p id="fecha-actual"></p>
+              <p id="hora-actual"></p>
+          </div>
+      </div>
+
 
     <?php if ($resultado['error']) { ?>
       <div class="container mt-2">
@@ -241,8 +266,13 @@
               </div>
 
               <div class="form-group col-md-3">
-                <label for="fecha_objetivo">Fecha estimada de llegada</label>
-                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($export['fecha_objetivo']) ?>" value="<?= escapar($export['fecha_objetivo']) ?>" ></input>
+                <label for="">Fecha estimada de llegada</label>
+                <input type="date" name="" id="" rows="1" class="form-control" placeholder="<?= escapar($export['eta_etd']) ?>" value="<?= escapar($export['eta_etd']) ?>" readonly ></input>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="fecha_objetivo">Fecha de planificacion</label>
+                <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" placeholder="<?= escapar($export['fecha_objetivo']) ?>" value="<?= escapar($export['fecha_objetivo']) ?>"></input>
               </div>
 
               <div class="form-group col-md-3">

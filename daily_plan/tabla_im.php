@@ -124,7 +124,7 @@ try {
                     <td class="border end"><?php echo escapar($fila["paletas"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["cajas"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["unidades"]); ?></td>
-                    <td class="border end"><?php echo escapar($fila["fecha_objetivo"]); ?></td>
+                    <td class="border end"><?php echo escapar($fila["eta_etd"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["fecha_lleg_rampa"]); ?></td>
                     <td class="border end"><?php echo escapar($fila["fecha_sal_rampa"]); ?></td>
                     <td class="border end">
