@@ -349,7 +349,7 @@ include("../../apertura_sesion.php")
             }
           },
           scrollX: '170vh',
-          scrollY: '340px',
+          scrollY: '270px',
 
           columnDefs: [{
             targets: '_all', // Aplica a todas las columnas

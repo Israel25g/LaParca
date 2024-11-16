@@ -123,34 +123,34 @@ include("../apertura_sesion.php");
 
       <!-- Flexbox container for aligning the toasts -->
 
-      <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <i class="bi bi-check-all rounded me-2"></i>
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
-      </div>    
+  <!-- <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-check-all rounded me-2"></i>
+        <strong class="me-auto">Bootstrap</strong>
+        <small>11 mins ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
+  </div>    
 
-      <script>
-        $(document).ready(function() {
-          $('.toast').toast('show');
-        });
-        const toastTrigger = document.getElementById('liveToastBtn')
-        const toastLiveExample = document.getElementById('liveToast')
+  <script>
+    $(document).ready(function() {
+      $('.toast').toast('show');
+    });
+    const toastTrigger = document.getElementById('liveToastBtn')
+    const toastLiveExample = document.getElementById('liveToast')
 
-        if (toastTrigger) {
-          const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-          toastTrigger.addEventListener('click', () => {
-            toastBootstrap.show()
-          })
-        }
-      </script>
+    if (toastTrigger) {
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+      toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+      })
+    }
+  </script> -->
 
       <script src="../host_virtual_TI/js/script.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
