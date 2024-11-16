@@ -173,6 +173,7 @@
             </div>
         </div>
     </div>
+    <script src="../../host_virtual_TI/js/script.js"></script>  
     <?php include "../templates/footer.php"; ?>
 </body>
 

@@ -173,7 +173,7 @@
             </div>
         </div>
     </div>
-    <script src="../js/script.js"></script>
+    <script src="../../host_virtual_TI/js/script.js"></script>
 
 </body>
 
