@@ -132,7 +132,7 @@ try {
                 <div class="dropdown">
                   <button class="btn btn-secondary btn-sm dropdown-toggle w-100" type="button" 
                   id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  <?php echo($filtro)?>
+                  
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li>
