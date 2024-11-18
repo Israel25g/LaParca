@@ -519,17 +519,17 @@ $tipo = $_GET['type']; // Definir la variable $type
 
                 <div class="form-group col-md-3">
                   <label for="fecha_objetivo">Fecha de <br/> programacion</label>
-                  <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" value="<?= escapar($export['fecha_objetivo']) ?>" value="<?= escapar($export['fecha_objetivo']) ?>" ></input>
+                  <input type="date" name="fecha_objetivo" id="fecha_objetivo" rows="1" class="form-control" value="<?= escapar($export['fecha_objetivo']) ?>" ></input>
                 </div>
   
                 <div class="form-group col-md-3">
                   <label for="fecha_lleg_rampa">Fecha de <br/>llegada a Rampa</label>
-                  <input type="date" name="fecha_lleg_rampa" id="fecha_lleg_rampa" rows="1" class="form-control" value="<?= escapar($export['fecha_lleg_rampa']) ?>" value="<?= escapar($export['fecha_lleg_rampa']) ?>"></input>
+                  <input type="date" name="fecha_lleg_rampa" id="fecha_lleg_rampa" rows="1" class="form-control" value="<?= escapar($export['fecha_lleg_rampa']) ?>" ></input>
                 </div>
   
                 <div class="form-group col-md-3">
                   <label for="fecha_sal_rampa">Fecha de salida de Rampa</label>
-                  <input type="date" name="fecha_sal_rampa" id="fecha_sal_rampa" rows="1" class="form-control" value="<?= escapar($export['fecha_sal_rampa']) ?>" value="<?= escapar($export['fecha_sal_rampa']) ?>"></input>
+                  <input type="date" name="fecha_sal_rampa" id="fecha_sal_rampa" rows="1" class="form-control" value="<?= escapar($export['fecha_sal_rampa']) ?>"></input>
                 </div>
             </div>
 
@@ -537,11 +537,11 @@ $tipo = $_GET['type']; // Definir la variable $type
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="comentario_oficina">Comentarios de oficina</label>
-                <textarea type="text" name="comentario_oficina" id="comentario_oficina" rows="3" class="form-control" value="<?= escapar($export['comentario_oficina']) ?>" value="<?= escapar($export['comentario_oficina']) ?>"></textarea>
+                <textarea type="text" name="comentario_oficina" id="comentario_oficina" rows="3" class="form-control" value="<?= escapar($export['comentario_oficina']) ?>"><?= escapar($export['comentario_oficina']) ?></textarea>
               </div>
               <div class="form-group col-md-12">
                 <label for="comentario_bodega">Comentarios de bodega</label>
-                <textarea type="text" name="comentario_bodega" id="comentario_bodega" rows="3" class="form-control" value="<?= escapar($export['comentario_bodega']) ?>" value="<?= escapar($export['comentario_bodega']) ?>"></textarea>
+                <textarea type="text" name="comentario_bodega" id="comentario_bodega" rows="3" class="form-control" value="<?= escapar($export['comentario_bodega']) ?>"><?= escapar($export['comentario_bodega']) ?></textarea>
               </div>
               <button type="submit" name="submit" class="btn btn-primary col-md-3" style="margin-bottom: 100px !important;">Actualizar</button>
             </div>
