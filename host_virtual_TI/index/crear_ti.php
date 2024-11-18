@@ -41,17 +41,18 @@ if (isset($_POST['submit'])) {
             "correo" => $_POST['correo'],
             "ubicacion" => implode(", ", $_POST['ubicacion']),
             "descripcion" => $_POST['descripcion'],
-            "urgencia" => implode(", ", $_POST['urgencia'])
+            "urgencia" => implode(", ", $_POST['urgencia']),
+            "estado" => $_POST['estado']
         );
 
         // Guardar datos en la base de datos
-        $consultaSQL = "INSERT INTO tickets (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL = "INSERT INTO tickets (nombrecompleto, correo, ubicacion, descripcion, urgencia, estado)";
         $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
 
         // Guardar datos en la base de datos de registro
-        $consultaSQL = "INSERT INTO tickets_r (nombrecompleto, correo, ubicacion, descripcion, urgencia)";
+        $consultaSQL = "INSERT INTO tickets_r (nombrecompleto, correo, ubicacion, descripcion, urgencia, estado)";
         $consultaSQL .= " VALUES (:" . implode(", :", array_keys($tickets)) . ")";
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute($tickets);
@@ -162,6 +163,7 @@ if (isset($_POST['submit'])) {
                         <option>Regular</option>
                         <option>Urgente</option>
                     </select>
+                    <input type="text" name="estado" id="estado" value="Recibido" hidden>
                 </div>
                 <div class="form-group">
                     <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">

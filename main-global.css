@@ -119,7 +119,7 @@ ul.clean{
   background-color: #fff;
   padding: 5px;
   border-radius: 10px 10px 50px 10px;
-  width: 270.48px;
+  width: 320px;
   height: 60px;
   display: flex;
   flex-direction: column;
@@ -132,7 +132,7 @@ ul.clean{
   background-color: #fff;
   padding: 5px;
   border-radius: 10px 10px 50px 10px;
-  width: 281px;
+  width: 320px;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -298,12 +298,12 @@ ul.detallesOps {
 /* ======================== Cuadro de sesión ======================== */
 
 .sessid{
-  margin : 0 50px;
+  margin : 0 48px;
 }
 
 .id_sesion {
   background-color: var(--color2);
-  padding: 15px;
+  padding: 16px;
   border-radius: 0 0 20px 20px;
   color: #fff;
 }

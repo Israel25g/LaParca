@@ -1,3 +1,4 @@
+// Reloj
 document.addEventListener("DOMContentLoaded", function() {
     function updateDateTime() {
         const dateElement = document.getElementById("fecha-actual");
@@ -13,10 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const formattedDate = now.toLocaleDateString('es-ES', dateOptions);
 
-        const hours = now.getHours().toString().padStart(2, '0');
+        let hours = now.getHours();
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const seconds = now.getSeconds().toString().padStart(2, '0');
-        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes}:${seconds} ${ampm}`;
 
         dateElement.textContent = formattedDate;
         timeElement.textContent = formattedTime;
@@ -25,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
     updateDateTime();
     setInterval(updateDateTime, 1000);
 });
-
 
 // temporizador
 
