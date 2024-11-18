@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="btn-group" style="margin-top: 100px; z-index: 999; margin-left: 38%; border-radius: 50px 50% 50% 50px; background-color: black">
+    <div class="btn-group" style="margin-top: 143px; z-index: 999; margin-left: 38%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-info active btn-md" aria-current="true" aria-label="Slide 0">Import</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-danger btn-md" aria-current="true" aria-label="Slide 1">Export</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="btn btn-warning btn-md" aria-label="Slide 3">Picking</button>
@@ -38,15 +38,31 @@
     <div id="carouselExampleCaptions" class="carousel slide mt-4">
         <div class="carousel-inner" style="margin-top: -70px;">
             <div class="carousel-item active ">
-                <div class="d-flex justify-content-center align-items-center " style="height: 900px;">
-                    <div id="barChart" style="width: 1200px; height: 400px;" class="border border-dark bg bg-light"></div>
-                    <div id="barChart2" style="width: 800px; height: 400px;" class="border border-warning "></div>
-                </div>
+            <div class="container mt-5">
+    <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
+        <!-- Primer gráfico -->
+        <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+            <div id="barChart1" class="border border-dark border-4 rounded bg-light" style="width: 1500px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
+        </div>
+        <!-- Segundo gráfico -->
+        <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+            <div id="barChart2" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px;background-color:aliceblue"></div>
+        </div>
+        <!-- Tercer gráfico -->
+        <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+            <div class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1000px; height: 600px;background-color:white"></div>
+        </div>
+        <!-- Cuarto gráfico -->
+        <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+            <div class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px; background-color:white"></div>
+        </div>
+    </div>
+</div>
+
             </div>
             <div class="carousel-item border border-4">
-                <div class="d-flex justify-content-center align-items-center" style="height: 900px;">
+                <div class="d-flex justify-content-center align-items-center" style="height: 900px; padding :2%">
                     <div id="scatterChart" style="width: 400px; height: 300px; background-color:aliceblue"></div>
-                    <div id="scatterChart2" style="width: 400px; height: 300px; background-color:aliceblue"></div>
                     </div>
             </div>
             <div class="carousel-item">
@@ -69,8 +85,21 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div>I will not close if you click outside of me.</div>
+        <div class="container mt-5">
+    <h2 class="text-center mb-4">Consulta Agrupada Dinámica</h2>
+    <form method="GET" action="get_data_imp_r.php">
+        <div class="mb-3">
+            <label for="groupBy" class="form-label">Agrupar por:</label>
+            <select id="groupBy" name="groupBy" class="form-select" required>
+                <option value="mes">Mes</option>
+                <option value="cliente">Cliente</option>
+                <option value="mes_cliente">Mes y Cliente</option>
+            </select>
         </div>
+        <button type="submit" class="btn btn-primary">Consultar</button>
+    </form>
+</div>
+</div>
     </div>
 
     <!-- Scripts -->
@@ -159,69 +188,201 @@
 </script>
 
 <script>
-// Definimos los datos de ejemplo para múltiples series, ahora por mes en lugar de año
-const data = [
+// Datos para el primer gráfico
+const data1 = [
   {
     "month": "Enero",
     "sales": [
-      { "name": "cajas A", "value": 411 },
-      { "name": "unidades B", "value": 495 },
-      { "name": "paletas C", "value": 200 },
-      { "name": "Producto D", "value": 156 },
-      { "name": "Producto E", "value": 464 }
+      { "name": "cajas ", "value": 421 },
+      { "name": "CBM", "value": 312 },
+      { "name": "KG", "value": 180 },
+      { "name": "Paletas recibidas", "value": 240 },
+      { "name": "posicion por paleta ", "value": 510 }
     ],
     "expense": [
-      { "name": "40 pies", "value": 483 },
-      { "name": "20 pies", "value": 289 },
-      { "name": "LCL", "value": 327 }
+      { "name": "40 pies", "value": 403 },
+      { "name": "20 pies", "value": 267 },
+      { "name": "LCL", "value": 333 }
     ]
   },
   {
     "month": "Febrero",
     "sales": [
-      { "name": "cajas A", "value": 352 },
-      { "name": "unidades B", "value": 310 },
-      { "name": "paletas C", "value": 183 },
-      { "name": "Producto D", "value": 241 },
-      { "name": "Producto E", "value": 219 }
+      { "name": "cajas ", "value": 390 },
+      { "name": "CBM", "value": 344 },
+      { "name": "KG", "value": 250 },
+      { "name": "Paletas recibidas", "value": 206 },
+      { "name": "posicion por paleta", "value": 398 }
     ],
     "expense": [
-      { "name": "40 pies", "value": 241 },
-      { "name": "20 pies", "value": 208 },
-      { "name": "LCL", "value": 104 }
+      { "name": "40 pies", "value": 342 },
+      { "name": "20 pies", "value": 225 },
+      { "name": "LCL", "value": 120 }
     ]
   },
   {
     "month": "Marzo",
     "sales": [
-      { "name": "cajas A", "value": 349 },
-      { "name": "unidades B", "value": 396 },
-      { "name": "paletas C", "value": 411 },
-      { "name": "Producto D", "value": 162 },
-      { "name": "Producto E", "value": 138 }
+      { "name": "cajas ", "value": 378 },
+      { "name": "CBM", "value": 401 },
+      { "name": "KG", "value": 320 },
+      { "name": "Paletas recibidas", "value": 190 },
+      { "name": "posicion por paleta", "value": 429 }
     ],
     "expense": [
-      { "name": "40 pies", "value": 464 },
-      { "name": "20 pies", "value": 497 },
-      { "name": "LCL", "value": 453 }
+      { "name": "40 pies", "value": 420 },
+      { "name": "20 pies", "value": 490 },
+      { "name": "LCL", "value": 368 }
     ]
   }
 ];
 
-// Configuración general del gráfico
-let chart = echarts.init(document.getElementById('barChart'));
 
-// Colores para las barras (colores variados)
-const barColors = ['#4CAF50', '#FF9800', '#2196F3', '#FF5722', '#9C27B0'];
+// Datos para el segundo gráfico
+const data2 = [
+    {
+    "month": "Enero",
+    "sales": [
+      { "name": "Brazil", "value": 411 },
+      { "name": "España", "value": 495 },
+      { "name": "polonoia", "value": 411 },
+      { "name": "Aruba", "value": 495 },
+      { "name": "Italia X", "value": 411 },
+      { "name": "Argentina", "value": 495 },
+      { "name": "Indonesia", "value": 411 },
+      { "name": "Namibia", "value": 495 },
+      { "name": "ecuador", "value": 200 }
+    ],
+  },
+  {
+    "month": "Febrero",
+    "sales": [
+      { "name": "producto X", "value": 300 },
+      { "name": "producto Y", "value": 420 },
+      { "name": "producto Z", "value": 250 }
+    ],
+  },
+  {
+    "month": "Marzo",
+    "sales": [
+      { "name": "producto X", "value": 378 },
+      { "name": "producto Y", "value": 401 },
+      { "name": "producto Z", "value": 320 }
+    ],
+  }
+  // Agrega más datos para `data2` si necesitas más meses
+];
 
-// Configuración del timeline y las opciones de gráficos
-let option = {
+// Configuración para el primer gráfico
+let chart1 = echarts.init(document.getElementById('barChart1'));
+const option1 = {
   baseOption: {
     timeline: {
       axisType: 'category',
-      data: data.map(item => item.month),
-      autoPlay: true,
-      playInterval: 2000,
+      data: data1.map(item => item.month),
+      autoPlay: false,
+      playInterval: 2500,
+      right:'0%',
+      left: ',0%',  // Ajusta la posición desde la izquierda
+      bottom: '1%', // Ajusta la posición desde la parte inferior
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {},
+        dataZoom: {},
+        restore: {},
+        magicType: { type: ['line', 'bar','pie'] },
+      },
+    },
+    tooltip: {
+      trigger: 'axis',
+    },
+    grid: {
+      left: '3%',
+      right: '30%',
+      bottom: '10%',
+      top: '15%',
+      containLabel: true,
+    },
+    legend: {
+      left:'0%',
+      data: ['Cajas/CBM/KG/PALETAS RECIBIDOS', 'Embarques totales recibidos'],
+    },
+    xAxis: {
+      type: 'category',
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        type: 'bar',
+        name: 'Cajas/CBM/KG/PALETAS RECIBIDOS',
+        itemStyle: { color: '#4CAF50' },
+        label: { show: true, position: 'top' },
+      },
+      {
+        type: 'pie',
+        name: 'Embarques totales recibidos',
+        radius: ['10%', '30%'],
+        center: ['85%', '50%'],
+        label: {
+          show: true,
+          position:'inner',
+          formatter: '{b}: {d}%',
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b}: {c} ({d}%)',
+        },
+      },
+    ],
+  },
+  options: data1.map((monthData) => {
+    const salesData = monthData.sales.map((item, index) => ({
+      value: item.value,
+      name: item.name,
+    }));
+    const expensesData = monthData.expense;
+
+    return {
+      title: {
+        text: `Ventas y Gastos en ${monthData.month}`,
+        top : '10%',
+      },
+      xAxis: {
+        data: salesData.map(item => item.name),
+      },
+      series: [
+        {
+          name: 'Cajas/CBM/KG/PALETAS RECIBIDOS',
+          type: 'bar',
+          data: salesData,
+        },
+        {
+          name: 'Embarques totales recibidos',
+          type: 'pie',
+          data: expensesData.map(item => ({
+            value: item.value,
+            name: item.name,
+          })),
+        },
+      ],
+    };
+  }),
+};
+
+// Configuración para el segundo gráfico
+let chart2 = echarts.init(document.getElementById('barChart2'));
+const option2 = {
+  baseOption: {
+    timeline: {
+      axisType: 'category',
+      left:'0%',
+      right:'0%',
+      data: data2.map(item => item.month),
+      autoPlay: false,
+      playInterval: 2500,
     },
     toolbox: {
       feature: {
@@ -235,14 +396,14 @@ let option = {
       trigger: 'axis',
     },
     grid: {
-      left: '3%', // Puedes cambiar este valor para ajustar el tamaño desde la izquierda
-      right: '30%', // Ajusta el tamaño desde la derecha
-      bottom: '10%', // Ajusta el tamaño desde la parte inferior
-      top: '15%', // Ajusta el tamaño desde la parte superior
-      containLabel: true, // Asegura que las etiquetas estén contenidas
+      left: '3%',
+      right: '2%',
+      bottom: '10%',
+      top: '15%',
+      containLabel: true,
     },
     legend: {
-      data: ['Ventas', 'Distribución de Gastos'], // Se eliminó "Embarques"
+      data: ['Ventas', 'Distribución de Gastos'],
     },
     xAxis: {
       type: 'category',
@@ -251,41 +412,21 @@ let option = {
       type: 'value',
     },
     series: [
-      // Solo mantendremos la serie de ventas
       {
         type: 'bar',
         name: 'Ventas',
-        itemStyle: { color: '#4CAF50' },
+        itemStyle: { color: '#2196F3' },
         label: { show: true, position: 'top' },
       },
-      // Este gráfico será de tipo pie para la distribución de gastos
-      {
-        type: 'pie',
-        name: 'Distribución de Gastos',
-        radius: ['20%', '70%'],
-        center: ['40%', '30%'],
-        left:'80%' ,
-        label: {
-          show: true,
-          formatter: '{b}: {d}%',
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)',
-        },
-      },
+
     ],
   },
-  options: data.map((monthData) => {
-    const salesData = monthData.sales.filter(item => item.value > 0);
-    const expensesData = monthData.expense;
-
-    // Combinamos las ventas en una sola serie
-    const combinedData = salesData.map((item, index) => ({
+  options: data2.map((monthData) => {
+    const salesData = monthData.sales.map((item, index) => ({
       value: item.value,
       name: item.name,
-      itemStyle: { color: barColors[index % barColors.length] },
     }));
+    const expensesData = monthData.expense;
 
     return {
       title: {
@@ -298,32 +439,18 @@ let option = {
         {
           name: 'Ventas',
           type: 'bar',
-          data: combinedData,
+          data: salesData,
         },
-        {
-          name: 'Distribución de Gastos',
-          type: 'pie',
-          data: expensesData.map(item => ({
-            value: item.value,
-            name: item.name,
-          })),
-        },
+
       ],
     };
   }),
 };
 
-// Renderizamos el gráfico con la configuración completa
-chart.setOption(option);
+// Renderiza ambos gráficos con sus configuraciones independientes
+chart1.setOption(option1);
+chart2.setOption(option2);
 </script>
-
-
-
-
-
-
-
-
 
 </body>
 </html>
