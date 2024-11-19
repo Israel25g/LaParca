@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-    <h1 style="width: 100%; text-align: center;">Gráficos dinámicos </h1>
+    <h1 style="width: 100%; text-align: center;">Gráficos dinámicos</h1>
     
     <!-- Contenedores para los 8 gráficos -->
     <div id="chart1" class="chart-container"></div>
@@ -40,52 +40,62 @@
     <div id="chart8" class="chart-container"></div>
 
     <script>
-        // Función para cargar datos desde PHP
+        // Función para obtener datos desde el servidor
         async function fetchData(endpoint) {
             const response = await fetch(endpoint);
+            if (!response.ok) {
+                console.error("Error al obtener los datos:", response.statusText);
+                return {};
+            }
             return await response.json();
         }
 
-        // Inicializa un gráfico
+        // Inicializa un gráfico dinámico
         function initChart(containerId, data, title = "Gráfico") {
             const chart = echarts.init(document.getElementById(containerId));
             const options = {
                 title: {
-                    text: title,
-                    left: 'center'
+                    text: data.title || title,
+                    left: 'center',
                 },
-                tooltip: {
-                    trigger: 'item'
+                tooltip: data.tooltip || {
+                    trigger: 'item',
                 },
-                xAxis: {
+                toolbox: data.toolbox || {
+                    show: true,
+                    feature: {
+                        saveAsImage: { show: true },
+                    },
+                },
+                xAxis: data.type === 'pie' || data.type === 'radar' ? undefined : {
                     type: 'category',
-                    data: data.categories || []
+                    data: data.categories || [],
                 },
-                yAxis: {
-                    type: 'value'
+                yAxis: data.type === 'pie' || data.type === 'radar' ? undefined : {
+                    type: 'value',
                 },
                 series: [
                     {
                         data: data.values || [],
-                         // Cambia a 'line', 'pie', etc. según el gráfico
-                    }
-                ]
+                        type: data.type || 'bar', // Tipo dinámico
+                        name: data.title || title,
+                    },
+                ],
             };
             chart.setOption(options);
         }
 
-        // Cargar los datos y renderizar los gráficos
+        // Cargar y renderizar gráficos
         async function loadCharts() {
-            // Endpoint donde se obtienen los datos
-            const data = await fetchData('get_data.php');
-            
+            const data = await fetchData('get_data.php'); // Obtiene datos del servidor
+
             // Inicializa 8 gráficos con datos distintos
             for (let i = 1; i <= 8; i++) {
                 initChart(`chart${i}`, data[`chart${i}`] || {}, `Gráfico ${i}`);
             }
         }
 
-        // Llama la función al cargar la página
+        // Llamar a la función para cargar los gráficos
         loadCharts();
     </script>
 </body>

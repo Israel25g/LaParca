@@ -32,34 +32,26 @@ while ($row = $result->fetch_assoc()) {
     $categories0[] = $row['cliente'];
     $categories1[] = $row['destino'];
 }
+function createChartConfig($categories, $values, $type, $title) {
+    return [
+        "categories" => $categories,
+        "values" => $values,
+        "type" => $type,
+        "title" => $title,
+        "tooltip" => ["trigger" => "item"],
+        "toolbox" => ["show" => true, "feature" => ["saveAsImage" => ["show" => true],["dataZoom"=> true]]]
+    ];
+}
 
-// Prepara los datos para los gráficos con opciones avanzadas
-$data["chart1"] = [
-    "categories" => $categories0,
-    "values" => $values0,
-    "type" => $type,
-    "title" => "Gráfico 1: Clientes y AID OID",
-    "tooltip" => ["trigger" => "axis"],
-    "toolbox" => ["show" => true, "feature" => ["saveAsImage" => ["show" => true]]]
-];
-$data["chart2"] = [
-    "categories" => $categories1,
-    "values" => $values1,
-    "type" => "line",
-    "title" => "Gráfico 2: Destinos e ID",
-    "tooltip" => ["trigger" => "item"],
-    "toolbox" => ["show" => true, "feature" => ["dataZoom" => ["show" => true]]]
-];
-$data["chart3"] = [
-    "categories" => $categories0,
-    "values" => $values1,
-    "type" => "pie",
-    "title" => "Gráfico 3: Clientes e ID",
-    "tooltip" => ["trigger" => "item"],
-    "toolbox" => ["show" => true, "feature" => ["saveAsImage" => ["show" => true]]]
-];
-
-// Puedes seguir agregando configuraciones similares para chart4 a chart8
+// Configuración dinámica de gráficos
+$data["chart1"] = createChartConfig($categories0, $values0, "bar", "Gráfico 1: Clientes y AID OID");
+$data["chart2"] = createChartConfig($categories1, $values1, "line", "Gráfico 2: Destinos e ID");
+$data["chart3"] = createChartConfig($categories0, $values1, "pie", "Gráfico 3: Clientes e ID");
+$data["chart4"] = createChartConfig($categories1, $values0, "scatter", "Gráfico 4: Destinos y AID OID");
+$data["chart5"] = createChartConfig($categories0, $values0, "bar", "Gráfico 5: Clientes y AID OID (Bar)");
+$data["chart6"] = createChartConfig($categories1, $values1, "line", "Gráfico 6: Destinos e ID (Line)");
+$data["chart7"] = createChartConfig($categories0, $values0, "pie", "Gráfico 7: Clientes y AID OID (Pie)");
+$data["chart8"] = createChartConfig($categories1, $values1, "gauge", "Gráfico 8: Radar de ID y Destinos");
 
 // Cierra la conexión
 $conn->close();
