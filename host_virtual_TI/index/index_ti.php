@@ -83,7 +83,7 @@ include("../../apertura_sesion.php")
         <div class="col-md-12">
           <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Tickets de TI</h2>
           <div class="col-md-12">
-            <a href="crear_ti.php" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
+            <a href="crear_ti.php#disabledd" class="btn btn-success "><i class="bi bi-pen-fill"></i> Crear Ticket</a>
             <?php
             if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
               echo '<a href="../indexAdmin/indexAdmin_ti.php" class="btn btn-warning "><i class="bi bi-pencil-square"></i> Ver tickets de TI</a>';

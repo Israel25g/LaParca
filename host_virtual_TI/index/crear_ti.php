@@ -61,9 +61,9 @@ if (isset($_POST['submit'])) {
         $tickets = array(
             "nombrecompleto" => $_POST['nombrecompleto'],
             "correo" => $_POST['correo'],
-            "ubicacion" => implode(", ", $_POST['ubicacion']),
+            "ubicacion" => $_POST['ubicacion'],
             "descripcion" => $_POST['descripcion'],
-            "urgencia" => implode(", ", $_POST['urgencia']),
+            "urgencia" => $_POST['urgencia'],
             "estado" => $_POST['estado']
         );
 
@@ -158,7 +158,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                         <label for="ubicacion">Departamento</label>
-                        <select class="form-control" name="ubicacion" id="ubicacion" required>
+                        <select class="form-control" name="ubicacion[]" id="ubicacion" required>
                             <option>Seleccione una opción...</option>
 
                             <?php  
