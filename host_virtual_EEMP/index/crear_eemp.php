@@ -35,7 +35,7 @@
             $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
             ]);
-
+            
             //echo "Conexión a la base de datos exitosa.<br>"; // Debug
 
             // Datos del formulario
@@ -102,7 +102,27 @@
         }
     }
     ?>
+<?php
+$config = include '../config.php';
 
+try {
+    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
+    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4'
+    ]);
+
+    $sql = "SELECT Departamento FROM departamentos";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($departamentos as $item) {
+         '<option value="' . $item['Departamento'] . '">' . $item['Departamento'] . '</option>';
+    }
+} catch (PDOException $error) {
+    echo 'Error: ' . $error->getMessage();
+}
+?>
     <?php include "../../host_virtual_EEMP/componentesxd/header.php"; ?>
 
 
@@ -137,20 +157,14 @@
                     </div>
                     <div class="form-group">
                         <label for="ubicacion">Departamento</label>
-                        <select class="form-control" name="ubicacion[]" id="ubicacion" required>
+                        <select class="form-control" name="ubicacion" id="ubicacion" required>
                             <option>Seleccione una opción...</option>
-                            <option>Trafico</option>
-                            <option>Soporte tecnico</option>
-                            <option>Mantenimiento</option>
-                            <option>Contabilidad</option>
-                            <option>RRHH</option>
-                            <option>Operaciones planta baja</option>
-                            <option>Asistente de gerencia</option>
-                            <option>Gerente de operaciones</option>
-                            <option>Gerente general</option>
-                            <option>Auditoria</option>
-                            <option>Inventario</option>
-                            <option>mezzanine</option>
+
+                            <?php  
+                        foreach ($departamentos as $item) {
+                            echo '<option value="' . $item['Departamento'] . '">' . $item['Departamento'] . '</option>';
+                        }
+                        ?>
                         </select>
                     </div>
                     <div class="form-group">
