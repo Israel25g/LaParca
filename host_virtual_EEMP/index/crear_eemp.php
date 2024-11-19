@@ -117,7 +117,7 @@ try {
     $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($departamentos as $item) {
-         '<option value="' . $item['Departamento'] . '">' . $item['Departamento'] . '</option>';
+         '<option value="' . $item['Departamento'] . '"></option>';
     }
 } catch (PDOException $error) {
     echo 'Error: ' . $error->getMessage();

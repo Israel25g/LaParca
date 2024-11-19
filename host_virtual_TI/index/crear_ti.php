@@ -61,9 +61,9 @@ if (isset($_POST['submit'])) {
         $tickets = array(
             "nombrecompleto" => $_POST['nombrecompleto'],
             "correo" => $_POST['correo'],
-            "ubicacion" => $_POST['ubicacion'],
+            "ubicacion" => implode(", ", $_POST['ubicacion']),
             "descripcion" => $_POST['descripcion'],
-            "urgencia" => $_POST['urgencia'],
+            "urgencia" => implode(", ", $_POST['urgencia']),
             "estado" => $_POST['estado']
         );
 
