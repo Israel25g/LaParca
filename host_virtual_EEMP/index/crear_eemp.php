@@ -162,7 +162,7 @@ try {
 
                             <?php  
                         foreach ($departamentos as $item) {
-                            echo '<option value="' . $item['Departamento'] . '">' . $item['Departamento'] . '</option>';
+                            echo '<option value="' . $item['Departamento'] . '"></option>';
                         }
                         ?>
                         </select>
