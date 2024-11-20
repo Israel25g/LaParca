@@ -102,31 +102,6 @@
         }
     }
     ?>
-<?php
-$config = include '../config.php';
-
-try {
-    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
-        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4'
-    ]);
-
-    $sql = "SELECT Departamento FROM departamentos";
-    $stmt = $conexion->prepare($sql);
-    $stmt->execute();
-    $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($departamentos as $item) {
-         '<option value="' . $item['Departamento'] . '"></option>';
-    }
-} catch (PDOException $error) {
-    echo 'Error: ' . $error->getMessage();
-}
-?>
-    <?php include "../../host_virtual_EEMP/componentesxd/header.php"; ?>
-
-
-
     <div class="tick-main-block">
         <span class="alerta-enviado">
             <?php if (!empty($resultado['mensaje'])) { ?>
