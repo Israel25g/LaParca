@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Consulta a la base de datos
-$query = "SELECT * FROM import GROUP BY t_carga";
+$query = "SELECT * FROM import ";
 $result = $conn->query($query);
 
 // Inicializa arrays para categorías y valores
@@ -31,6 +31,7 @@ while ($row = $result->fetch_assoc()) {
     $values1[] = $row['id'];
     $categories0[] = $row['cliente'];
     $categories1[] = $row['destino'];
+
 }
 function createChartConfig($categories, $values, $type, $title) {
     return [
@@ -38,8 +39,9 @@ function createChartConfig($categories, $values, $type, $title) {
         "values" => $values,
         "type" => $type,
         "title" => $title,
-        "tooltip" => ["trigger" => "item"],
-        "toolbox" => ["show" => true, "feature" => ["saveAsImage" => ["show" => true],["dataZoom"=> true]]]
+
+
+        
     ];
 }
 
