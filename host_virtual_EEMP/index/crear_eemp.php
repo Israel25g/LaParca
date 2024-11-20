@@ -35,7 +35,7 @@
             $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4' // Establecer UTF-8
             ]);
-            
+
             //echo "Conexión a la base de datos exitosa.<br>"; // Debug
 
             // Datos del formulario
@@ -102,6 +102,11 @@
         }
     }
     ?>
+
+    <?php include "../../host_virtual_EEMP/componentesxd/header.php"; ?>
+
+
+
     <div class="tick-main-block">
         <span class="alerta-enviado">
             <?php if (!empty($resultado['mensaje'])) { ?>
@@ -132,9 +137,10 @@
                     </div>
                     <div class="form-group">
                         <label for="ubicacion">Departamento</label>
-                        <select class="form-control" name="ubicacion" id="ubicacion" required>
+                        <select class="form-control" name="ubicacion[]" id="ubicacion" required>
                             <option>Seleccione una opción...</option>
                             <option>Trafico</option>
+                            <option>Soporte tecnico</option>
                             <option>Mantenimiento</option>
                             <option>Contabilidad</option>
                             <option>RRHH</option>
@@ -145,8 +151,7 @@
                             <option>Auditoria</option>
                             <option>Inventario</option>
                             <option>mezzanine</option>
-                            <option>SAC(servicio al cliente)</option>
-                            <option>Soporte tecnico</option>
+                            <option>SAC</option>
                         </select>
                     </div>
                     <div class="form-group">

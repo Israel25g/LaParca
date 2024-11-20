@@ -1,25 +1,3 @@
-<?php
-$config = include '../config.php';
-
-try {
-    $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
-    $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], [
-        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4'
-    ]);
-
-    $sql = "SELECT Departamento FROM departamentos";
-    $stmt = $conexion->prepare($sql);
-    $stmt->execute();
-    $departamentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($departamentos as $item) {
-         '<option value="' . $item['Departamento'] . '">' . $item['Departamento'] . '</option>';
-    }
-} catch (PDOException $error) {
-    echo 'Error: ' . $error->getMessage();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,24 +135,24 @@ if (isset($_POST['submit'])) {
                     <input type="email" name="correo" id="correo" class="form-control" required>
                 </div>
                 <div class="form-group">
-                        <label for="ubicacion">Departamento</label>
-                        <select class="form-control" name="ubicacion[]" id="ubicacion" required>
-                            <option>Seleccione una opción...</option>
-                            <option>Trafico</option>
-                            <option>Mantenimiento</option>
-                            <option>Contabilidad</option>
-                            <option>RRHH</option>
-                            <option>Operaciones planta baja</option>
-                            <option>Asistente de gerencia</option>
-                            <option>Gerente de operaciones</option>
-                            <option>Gerente general</option>
-                            <option>Auditoria</option>
-                            <option>Inventario</option>
-                            <option>mezzanine</option>
-                            <option>SAC(servicio al cliente)</option>
-                            <option>Soporte tecnico</option>
-                        </select>
-                    </div>
+                    <label for="ubicacion">Departamento</label>
+                    <select class="form-control" name="ubicacion[]" id="ubicacion" required>
+                        <option>Seleccione una opción...</option>
+                        <option>Trafico</option>
+                        <option>Recepción</option>
+                        <option>Servicio al cliente</option>
+                        <option>Contabilidad</option>
+                        <option>RRHH</option>
+                        <option>Operaciones planta baja</option>
+                        <option>Asistente de gerencia</option>
+                        <option>Gerente de operaciones</option>
+                        <option>Gerente general</option>
+                        <option>Auditoria</option>
+                        <option>Inventario</option>
+                        <option>mezzanine</option>
+                        <option>SAC</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="descripcion">Describa el problema</label>
                     <textarea type="text" name="descripcion" id="descripcion" class="form-control" rows="4" required></textarea>
@@ -198,4 +176,3 @@ if (isset($_POST['submit'])) {
 
 </body>
 </html>
-
