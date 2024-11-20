@@ -160,12 +160,19 @@ if (isset($_POST['submit'])) {
                         <label for="ubicacion">Departamento</label>
                         <select class="form-control" name="ubicacion[]" id="ubicacion" required>
                             <option>Seleccione una opción...</option>
-
-                            <?php  
-                        foreach ($departamentos as $item) {
-                            echo '<option value="' . $item['Departamento'] . '">' . $item['Departamento'] . '</option>';
-                        }
-                        ?>
+                            <option>Trafico</option>
+                            <option>Mantenimiento</option>
+                            <option>Contabilidad</option>
+                            <option>RRHH</option>
+                            <option>Operaciones planta baja</option>
+                            <option>Asistente de gerencia</option>
+                            <option>Gerente de operaciones</option>
+                            <option>Gerente general</option>
+                            <option>Auditoria</option>
+                            <option>Inventario</option>
+                            <option>mezzanine</option>
+                            <option>SAC(servicio al cliente)</option>
+                            <option>Soporte tecnico</option>
                         </select>
                     </div>
                 <div class="form-group">
