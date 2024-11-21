@@ -23,7 +23,7 @@ switch ($groupBy) {
 
 // Construir la consulta SQL dinámica
 $query = "SELECT $groupByClause, SUM(pedidos_en_proceso) AS total
-          FROM picking 
+          FROM import 
           GROUP BY $groupByField
           ORDER BY mes";
 

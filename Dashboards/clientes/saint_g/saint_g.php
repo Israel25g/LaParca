@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Incluyendo la librería de ECharts -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
+
+
 </head>
 
 <body style="background-color:lightgrey">
@@ -42,7 +44,7 @@
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- Primer gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart1" class="border border-dark border-4 rounded bg-light" style="width: 1500px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
+              <div id="chart1" class="border border-dark border-4 rounded bg-light" style="width: 1200px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
           </div>
           <!-- Segundo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
@@ -50,7 +52,7 @@
           </div>
           <!-- Tercer gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart3" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1000px; height: 600px;background-color:white"></div>
+              <div id="chart3" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px;background-color:white"></div>
           </div>
           <!-- Cuarto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
@@ -64,19 +66,19 @@
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!--  Quinto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart5" class="border border-dark border-4 rounded bg-light" style="width: 1500px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
+              <div id="chart5" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue"></div>
           </div>
           <!-- Sexto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px;background-color:aliceblue"></div>
+              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue"></div>
           </div>
           <!-- septimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart7" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1000px; height: 600px;background-color:white"></div>
+              <div id="chart7" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white"></div>
           </div>
           <!-- octavo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px; background-color:white"></div>
+              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white"></div>
           </div>
       </div>
   </div>
@@ -86,7 +88,7 @@
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- noveno gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 1500px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
+              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 1200px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
           </div>
           <!-- decimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
@@ -108,19 +110,19 @@
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- decimo tercero gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 1500px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
+              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 1200px; max-width: 1200px; height: 600px; background-color:aliceblue"></div>
           </div>
           <!-- decimocuarto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px;background-color:aliceblue"></div>
+              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1200px; height: 600px;background-color:aliceblue"></div>
           </div>
           <!-- decimoquinto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1000px; height: 600px;background-color:white"></div>
+              <div class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1200px; height: 600px;background-color:white"></div>
           </div>
           <!-- decimo sexto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 800px; height: 600px; background-color:white"></div>
+              <div class="border border-dark border-4 rounded bg-light" style="width: 100%; max-width: 1200px; height: 600px; background-color:white"></div>
           </div>
       </div>
   </div>
@@ -157,64 +159,102 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
-        // Función para obtener datos desde el servidor
-        async function fetchData(endpoint) {
-            const response = await fetch(endpoint);
-            if (!response.ok) {
-                console.error("Error al obtener los datos:", response.statusText);
-                return {};
-            }
-            return await response.json();
-        }
+// Función para obtener datos desde el servidor
+async function fetchData(endpoint) {
+    const response = await fetch(endpoint);
+    if (!response.ok) {
+        console.error("Error al obtener los datos:", response.statusText);
+        return {};
+    }
+    return await response.json();
+}
 
-        // Inicializa un gráfico dinámico
-        function initChart(containerId, data, title = "Gráfico") {
-            const chart = echarts.init(document.getElementById(containerId));
-            const options = {
-                title: {
-                    text: data.title || title,
-                    left: 'center',
+// Función para inicializar un gráfico dinámico con toolbox y tooltip
+function initChart(containerId, chartData, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    
+    const options = {
+        title: {
+            text: title,
+            left: '0%'
+        },
+        tooltip: {
+            trigger: 'axis', // Tooltip activado al pasar por el eje
+            axisPointer: {
+                type: 'shadow' // Línea sombreada para resaltar el eje
+            },
+            formatter: params => {
+                let tooltipContent = `${title}<br>`;
+                params.forEach(item => {
+                    tooltipContent += `${item.name}: ${item.value}<br>`;
+                });
+                return tooltipContent;
+            }
+        },
+        xAxis: {
+            type: 'category',
+            data: chartData.map(item => item.name),
+            axisLabel: {
+                rotate: 90 // Rotar etiquetas si hay muchas categorías
+            }
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: chartData.map(item => item.value[1]),
+                type: 'bar',
+                name: title
+            }
+        ],
+        toolbox: {
+            feature: {
+                dataZoom: { // Herramienta para hacer zoom y desplazar
+                    yAxisIndex: 'none'
                 },
-                tooltip: data.tooltip || {
-                    trigger: 'item',
+                magicType: { // Cambiar tipo de gráfico
+                    type: ['line', 'bar']
                 },
-                toolbox: data.toolbox || {
+                restore: { // Restaurar estado inicial
+                    show: true
+                },
+                saveAsImage: { // Descargar gráfico como imagen
+                    show: true
+                },
+                dataView: { // Ver los datos en una ventana emergente
                     show: true,
-                    feature: {
-                        saveAsImage: { show: true },
-
-                    },
-                },
-                xAxis: data.type === 'pie' || data.type === 'radar' ? undefined : {
-                    type: 'category',
-                    data: data.categories || [],
-                },
-                yAxis: data.type === 'pie' || data.type === 'radar' ? undefined : {
-                    type: 'value',
-                },
-                series: [
-                    {
-                        data: data.values || [],
-                        type: data.type || 'bar', // Tipo dinámico
-                        name: data.title || title,
-                    },
-                ],
-            };
-            chart.setOption(options);
-        }
-
-        // Cargar y renderizar gráficos
-        async function loadCharts() {
-            const data = await fetchData('get_data.php'); // Obtiene datos del servidor
-
-            // Inicializa 8 gráficos con datos distintos
-            for (let i = 1; i <= 8; i++) {
-                initChart(`chart${i}`, data[`chart${i}`] || {}, `Gráfico ${i}`);
+                    readOnly: false
+                }
             }
         }
+    };
 
-        // Llamar a la función para cargar los gráficos
-        loadCharts();
+    chart.setOption(options);
+}
+
+// Función para cargar y renderizar los gráficos
+async function loadCharts() {
+  const data = await fetchData('get_data.php?fecha_inicio=2024-01-01&fecha_final=2024-12-31&cliente=ADOC');
+
+
+
+    if (!data) {
+        console.error("No se recibieron datos válidos del servidor.");
+        return;
+    }
+
+    // Configurar cada gráfico usando los datos recibidos
+    initChart('chart1', data.chart1, 'Gráfico 1: Clientes y Unidades');
+    initChart('chart2', data.chart2, 'Gráfico 2: Destinos y Paletas');
+    initChart('chart3', data.chart3, 'Gráfico 3: Clientes y Cajas');
+    initChart('chart4', data.chart4, 'Gráfico 4: Repetición de Clientes (Ejemplo)');
+    // Agregar más inicializaciones si es necesario
+}
+
+// Ejecutar la carga de gráficos
+loadCharts();
+
     </script>
 
 </body>
