@@ -54,7 +54,7 @@ if ($dateCondition && $clientCondition) {
 }
 
 // Consultas para múltiples gráficos
-
+// Inician los graficos de import
 // Gráfico 1: Total de unidades por cliente y mes
 $query1 = "
     SELECT 
@@ -146,7 +146,7 @@ $query4 = "
         cliente,
         SUM(cajas) AS total_cajas
     FROM 
-        export
+        import
     $whereClause
     GROUP BY 
         mes, cliente
@@ -166,13 +166,375 @@ if ($result4->num_rows > 0) {
         ];
     }
 }
+//Terminan los graficos de import
 
+// inician los graficos de export
+// Gráfico 5: Total de unidades por cliente y mes
+$query5 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    cliente,
+    SUM(unidades) AS total_unidades
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, cliente
+ORDER BY 
+    mes, cliente
+";
+$result5 = $conn->query($query5);
+$chart5 = [];
+if ($result5->num_rows > 0) {
+while ($row = $result5->fetch_assoc()) {
+    $chart5[] = [
+        'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_unidades'],
+        ],
+    ];
+}
+}
+
+// Gráfico 6: Total de paletas por destino y mes
+$query6 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    destino,
+    SUM(paletas) AS total_paletas
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, destino
+ORDER BY 
+    mes, destino
+";
+$result6 = $conn->query($query6);
+$chart6 = [];
+if ($result6->num_rows > 0) {
+while ($row = $result6->fetch_assoc()) {
+    $chart6[] = [
+        'name' => $row['destino'] ? $row['destino'] : 'Sin Destino',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_paletas'],
+        ],
+    ];
+}
+}
+
+// Gráfico 7: Total de cajas por cliente y mes
+$query7 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    cliente,
+    SUM(cajas) AS total_cajas
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, cliente
+ORDER BY 
+    mes, cliente
+";
+$result7 = $conn->query($query7);
+$chart7= [];
+if ($result7->num_rows > 0) {
+while ($row = $result7->fetch_assoc()) {
+    $chart7[] = [
+        'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_cajas'],
+        ],
+    ];
+}
+}
+
+// Gráfico 8: Ejemplo adicional de consulta
+$query8 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    cliente,
+    SUM(unidades) AS total_unidades
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, cliente
+ORDER BY 
+    mes, cliente
+";
+$result8 = $conn->query($query8);
+$chart8 = [];
+if ($result8->num_rows > 0) {
+while ($row = $result8->fetch_assoc()) {
+    $chart8[] = [
+        'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_unidades'],
+        ],
+    ];
+}
+}
+// Termonan los graficos de export
+
+// Inician los graficos de picking
+// Gráfico 9: Total de unidades por cliente y mes
+$query9 = "
+    SELECT 
+        DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+        cliente,
+        SUM(unidades) AS total_unidades
+    FROM 
+        picking
+    $whereClause
+    GROUP BY 
+        mes, cliente
+    ORDER BY 
+        mes, cliente
+";
+$result9 = $conn->query($query9);
+$chart9 = [];
+if ($result9->num_rows > 0) {
+    while ($row = $result9->fetch_assoc()) {
+        $chart9[] = [
+            'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+            'value' => [
+                $row['mes'],
+                (int)$row['total_unidades'],
+            ],
+        ];
+    }
+}
+
+// Gráfico 10: Total de paletas por destino y mes
+$query10 = "
+    SELECT 
+        DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+        destino,
+        SUM(paletas) AS total_paletas
+    FROM 
+        picking
+    $whereClause
+    GROUP BY 
+        mes, destino
+    ORDER BY 
+        mes, destino
+";
+$result10 = $conn->query($query10);
+$chart10 = [];
+if ($result10->num_rows > 0) {
+    while ($row = $result10->fetch_assoc()) {
+        $chart10[] = [
+            'name' => $row['destino'] ? $row['destino'] : 'Sin Destino',
+            'value' => [
+                $row['mes'],
+                (int)$row['total_paletas'],
+            ],
+        ];
+    }
+}
+
+// Gráfico 11: Total de cajas por cliente y mes
+$query11 = "
+    SELECT 
+        DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+        cliente,
+        SUM(unidades) AS total_unidades
+    FROM 
+        picking
+    $whereClause
+    GROUP BY 
+        mes, cliente
+    ORDER BY 
+        mes, cliente
+";
+$result11 = $conn->query($query11);
+$chart11 = [];
+if ($result11->num_rows > 0) {
+    while ($row = $result11->fetch_assoc()) {
+        $chart11[] = [
+            'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+            'value' => [
+                $row['mes'],
+                (int)$row['total_unidades'],
+            ],
+        ];
+    }
+}
+
+// Gráfico 12: Ejemplo adicional de consulta
+$query12 = "
+    SELECT 
+        DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+        cliente,
+        SUM(cajas) AS total_cajas
+    FROM 
+        picking
+    $whereClause
+    GROUP BY 
+        mes, cliente
+    ORDER BY 
+        mes, cliente
+";
+$result12 = $conn->query($query12);
+$chart12 = [];
+if ($result12->num_rows > 0) {
+    while ($row = $result12->fetch_assoc()) {
+        $chart12[] = [
+            'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+            'value' => [
+                $row['mes'],
+                (int)$row['total_cajas'],
+            ],
+        ];
+    }
+}
+// terminan los graficos de Picking
+
+// inician los graficos de Varios
+// Gráfico 13: Total de unidades por cliente y mes
+$query13 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    cliente,
+    SUM(unidades) AS total_unidades
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, cliente
+ORDER BY 
+    mes, cliente
+";
+$result13 = $conn->query($query13);
+$chart13 = [];
+if ($result13->num_rows > 0) {
+while ($row = $result13->fetch_assoc()) {
+    $chart13[] = [
+        'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_unidades'],
+        ],
+    ];
+}
+}
+
+// Gráfico 14: Total de paletas por destino y mes
+$query14 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    destino,
+    SUM(paletas) AS total_paletas
+FROM 
+    import
+$whereClause
+GROUP BY 
+    mes, destino
+ORDER BY 
+    mes, destino
+";
+$result14 = $conn->query($query14);
+$chart14 = [];
+if ($result14->num_rows > 0) {
+while ($row = $result14->fetch_assoc()) {
+    $chart14[] = [
+        'name' => $row['destino'] ? $row['destino'] : 'Sin Destino',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_paletas'],
+        ],
+    ];
+}
+}
+
+// Gráfico 15: Total de cajas por cliente y mes
+$query15 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    cliente,
+    SUM(cajas) AS total_cajas
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, cliente
+ORDER BY 
+    mes, cliente
+";
+$result15 = $conn->query($query15);
+$chart15= [];
+if ($result15->num_rows > 0) {
+while ($row = $result15->fetch_assoc()) {
+    $chart15[] = [
+        'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_cajas'],
+        ],
+    ];
+}
+}
+
+// Gráfico 16: Ejemplo adicional de consulta
+$query16 = "
+SELECT 
+    DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
+    cliente,
+    SUM(unidades) AS total_unidades
+FROM 
+    export
+$whereClause
+GROUP BY 
+    mes, cliente
+ORDER BY 
+    mes, cliente
+";
+$result16 = $conn->query($query16);
+$chart16 = [];
+if ($result16->num_rows > 0) {
+while ($row = $result16->fetch_assoc()) {
+    $chart16[] = [
+        'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
+        'value' => [
+            $row['mes'],
+            (int)$row['total_unidades'],
+        ],
+    ];
+}
+}
+// Terminan  los graficos de varios
 // Empaqueta los datos en un solo array
 $data = [
+    // import
     'chart1' => $chart1,
     'chart2' => $chart2,
     'chart3' => $chart3,
     'chart4' => $chart4,
+    // import
+    // export
+    'chart5' => $chart5,
+    'chart6' => $chart6,
+    'chart7' => $chart7,
+    'chart8' => $chart8,
+    // export
+    // picking
+    'chart9' => $chart9,
+    'chart10' => $chart10,
+    'chart11' => $chart11,
+    'chart12' => $chart12,
+    // picking
+    // varios
+    'chart13' => $chart13,
+    'chart14' => $chart14,
+    'chart15' => $chart15,
+    'chart16' => $chart16,
+    // varios
 ];
 
 // Cierra la conexión
