@@ -39,9 +39,6 @@ function createChartConfig($categories, $values, $type, $title) {
         "values" => $values,
         "type" => $type,
         "title" => $title,
-
-
-        
     ];
 }
 
