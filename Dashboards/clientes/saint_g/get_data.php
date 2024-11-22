@@ -54,6 +54,7 @@ if ($dateCondition && $clientCondition) {
 }
 
 // Consultas para múltiples gráficos
+
 // Inician los graficos de import
 // Gráfico 1: Total de unidades por cliente y mes
 $query1 = "
@@ -144,7 +145,7 @@ $query4 = "
     SELECT 
         DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
         cliente,
-        SUM(cajas) AS total_cajas
+        COUNT(t_carga) AS total_carga
     FROM 
         import
     $whereClause
@@ -161,7 +162,7 @@ if ($result4->num_rows > 0) {
             'name' => $row['cliente'] ? $row['cliente'] : 'Sin Cliente',
             'value' => [
                 $row['mes'],
-                (int)$row['total_cajas'],
+                (int)$row['total_carga'],
             ],
         ];
     }
@@ -288,7 +289,7 @@ $query9 = "
     SELECT 
         DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
         cliente,
-        SUM(unidades) AS total_unidades
+        SUM(pedidos_en_proceso) AS total_unidades
     FROM 
         picking
     $whereClause
@@ -344,7 +345,7 @@ $query11 = "
     SELECT 
         DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes,
         cliente,
-        SUM(unidades) AS total_unidades
+        SUM(pedidos_despachados) AS total_unidades
     FROM 
         picking
     $whereClause

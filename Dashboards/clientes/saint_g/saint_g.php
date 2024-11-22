@@ -42,11 +42,11 @@
     </div>
 
     <div class="btn-group" style="margin-top: 143px; z-index: 999; margin-left: 38%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-info active btn-md" aria-current="true" aria-label="Slide 0">Import</button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-danger btn-md" aria-current="true" aria-label="Slide 1">Export</button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-warning active btn-md" aria-current="true" aria-label="Slide 0">Import</button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 1">Export</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="btn btn-warning btn-md" aria-label="Slide 3">Picking</button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="btn btn-primary btn-md" aria-label="Slide 4">Detalles Varios</button>
-        <button class="btn btn-success text-dark btn-md" type="button" data-bs-toggle="offcanvas" data-bs-target="#Id2" aria-controls="Id2">Clientes</button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="btn btn-warning btn-md" aria-label="Slide 4">Detalles Varios</button>
+        <button class="btn btn-warning text-dark btn-md" type="button" data-bs-toggle="offcanvas" data-bs-target="#Id2" aria-controls="Id2">Clientes</button>
     </div>
 
     <!-- Carrusel -->
@@ -79,20 +79,20 @@
               <div class="container mt-5">
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!--  Quinto gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart5" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color:aliceblue"></div>
+          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center" >
+              <div id="chart5" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color:aliceblue; overflow: hidden;"></div>
           </div>
           <!-- Sexto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue"></div>
+              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue; overflow: hidden;"></div>
           </div>
           <!-- septimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart7" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white"></div>
+              <div id="chart7" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white; overflow: hidden;"></div>
           </div>
           <!-- octavo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white"></div>
+              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white; overflow: hidden;"></div>
           </div>
       </div>
   </div>
@@ -102,19 +102,19 @@
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- noveno gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart9" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue"></div>
+              <div id="chart9" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- decimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart10" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue"></div>
+              <div id="chart10" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- undecimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart11" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white"></div>
+              <div id="chart11" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
           <!-- duodecimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart12" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white"></div>
+              <div id="chart12" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
           </div>
       </div>
   </div>
@@ -124,19 +124,19 @@
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- decimo tercero gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart13" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue"></div>
+              <div id="chart13" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- decimocuarto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart14" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue"></div>
+              <div id="chart14" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- decimoquinto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart15" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white"></div>
+              <div id="chart15" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
           <!-- decimo sexto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart16" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white"></div>
+              <div id="chart16" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
           </div>
       </div>
   </div>
@@ -144,117 +144,94 @@
 </div>
 </div>
 
-    <!-- Offcanvas -->
-    <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="Id2" aria-labelledby="staticBackdropLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="staticBackdropLabel">Clientes - IPL Group</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-        <div class="container mt-5">
-    <h2 class="text-center mb-4">Consulta Agrupada Dinámica</h2>
-    <form method="GET" action="get_data_imp_r.php">
-        <div class="mb-3">
-            <label for="groupBy" class="form-label">Agrupar por:</label>
-            <select id="groupBy" name="groupBy" class="form-select" required>
-                <option value="mes">Mes</option>
-                <option value="cliente">Cliente</option>
-                <option value="mes_cliente">Mes y Cliente</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Consultar</button>
-    </form>
-</div>
-</div>
+<!-- Offcanvas -->
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="Id2" aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel">Clientes - IPL Group</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+    <div class="offcanvas-body">
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Consulta Personalizada</h2>
+            <form id="filterForm" method="GET">
+                <!-- Campo Fecha de Inicio -->
+                <div class="mb-3">
+                    <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
+                    <input type="date" id="fechaInicio" name="fecha_inicio" class="form-control" required>
+                </div>
+                <!-- Campo Fecha de Final -->
+                <div class="mb-3">
+                    <label for="fechaFinal" class="form-label">Fecha Final:</label>
+                    <input type="date" id="fechaFinal" name="fecha_final" class="form-control" required>
+                </div>
+                <!-- Campo Cliente -->
+                <div class="mb-3">
+                    <label for="cliente" class="form-label">Cliente:</label>
+                    <input type="text" id="cliente" name="cliente" class="form-control" placeholder="Ingrese el cliente" >
+                </div>
+                <!-- Botón para aplicar los filtros -->
+                <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
     <!-- Scripts -->
     <script src="../../../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
-// Función para obtener datos desde el servidor
-async function fetchData(endpoint) {
-    const response = await fetch(endpoint);
-    if (!response.ok) {
-        console.error("Error al obtener los datos:", response.statusText);
-        return {};
-    }
-    return await response.json();
-}
+    // Leer los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const fechaInicio = urlParams.get('fecha_inicio') || '';
+    const fechaFinal = urlParams.get('fecha_final') || '';
+    const cliente = urlParams.get('cliente') || '';
 
-// Función para inicializar un gráfico dinámico con toolbox y tooltip
-function initChart(containerId, chartData, title) {
-    const chart = echarts.init(document.getElementById(containerId));
-    
-    const options = {
-        title: {
-            text: title,
-            left: '0%'
-        },
-        tooltip: {
-            trigger: 'axis', // Tooltip activado al pasar por el eje
-            axisPointer: {
-                type: 'shadow' // Línea sombreada para resaltar el eje
-            },
-            formatter: params => {
-                let tooltipContent = `${title}<br>`;
-                params.forEach(item => {
-                    tooltipContent += `${item.name}: ${item.value}<br>`;
-                });
-                return tooltipContent;
-            }
-        },
-        xAxis: {
-            type: 'category',
-            data: chartData.map(item => item.name),
-            axisLabel: {
-              fontSize: "8px",
-                rotate: 90 // Rotar etiquetas si hay muchas categorías
-            }
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                data: chartData.map(item => item.value[1]),
-                type: 'bar',
-                name: title
-            }
-        ],
-        toolbox: {
-            feature: {
-                dataZoom: { // Herramienta para hacer zoom y desplazar
-                    yAxisIndex: 'none'
-                },
-                magicType: { // Cambiar tipo de gráfico
-                    type: ['line', 'bar',]
-                },
-                restore: { // Restaurar estado inicial
-                    show: true
-                },
-                saveAsImage: { // Descargar gráfico como imagen
-                    show: true
-                },
-                dataView: { // Ver los datos en una ventana emergente
-                    show: true,
-                    readOnly: true
+    // Asignar los valores de los parámetros al formulario
+    document.getElementById('fechaInicio').value = fechaInicio;
+    document.getElementById('fechaFinal').value = fechaFinal;
+    document.getElementById('cliente').value = cliente;
+
+    // Función para obtener datos desde el servidor
+    async function fetchData(endpoint) {
+        const response = await fetch(endpoint);
+        if (!response.ok) {
+            console.error("Error al obtener los datos:", response.statusText);
+            return {};
+        }
+        return await response.json();
+    }
+
+    // Función para inicializar un gráfico dinámico con toolbox y tooltip
+    function initChart(containerId, chartData, title) {
+        const chart = echarts.init(document.getElementById(containerId));
+        const options = {
+            title: { text: title, left: '0%' },
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 90 } },
+            yAxis: { type: 'value' },
+            series: [{ data: chartData.map(item => item.value[1]), type: 'bar', name: title, areaStyle: {} }],
+            toolbox: {
+                feature: {
+                    dataZoom: { yAxisIndex: 'none' },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true },
+                    dataView: { show: true, readOnly: true }
                 }
             }
-        }
-    };
+        };
+        chart.setOption(options);
+    }
 
-    chart.setOption(options);
-}
+    // Función para cargar y renderizar los gráficos
+    async function loadCharts() {
+        // Construir la URL con las variables persistentes
+        const endpoint = `get_data.php?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&cliente=${cliente}`;
+        const data = await fetchData(endpoint);
 
-// Función para cargar y renderizar los gráficos
-async function loadCharts() {
-  const data = await fetchData('get_data.php?fecha_inicio=&fecha_final=&cliente=');
-
-
-
-    if (!data) {
+        if (!data) {
         console.error("No se recibieron datos válidos del servidor.");
         return;
     }
@@ -291,11 +268,27 @@ async function loadCharts() {
     
     // Agregar más inicializaciones si es necesario
 }
+    
 
-// Ejecutar la carga de gráficos
-loadCharts();
+    // Cargar los gráficos al inicio
+    loadCharts();
 
-    </script>
+    
+
+    // Capturar el evento de envío del formulario
+    document.getElementById('filterForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evitar el envío normal del formulario
+
+        // Obtener los valores de los campos
+        const fechaInicio = document.getElementById('fechaInicio').value;
+        const fechaFinal = document.getElementById('fechaFinal').value;
+        const cliente = document.getElementById('cliente').value;
+
+        // Recargar la página con los nuevos parámetros en la URL
+        window.location.href = `?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&cliente=${cliente}`;
+    });
+</script>
+
 
 </body>
 </html>
