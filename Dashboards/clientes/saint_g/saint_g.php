@@ -1,3 +1,86 @@
+<?php
+
+// Incluir la configuración
+$config = include '../../../daily_plan/funcionalidades/config_DP.php'; // Asegúrate de que este archivo contiene el código que has proporcionado
+
+// Crear conexión PDO usando la configuración
+try {
+    $dbConfig = $config['db'];
+    $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['name']};charset=utf8mb4";
+    $pdo = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $dbConfig['options']);
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
+}
+
+// Obtener parámetros de la URL
+$cliente = isset($_GET['cliente']) ? $_GET['cliente'] : null;
+$fecha_inicio = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : null;
+$fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
+
+// Validar que los parámetros requeridos están presentes
+if (!$cliente || !$fecha_inicio || !$fecha_final) {
+    die("Faltan parámetros en la URL. Asegúrate de incluir cliente, fecha_inicio y fecha_final.");
+}
+
+// Consultas SQL
+try {
+    // Consulta para sumar la columna 'cajas' en la tabla 'picking'
+    $stmt1 = $pdo->prepare("
+        SELECT SUM(cajas) AS suma_caja_pk,
+          SUM(paletas) AS suma_paletas_pk, 
+          SUM(pedidos_en_proceso) AS suma_pedidos_en_proceso_pk,
+          SUM(unidades) AS suma_unidad_pk
+        FROM picking
+        WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+    ");
+    $stmt1->execute(['cliente' => $cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+    $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+    $suma_caja_pk = $resultado1['suma_caja_pk'] ?? 0;
+    $suma_paletas_pk = $resultado1['suma_paletas_pk'] ?? 0;
+    $suma_pedidos_en_proceso_pk = $resultado1['suma_pedidos_en_proceso_pk'] ?? 0;
+    $suma_unidad_pk = $resultado1['suma_unidad_pk'] ?? 0;
+
+    // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
+    $stmt2 = $pdo->prepare("
+        SELECT SUM(cajas) AS suma_caja_im,
+          SUM(paletas) AS suma_paletas_im, 
+          SUM(pedidos_en_proceso) AS suma_pedidos_en_proceso_im,
+          SUM(unidades) AS suma_unidad_im
+        FROM import
+        WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+    ");
+    $stmt2->execute(['cliente' => $cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+    $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+    $suma_caja_im = $resultado2['suma_caja_im'] ?? 0;
+    $suma_paletas_im = $resultado2['suma_paletas_im'] ?? 0;
+    $suma_pedidos_en_proceso_im = $resultado2['suma_pedidos_en_proceso_im'] ?? 0;
+    $suma_unidad_im = $resultado2['suma_unidad_im'] ?? 0;
+
+    // Consulta para sumar la columna 'pedidos_en_proceso' en la tabla 'export'
+    $stmt3 = $pdo->prepare("
+        SELECT SUM(cajas) AS suma_caja_ex,
+          SUM(paletas) AS suma_paletas_ex, 
+          SUM(pedidos_en_proceso) AS suma_pedidos_en_proceso_ex,
+          SUM(unidades) AS suma_unidad_ex
+        FROM export
+        WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+    ");
+    $stmt3->execute(['cliente' => $cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+    $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
+    $suma_caja_ex = $resultado3['suma_caja_ex'] ?? 0;
+    $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
+    $suma_pedidos_en_proceso_ex = $resultado3['suma_pedidos_en_proceso_ex'] ?? 0;
+    $suma_unidad_ex = $resultado3['suma_unidad_ex'] ?? 0;
+
+    // Imprimir resultados
+
+} catch (PDOException $e) {
+    die("Error al ejecutar las consultas: " . $e->getMessage());
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -41,12 +124,14 @@
         </div>
     </div>
 
-    <div class="btn-group" style="margin-top: 143px; z-index: 999; margin-left: 38%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
+    <div class="btn-group" style="margin-top: 140px; z-index: 999; margin-left: 30%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 0">Import</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 1">Export</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="btn btn-warning btn-md" aria-label="Slide 3">Picking</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="btn btn-warning btn-md" aria-label="Slide 4">Detalles Varios</button>
         <button class="btn btn-warning text-dark btn-md" type="button" data-bs-toggle="offcanvas" data-bs-target="#Id2" aria-controls="Id2">Clientes</button>
+        <button class="btn btn-primary"type="button"data-bs-toggle="offcanvas"data-bs-target="#Id1" aria-controls="Id1">Tarjeta de datos</button>
+
     </div>
 
     <!-- Carrusel -->
@@ -177,6 +262,45 @@
 </div>
 
 
+<div
+  class="offcanvas offcanvas-end"
+  data-bs-scroll="true"
+  tabindex="-1"
+  id="Id1"
+  aria-labelledby="Enable both scrolling & backdrop"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="Enable both scrolling & backdrop">
+      Tarjeta de datos
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+<?php
+    echo '<div style="font-size:16px">import <div/><br>';
+    echo "cajas (import): $suma_caja_im<br>";
+    echo "paletas (import): $suma_paletas_im<br>";
+    echo "unidades (import): $suma_unidad_im<br>";
+    echo "pedidos en proceso (import): $suma_pedidos_en_proceso_im<br>","<br/><hr/>";
+    echo '<div style="font-size:16px">picking <div/><br>';
+    echo "cajas (picking): $suma_caja_pk<br>";
+    echo "paletas (picking): $suma_paletas_pk<br>";
+    echo "unidades (picking): $suma_unidad_pk<br>";
+    echo "pedidos en proceso (picking): $suma_pedidos_en_proceso_pk<br>","<br/><hr/>";
+    echo '<div style="font-size:16px">export <div/><br>';
+    echo "cajas (export): $suma_caja_ex<br>";
+    echo "paletas (export): $suma_paletas_ex<br>";
+    echo "unidades (export): $suma_unidad_ex<br>";
+    echo "pedidos en proceso (export): $suma_pedidos_en_proceso_ex<br>","<br/><hr/>";?>
+  </div>
+</div>
+
+
     <!-- Scripts -->
     <script src="../../../host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -207,9 +331,10 @@
 function createBarChart(containerId, chartData, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
+        
         title: { text: title, left: '0%' },
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        xAxis: { type: 'category', bottom:'100%', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
         yAxis: { type: 'value' },
         series: [
             {
@@ -262,15 +387,21 @@ function createLineChart(containerId, chartData, title) {
 }
 
 // Función para gráficos de pastel
-function createPieChart(containerId, chartData, title) {
+function createPieChart(containerId, chartData, title,rad1,rad2) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
+        legend: {
+            top: '5%',
+            left: 'center'
+          },
         tooltip: { trigger: 'item' },
         series: [
             {
                 type: 'pie',
-                radius: '50%',
+                startAngle: 180,
+                endAngle: 4,
+                radius: [rad1, rad2],
                 data: chartData.map(item => ({
                     value: item.value[1],
                     name: item.name
@@ -338,29 +469,29 @@ function createScatterChart(containerId, chartData, title) {
     createBarChart('chart1', data.chart1, 'Gráfico 1: Clientes y Unidades');
     createBarChart('chart2', data.chart2, 'Gráfico 2: Destinos y Paletas');
     createBarChart('chart3', data.chart3, 'Gráfico 3: Clientes y Cajas');
-    createBarChart('chart4', data.chart4, 'Gráfico 4: Repetición de Clientes');
+    createBarChart('chart4', data.chart4, 'Gráfico 4: Embarques totales recibidos');
 
     // import
 
     // export
-    initChart('chart5', data.chart5, 'Gráfico 5: Clientes y Unidades','line');
-    initChart('chart6', data.chart6, 'Gráfico 6: Destinos y Paletas','bar');
-    initChart('chart7', data.chart7, 'Gráfico 7: Clientes y Cajas','bar');
-    initChart('chart8', data.chart8, 'Gráfico 8: Repetición de Clientes','bar');
+    createPieChart('chart5', data.chart5, 'Gráfico 5: Clientes y Unidades','40%','60%');
+    createPieChart('chart6', data.chart6, 'Gráfico 6: Destinos y Paletas','50%','60%');
+    createPieChart('chart7', data.chart7, 'Gráfico 7: Clientes y Cajas','20%','30%');
+    createPieChart('chart8', data.chart8, 'Gráfico 8: Repetición de Clientes','40%','60%');
     // export
 
     // picking
-    initChart('chart9', data.chart9, 'Gráfico 9: Clientes y Unidades','bar');
-    initChart('chart10', data.chart10, 'Gráfico 10: Destinos y Paletas','bar');
-    initChart('chart11', data.chart11, 'Gráfico 11: Clientes y Cajas', 'scatter');
-    initChart('chart12', data.chart12, 'Gráfico 12: Repetición de Clientes', 'line');
+    createLineChart('chart9', data.chart9, 'Gráfico 9: Clientes y Unidades');
+    createLineChart('chart10', data.chart10, 'Gráfico 10: Destinos y Paletas');
+    createLineChart('chart11', data.chart11, 'Gráfico 11: Clientes y Cajas');
+    createLineChart('chart12', data.chart12, 'Gráfico 12: Repetición de Clientes');
     // picking
 
     // varios
-    initChart('chart13', data.chart13, 'Gráfico 13: Clientes y Unidades','line');
-    initChart('chart14', data.chart14, 'Gráfico 14: Destinos y Paletas ','bar');
-    initChart('chart15', data.chart15, 'Gráfico 15: Clientes y Cajas ','line');
-    initChart('chart16', data.chart16, 'Gráfico 16: Repetición de Clientes','bar');
+    createScatterChart('chart13', data.chart13, 'Gráfico 13: Clientes y Unidades');
+    createLineChart('chart14', data.chart14, 'Gráfico 14: Destinos y Paletas ');
+    createPieChart('chart15', data.chart15, 'Gráfico 15: Clientes y Cajas','40%','60%');
+    createBarChart('chart16', data.chart16, 'Gráfico 16: Repetición de Clientes');
     // varios
     
 }
@@ -383,6 +514,7 @@ function createScatterChart(containerId, chartData, title) {
         // Recargar la página con los nuevos parámetros en la URL
         window.location.href = `?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&cliente=${cliente}`;
     });
+
 </script>
 
 
