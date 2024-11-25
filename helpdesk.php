@@ -145,6 +145,17 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                 </div>
             </a>
             <!-- Fin de EEMP -->
+            <!-- Seguimiento de temas -->
+            <a href="host_virtual_seguimiento/index/index_seguimiento.php">
+                <div class="bloque" id="bloque_seguimiento">
+                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
+                    <div class="my-text-overlay">
+                        <h3>Seguimiento de temas pendientes</h3>
+                        <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
+                    </div>
+                </div>
+            </a>
+            <!-- Fin de Seguimiento de temas -->
 
             <!-- Sobre tiempo -->
             <a target="https://forms.office.com/Pages/ShareFormPage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u&sharetoken=NhdNt0HuLG7WFd5Sc9QH" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
