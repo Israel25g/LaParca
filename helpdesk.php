@@ -7,41 +7,26 @@ $id_usuario = $_SESSION['id'];
 
 // Jala la versión ingresada
 $getLastVersion = "SELECT version_number FROM u366386740_versions order by version_number desc limit 1";
-$getLastForm = "SELECT nombre_formulario FROM u366386740_formularios order by nombre_formulario desc limit 1";
 $result = mysqli_query($conexion, $getLastVersion);
-$result2 = mysqli_query($conexion, $getLastForm);
 
-if ($result && mysqli_num_rows($result) > 0) {
+if($result && mysqli_num_rows($result) > 0){
     $lastVersion = mysqli_fetch_array($result)['version_number'];
 } else {
     $lastVersion = 0.0;
 }
-if ($result2 && mysqli_num_rows($result2) > 0) {
-    $lastForm = mysqli_fetch_array($result2)['nombre_formulario'];
-} else {
-    $lastForm = null;
-}
 
 // version del usuario
 $getUserVersion = "SELECT last_seen_version_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_version_id DESC LIMIT 1";
-$getUserForm = "SELECT last_seen_form_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_form_id DESC LIMIT 1";
 $userResult = mysqli_query($conexion, $getUserVersion);
-$formResult = mysqli_query($conexion, $getUserForm);
 
-if ($userResult && mysqli_num_rows($userResult) > 0) {
+if($userResult && mysqli_num_rows($userResult) > 0){
     $userVersion = mysqli_fetch_array($userResult)['last_seen_version_id'];
 } else {
     $userVersion = 0.0;
 }
-if ($formResult && mysqli_num_rows($formResult) > 0) {
-    $userForm = mysqli_fetch_array($formResult)['last_seen_form_id'];
-} else {
-    $userForm = null;
-}
 
 // mostrar modal
 $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $lastVersion;
-$showModal2 = $userForm === null && $lastForm !== null;
 
 ?>
 
@@ -68,23 +53,13 @@ $showModal2 = $userForm === null && $lastForm !== null;
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM cargado completamente');
             var showModal = <?php echo $showModal ? 'true' : 'false'; ?>;
-            // var showModal2 = <?php echo $showModal2 ? 'true' : 'false'; ?>;
-            if (showModal) {
+            if(showModal){
                 var myModal = new bootstrap.Modal(document.getElementById('version'), {
                     keyboard: false
                 });
                 myModal.show();
             } else {
-                console.log('No se muestra el modal de versión');
-            }
-
-            if (showModal2) {
-                var myModal2 = new bootstrap.Modal(document.getElementById('formulario'), {
-                    keyboard: false
-                });
-                myModal2.show();
-            } else {
-                console.log('No se muestra el modal de formulario');
+                console.log('No se muestra el modal');
             }
         });
     </script>
@@ -170,23 +145,6 @@ $showModal2 = $userForm === null && $lastForm !== null;
                 </div>
             </a>
             <!-- Fin de EEMP -->
-            <!-- Seguimiento de Temas -->
-             <?php
-             if($_SESSION['rol'] === 'EEMP'){
-                ?>
-                 <a href="host_virtual_seguimiento/index/index_seguimiento.php">
-                     <div class="bloque" id="bloque_Seguimiento">
-                         <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
-                         <div class="my-text-overlay">
-                             <h3>Seguimiento de Temas</h3>
-                             <p>En este formulario podrás darle seguimiento a los temas referentes al flujo de comunicación de Operaciones/SAC</p>
-                         </div>
-                     </div>
-                 </a>
-             <?php
-             }
-             ?>
-            <!-- Fin de Seguimiento de temas -->
 
             <!-- Sobre tiempo -->
             <a target="https://forms.office.com/Pages/ShareFormPage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u&sharetoken=NhdNt0HuLG7WFd5Sc9QH" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
@@ -215,42 +173,42 @@ $showModal2 = $userForm === null && $lastForm !== null;
         </div>
     </div>
 
-
+    
 
     <?php
-    $url = $url = "https://api.github.com/repos/Israel25g/LaParca/tags";
+        $url = $url = "https://api.github.com/repos/Israel25g/LaParca/tags";
 
-    // Inicializamos cURL
-    $ch = curl_init($url);
+        // Inicializamos cURL
+        $ch = curl_init($url);
 
-    // token
-    $token = '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';
+        // token
+        $token = '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';
 
-    // Configuramos cURL para que nos devuelva el resultado como cadena
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'IPL_Group');
+        // Configuramos cURL para que nos devuelva el resultado como cadena
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'IPL_Group');
 
-    // Ejecutamos la petición
-    $response = curl_exec($ch);
-    curl_close($ch);
+        // Ejecutamos la petición
+        $response = curl_exec($ch);
+        curl_close($ch);
 
-    // Decodificamos el JSON
-    $tags = json_decode($response, true);
+        // Decodificamos el JSON
+        $tags = json_decode($response,true);
 
 
-    // verificar los tags recibidos
+        // verificar los tags recibidos
 
-    if (!empty($tags)) {
-        $lastTag = $tags[0]['name'];
-    } else {
-        echo "No se encontraron tags";
-    }
+        if(!empty($tags)){
+            $lastTag = $tags[0]['name'];
+        } else {
+            echo "No se encontraron tags";
+        }
     ?>
-
+    
     <!-- Notas de la versión -->
     <div class="version-notes" id="version-sistema" data-bs-toggle="modal" data-bs-target="#version">
-        <p class="m-0">Versión <?php echo $lastTag; ?></p>
+        <p class="m-0">Versión <?php echo $lastTag;?></p>
     </div>
 
 
@@ -369,9 +327,9 @@ $showModal2 = $userForm === null && $lastForm !== null;
                 <div class="modal-footer">
                     <p class="text-center">Para ver la imagen con más detalle, haga click derecho sobre ella y luego "Abre la imagen en nueva pestaña"</p>
                     <br>
-
+                    
                     <form action="version.php" method="post">
-                        <input type="hidden" name="version" value="<?php echo $lastTag ?>">
+                        <input type="hidden" name="version" value= "<?php echo $lastTag ?>">
                         <button
                             type="submit"
                             class="btn btn-success"
@@ -384,88 +342,14 @@ $showModal2 = $userForm === null && $lastForm !== null;
         </div>
     </div>
 
-    <!-- Encuesta de satisfacción -->
-    <!-- Modal trigger button -->
-
-    <!-- Modal Body -->
-    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div
-        class="modal fade"
-        id="formulario"
-        tabindex="-1"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-
-        role="dialog"
-        aria-labelledby="modalTitleId"
-        aria-hidden="true">
-        <div
-            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
-            role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleId">
-                        Encuesta de Satisfacción - DIPROP
-                    </h5>
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Agradecemos que llenes esta corta encuesta, No toma más de un minuto. <br><br> La encuesta es totalmente anónima, por lo tanto, agradecemos su honestidad.</p>
-                    <p class="text-start">Tiempo para cierre de ventana </p>
-                </div>
-                <div class="modal-footer row">
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="https://forms.office.com/r/RG7yzw6qRW" target="_blank"><i class="bi bi-file-earmark-break btn btn-warning"> Llenar encuesta</i></a>
-                        </div>
-                        <div class="col-6">
-                            <form action="formulario.php" method="post">
-                                <input type="hidden" name="form" value=1>
-                                <button
-                                    id="tiempoRest"
-                                    type="submit"
-                                    class="btn btn-success"
-                                    data-bs-dismiss="modal"
-                                    disabled>
-                                    <i class="bi bi-arrow-left-circle-fill"></i> Llene el formulario
-                                </button>
-                            </form>
-                            <script>
-                                // obtiene el boton
-                                const tiempoRest = document.getElementById('tiempoRest');
-
-                                // funcion para actualizar el tiempo
-                                function habilitarBoton() {
-                                    tiempoRest.disabled = false;
-                                    tiempoRest.innerHTML = 'Encuesta llenada';
-                                }
-
-                                // tiempo de espera (tiempo en ms)
-                                setTimeout(habilitarBoton, 5000);
-                            </script>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Optional: Place to the bottom of scripts -->
-    <script>
+    <!-- <script>
         const myModal = new bootstrap.Modal(
-            document.getElementById("modalId"),
+            document.getElementById("version"),
             options,
         );
-    </script>
-
-    <!-- Fin de Encuesta de satisfacción -->
-
-
+    </script> -->
 
     <script src="./host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
