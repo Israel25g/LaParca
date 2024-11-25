@@ -143,24 +143,6 @@
 
     <div class="carousel-item" data-bs-interval="7500">
       <div >
-      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_1.jpg"  alt="cumpleaños"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>
-    </div>
-
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
-      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_2.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>   
-    </div>
-
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
-      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_3.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>   
-    </div>
-
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
       <img loading="lazy" src="../daily_plan/imagenes/seguridad.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
     </div>
