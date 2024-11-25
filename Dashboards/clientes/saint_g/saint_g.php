@@ -42,7 +42,7 @@
     </div>
 
     <div class="btn-group" style="margin-top: 143px; z-index: 999; margin-left: 38%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-warning active btn-md" aria-current="true" aria-label="Slide 0">Import</button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 0">Import</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 1">Export</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="btn btn-warning btn-md" aria-label="Slide 3">Picking</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="btn btn-warning btn-md" aria-label="Slide 4">Detalles Varios</button>
@@ -84,15 +84,15 @@
           </div>
           <!-- Sexto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue; overflow: hidden;"></div>
+              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px;background-color:aliceblue; overflow: hidden;"></div>
           </div>
           <!-- septimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart7" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white; overflow: hidden;"></div>
+              <div id="chart7" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px;background-color:white; overflow: hidden;"></div>
           </div>
           <!-- octavo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white; overflow: hidden;"></div>
+              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color:white; overflow: hidden;"></div>
           </div>
       </div>
   </div>
@@ -203,27 +203,123 @@
         return await response.json();
     }
 
-    // Función para inicializar un gráfico dinámico con toolbox y tooltip
-    function initChart(containerId, chartData, title) {
-        const chart = echarts.init(document.getElementById(containerId));
-        const options = {
-            title: { text: title, left: '0%' },
-            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-            xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 90 } },
-            yAxis: { type: 'value' },
-            series: [{ data: chartData.map(item => item.value[1]), type: 'bar', name: title, areaStyle: {} }],
-            toolbox: {
-                feature: {
-                    dataZoom: { yAxisIndex: 'none' },
-                    magicType: { type: ['line', 'bar'] },
-                    restore: { show: true },
-                    saveAsImage: { show: true },
-                    dataView: { show: true, readOnly: true }
+// Función para gráficos de barra
+function createBarChart(containerId, chartData, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    const options = {
+        title: { text: title, left: '0%' },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                data: chartData.map(item => item.value[1]),
+                type: 'bar',
+                name: title
+            }
+        ],
+        toolbox: {
+            feature: {
+                dataZoom: { yAxisIndex: 'none' },
+                magicType: { type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true },
+                dataView: { show: true, readOnly: true }
+            }
+        }
+    };
+    chart.setOption(options);
+}
+
+// Función para gráficos de línea
+function createLineChart(containerId, chartData, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    const options = {
+        title: { text: title, left: '0%' },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                data: chartData.map(item => item.value[1]),
+                type: 'line',
+                name: title,
+                smooth: true,
+                areaStyle: {}
+            }
+        ],
+        toolbox: {
+            feature: {
+                dataZoom: { yAxisIndex: 'none' },
+                magicType: { type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true },
+                dataView: { show: true, readOnly: true }
+            }
+        }
+    };
+    chart.setOption(options);
+}
+
+// Función para gráficos de pastel
+function createPieChart(containerId, chartData, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    const options = {
+        title: { text: title, left: '0%' },
+        tooltip: { trigger: 'item' },
+        series: [
+            {
+                type: 'pie',
+                radius: '50%',
+                data: chartData.map(item => ({
+                    value: item.value[1],
+                    name: item.name
+                })),
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
                 }
             }
-        };
-        chart.setOption(options);
-    }
+        ],
+        toolbox: {
+            feature: {
+                saveAsImage: { show: true },
+                dataView: { show: true, readOnly: true }
+            }
+        }
+    };
+    chart.setOption(options);
+}
+
+// Función para gráficos de dispersión
+function createScatterChart(containerId, chartData, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    const options = {
+        title: { text: title, left: '0%' },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+        xAxis: { type: 'value' },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                data: chartData.map(item => item.value),
+                type: 'scatter',
+                name: title
+            }
+        ],
+        toolbox: {
+            feature: {
+                saveAsImage: { show: true },
+                dataView: { show: true, readOnly: true }
+            }
+        }
+    };
+    chart.setOption(options);
+}
+
+
 
     // Función para cargar y renderizar los gráficos
     async function loadCharts() {
@@ -239,34 +335,34 @@
     // Configurar cada gráfico usando los datos recibidos
 
     // import
-    initChart('chart1', data.chart1, 'Gráfico 1: Clientes y Unidades');
-    initChart('chart2', data.chart2, 'Gráfico 2: Destinos y Paletas');
-    initChart('chart3', data.chart3, 'Gráfico 3: Clientes y Cajas');
-    initChart('chart4', data.chart4, 'Gráfico 4: Repetición de Clientes ');
+    createBarChart('chart1', data.chart1, 'Gráfico 1: Clientes y Unidades');
+    createBarChart('chart2', data.chart2, 'Gráfico 2: Destinos y Paletas');
+    createBarChart('chart3', data.chart3, 'Gráfico 3: Clientes y Cajas');
+    createBarChart('chart4', data.chart4, 'Gráfico 4: Repetición de Clientes');
+
     // import
 
     // export
-    initChart('chart5', data.chart5, 'Gráfico 5: Clientes y Unidades');
-    initChart('chart6', data.chart6, 'Gráfico 6: Destinos y Paletas ');
-    initChart('chart7', data.chart7, 'Gráfico 7: Clientes y Cajas ');
-    initChart('chart8', data.chart8, 'Gráfico 8: Repetición de Clientes');
+    initChart('chart5', data.chart5, 'Gráfico 5: Clientes y Unidades','line');
+    initChart('chart6', data.chart6, 'Gráfico 6: Destinos y Paletas','bar');
+    initChart('chart7', data.chart7, 'Gráfico 7: Clientes y Cajas','bar');
+    initChart('chart8', data.chart8, 'Gráfico 8: Repetición de Clientes','bar');
     // export
 
     // picking
-    initChart('chart9', data.chart9, 'Gráfico 9: Clientes y Unidades');
-    initChart('chart10', data.chart10, 'Gráfico 10: Destinos y Paletas ');
-    initChart('chart11', data.chart11, 'Gráfico 11: Clientes y Cajas ');
-    initChart('chart12', data.chart12, 'Gráfico 12: Repetición de Clientes');
+    initChart('chart9', data.chart9, 'Gráfico 9: Clientes y Unidades','bar');
+    initChart('chart10', data.chart10, 'Gráfico 10: Destinos y Paletas','bar');
+    initChart('chart11', data.chart11, 'Gráfico 11: Clientes y Cajas', 'scatter');
+    initChart('chart12', data.chart12, 'Gráfico 12: Repetición de Clientes', 'line');
     // picking
 
     // varios
-    initChart('chart13', data.chart13, 'Gráfico 13: Clientes y Unidades');
-    initChart('chart14', data.chart14, 'Gráfico 14: Destinos y Paletas ');
-    initChart('chart15', data.chart15, 'Gráfico 15: Clientes y Cajas ');
-    initChart('chart16', data.chart16, 'Gráfico 16: Repetición de Clientes');
+    initChart('chart13', data.chart13, 'Gráfico 13: Clientes y Unidades','line');
+    initChart('chart14', data.chart14, 'Gráfico 14: Destinos y Paletas ','bar');
+    initChart('chart15', data.chart15, 'Gráfico 15: Clientes y Cajas ','line');
+    initChart('chart16', data.chart16, 'Gráfico 16: Repetición de Clientes','bar');
     // varios
     
-    // Agregar más inicializaciones si es necesario
 }
     
 
