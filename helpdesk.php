@@ -146,7 +146,23 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             </a>
             <!-- Fin de EEMP -->
             <!-- Seguimiento de temas -->
-            <a href="host_virtual_seguimiento/index/index_seguimiento.php">
+            <?php
+
+                if($_SESSION['rol'] === 'EEMP'){
+                    echo '<a href="host_virtual_seguimiento/index/index_seguimiento.php">
+                            <div class="bloque" id="bloque_seguimiento">
+                                <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
+                                <div class="my-text-overlay">
+                                    <h3>Seguimiento de temas pendientes</h3>
+                                    <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
+                                </div>
+                            </div>
+                        </a>';
+                }
+
+            ?>
+
+            <!-- <a href="host_virtual_seguimiento/index/index_seguimiento.php">
                 <div class="bloque" id="bloque_seguimiento">
                     <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
                     <div class="my-text-overlay">
@@ -154,7 +170,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                         <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
                     </div>
                 </div>
-            </a>
+            </a> -->
             <!-- Fin de Seguimiento de temas -->
 
             <!-- Sobre tiempo -->
