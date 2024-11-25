@@ -138,7 +138,7 @@
                     </div>
                     <div class="form-group">
                         <label for="correo">Adjuntar Destinatario</label>
-                        <input type="email" name="correo_receiver" id="correo_receiver" class="form-control" required>
+                        <input type="email" name="correo_receiver" id="correo_receiver" class="form-control" multiple required>
                     </div>
                     <div class="form-group">
                         <label for="ubicacion">Departamento</label>
