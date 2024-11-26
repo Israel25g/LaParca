@@ -1,6 +1,6 @@
 <?php
 include("../../apertura_sesion.php");
-$usuarios_admitidos = ['igondola','agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero','igondola01'];
+$usuarios_admitidos = ['igondola', 'agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero', 'igondola01'];
 if (!in_array($_SESSION['user'], $usuarios_admitidos)) {
   echo "<script>location.href='../../helpdesk.php?error=No tienes permisos para acceder a esta página'</script>";
   exit;
@@ -252,12 +252,21 @@ if (!in_array($_SESSION['user'], $usuarios_admitidos)) {
                                     </div>
                                     <!-- Fecha de creación -->
 
+
                                     <!-- Destinatarios -->
+                                    <?php
+                                    $desdeDB = $fila["correo_receiver"];
+                                    $destinatarios = explode(",", $desdeDB);
+                                    $destinatarios = array_map('trim',$destinatarios);
+                                    $destinatariosUI = implode("\n ", $destinatarios);
+
+                                    ?>
                                     <div class="row">
                                       <div class="col-md-4">
-                                        <?php echo "<strong>Creado el: </strong> " ?>
+                                        <?php echo "<strong>Destinatario(s): </strong> " ?>
                                       </div>
                                       <div class="col-md-4 pb-2">
+                                        <?php echo "<textarea class='p-1' rows='4' cols='30'> " . htmlspecialchars($destinatariosUI) . " </textarea>" . "<br>"; ?>
                                       </div>
                                     </div>
                                     <!-- Destinatarios -->
