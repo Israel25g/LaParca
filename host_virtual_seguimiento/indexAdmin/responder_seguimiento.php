@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
             "estado"    => $_POST['estado'],
         ];
 
-        $consultaSQL = "UPDATE tickets_eemp SET
+        $consultaSQL = "UPDATE tickets_seguimiento SET
             respuesta = :respuesta,
             estado = :estado,
             updated_at = NOW()
@@ -108,8 +108,7 @@ if (isset($_POST['submit'])) {
 
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
-            $mail->addAddress($info['correo_sender'], $info['nombrecompleto']);  // Enviar al correo del solicitante
-            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
+            $mail->addAddress($info['correo_sender'], $info['nombrecompleto']);  // Enviar al correo del solicitante            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
             foreach ($validos as $email) {
                 $mail->addAddress($email);
             }
