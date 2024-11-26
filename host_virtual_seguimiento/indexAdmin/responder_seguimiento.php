@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
             $resultado['error'] = true;
             $resultado['mensaje'] = 'No se han ingresado correos electrónicos válidos.';
         }
-         
+
 
         // Obtener el correo y nombrecompleto
         $consultaInfo = "SELECT correo_sender, nombrecompleto FROM tickets_seguimiento WHERE id = :id";
@@ -111,7 +111,9 @@ if (isset($_POST['submit'])) {
             $mail->addAddress($info['correo_sender'], $info['nombrecompleto']);  // Enviar al correo del solicitante
             $mail->addAddress($tickets['correo_receiver']);  // Enviar a los correos adicionales
             // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
-
+            foreach ($validos as $email) {
+                $mail->addAddress($email);
+            }
             // Contenido del correo
             $mail->isHTML(true);
             $mail->Subject = "El ticket # " . $_GET['id'] . " se encuentra " . $_POST['estado'];
