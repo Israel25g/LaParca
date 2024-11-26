@@ -66,11 +66,31 @@ if (isset($_POST['submit'])) {
             'urgencia' => $ticketInfo['urgencia'],  // Datos originales
         ]);
 
+        $emails = array_map('trim', explode(',', $ticketInfo['correo_receiver']));
+       
+        $validos = [];
+        
+        foreach ($emails as $email) {
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $validos[] = $email;
+            }
+        }
+
+        if (!empty($validos)) {
+            $tickets['correo_receiver'] = implode(', ', $validos);
+        } else {
+            $resultado['error'] = true;
+            $resultado['mensaje'] = 'No se han ingresado correos electrónicos válidos.';
+        }
+         
+
         // Obtener el correo y nombrecompleto
-        $consultaInfo = "SELECT correo_receiver, nombrecompleto FROM tickets_seguimiento WHERE id = :id";
+        $consultaInfo = "SELECT correo_sender, nombrecompleto FROM tickets_seguimiento WHERE id = :id";
         $consultaInfoStmt = $conexion->prepare($consultaInfo);
         $consultaInfoStmt->execute(['id' => $_GET['id']]);
         $info = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
+
+
 
         // Enviar correo con PHPMailer
         $mail = new PHPMailer(true);
