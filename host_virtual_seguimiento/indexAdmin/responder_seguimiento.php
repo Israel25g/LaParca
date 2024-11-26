@@ -50,8 +50,8 @@ if (isset($_POST['submit'])) {
         $ticketInfo = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
 
         // Insertar en la segunda tabla todos los datos del ticket
-        $consultaSQL = "INSERT INTO tickets_seguimiento_r (estado, respuesta, nombrecompleto, descripcion, correo, ubicacion, urgencia, updated_at) 
-                         VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo, :ubicacion, :urgencia, NOW())";
+        $consultaSQL = "INSERT INTO tickets_seguimiento_r (estado, respuesta, nombrecompleto, descripcion, correo_sender, correo_receiver, ubicacion, urgencia, updated_at) 
+                         VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo_sender, :correo_sender, :ubicacion, :urgencia, NOW())";
 
         // Asegurarse de que todos los valores se incluyan correctamente
         $consulta = $conexion->prepare($consultaSQL);
