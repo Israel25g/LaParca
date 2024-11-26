@@ -44,13 +44,13 @@ if (isset($_POST['submit'])) {
         $consulta->execute($tickets);
 
         // Obtener toda la información del ticket desde la primera tabla (para insertar en la segunda tabla)
-        $consultaInfo = "SELECT * FROM tickets_eemp WHERE id = :id";
+        $consultaInfo = "SELECT * FROM tickets_seguimiento WHERE id = :id";
         $consultaInfoStmt = $conexion->prepare($consultaInfo);
         $consultaInfoStmt->execute(['id' => $_GET['id']]);
         $ticketInfo = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
 
         // Insertar en la segunda tabla todos los datos del ticket
-        $consultaSQL = "INSERT INTO tickets_eemp_r (estado, respuesta, nombrecompleto, descripcion, correo, ubicacion, urgencia, updated_at) 
+        $consultaSQL = "INSERT INTO tickets_seguimiento_r (estado, respuesta, nombrecompleto, descripcion, correo, ubicacion, urgencia, updated_at) 
                          VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo, :ubicacion, :urgencia, NOW())";
 
         // Asegurarse de que todos los valores se incluyan correctamente
@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
         ]);
 
         // Obtener el correo y nombrecompleto
-        $consultaInfo = "SELECT correo, nombrecompleto FROM tickets_eemp WHERE id = :id";
+        $consultaInfo = "SELECT correo, nombrecompleto FROM tickets_seguimiento WHERE id = :id";
         $consultaInfoStmt = $conexion->prepare($consultaInfo);
         $consultaInfoStmt->execute(['id' => $_GET['id']]);
         $info = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
@@ -123,7 +123,7 @@ if (!isset($_POST['submit'])) {
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
         $id = $_GET['id'];
-        $consultaSQL = "SELECT * FROM tickets_eemp WHERE id = :id";
+        $consultaSQL = "SELECT * FROM tickets_seguimiento WHERE id = :id";
 
         $sentencia = $conexion->prepare($consultaSQL);
         $sentencia->execute(['id' => $id]);
@@ -199,7 +199,7 @@ if (!isset($_POST['submit'])) {
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <a class="btn btn-success mb-2" href="../index/index_eemp.php">Regresar al listado</a>
+                    <a class="btn btn-success mb-2" href="../index/index_seguimiento.php">Regresar al listado</a>
                     <div class="card text-start">
                         <div class="card-header">
                             <h2>Respondiendo al Ticket #<?= escapar($tickets['id'])?> - Usuario: <?= escapar($tickets['nombrecompleto'])?></h2>

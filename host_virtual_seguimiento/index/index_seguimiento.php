@@ -258,7 +258,7 @@ if (!in_array($_SESSION['user'], $usuarios_admitidos)) {
                                     $desdeDB = $fila["correo_receiver"];
                                     $destinatarios = explode(",", $desdeDB);
                                     $destinatarios = array_map('trim',$destinatarios);
-                                    $destinatariosUI = implode("\n ", $destinatarios);
+                                    $destinatariosUI = implode("\n", $destinatarios);
 
                                     ?>
                                     <div class="row">
@@ -295,7 +295,7 @@ if (!in_array($_SESSION['user'], $usuarios_admitidos)) {
                                   <?php
                                   if ($_SESSION['rol'] == 'EEMP') {
                                   ?>
-                                    <a class="btn btn-success" href="../indexAdmin/responder_eemp.php?id=<?= $fila["id"] ?>" style="color: white; text-decoration: none;">Responder</a>
+                                    <a class="btn btn-success" href="../indexAdmin/responder_seguimiento.php?id=<?= $fila["id"] ?>" style="color: white; text-decoration: none;">Responder</a>
                                   <?php
                                   }
                                   ?>

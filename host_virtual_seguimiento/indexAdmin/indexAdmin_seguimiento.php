@@ -40,7 +40,7 @@
       $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
       $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
 
-      $consultaSQL = "SELECT * FROM tickets_eemp";
+      $consultaSQL = "SELECT * FROM tickets_seguimiento";
 
       $sentencia = $conexion->prepare($consultaSQL);
       $sentencia->execute();
