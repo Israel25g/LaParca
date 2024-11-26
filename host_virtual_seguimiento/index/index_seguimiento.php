@@ -1,5 +1,32 @@
 <?php
-include("../../apertura_sesion.php")
+include("../../apertura_sesion.php");
+$usuarios_admitidos = ['agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero', 'igondola01'];
+if ($_SESSION['user'] != $usuarios_admitidos) {
+  header("Location: ../../helpdesk.php?error=No tienes permisos para acceder a esta página");
+?>
+  <script>
+    Command: toastr["success"]("My name is Inigo Montoya. You killed my father. Prepare to die!")
+
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+  </script>
+<?php
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -247,6 +274,16 @@ include("../../apertura_sesion.php")
                                     </div>
                                     <!-- Fecha de creación -->
 
+                                    <!-- Destinatarios -->
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                        <?php echo "<strong>Creado el: </strong> " ?>
+                                      </div>
+                                      <div class="col-md-4 pb-2">
+                                      </div>
+                                    </div>
+                                    <!-- Destinatarios -->
+
                                     <!-- Fecha de Actualización -->
                                     <div class="row">
                                       <div class="col-md-4">
@@ -317,108 +354,108 @@ include("../../apertura_sesion.php")
       <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
 
       <script>
-      $(document).ready(function() {
-        var table = $('#tickEemptable').DataTable({
-          language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
-          },
-          layout: {
-            topStart: {
-              pageLength: {
-                menu: [10, 25, 50, 100],
+        $(document).ready(function() {
+          var table = $('#tickEemptable').DataTable({
+            language: {
+              url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
+            },
+            layout: {
+              topStart: {
+                pageLength: {
+                  menu: [10, 25, 50, 100],
+                }
+              },
+              topEnd: {
+                search: true
+              },
+
+              bottomEnd: {
+                paging: {
+                  buttons: 3
+                }
               }
             },
-            topEnd: {
-              search: true
-            },
+            scrollX: '170vh',
+            scrollY: '270px',
 
-            bottomEnd: {
-              paging: {
-                buttons: 3
-              }
-            }
-          },
-          scrollX: '170vh',
-          scrollY: '270px',
+            columnDefs: [{
+              targets: '_all', // Aplica a todas las columnas
+              render: function(data, type, row) {
+                if (type === 'display' && data.length > 20) {
+                  return data.substr(0, 20) + '...'; // Trunca el texto a 20 caracteres
+                }
+                return data;
+              },
+            }, ],
 
-          columnDefs: [{
-            targets: '_all', // Aplica a todas las columnas
-            render: function(data, type, row) {
-              if (type === 'display' && data.length > 20) {
-                return data.substr(0, 20) + '...'; // Trunca el texto a 20 caracteres
-              }
-              return data;
-            },
-          }, ],
+            initComplete: function() {
+              this.api()
+                .columns()
+                .every(function() {
+                  let column = this;
+                  let title = column.footer().textContent;
 
-          initComplete: function() {
-            this.api()
-              .columns()
-              .every(function() {
-                let column = this;
-                let title = column.footer().textContent;
+                  // Create input element
+                  let input = document.createElement('input');
+                  input.placeholder = title;
+                  column.footer().replaceChildren(input);
 
-                // Create input element
-                let input = document.createElement('input');
-                input.placeholder = title;
-                column.footer().replaceChildren(input);
-
-                // Event listener for user input
-                input.addEventListener('keyup', () => {
-                  if (column.search() !== this.value) {
-                    column.search(input.value).draw();
-                  }
+                  // Event listener for user input
+                  input.addEventListener('keyup', () => {
+                    if (column.search() !== this.value) {
+                      column.search(input.value).draw();
+                    }
+                  });
                 });
-              });
-          },
-        });
-        // Filtros personalizados
-        $('#creacion, #filter-date-to').on('change', function() {
-          table.draw();
-        });
+            },
+          });
+          // Filtros personalizados
+          $('#creacion, #filter-date-to').on('change', function() {
+            table.draw();
+          });
 
-        $('#urgencia, #filter-status').on('change', function() {
-          table.draw();
-        });
-        // Comienza aqui
-        $.fn.dataTable.ext.search.push(
-          function(settings, data, dataIndex) {
-            var creacion = $('#creacion').val();
-            var dateTo = $('#filter-date-to').val();
-            var urgency = $('#urgencia').val();
-            var status = $('#filter-status').val();
+          $('#urgencia, #filter-status').on('change', function() {
+            table.draw();
+          });
+          // Comienza aqui
+          $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+              var creacion = $('#creacion').val();
+              var dateTo = $('#filter-date-to').val();
+              var urgency = $('#urgencia').val();
+              var status = $('#filter-status').val();
 
-            var createdAt = data[7] || ''; // Usa el índice correcto para la columna de fecha de creación
-            var updatedAt = data[8] || ''; // Usa el índice correcto para la columna de fecha de creación
-            var ticketUrgency = data[4] || ''; // Usa el índice correcto para la columna de urgencia
-            var ticketStatus = data[6] || ''; // Usa el índice correcto para la columna de estado
+              var createdAt = data[7] || ''; // Usa el índice correcto para la columna de fecha de creación
+              var updatedAt = data[8] || ''; // Usa el índice correcto para la columna de fecha de creación
+              var ticketUrgency = data[4] || ''; // Usa el índice correcto para la columna de urgencia
+              var ticketStatus = data[6] || ''; // Usa el índice correcto para la columna de estado
 
-            // Convertir las fechas a objetos Date para compararlas
-            var createdAtDate = new Date(createdAt);
-            var updatedAtDate = new Date(updatedAt);
-            var creacionDate = creacion ? new Date(creacion) : null;
-            var dateToDate = dateTo ? new Date(dateTo) : null;
+              // Convertir las fechas a objetos Date para compararlas
+              var createdAtDate = new Date(createdAt);
+              var updatedAtDate = new Date(updatedAt);
+              var creacionDate = creacion ? new Date(creacion) : null;
+              var dateToDate = dateTo ? new Date(dateTo) : null;
 
-            if (creacionDate) {
-              creacionDate.setHours(0, 0, 0, 0);
+              if (creacionDate) {
+                creacionDate.setHours(0, 0, 0, 0);
+              }
+              if (dateToDate) {
+                dateToDate.setHours(23, 59, 59, 999);
+              }
+              createdAtDate.setHours(0, 0, 0, 0);
+              if (
+                (creacionDate === null || createdAtDate.toDateString() === creacionDate.toDateString()) &&
+                (dateToDate === null || updatedAtDate.toDateString() === dateToDate.toDateString()) &&
+                (urgency === '' || ticketUrgency === urgency) &&
+                (status === '' || ticketStatus === status)
+              ) {
+                return true;
+              }
+              return false;
             }
-            if (dateToDate) {
-              dateToDate.setHours(23, 59, 59, 999);
-            }
-            createdAtDate.setHours(0, 0, 0, 0);
-            if (
-              (creacionDate === null || createdAtDate.toDateString() === creacionDate.toDateString()) &&
-              (dateToDate === null || updatedAtDate.toDateString() === dateToDate.toDateString()) &&
-              (urgency === '' || ticketUrgency === urgency) &&
-              (status === '' || ticketStatus === status)
-            ) {
-              return true;
-            }
-            return false;
-          }
-        );
-      });
-    </script>
+          );
+        });
+      </script>
 </body>
 
 </html>

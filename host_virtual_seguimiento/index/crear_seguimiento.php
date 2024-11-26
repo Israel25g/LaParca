@@ -111,7 +111,7 @@
                 "Descripción: " . $tickets['descripcion'] . "\n" .
                 "Ubicación o Departamento: " . $tickets['ubicacion'] . ".\n" .
                 "Urgencia: " . $tickets['urgencia'] . ".\n\n" .
-                "Atentamente,\nPersonal encargado\n(no responder a este mensaje).";
+                "Atentamente,\n" .$tickets['correo_sender'] . "\n(no responder a este mensaje).";
 
             $mail->send();
 

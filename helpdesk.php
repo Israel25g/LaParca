@@ -9,7 +9,7 @@ $id_usuario = $_SESSION['id'];
 $getLastVersion = "SELECT version_number FROM u366386740_versions order by version_number desc limit 1";
 $result = mysqli_query($conexion, $getLastVersion);
 
-if($result && mysqli_num_rows($result) > 0){
+if ($result && mysqli_num_rows($result) > 0) {
     $lastVersion = mysqli_fetch_array($result)['version_number'];
 } else {
     $lastVersion = 0.0;
@@ -19,7 +19,7 @@ if($result && mysqli_num_rows($result) > 0){
 $getUserVersion = "SELECT last_seen_version_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_version_id DESC LIMIT 1";
 $userResult = mysqli_query($conexion, $getUserVersion);
 
-if($userResult && mysqli_num_rows($userResult) > 0){
+if ($userResult && mysqli_num_rows($userResult) > 0) {
     $userVersion = mysqli_fetch_array($userResult)['last_seen_version_id'];
 } else {
     $userVersion = 0.0;
@@ -53,7 +53,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM cargado completamente');
             var showModal = <?php echo $showModal ? 'true' : 'false'; ?>;
-            if(showModal){
+            if (showModal) {
                 var myModal = new bootstrap.Modal(document.getElementById('version'), {
                     keyboard: false
                 });
@@ -147,19 +147,18 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             <!-- Fin de EEMP -->
             <!-- Seguimiento de temas -->
             <?php
-
-                if($_SESSION['rol'] === 'EEMP'){
-                    echo '<a href="host_virtual_seguimiento/index/index_seguimiento.php">
-                            <div class="bloque" id="bloque_seguimiento">
-                                <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
-                                <div class="my-text-overlay">
-                                    <h3>Seguimiento de temas pendientes</h3>
-                                    <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
+            $usuarios_admitidos = ['igondola', 'agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero', 'igondola01'];
+            if (in_array($_SESSION['user'], $usuarios_admitidos)) {
+                echo '<a href="host_virtual_seguimiento/index/index_seguimiento.php">
+                                <div class="bloque" id="bloque_seguimiento">
+                                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
+                                    <div class="my-text-overlay">
+                                        <h3>Seguimiento de temas pendientes</h3>
+                                        <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>';
-                }
-
+                              </a>';
+            }
             ?>
 
             <!-- <a href="host_virtual_seguimiento/index/index_seguimiento.php">
@@ -200,42 +199,42 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
         </div>
     </div>
 
-    
+
 
     <?php
-        $url = $url = "https://api.github.com/repos/Israel25g/LaParca/tags";
+    $url = $url = "https://api.github.com/repos/Israel25g/LaParca/tags";
 
-        // Inicializamos cURL
-        $ch = curl_init($url);
+    // Inicializamos cURL
+    $ch = curl_init($url);
 
-        // token
-        $token = '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';
+    // token
+    $token = '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';
 
-        // Configuramos cURL para que nos devuelva el resultado como cadena
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'IPL_Group');
+    // Configuramos cURL para que nos devuelva el resultado como cadena
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'IPL_Group');
 
-        // Ejecutamos la petición
-        $response = curl_exec($ch);
-        curl_close($ch);
+    // Ejecutamos la petición
+    $response = curl_exec($ch);
+    curl_close($ch);
 
-        // Decodificamos el JSON
-        $tags = json_decode($response,true);
+    // Decodificamos el JSON
+    $tags = json_decode($response, true);
 
 
-        // verificar los tags recibidos
+    // verificar los tags recibidos
 
-        if(!empty($tags)){
-            $lastTag = $tags[0]['name'];
-        } else {
-            echo "No se encontraron tags";
-        }
+    if (!empty($tags)) {
+        $lastTag = $tags[0]['name'];
+    } else {
+        echo "No se encontraron tags";
+    }
     ?>
-    
+
     <!-- Notas de la versión -->
     <div class="version-notes" id="version-sistema" data-bs-toggle="modal" data-bs-target="#version">
-        <p class="m-0">Versión <?php echo $lastTag;?></p>
+        <p class="m-0">Versión <?php echo $lastTag; ?></p>
     </div>
 
 
@@ -354,9 +353,9 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                 <div class="modal-footer">
                     <p class="text-center">Para ver la imagen con más detalle, haga click derecho sobre ella y luego "Abre la imagen en nueva pestaña"</p>
                     <br>
-                    
+
                     <form action="version.php" method="post">
-                        <input type="hidden" name="version" value= "<?php echo $lastTag ?>">
+                        <input type="hidden" name="version" value="<?php echo $lastTag ?>">
                         <button
                             type="submit"
                             class="btn btn-success"
@@ -368,6 +367,8 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             </div>
         </div>
     </div>
+
+  
 
 
     <!-- Optional: Place to the bottom of scripts -->
