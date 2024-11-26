@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
 
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
-            $mail->addAddress($info['correo_receiver'], $info['nombrecompleto']);  // Enviar al correo del solicitante
+            $mail->addAddress($info['correo_sender'], $info['nombrecompleto']);  // Enviar al correo del solicitante
             // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
