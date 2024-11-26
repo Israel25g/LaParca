@@ -42,12 +42,30 @@
             $tickets = array(
                 "nombrecompleto" => $_POST['nombrecompleto'],
                 "correo_sender" => $_POST['correo_sender'],
-                "correo_receiver" => $_POST['correo_receiver'],
+                "correo_receiver" => $_POST['correo_receiver'] ?? '',
                 "ubicacion" => implode(", ", $_POST['ubicacion']),
                 "descripcion" => $_POST['descripcion'],
                 "urgencia" => implode(", ", $_POST['urgencia']),
                 "estado" => $_POST['estado']
             );
+
+            $emails = array_map('trim', explode(',', $tickets['correo_receiver']));
+
+            // Validar correos electrónicos
+            $validos = [];
+            foreach ($emails as $email) {
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $validos[] = $email;
+                }
+            }
+
+            if (!empty($validos)) {
+                $tickets['correo_receiver'] = implode(', ', $validos);
+            } else {
+                $resultado['error'] = true;
+                $resultado['mensaje'] = 'No se han ingresado correos electrónicos válidos.';
+            }
+
 
             // Guardar datos en la base de datos
             $consultaSQL = "INSERT INTO tickets_seguimiento (nombrecompleto, correo_sender, correo_receiver, ubicacion, descripcion, urgencia, estado)";
@@ -78,9 +96,13 @@
 
             $mail->setFrom('ticketpruebas1@gmail.com', 'Seguimiento de Temas Pendientes');
             $mail->addAddress($tickets['correo_sender']);
-            $mail->addAddress($tickets['correo_receiver']);
-            $mail->addAddress('israel@iplgsc.com'); // Correo adicional
 
+            // $mail->addAddress($tickets['correo_receiver']);
+            $mail->addAddress('israel@iplgsc.com'); // Correo adicional
+            // Añadir destinatarios
+            foreach ($validos as $email) {
+                $mail->addAddress($email);
+            }
             $mail->isHTML(false);
             $mail->Subject = 'Confirmación de recepción del ticket';
             $mail->Body = "Hola " . $tickets['nombrecompleto'] . ",\n\n" .
@@ -138,7 +160,7 @@
                     </div>
                     <div class="form-group">
                         <label for="correo">Adjuntar Destinatario</label>
-                        <input type="email" name="correo_receiver" id="correo_receiver" class="form-control" multiple required>
+                        <input type="email" name="correo_receiver" id="correo_receiver" class="form-control" multiple placeholder="Inserte los correos separados por coma: correo1@ejemplo.com,correo2@ejemplo.com,correo3@ejemplo.com" required>
                     </div>
                     <div class="form-group">
                         <label for="ubicacion">Departamento</label>
@@ -178,7 +200,7 @@
             </div>
         </div>
     </div>
-    <script src="../../host_virtual_TI/js/script.js"></script>  
+    <script src="../../host_virtual_TI/js/script.js"></script>
     <?php include "../templates/footer.php"; ?>
 </body>
 
