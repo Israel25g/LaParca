@@ -30,6 +30,9 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
 
 ?>
 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,6 +52,8 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
     <link rel="stylesheet" href="main-global.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM cargado completamente');
@@ -368,9 +373,14 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
         </div>
     </div>
 
-  
-
-
+    <!-- <?php
+    #if (isset($_GET['error'])) {
+    ?>
+        <script>
+            Command: toastr["error"]("No tienes permiso para acceder a este apartado", <?php #$_GET['error'] ?>)
+        </script><?php
+                #}
+                    ?> -->
     <!-- Optional: Place to the bottom of scripts -->
     <!-- <script>
         const myModal = new bootstrap.Modal(

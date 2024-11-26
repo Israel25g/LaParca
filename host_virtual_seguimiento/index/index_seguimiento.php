@@ -1,31 +1,9 @@
 <?php
 include("../../apertura_sesion.php");
-$usuarios_admitidos = ['agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero', 'igondola01'];
-if ($_SESSION['user'] != $usuarios_admitidos) {
-  header("Location: ../../helpdesk.php?error=No tienes permisos para acceder a esta página");
-?>
-  <script>
-    Command: toastr["success"]("My name is Inigo Montoya. You killed my father. Prepare to die!")
-
-    toastr.options = {
-      "closeButton": false,
-      "debug": false,
-      "newestOnTop": false,
-      "progressBar": false,
-      "positionClass": "toast-top-right",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    }
-  </script>
-<?php
+$usuarios_admitidos = ['igondola','agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero','igondola01'];
+if (!in_array($_SESSION['user'], $usuarios_admitidos)) {
+  echo "<script>location.href='../../helpdesk.php?error=No tienes permisos para acceder a esta página'</script>";
+  exit;
 }
 ?>
 <!DOCTYPE html>
