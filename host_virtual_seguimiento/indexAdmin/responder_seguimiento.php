@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
         ]);
 
         // Obtener el correo y nombrecompleto
-        $consultaInfo = "SELECT correo, nombrecompleto FROM tickets_seguimiento WHERE id = :id";
+        $consultaInfo = "SELECT correo_receiver, nombrecompleto FROM tickets_seguimiento WHERE id = :id";
         $consultaInfoStmt = $conexion->prepare($consultaInfo);
         $consultaInfoStmt->execute(['id' => $_GET['id']]);
         $info = $consultaInfoStmt->fetch(PDO::FETCH_ASSOC);
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
 
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
-            $mail->addAddress($info['correo'], $info['nombrecompleto']);  // Enviar al correo del solicitante
+            $mail->addAddress($info['correo_receiver'], $info['nombrecompleto']);  // Enviar al correo del solicitante
             // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
