@@ -60,7 +60,8 @@ if (isset($_POST['submit'])) {
             'respuesta' => $_POST['respuesta'],  // Respuesta actualizada
             'nombrecompleto' => $ticketInfo['nombrecompleto'],  // Datos originales
             'descripcion' => $ticketInfo['descripcion'],  // Datos originales
-            'correo' => $ticketInfo['correo'],  // Datos originales
+            'correo_sender' => $ticketInfo['correo_sender'],  // Datos originales
+            'correo_receiver' => $ticketInfo['correo_receiver'],  // Datos originales
             'ubicacion' => $ticketInfo['ubicacion'],  // Datos originales
             'urgencia' => $ticketInfo['urgencia'],  // Datos originales
         ]);
@@ -88,7 +89,7 @@ if (isset($_POST['submit'])) {
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
             $mail->addAddress($info['correo'], $info['nombrecompleto']);  // Enviar al correo del solicitante
-            $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
+            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
             $mail->isHTML(true);
