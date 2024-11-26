@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 
         // Insertar en la segunda tabla todos los datos del ticket
         $consultaSQL = "INSERT INTO tickets_seguimiento_r (estado, respuesta, nombrecompleto, descripcion, correo_sender, correo_receiver, ubicacion, urgencia, updated_at) 
-                         VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo_sender, :correo_sender, :ubicacion, :urgencia, NOW())";
+                         VALUES ( :estado, :respuesta, :nombrecompleto, :descripcion, :correo_sender, :correo_receiver, :ubicacion, :urgencia, NOW())";
 
         // Asegurarse de que todos los valores se incluyan correctamente
         $consulta = $conexion->prepare($consultaSQL);
