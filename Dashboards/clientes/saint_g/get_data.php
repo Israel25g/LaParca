@@ -296,7 +296,7 @@ $query9 = "
     SELECT 
         DATE_FORMAT(EJE, '%Y-%m') AS mes,
         Cliente,
-        SUM(País) AS total_und_Recibidas
+        SUM(piezas) AS total_und_Recibidas
     FROM 
         picking
     $whereClause
@@ -411,7 +411,7 @@ $query13 = "
 SELECT 
     DATE_FORMAT(EJE, '%Y-%m') AS mes,
     sucursal,
-    SUM(Piezas_pick) AS total_und_Recibidas,
+    Piezas,
     Piezas_pick
 FROM 
     exports
@@ -429,7 +429,7 @@ while ($row = $result13->fetch_assoc()) {
         'name' => $row['sucursal'] ? $row['sucursal'] : 'Sin Cliente',
         'value' => [
             (int)$row['Piezas_pick'],
-            (int)$row['total_und_Recibidas'],
+            (int)$row['Piezas'],
         ],
     ];
 }

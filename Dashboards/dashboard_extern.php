@@ -89,7 +89,7 @@
     <!-- Dashboard STG -->
     <div class="container">
         <div class="bloques ">
-            <a href="../Dashboards/clientes/saint_g/saint_g.php" rel="noopener noreferrer">
+            <a href="../Dashboards/clientes/saint_g/Dash_b.php?fecha_inicio=2023-01-01&fecha_final=2027-12-31&Cliente=CIA002" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                     <img  class="img_helpdesk " id="logo-stg" style="height: auto; margin-top: 15px" src="https://lobbymap.org/site//data/001/361/1361877.png" alt="">
                 </div>
