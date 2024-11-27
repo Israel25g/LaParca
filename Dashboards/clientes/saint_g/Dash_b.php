@@ -1,7 +1,7 @@
 <?php
 
 // Incluir la configuración
-$config = include '../../../daily_plan/funcionalidades/config_DP.php'; // Asegúrate de que este archivo contiene el código que has proporcionado
+$config = include './config_dash.php'; 
 
 // Crear conexión PDO usando la configuración
 try {
@@ -13,25 +13,25 @@ try {
 }
 
 // Obtener parámetros de la URL
-$Cliente = isset($_GET['cliente']) ? $_GET['cliente'] : null;
+$Cliente = isset($_GET['Cliente']) ? $_GET['Cliente'] : null;
 $fecha_inicio = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : null;
 $fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
 
 // Validar que los parámetros requeridos están presentes
-// if (!$Cliente || !$fecha_inicio || !$fecha_final) {
-//     die("Faltan parámetros en la URL. Asegúrate de incluir cliente, fecha_inicio y fecha_final.");
-// }
+if (!$Cliente || !$fecha_inicio || !$fecha_final) {
+    die("No cuenta con los parametros necesarios para acceder a este recurso.");
+}
 
 // Consultas SQL
 try {
     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
     $stmt1 = $pdo->prepare("
-        SELECT SUM(cajas) AS suma_caja_pk,
-          SUM(paletas) AS suma_paletas_pk, 
-          SUM(pedidos_en_proceso) AS suma_pedidos_en_proceso_pk,
-          SUM(unidades) AS suma_unidad_pk
+        SELECT SUM(Piezas) AS suma_caja_pk,
+          SUM(Paletas) AS suma_paletas_pk, 
+          SUM(CBM) AS suma_pedidos_en_proceso_pk,
+          SUM(KG) AS suma_unidad_pk
         FROM picking
-        WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
     ");
     $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
@@ -42,28 +42,28 @@ try {
 
     // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
     $stmt2 = $pdo->prepare("
-        SELECT SUM(cajas) AS suma_caja_im,
-          SUM(paletas) AS suma_paletas_im, 
-          SUM(pedidos_en_proceso) AS suma_pedidos_en_proceso_im,
-          SUM(unidades) AS suma_unidad_im
-        FROM import
-        WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+        SELECT cajas,
+          paletas, 
+          und_recibidas,
+          CBM
+        FROM imports
+        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
     ");
     $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_im = $resultado2['suma_caja_im'] ?? 0;
-    $suma_paletas_im = $resultado2['suma_paletas_im'] ?? 0;
-    $suma_pedidos_en_proceso_im = $resultado2['suma_pedidos_en_proceso_im'] ?? 0;
-    $suma_unidad_im = $resultado2['suma_unidad_im'] ?? 0;
+    $suma_caja_im = $resultado2['paletas'] ?? 0;
+    $suma_paletas_im = $resultado2['und_recibidas'] ?? 0;
+    $suma_pedidos_en_proceso_im = $resultado2['CBM'] ?? 0;
+    $suma_unidad_im = $resultado2['cajas'] ?? 0;
 
     // Consulta para sumar la columna 'pedidos_en_proceso' en la tabla 'export'
     $stmt3 = $pdo->prepare("
-        SELECT SUM(cajas) AS suma_caja_ex,
+        SELECT SUM(Piezas) AS suma_caja_ex,
           SUM(paletas) AS suma_paletas_ex, 
-          SUM(pedidos_en_proceso) AS suma_pedidos_en_proceso_ex,
-          SUM(unidades) AS suma_unidad_ex
-        FROM export
-        WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+          SUM(CBM) AS suma_pedidos_en_proceso_ex,
+          SUM(KG) AS suma_unidad_ex
+        FROM exports
+        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
     ");
     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
@@ -87,7 +87,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPL Group-Saint Gobain</title>
+    <title>IPL Group></title>
     <link rel="stylesheet" href="../../../estilos.css">
     <link rel="shortcut icon" href="../../../images/ICO.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -111,20 +111,20 @@ try {
 
 </head>
 
-<body style="background-color:lightgrey">
+<body style="background-color:lightslategray">
     <!-- Header -->
     <div class="header" style="background-color: orange !important; box-shadow: -10px 5px 5px #a77700">
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
         </div>
-        <h1 style="margin-left: 35% !important;">Reportes externos</h1>
+        <a style="margin-left: 38% !important; font-size:xxx-large; " href="../../dashboard_extern.php" class="link-offset-2 link-underline link-underline-opacity-0 fw-bold link-light">Reportes externos</a>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
         </div>
     </div>
 
-    <div class="btn-group" style="margin-top: 140px; z-index: 999; margin-left: 30%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
+    <div class="btn-group" style="margin-top: 140px; z-index: 999; margin-left: 31%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 0">Import</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 1">Export</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="btn btn-warning btn-md" aria-label="Slide 3">Picking</button>
@@ -251,8 +251,8 @@ try {
                 </div>
                 <!-- Campo Cliente -->
                 <div class="mb-3">
-                    <label for="cliente" class="form-label">Cliente:</label>
-                    <input type="text" id="cliente" name="cliente" class="form-control" placeholder="Ingrese el cliente" >
+                    <label for="Cliente" class="form-label">Cliente:</label>
+                    <input type="text" id="Cliente" name="Cliente" class="form-control" placeholder="<?php $Cliente ?>" >
                 </div>
                 <!-- Botón para aplicar los filtros -->
                 <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
@@ -283,20 +283,22 @@ try {
   <div class="offcanvas-body">
 <?php
     echo '<div style="font-size:16px">import <div/><br>';
-    echo "cajas (import): $suma_caja_im<br>";
-    echo "paletas (import): $suma_paletas_im<br>";
-    echo "unidades (import): $suma_unidad_im<br>";
-    echo "pedidos en proceso (import): $suma_pedidos_en_proceso_im<br>","<br/><hr/>";
+    echo "cajas : $suma_caja_im<br>";
+    echo "paletas : $suma_paletas_im<br>";
+    echo "unidades : $suma_unidad_im<br>";
+    echo "pedidos en proceso : $suma_pedidos_en_proceso_im<br>","<br/><hr/>";
+
     echo '<div style="font-size:16px">picking <div/><br>';
-    echo "cajas (picking): $suma_caja_pk<br>";
-    echo "paletas (picking): $suma_paletas_pk<br>";
-    echo "unidades (picking): $suma_unidad_pk<br>";
-    echo "pedidos en proceso (picking): $suma_pedidos_en_proceso_pk<br>","<br/><hr/>";
+    echo "cajas : $suma_caja_pk<br>";
+    echo "paletas : $suma_paletas_pk<br>";
+    echo "unidades : $suma_unidad_pk<br>";
+    echo "pedidos en proceso : $suma_pedidos_en_proceso_pk<br>","<br/><hr/>";
+
     echo '<div style="font-size:16px">export <div/><br>';
-    echo "cajas (export): $suma_caja_ex<br>";
-    echo "paletas (export): $suma_paletas_ex<br>";
-    echo "unidades (export): $suma_unidad_ex<br>";
-    echo "pedidos en proceso (export): $suma_pedidos_en_proceso_ex<br>","<br/><hr/>";?>
+    echo "cajas : $suma_caja_ex<br>";
+    echo "paletas : $suma_paletas_ex<br>";
+    echo "unidades : $suma_unidad_ex<br>";
+    echo "pedidos en proceso : $suma_pedidos_en_proceso_ex<br>","<br/><hr/>";?>
   </div>
 </div>
 
@@ -310,12 +312,12 @@ try {
     const urlParams = new URLSearchParams(window.location.search);
     const fechaInicio = urlParams.get('fecha_inicio') || '';
     const fechaFinal = urlParams.get('fecha_final') || '';
-    const Cliente = urlParams.get('cliente') || '';
+    const Cliente = urlParams.get('Cliente') || '';
 
     // Asignar los valores de los parámetros al formulario
     document.getElementById('fechaInicio').value = fechaInicio;
     document.getElementById('fechaFinal').value = fechaFinal;
-    document.getElementById('cliente').value = Cliente;
+    document.getElementById('Cliente').value = Cliente;
 
     // Función para obtener datos desde el servidor
     async function fetchData(endpoint) {
@@ -361,7 +363,7 @@ function createLineChart(containerId, chartData, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, text:item.name, },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, },
         xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
         yAxis: { type: 'value' },
         series: [
@@ -469,7 +471,7 @@ function createScatterChart(containerId, chartData, title) {
     createBarChart('chart1', data.chart1, 'Gráfico 1: Clientes y Unidades');
     createBarChart('chart2', data.chart2, 'Gráfico 2: Destinos y Paletas');
     createBarChart('chart3', data.chart3, 'Gráfico 3: Clientes y Cajas');
-    createBarChart('chart4', data.chart4, 'Gráfico 4: Embarques totales recibidos');
+    createPieChart('chart4', data.chart4, 'Gráfico 4: Embarques totales recibidos','40%','60%');
 
     // import
 
@@ -509,7 +511,7 @@ function createScatterChart(containerId, chartData, title) {
         // Obtener los valores de los campos
         const fechaInicio = document.getElementById('fechaInicio').value;
         const fechaFinal = document.getElementById('fechaFinal').value;
-        const Cliente = document.getElementById('cliente').value;
+        const Cliente = document.getElementById('Cliente').value;
 
         // Recargar la página con los nuevos parámetros en la URL
         window.location.href = `?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&Cliente=${Cliente}`;
