@@ -346,7 +346,7 @@ if (!in_array($_SESSION['user'], $usuarios_admitidos)) {
             language: {
               url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
             },
-            order: [[ 7, 'desc' ], [ 0, 'asc' ]],
+            order: [[ 7, 'desc' ]],
             layout: {
               topStart: {
                 pageLength: {

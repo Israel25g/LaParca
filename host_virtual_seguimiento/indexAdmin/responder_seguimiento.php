@@ -67,9 +67,9 @@ if (isset($_POST['submit'])) {
         ]);
 
         $emails = array_map('trim', explode(',', $ticketInfo['correo_receiver']));
-       
+
         $validos = [];
-        
+
         foreach ($emails as $email) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $validos[] = $email;
@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
             $mail->CharSet = 'UTF-8';
 
             // Configuración del correo
-            $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
+            $mail->setFrom('ticketpruebas1@gmail.com', 'Seguimiento de Temas Pendientes');
             $mail->addAddress($info['correo_sender'], $info['nombrecompleto']);  // Enviar al correo del solicitante            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
             $mail->addAddress('nohelys@iplgsc.com');  // Enviar al correo del solicitante            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
             foreach ($validos as $email) {
@@ -224,7 +224,7 @@ if (!isset($_POST['submit'])) {
                     <a class="btn btn-success mb-2" href="../index/index_seguimiento.php">Regresar al listado</a>
                     <div class="card text-start">
                         <div class="card-header">
-                            <h2>Respondiendo al Ticket #<?= escapar($tickets['id'])?> - Usuario: <?= escapar($tickets['nombrecompleto'])?></h2>
+                            <h2>Respondiendo al Ticket #<?= escapar($tickets['id']) ?> - Usuario: <?= escapar($tickets['nombrecompleto']) ?></h2>
                             <div class="card-body">
                                 <div class="card text-start">
                                     <div class="card-body">
