@@ -7,7 +7,7 @@ $groupBy = isset($_GET['groupBy']) ? $_GET['groupBy'] : 'mes_cliente';
 // Determinar la cláusula GROUP BY basada en el parámetro
 switch ($groupBy) {
     case 'mes':
-        $groupByClause = "DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes";
+        $groupByClause = "DATE_FORMAT(fecha_objetivo, '%Y-%m-%d') AS mes";
         $groupByField = "mes";
         break;
     case 'cliente':
@@ -16,14 +16,14 @@ switch ($groupBy) {
         break;
     case 'mes_cliente':
     default:
-        $groupByClause = "DATE_FORMAT(fecha_objetivo, '%Y-%m') AS mes, cliente";
+        $groupByClause = "DATE_FORMAT(fecha_objetivo, '%Y-%m-%d') AS mes, cliente";
         $groupByField = "mes, cliente";
         break;
 }
 
 // Construir la consulta SQL dinámica
 $query = "SELECT $groupByClause, SUM(pedidos_en_proceso) AS total
-          FROM picking 
+          FROM import 
           GROUP BY $groupByField
           ORDER BY mes";
 
