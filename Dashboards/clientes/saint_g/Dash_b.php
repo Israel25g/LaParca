@@ -13,14 +13,14 @@ try {
 }
 
 // Obtener parámetros de la URL
-$cliente = isset($_GET['cliente']) ? $_GET['cliente'] : null;
+$Cliente = isset($_GET['cliente']) ? $_GET['cliente'] : null;
 $fecha_inicio = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : null;
 $fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
 
 // Validar que los parámetros requeridos están presentes
-if (!$cliente || !$fecha_inicio || !$fecha_final) {
-    die("Faltan parámetros en la URL. Asegúrate de incluir cliente, fecha_inicio y fecha_final.");
-}
+// if (!$Cliente || !$fecha_inicio || !$fecha_final) {
+//     die("Faltan parámetros en la URL. Asegúrate de incluir cliente, fecha_inicio y fecha_final.");
+// }
 
 // Consultas SQL
 try {
@@ -33,7 +33,7 @@ try {
         FROM picking
         WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
     ");
-    $stmt1->execute(['cliente' => $cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+    $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
     $suma_caja_pk = $resultado1['suma_caja_pk'] ?? 0;
     $suma_paletas_pk = $resultado1['suma_paletas_pk'] ?? 0;
@@ -49,7 +49,7 @@ try {
         FROM import
         WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
     ");
-    $stmt2->execute(['cliente' => $cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+    $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
     $suma_caja_im = $resultado2['suma_caja_im'] ?? 0;
     $suma_paletas_im = $resultado2['suma_paletas_im'] ?? 0;
@@ -65,7 +65,7 @@ try {
         FROM export
         WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
     ");
-    $stmt3->execute(['cliente' => $cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+    $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
     $suma_caja_ex = $resultado3['suma_caja_ex'] ?? 0;
     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
@@ -230,7 +230,7 @@ try {
 </div>
 
 <!-- Offcanvas -->
-<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="Id2" aria-labelledby="staticBackdropLabel">
+<div class="offcanvas offcanvas-start"  tabindex="-1" id="Id2" aria-labelledby="staticBackdropLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="staticBackdropLabel">Clientes - IPL Group</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -242,12 +242,12 @@ try {
                 <!-- Campo Fecha de Inicio -->
                 <div class="mb-3">
                     <label for="fechaInicio" class="form-label">Fecha de Inicio:</label>
-                    <input type="date" id="fechaInicio" name="fecha_inicio" class="form-control" required>
+                    <input type="date" id="fechaInicio" name="fecha_inicio" class="form-control" >
                 </div>
                 <!-- Campo Fecha de Final -->
                 <div class="mb-3">
                     <label for="fechaFinal" class="form-label">Fecha Final:</label>
-                    <input type="date" id="fechaFinal" name="fecha_final" class="form-control" required>
+                    <input type="date" id="fechaFinal" name="fecha_final" class="form-control" >
                 </div>
                 <!-- Campo Cliente -->
                 <div class="mb-3">
@@ -310,12 +310,12 @@ try {
     const urlParams = new URLSearchParams(window.location.search);
     const fechaInicio = urlParams.get('fecha_inicio') || '';
     const fechaFinal = urlParams.get('fecha_final') || '';
-    const cliente = urlParams.get('cliente') || '';
+    const Cliente = urlParams.get('cliente') || '';
 
     // Asignar los valores de los parámetros al formulario
     document.getElementById('fechaInicio').value = fechaInicio;
     document.getElementById('fechaFinal').value = fechaFinal;
-    document.getElementById('cliente').value = cliente;
+    document.getElementById('cliente').value = Cliente;
 
     // Función para obtener datos desde el servidor
     async function fetchData(endpoint) {
@@ -361,7 +361,7 @@ function createLineChart(containerId, chartData, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, text:item.name, },
         xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
         yAxis: { type: 'value' },
         series: [
@@ -455,7 +455,7 @@ function createScatterChart(containerId, chartData, title) {
     // Función para cargar y renderizar los gráficos
     async function loadCharts() {
         // Construir la URL con las variables persistentes
-        const endpoint = `get_data.php?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&cliente=${cliente}`;
+        const endpoint = `get_data.php?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&Cliente=${Cliente}`;
         const data = await fetchData(endpoint);
 
         if (!data) {
@@ -509,12 +509,13 @@ function createScatterChart(containerId, chartData, title) {
         // Obtener los valores de los campos
         const fechaInicio = document.getElementById('fechaInicio').value;
         const fechaFinal = document.getElementById('fechaFinal').value;
-        const cliente = document.getElementById('cliente').value;
+        const Cliente = document.getElementById('cliente').value;
 
         // Recargar la página con los nuevos parámetros en la URL
-        window.location.href = `?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&cliente=${cliente}`;
+        window.location.href = `?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&Cliente=${Cliente}`;
     });
-
+    
+    document.write(<?php $fechaInicio; $fechaFinal; $Cliente;?>)
 </script>
 
 
