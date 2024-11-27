@@ -109,6 +109,7 @@ if (isset($_POST['submit'])) {
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de EEMP');
             $mail->addAddress($info['correo_sender'], $info['nombrecompleto']);  // Enviar al correo del solicitante            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
+            $mail->addAddress('nohelys@iplgsc.com');  // Enviar al correo del solicitante            // $mail->addCC('alcibiades@iplgsc.com', 'israel@iplgsc.com');  // Copia a un correo adicional si es necesario
             foreach ($validos as $email) {
                 $mail->addAddress($email);
             }
@@ -122,7 +123,6 @@ if (isset($_POST['submit'])) {
                     <li><strong>Respuesta:</strong> {$_POST['respuesta']}</li>
                     <li><strong>Estado del ticket:</strong> {$_POST['estado']}</li>
                 </ul>
-                <p>Atentamente,<br>El departamento de EEMP<br><em>(No responder a este mensaje).</em></p>
             ";
 
             // Enviar el correo

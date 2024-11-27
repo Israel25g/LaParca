@@ -99,19 +99,20 @@
 
             // $mail->addAddress($tickets['correo_receiver']);
             $mail->addAddress('israel@iplgsc.com'); // Correo adicional
+            $mail->addAddress('nohelys@iplgsc.com'); // Correo adicional
             // Añadir destinatarios
             foreach ($validos as $email) {
                 $mail->addAddress($email);
             }
             $mail->isHTML(false);
-            $mail->Subject = 'Confirmación de recepción del ticket';
+            $mail->Subject = 'Se ha creado una nueva solicitud de seguimiento';
             $mail->Body = "Hola " . $tickets['nombrecompleto'] . ",\n\n" .
-                "Gracias por contactarnos. Aquí están los datos que nos suministraste para confirmar su correcto envío:\n\n" .
-                "Nombre Completo: " . $tickets['nombrecompleto'] . ".\n" .
-                "Descripción: " . $tickets['descripcion'] . "\n" .
-                "Ubicación o Departamento: " . $tickets['ubicacion'] . ".\n" .
+                "Queremos informarle que se ha generado una nueva solicitud de seguimiento para un tema importante, acá los detalles:\n\n" .
+                "Solicitante: " . $tickets['nombrecompleto'] . ".\n" .
+                "Departamento: " . $tickets['ubicacion'] . ".\n" .
                 "Urgencia: " . $tickets['urgencia'] . ".\n\n" .
-                "Atentamente,\n" .$tickets['correo_sender'] . "\n(no responder a este mensaje).";
+                "Descripción: " . $tickets['descripcion'] . "\n\n" .
+                "\n(no responder a este mensaje).";
 
             $mail->send();
 
