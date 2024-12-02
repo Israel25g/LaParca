@@ -79,62 +79,73 @@ try {
 }
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPL Group</title>
-    <link rel="stylesheet" href="../../../estilos.css">
-    <link rel="shortcut icon" href="../../../images/ICO.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Incluyendo la librería de ECharts -->
+    <title>Dashboard con Carrusel Estático</title>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.0.2/dist/echarts.min.js"></script>
-<style>
-::-webkit-scrollbar{
-  width:0px ;
-}
+    <!-- Bootstrap CSS -->
 
-::-webkit-scrollbar-track{
-  background: #0000;
-}
-::-webkit-scrollbar-thumb{
-  background: #a77700;
-  border-radius: 10px;
-  border: #a77700;
-}
-</style>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../../estilos.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .chart-container {
+            height: 400px;
+        }
+        .card-category {
+            margin-bottom: 30px;
+        }
+        .carousel-indicators {
+            position: static;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
-<body style="background-color:lightslategray">
-    <!-- Header -->
-    <div class="header" style="background-color: orange !important; box-shadow: -10px 5px 5px #a77700">
+<body>
+<div class="header" style="background-color: orange !important; box-shadow: -10px 5px 5px #a77700">
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
         </div>
-        <a style=" font-size:xxx-large; margin:auto" href="../../dashboard_extern.php" class="link-offset-2 link-underline link-underline-opacity-0 fw-bold link-light ">Reportes externos: <?php echo($Cliente)?></a>
+        <a style="margin-left: 38% !important; font-size:xxx-large; " href="../../dashboard_extern.php" class="link-offset-2 link-underline link-underline-opacity-0 fw-bold link-light">Reportes externos</a>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
         </div>
     </div>
-
-    <div class="btn-group" style="margin-top: 140px; z-index: 999; margin-left: 28%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
+    <div class="btn-group" style="margin-top: 140px; z-index: 999; margin-left: 33%; border-radius: 50px 50% 50% 50px; background-color: black; position: fixed">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 0">Import</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="btn btn-warning btn-md" aria-current="true" aria-label="Slide 1">Export</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" class="btn btn-warning btn-md" aria-label="Slide 3">Picking</button>
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" class="btn btn-warning btn-md" aria-label="Slide 4">Detalles Varios</button>
         <button class="btn btn-warning text-dark btn-md" type="button" data-bs-toggle="offcanvas" data-bs-target="#Id2" aria-controls="Id2">Clientes</button>
         <button class="btn btn-primary"type="button"data-bs-toggle="offcanvas"data-bs-target="#Id1" aria-controls="Id1">Tarjeta de datos</button>
-        <button class="btn btn-primary  active"type="button"><?php echo($fecha_inicio);echo(" / ");echo($fecha_final)?></button>
+
     </div>
-    <!-- Carrusel -->
-    <div id="carouselExampleCaptions" class="carousel slide mt-4" style="margin-bottom: 100px;">
+<div class="container my-5">
+    <!-- Título del Dashboard -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Dashboard de Datos</h1>
+        <p class="lead">Visualiza información clave dividida en categorías y gráficos interactivos.</p>
+    </div>
+
+        <!-- Carrusel -->
+        <div id="carouselExampleCaptions" class="carousel slide mt-4" style="margin-bottom: 100px;">
         <div class="carousel-inner" style="margin-top: -70px;">
               <div class="carousel-item active ">
               <div class="container mt-5">
@@ -228,8 +239,87 @@ try {
 </div>
 </div>
 </div>
+    
+    <div class="container my-5">
+        <!-- Categorías de Tarjetas -->
+        <div class="card-category">
+            <h2 class="text-primary">Import</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <?php
+                $importData = [
+                    "Pedidos Pendientes" => 32,
+                    "Tiempo en el Sitio" => "5m 30s",
+                    "Productos en Stock" => 450,
+                    "Productos defectuosos" => 10
+                ];
+                foreach ($importData as $titulo => $valor) {
+                    echo "
+                    <div class='col'>
+                    <div class='card h-100  border-primary'>
+                    <div class='card-body'>
+                    <h5 class='card-title'>$titulo</h5>
+                    <p class='card-text fs-4'>$valor</p>
+                    </div>
+                    </div>
+                    </div>";
+                }
+                ?>
+            </div>
+        </div>
+        
+        <div class="card-category">
+            <h2 class="text-success">Export</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <?php
+                $exportData = [
+                    "Ventas Mensuales" => 5400,
+                    "Tasa de Conversión" => "2.3%",
+                    "Ingresos Totales" => "$150,000",
+                    "unidades enviadas" => "100,000"
+                ];
+                foreach ($exportData as $titulo => $valor) {
+                    echo "
+                    <div class='col'>
+                    <div class='card h-100 border-success'>
+                    <div class='card-body'>
+                    <h5 class='card-title'>$titulo</h5>
+                    <p class='card-text fs-4'>$valor</p>
+                    </div>
+                    </div>
+                    </div>";
+                }
+                ?>
+            </div>
+        </div>
+        
+        <div class="card-category">
+            <h2 class="text-warning">Picking</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <?php
+                $pickingData = [
+                    "Usuarios Activos" => 1200,
+                    "Nuevos Registros" => 75,
+                    "Comentarios Recibidos" => 342,
+                    "Ubicaciónes utilizadas" => 425
+                ];
+                foreach ($pickingData as $titulo => $valor) {
+                    echo "
+                    <div class='col'>
+                    <div class='card h-100 border-warning'>
+                    <div class='card-body'>
+                    <h5 class='card-title'>$titulo</h5>
+                    <p class='card-text fs-4'>$valor</p>
+                    </div>
+                    </div>
+                    </div>";
+                }
+                ?>
+            </div>
+        </div>
+        
+    </div>
 
-<!-- Offcanvas -->
+    <!-- Offcanvas -->
 <div class="offcanvas offcanvas-start"  tabindex="-1" id="Id2" aria-labelledby="staticBackdropLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="staticBackdropLabel">Clientes - IPL Group</h5>
@@ -270,9 +360,9 @@ try {
   aria-labelledby="Enable both scrolling & backdrop"
 >
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title" id="Enable both scrolling & backdrop">
+    <h5 class="offcanvas-title" id="Enable both scrolling & backdrop">
       Tarjeta de datos
-    </h4>
+    </h5>
     <button
       type="button"
       class="btn-close"
@@ -281,93 +371,30 @@ try {
     ></button>
   </div>
   <div class="offcanvas-body">
-    <!-- Categorías de Tarjetas -->
-    <div class="card-category mb-4">
-        <h2 class="text-primary">Import</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <?php
-            $importData = [
-                "Cajas totales" => $suma_caja_im,
-                "Paletas totales" => $suma_paletas_im,
-                "Unidades totales" => $suma_unidad_im,
-                "Pedidos totales" => $suma_pedidos_en_proceso_im
-            ];
-            foreach ($importData as $titulo => $valor) {
-                echo "
-                <div class='col'>
-                    <div class='card h-100 border-primary border-2'>
-                        <div class='card-body'>
-                            <h6 class='card-title'>$titulo</h6>
-                            <p class='card-text fs-4'>$valor</p>
-                        </div>
-                    </div>
-                </div>";
-            }
-            ?>
-        </div>
-    </div>
-<hr/>
-    <div class="card-category mb-4">
-        <h2 class="text-success">Export</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <?php
-            $exportData = [
-                "Cajas Exportadas" => $suma_caja_ex,
-                "Paletas Exportadas" => $suma_paletas_ex,
-                "Unidades Exportadas" => $suma_unidad_ex,
-                "Exportaciones abiertas" => $suma_pedidos_en_proceso_ex
-            ];
-            foreach ($exportData as $titulo => $valor) {
-                echo "
-                <div class='col'>
-                    <div class='card h-100 border-success border-2'>
-                        <div class='card-body'>
-                            <h6 class='card-title'>$titulo</h6>
-                            <p class='card-text fs-4'>$valor</p>
-                        </div>
-                    </div>
-                </div>";
-            }
-            ?>
-        </div>
-    </div>
-    <hr/>
-    <div class="card-category mb-4">
-        <h2 class="text-warning">Picking</h2>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-            <?php
-            $pickingData = [
-                "Cajas Pickeadas" => $suma_caja_pk,
-                "Paletas registradas" => $suma_paletas_pk,
-                "unidades pickeadas" => $suma_unidad_pk,
-                "Pedidos abiertos" => $suma_pedidos_en_proceso_pk
-            ];
-            foreach ($pickingData as $titulo => $valor) {
-                echo "
-                <div class='col'>
-                    <div class='card h-100 border-warning border-2'>
-                        <div class='card-body'>
-                            <h6 class='card-title'>$titulo</h6>
-                            <p class='card-text fs-4'>$valor</p>
-                        </div>
-                    </div>
-                </div>";
-            }
-            ?>
-        </div>
-    </div>
-    <hr/>
-    <!-- Resumen con Totales -->
+<?php
+        
+
+
+    echo '<div style="font-size:16px">import <div/><br>';
+    echo "cajas : $suma_caja_im<br>";
+    echo "paletas : $suma_paletas_im<br>";
+    echo "unidades : $suma_unidad_im<br>";
+    echo "pedidos en proceso : $suma_pedidos_en_proceso_im<br>","<br/><hr/>";
+
+    echo '<div style="font-size:16px">picking <div/><br>';
+    echo "cajas : $suma_caja_pk<br>";
+    echo "paletas : $suma_paletas_pk<br>";
+    echo "unidades : $suma_unidad_pk<br>";
+    echo "pedidos en proceso : $suma_pedidos_en_proceso_pk<br>","<br/><hr/>";
+
+    echo '<div style="font-size:16px">export <div/><br>';
+    echo "cajas : $suma_caja_ex<br>";
+    echo "paletas : $suma_paletas_ex<br>";
+    echo "unidades : $suma_unidad_ex<br>";
+    echo "pedidos en proceso : $suma_pedidos_en_proceso_ex<br>","<br/><hr/>";?>
+  </div>
 </div>
-
-
-</div>
-
-
-<!-- Scripts -->
-<script src="../../../host_virtual_TI/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <!-- Script para los Gráficos -->
     <script>
     // Leer los parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -389,191 +416,21 @@ try {
         }
         return await response.json();
     }
+
 // Función para gráficos de barra
-function createBarChart_multiseries(containerId, chartData1, chartData2, chartData3, chartData4, chartData5, chartData6, title) {
+function createBarChart(containerId, chartData, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         
         title: { text: title, left: '0%' },
-
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        xAxis: { type: 'category', bottom:'100%', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        xAxis: { type: 'category', bottom:'100%', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
         yAxis: { type: 'value' },
         series: [
             {
-                data: chartData1.map(item => item.value[1]),
+                data: chartData.map(item => item.value[1]),
                 type: 'bar',
-                name: 'Unidades recibidas',
-                color: [
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
-            },
-            {
-                data: chartData2.map(item => item.value[1]),
-                type: 'bar',
-                name: 'unidades esperadas',
-                color: [
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            },            {
-                data: chartData3.map(item => item.value[1]),
-                type: 'bar',
-                name: 'total de cajas',
-                color: [
-                    '#ca8622',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
-            },
-            {
-                data: chartData4.map(item => item.value[1]),
-                type: 'bar',
-                name: 'KG totales',
-                color: [
-                    '#2f4554',
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            },            {
-                data: chartData5.map(item => item.value[1]),
-                type: 'line',
-                name: 'CBM totales',
-                color: [
-                    '#6e7074',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#546570',
-    '#c4ccd3'
-  ],
-            },
-            {
-                data: chartData6.map(item => item.value[1]),
-                type: 'line',
-                name: 'SKUs totales',
-                color: [
-                    '#ca8622',
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            },          
-        ],
-        toolbox: {
-            feature: {
-                dataZoom: { yAxisIndex: 'none' },
-                magicType: { type: ['line', 'bar'] },
-                restore: { show: true },
-                saveAsImage: { show: true },
-                dataView: { show: true, readOnly: true }
-            }
-        },
-        legend:{
-            type: 'scroll',
-    // orient: 'vertical',
-    right: 10,
-    top: 20,
-    bottom: 20,
-        },
-    };
-    chart.setOption(options);
-}
-
-
-// Función para gráficos de barra
-function createBarChart(containerId, chartData1, chartData2, title) {
-    const chart = echarts.init(document.getElementById(containerId));
-    const options = {
-        
-        title: { text: title, left: '0%' },
-
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        xAxis: { type: 'category', bottom:'100%', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
-        yAxis: { type: 'value' },
-        series: [
-            {
-                data: chartData1.map(item => item.value[1]),
-                type: 'bar',
-                name: title,
-                color: [
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
-            },
-            {
-                data: chartData2.map(item => item.value[1]),
-                type: 'line',
-                name: title,
-                color: [
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
+                name: title
             }
         ],
         toolbox: {
@@ -590,54 +447,20 @@ function createBarChart(containerId, chartData1, chartData2, title) {
 }
 
 // Función para gráficos de línea
-function createLineChart(containerId, chartData1,chartData2, title) {
+function createLineChart(containerId, chartData, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
-
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, },
-        xAxis: { type: 'category', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
         yAxis: { type: 'value' },
         series: [
             {
-                data: chartData1.map(item => item.value[1]),
+                data: chartData.map(item => item.value[1]),
                 type: 'line',
                 name: title,
                 smooth: true,
-                areaStyle: {},
-                color: [
-            '#ca8622',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
-            },
-            {
-                data: chartData2.map(item => item.value[1]),
-                type: 'line',
-                name: title,
-                smooth: true,
-                areaStyle: {},
-                color: [
-            '#546570',
-            '#ca8622',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#c4ccd3'
-  ],
+                areaStyle: {}
             }
         ],
         toolbox: {
@@ -658,19 +481,6 @@ function createPieChart(containerId, chartData, title,rad1,rad2) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
-        color: [
-            '#546570',
-            '#ca8622',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#c4ccd3'
-  ],
         legend: {
             top: '5%',
             left: 'center'
@@ -710,19 +520,6 @@ function createScatterChart(containerId, chartData, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
-        color: [
-            '#6e7074',
-            '#546570',
-            '#ca8622',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#c4ccd3'
-  ],
         tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
         xAxis: { type: 'value' },
         yAxis: { type: 'value' },
@@ -759,9 +556,9 @@ function createScatterChart(containerId, chartData, title) {
     // Configurar cada gráfico usando los datos recibidos
 
     // import
-    createBarChart_multiseries('chart1', data.chart1,data.line1,data.line2,data.line3,data.line4,data.line5, 'Gráfico 1: Clientes y Unidades');
-    createBarChart('chart2', data.chart2,data.chart3, 'Gráfico 2: Destinos y Paletas');
-    createBarChart('chart3', data.chart3,data.chart4, 'Gráfico 3: Clientes y Cajas');
+    createBarChart('chart1', data.chart1, 'Gráfico 1: Clientes y Unidades');
+    createBarChart('chart2', data.chart2, 'Gráfico 2: Destinos y Paletas');
+    createBarChart('chart3', data.chart3, 'Gráfico 3: Clientes y Cajas');
     createPieChart('chart4', data.chart4, 'Gráfico 4: Embarques totales recibidos','40%','60%');
 
     // import
@@ -774,10 +571,10 @@ function createScatterChart(containerId, chartData, title) {
     // export
 
     // picking
-    createLineChart('chart9', data.chart9, data.line9, 'Gráfico 9: Clientes y Unidades');
-    createLineChart('chart10', data.chart10, data.line9, 'Gráfico 10: Destinos y Paletas');
-    createLineChart('chart11', data.chart11, data.line9, 'Gráfico 11: Clientes y Cajas');
-    createLineChart('chart12', data.chart12, data.line9,'Gráfico 12: Repetición de Clientes');
+    createLineChart('chart9', data.chart9, 'Gráfico 9: Clientes y Unidades');
+    createLineChart('chart10', data.chart10, 'Gráfico 10: Destinos y Paletas');
+    createLineChart('chart11', data.chart11, 'Gráfico 11: Clientes y Cajas');
+    createLineChart('chart12', data.chart12, 'Gráfico 12: Repetición de Clientes');
     // picking
 
     // varios
@@ -811,6 +608,7 @@ function createScatterChart(containerId, chartData, title) {
     document.write(<?php $fechaInicio; $fechaFinal; $Cliente;?>)
 </script>
 
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
