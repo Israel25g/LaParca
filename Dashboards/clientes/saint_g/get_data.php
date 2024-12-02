@@ -4,9 +4,9 @@ header('Content-Type: application/json');
 
 // Conexión a la base de datos
 $servername = "localhost";
-$username = "u366386740_adminDP";
+$username = "u366386740_IPLGroup";
 $password = "1plGr0up01*";
-$dbname = "main_dash";
+$dbname = "u366386740_dataWarehouse";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
