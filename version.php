@@ -10,8 +10,11 @@ if (isset($_POST['version'])) {
 
     $versionIngresada = $_POST['version'];
     $getLastVersion = "SELECT version_number FROM u366386740_versions order by version_number desc limit 1";
+    $getLastForm = "SELECT nombre_formulario FROM u366386740_formularios order by nombre_formulario desc limit 1";
     $versionBD = 2;
+    $formBD = 1;
     $result = mysqli_query($conexion, $getLastVersion);
+    $result2 = mysqli_query($conexion, $getLastForm);
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_array($result);
@@ -66,6 +69,10 @@ if (isset($_POST['version'])) {
                         }
                     }
                 }
+
+                // Formulario
+
+                
             }
 
 
