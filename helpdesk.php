@@ -9,15 +9,28 @@ $id_usuario = $_SESSION['id'];
 $getLastVersion = "SELECT version_number FROM u366386740_versions order by version_number desc limit 1";
 $result = mysqli_query($conexion, $getLastVersion);
 
+// Jala el formulario ingresado
+$getLastForm = "SELECT nombre_formulario FROM u366386740_formularios order by nombre_formulario desc limit 1";
+$result2 = mysqli_query($conexion, $getLastForm);
+
 if ($result && mysqli_num_rows($result) > 0) {
     $lastVersion = mysqli_fetch_array($result)['version_number'];
 } else {
     $lastVersion = 0.0;
 }
 
+if ($result2 && mysqli_num_rows($result2) > 0) {
+    $lastForm = mysqli_fetch_array($result2)['nombre_formulario'];
+} else {
+    $lastForm = 0;
+}
+
 // version del usuario
 $getUserVersion = "SELECT last_seen_version_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_version_id DESC LIMIT 1";
+$getUserForm = "SELECT last_seen_form_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_form_id DESC LIMIT 1";
+
 $userResult = mysqli_query($conexion, $getUserVersion);
+$userResult2 = mysqli_query($conexion, $getUserForm);
 
 if ($userResult && mysqli_num_rows($userResult) > 0) {
     $userVersion = mysqli_fetch_array($userResult)['last_seen_version_id'];
@@ -25,9 +38,16 @@ if ($userResult && mysqli_num_rows($userResult) > 0) {
     $userVersion = 0.0;
 }
 
+if ($userResult2 && mysqli_num_rows($userResult2) > 0) {
+    $userForm = mysqli_fetch_array($userResult2)['last_seen_form_id'];
+} else {
+    $userForm = 0;
+}
+
 // mostrar modal
 $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $lastVersion;
-$showModal2 = 1 == 1;
+$showModal2 = $userForm === null;
+
 
 ?>
 
@@ -106,7 +126,12 @@ $showModal2 = 1 == 1;
                 <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
                 <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
-                <li class="nav-li"><a href="./Dashboards/dashboards.php">Dashboards</a></li>
+                <?php
+                if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
+                    echo '<li class="nav-li"><a href="Dashboards/dashboards.php">Dashboards</a></li>';
+                }
+                ?>
+
                 <?php
                 if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
                     echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
@@ -320,67 +345,41 @@ $showModal2 = 1 == 1;
                     </h3>
                 </div>
                 <div class="modal-body" style="::-webkit-scrollbar{width:0px ;}">
-                    <iframe width="1140px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx_i4ZMVL7d5Bl3Uid2V54-BURENSSE5RODNRRjRNVDJQVUU1RzdUUkRQMi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh; ::-webkit-scrollbar{width:0px ;}" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
-                        <script>
-                            window.parent.postMessage('form-submitted', 'https://localhost')
-                        </script>
-                    </iframe>
+                    <iframe width="1140px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx_i4ZMVL7d5Bl3Uid2V54-BURENSSE5RODNRRjRNVDJQVUU1RzdUUkRQMi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh; ::-webkit-scrollbar{width:0px ;}" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
                 </div>
                 <div class="modal-footer">
                     <p class="text-center"></p>
                     <br>
 
-                    <form action="version.php" method="post">
-                        <input type="hidden" name="version" value="<?php echo $lastTag ?>">
+                    <form action="formulario.php" method="post">
+                        <?php $ultForm ?>
+                        <input type="hidden" name="formulario" value="<?php echo $ultForm ?>">
                         <button
                             id="botonHabilitar"
                             type="submit"
                             class="btn btn-success"
                             data-bs-dismiss="modal"
                             disabled>
-                            Por favor espere (<span id="countdown">5</span>) segundos...
+                            Favor llenar el formulario. Tiempo restante: (<strong><span id="countdown">25</span></strong>) segundos...
                         </button>
-                        <!-- <script>
+                        <script>
                             document.addEventListener('DOMContentLoaded', function() {
                                 const botonHabilitar = document.getElementById('botonHabilitar');
                                 const countdownSpan = document.getElementById('countdown');
+                                let remainingTime = 25; // Tiempo inicial en segundos
 
-                                setTimeout(() => {
-                                    botonHabilitar.disabled = false;
-                                    botonHabilitar.textContent = 'He llenado el formulario';
-                                    let remainingTime = 10;
+                                // Actualiza la cuenta regresiva cada segundo
+                                const countdownInterval = setInterval(() => {
+                                    remainingTime--;
+                                    countdownSpan.textContent = remainingTime;
 
-                                    const interval = setInterval(() => {
-                                        remainingTime--;
-                                        countdownSpan.textContent = remainingTime;
-
-                                        if (remainingTime <= 0) {
-                                            clearInterval(interval);
-                                            botonHabilitar.disabled = false;
-                                            document.getElementById('botonHabilitar').textContent = 'He llenado el formulario';
-                                        }
-                                    }, 5000);
-                                });
+                                    if (remainingTime <= 0) {
+                                        clearInterval(countdownInterval); // Detiene la cuenta regresiva
+                                        botonHabilitar.disabled = false; // Habilita el botón
+                                        document.getElementById('botonHabilitar').textContent = "He llenado el formulario";
+                                    }
+                                }, 1000);
                             });
-                        </script> -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                        const botonHabilitar = document.getElementById('botonHabilitar');
-                                        const countdownSpan = document.getElementById('countdown');
-                                        let remainingTime = 10; // Tiempo inicial en segundos
-
-                                        // Actualiza la cuenta regresiva cada segundo
-                                        const countdownInterval = setInterval(() => {
-                                            remainingTime--;
-                                            countdownSpan.textContent = remainingTime;
-
-                                            if (remainingTime <= 0) {
-                                                clearInterval(countdownInterval); // Detiene la cuenta regresiva
-                                                botonHabilitar.disabled = false; // Habilita el botón
-                                                document.getElementById('botonHabilitar').textContent = "El botón ya está disponible.";
-                                            }
-                                        }, 1000);
-                                    });
                         </script>
                     </form>
                 </div>
