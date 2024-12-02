@@ -389,6 +389,144 @@ try {
         }
         return await response.json();
     }
+// Función para gráficos de barra
+function createBarChart_multiseries(containerId, chartData1, chartData2, chartData3, chartData4, chartData5, chartData6, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    const options = {
+        
+        title: { text: title, left: '0%' },
+
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        xAxis: { type: 'category', bottom:'100%', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                data: chartData1.map(item => item.value[1]),
+                type: 'bar',
+                name: 'Unidades recibidas',
+                color: [
+            '#61a0a8',
+    '#c23531',
+    '#2f4554',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#ca8622',
+    '#bda29a',
+    '#6e7074',
+    '#546570',
+    '#c4ccd3'
+  ],
+            },
+            {
+                data: chartData2.map(item => item.value[1]),
+                type: 'bar',
+                name: 'unidades esperadas',
+                color: [
+    '#c4ccd3',
+    '#61a0a8',
+    '#c23531',
+    '#2f4554',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#ca8622',
+    '#bda29a',
+    '#6e7074',
+    '#546570',
+  ],
+            },            {
+                data: chartData3.map(item => item.value[1]),
+                type: 'bar',
+                name: 'total de cajas',
+                color: [
+                    '#ca8622',
+            '#61a0a8',
+    '#c23531',
+    '#2f4554',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#bda29a',
+    '#6e7074',
+    '#546570',
+    '#c4ccd3'
+  ],
+            },
+            {
+                data: chartData4.map(item => item.value[1]),
+                type: 'bar',
+                name: 'KG totales',
+                color: [
+                    '#2f4554',
+    '#c4ccd3',
+    '#61a0a8',
+    '#c23531',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#ca8622',
+    '#bda29a',
+    '#6e7074',
+    '#546570',
+  ],
+            },            {
+                data: chartData5.map(item => item.value[1]),
+                type: 'line',
+                name: 'CBM totales',
+                color: [
+                    '#6e7074',
+            '#61a0a8',
+    '#c23531',
+    '#2f4554',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#ca8622',
+    '#bda29a',
+    '#546570',
+    '#c4ccd3'
+  ],
+            },
+            {
+                data: chartData6.map(item => item.value[1]),
+                type: 'line',
+                name: 'SKUs totales',
+                color: [
+                    '#ca8622',
+    '#c4ccd3',
+    '#61a0a8',
+    '#c23531',
+    '#2f4554',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#bda29a',
+    '#6e7074',
+    '#546570',
+  ],
+            },          
+        ],
+        toolbox: {
+            feature: {
+                dataZoom: { yAxisIndex: 'none' },
+                magicType: { type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true },
+                dataView: { show: true, readOnly: true }
+            }
+        },
+        legend:{
+            type: 'scroll',
+    // orient: 'vertical',
+    right: 10,
+    top: 20,
+    bottom: 20,
+        },
+    };
+    chart.setOption(options);
+}
+
 
 // Función para gráficos de barra
 function createBarChart(containerId, chartData1, chartData2, title) {
@@ -452,11 +590,22 @@ function createBarChart(containerId, chartData1, chartData2, title) {
 }
 
 // Función para gráficos de línea
-function createLineChart(containerId, chartData, title) {
+function createLineChart(containerId, chartData1,chartData2, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         title: { text: title, left: '0%' },
-        color: [
+
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, },
+        xAxis: { type: 'category', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                data: chartData1.map(item => item.value[1]),
+                type: 'line',
+                name: title,
+                smooth: true,
+                areaStyle: {},
+                color: [
             '#ca8622',
             '#61a0a8',
     '#c23531',
@@ -469,16 +618,26 @@ function createLineChart(containerId, chartData, title) {
     '#546570',
     '#c4ccd3'
   ],
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, },
-        xAxis: { type: 'category', data: chartData.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
-        yAxis: { type: 'value' },
-        series: [
+            },
             {
-                data: chartData.map(item => item.value[1]),
+                data: chartData2.map(item => item.value[1]),
                 type: 'line',
                 name: title,
                 smooth: true,
-                areaStyle: {}
+                areaStyle: {},
+                color: [
+            '#546570',
+            '#ca8622',
+            '#61a0a8',
+    '#c23531',
+    '#2f4554',
+    '#d48265',
+    '#91c7ae',
+    '#749f83',
+    '#bda29a',
+    '#6e7074',
+    '#c4ccd3'
+  ],
             }
         ],
         toolbox: {
@@ -600,7 +759,7 @@ function createScatterChart(containerId, chartData, title) {
     // Configurar cada gráfico usando los datos recibidos
 
     // import
-    createBarChart('chart1', data.chart1,data.line1, 'Gráfico 1: Clientes y Unidades');
+    createBarChart_multiseries('chart1', data.chart1,data.line1,data.line2,data.line3,data.line4,data.line5, 'Gráfico 1: Clientes y Unidades');
     createBarChart('chart2', data.chart2,data.chart3, 'Gráfico 2: Destinos y Paletas');
     createBarChart('chart3', data.chart3,data.chart4, 'Gráfico 3: Clientes y Cajas');
     createPieChart('chart4', data.chart4, 'Gráfico 4: Embarques totales recibidos','40%','60%');
@@ -615,10 +774,10 @@ function createScatterChart(containerId, chartData, title) {
     // export
 
     // picking
-    createLineChart('chart9', data.chart9, 'Gráfico 9: Clientes y Unidades');
-    createLineChart('chart10', data.chart10, 'Gráfico 10: Destinos y Paletas');
-    createLineChart('chart11', data.chart11, 'Gráfico 11: Clientes y Cajas');
-    createLineChart('chart12', data.chart12, 'Gráfico 12: Repetición de Clientes');
+    createLineChart('chart9', data.chart9, data.line9, 'Gráfico 9: Clientes y Unidades');
+    createLineChart('chart10', data.chart10, data.line9, 'Gráfico 10: Destinos y Paletas');
+    createLineChart('chart11', data.chart11, data.line9, 'Gráfico 11: Clientes y Cajas');
+    createLineChart('chart12', data.chart12, data.line9,'Gráfico 12: Repetición de Clientes');
     // picking
 
     // varios

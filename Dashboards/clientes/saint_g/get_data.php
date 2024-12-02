@@ -63,8 +63,13 @@ $query1 = "
 SELECT 
     DATE_FORMAT(UPD_Eta, '%Y-%m-%d') AS mes,
     Cliente,
+    und_Recibidas,
     SUM(und_Recibidas) AS total_und_Recibidas,
-    SUM(und_Recibidas) AS und_Recibidas
+    SUM(cajas) AS total_cajas,
+    SUM(KG) AS total_KG,
+    SUM(CBM) total_CBM,
+    SUM(SKUs) AS SKUs_total,
+    SUM(und_esperadas) as total_und_esperadas
 FROM 
     imports
 $whereClause
@@ -75,6 +80,12 @@ mes
 $result1 = $conn->query($query1);
 $chart1 = [];
 $line1 = [];
+$line2 = [];
+$line3 = [];
+$line4 = [];
+$line5 = [];
+$line6 = [];
+
 if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
         $chart1[] = [
@@ -88,7 +99,35 @@ if ($result1->num_rows > 0) {
             'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
             'value' => [
                 (int)$row['und_Recibidas'],
-                (int)$row['total_und_Recibidas'],
+                (int)$row['total_und_esperadas'],
+            ],
+        ];
+        $line2[] = [
+            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'value' => [
+                (int)$row['und_Recibidas'],
+                (int)$row['total_cajas'],
+            ],
+        ];
+        $line3[] = [
+            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'value' => [
+                (int)$row['und_Recibidas'],
+                (int)$row['total_KG'],
+            ],
+        ];
+        $line4[] = [
+            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'value' => [
+                (int)$row['und_Recibidas'],
+                (int)$row['total_CBM'],
+            ],
+        ];
+        $line5[] = [
+            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'value' => [
+                (int)$row['und_Recibidas'],
+                (int)$row['SKUs_total'],
             ],
         ];
     }
@@ -289,7 +328,8 @@ $query9 = "
     SELECT 
         DATE_FORMAT(EJE, '%Y-%m-%d') AS mes,
         Cliente,
-        SUM(piezas) AS total_und_Recibidas
+        SUM(piezas) AS total_und_Recibidas,
+        SUM(Piezas_Pick) AS total_und_pick
     FROM 
         picking
     $whereClause
@@ -298,6 +338,7 @@ mes
 ";
 $result9 = $conn->query($query9);
 $chart9 = [];
+$line9 = [];
 if ($result9->num_rows > 0) {
     while ($row = $result9->fetch_assoc()) {
         $chart9[] = [
@@ -305,6 +346,13 @@ if ($result9->num_rows > 0) {
             'value' => [
                 $row['mes'],
                 (int)$row['total_und_Recibidas'],
+            ],
+        ];
+        $line9[] = [
+            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'value' => [
+                $row['mes'],
+                (int)$row['total_und_pick'],
             ],
         ];
     }
@@ -497,6 +545,10 @@ $data = [
     // imports
     'chart1' => $chart1,
     'line1' =>$line1,
+    'line2' =>$line2,
+    'line3' =>$line3,
+    'line4' =>$line4,
+    'line5' =>$line5,
     'chart2' => $chart2,
     'chart3' => $chart3,
     'chart4' => $chart4,
@@ -511,6 +563,7 @@ $data = [
 
     // picking
     'chart9' => $chart9,
+    'line9' => $line9,
     'chart10' => $chart10,
     'chart11' => $chart11,
     'chart12' => $chart12,
