@@ -27,6 +27,7 @@ if ($userResult && mysqli_num_rows($userResult) > 0) {
 
 // mostrar modal
 $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $lastVersion;
+$showModal2 = 1 == 1;
 
 ?>
 
@@ -68,6 +69,19 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             }
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var showModal2 = <?php echo $showModal2 ? 'true' : 'false'; ?>;
+            if (showModal2) {
+                var myModal2 = new bootstrap.Modal(document.getElementById('formulario'), {
+                    keyboard: false
+                });
+                myModal2.show();
+            } else {
+                console.log('No se muestra el modal');
+            }
+        });
+    </script>
 </head>
 
 <body style="background-image: url('./images/Motivo2.png')">
@@ -92,7 +106,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                 <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
                 <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
-                <li class="nav-li"><a href="./Dashboards/dashboards_extern.php">Dashboards</a></li>
+                <li class="nav-li"><a href="./Dashboards/dashboard_extern.php">Dashboards</a></li>
                 <?php
                 if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
                     echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
@@ -284,14 +298,104 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             </div>
         </div>
     </div>
+    <!-- ========================================================================================================================================== -->
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div
+        class="modal fade"
+        id="formulario"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-hidden="true">
+        <div
+            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitleId">
+                        Encuesta de satisfacción
+                    </h3>
+                </div>
+                <div class="modal-body" style="::-webkit-scrollbar{width:0px ;}">
+                    <iframe width="1140px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx_i4ZMVL7d5Bl3Uid2V54-BURENSSE5RODNRRjRNVDJQVUU1RzdUUkRQMi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh; ::-webkit-scrollbar{width:0px ;}" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
+                        <script>
+                            window.parent.postMessage('form-submitted', 'https://localhost')
+                        </script>
+                    </iframe>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-center"></p>
+                    <br>
+
+                    <form action="version.php" method="post">
+                        <input type="hidden" name="version" value="<?php echo $lastTag ?>">
+                        <button
+                            id="botonHabilitar"
+                            type="submit"
+                            class="btn btn-success"
+                            data-bs-dismiss="modal"
+                            disabled>
+                            Por favor espere (<span id="countdown">5</span>) segundos...
+                        </button>
+                        <!-- <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const botonHabilitar = document.getElementById('botonHabilitar');
+                                const countdownSpan = document.getElementById('countdown');
+
+                                setTimeout(() => {
+                                    botonHabilitar.disabled = false;
+                                    botonHabilitar.textContent = 'He llenado el formulario';
+                                    let remainingTime = 10;
+
+                                    const interval = setInterval(() => {
+                                        remainingTime--;
+                                        countdownSpan.textContent = remainingTime;
+
+                                        if (remainingTime <= 0) {
+                                            clearInterval(interval);
+                                            botonHabilitar.disabled = false;
+                                            document.getElementById('botonHabilitar').textContent = 'He llenado el formulario';
+                                        }
+                                    }, 5000);
+                                });
+                            });
+                        </script> -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                        const botonHabilitar = document.getElementById('botonHabilitar');
+                                        const countdownSpan = document.getElementById('countdown');
+                                        let remainingTime = 10; // Tiempo inicial en segundos
+
+                                        // Actualiza la cuenta regresiva cada segundo
+                                        const countdownInterval = setInterval(() => {
+                                            remainingTime--;
+                                            countdownSpan.textContent = remainingTime;
+
+                                            if (remainingTime <= 0) {
+                                                clearInterval(countdownInterval); // Detiene la cuenta regresiva
+                                                botonHabilitar.disabled = false; // Habilita el botón
+                                                document.getElementById('botonHabilitar').textContent = "El botón ya está disponible.";
+                                            }
+                                        }, 1000);
+                                    });
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- <?php
-    #if (isset($_GET['error'])) {
-    ?>
+            #if (isset($_GET['error'])) {
+            ?>
         <script>
-            Command: toastr["error"]("No tienes permiso para acceder a este apartado", <?php #$_GET['error'] ?>)
+            Command: toastr["error"]("No tienes permiso para acceder a este apartado", <?php #$_GET['error'] 
+                                                                                        ?>)
         </script><?php
-                #}
+                    #}
                     ?> -->
     <!-- Optional: Place to the bottom of scripts -->
     <!-- <script>
