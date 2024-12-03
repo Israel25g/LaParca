@@ -92,7 +92,7 @@
      <!-- Header -->
      <div class="header" style="border-radius: 0 0 0px 50px !important;">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/Salida2.gif" alt="Logo_IPL_Group" ></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
         </div>
         <h1><a style="color: #fff; text-decoration:none" href="../daily_plan/index_DP.php">Daily plan</a></h1>
         <div class="cuadroFecha">
