@@ -1,5 +1,5 @@
 <?php
-// include("../../apertura_sesion.php");
+include("../../apertura_sesion.php");
 include '../funcionalidades/funciones.php';
 $config = include '../funcionalidades/config_DP.php';
 $error = false;
@@ -461,7 +461,7 @@ try {
   $(document).ready(function() {
     let table = new DataTable('#tabla_MOP', {
       paging: false,
-      scrollCollapse: true,
+      scrollCollapse: false,
       scrollY: '350px',
       scrollX: '1700px',
       deferRender:    true,
