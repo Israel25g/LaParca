@@ -105,13 +105,13 @@ ul.clean{
   top: 8px;
   left: 20px;
   background-color: #fff;
-  /* padding: 2px; */
+  /* padding: 10px; */
   border-radius: 10px 10px 10px 40px;
   overflow: hidden;
 }
 .logo {
   width: 250px;
-  padding: 0px;
+  padding: 10px;
 }
 
 /* ======================== Fecha ======================== */

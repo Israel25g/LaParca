@@ -45,7 +45,7 @@ try {
         if (!empty($condiciones)) {
             $consultaSQL .= " WHERE " . implode(" AND ", $condiciones);
         }
-        $encabezado = ["#", "AID", "Cliente", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas","Cajas","Unidades", "Fecha estimada de llegada","Fecha programada", "Llegada a rampa", "Salida de rampa", "Acciones"];
+        $encabezado = ["#", "AID", "Cliente","# Vehículo / Placa", "Contenedor a recibir", "Contenedor recibido", "Tipo de carga", "Paletas","Cajas","Unidades", "Fecha estimada de llegada","Fecha programada", "Llegada a rampa", "Salida de rampa", "Acciones"];
     } else {
         $consultaSQL = "SELECT * FROM import WHERE 1 = 0";
         $mensaje = "Seleccione un tipo de operación";
@@ -99,7 +99,7 @@ try {
     <!-- Header -->
         <div class="header-error">
         <div class="logo-container">
-          <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
+          <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
         <h1><a href="../index_DP.php">Daily Plan</a></h1>
         <div class="cuadroFecha">
@@ -278,6 +278,7 @@ try {
                             <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['id'] ?></td>
                             <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['aid_oid'] ?></td>
                             <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['cliente'] ?></td>
+                            <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['vehiculo'] ?></td>
                             <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_en_proceso'] ?></td>
                             <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['pedidos_despachados'] ?></td>
                             <td class="border end" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>"><?= $fila['t_carga'] ?></td>

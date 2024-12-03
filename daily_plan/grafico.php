@@ -92,7 +92,7 @@
      <!-- Header -->
      <div class="header" style="border-radius: 0 0 0px 50px !important;">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/Salida2.gif" alt="Logo_IPL_Group" ></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group" ></a>
         </div>
         <h1><a style="color: #fff; text-decoration:none" href="../daily_plan/index_DP.php">Daily plan</a></h1>
         <div class="cuadroFecha">
@@ -139,24 +139,6 @@
 
 
     </div>
-    </div>
-
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
-      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_1.jpg"  alt="cumpleaños"  style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>
-    </div>
-
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
-      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_2.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>   
-    </div>
-
-    <div class="carousel-item" data-bs-interval="7500">
-      <div >
-      <img loading="lazy" src="../daily_plan/imagenes/cumpleaños_nov_3.jpg"  alt="cumpleaños 2" style="width: 100%; height: 90%;display: flex;z-index: 999;">
-      </div>   
     </div>
 
     <div class="carousel-item" data-bs-interval="7500">
