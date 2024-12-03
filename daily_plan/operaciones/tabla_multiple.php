@@ -92,6 +92,10 @@ try {
   
     <link rel="stylesheet" href="../../main-global.css">
     <link rel="shortcut icon" href="../../images/ICO.png">
+    <style>
+
+
+    </style>
 </head>
 <body background="../../images/Motivo2.png">
 <div class="container-lg start-0" style="margin-top: 90px;">
@@ -458,7 +462,7 @@ try {
   $(document).ready(function() {
     let table = new DataTable('#tabla_MOP', {
       paging: false,
-      scrollCollapse: false,
+      scrollCollapse: true,
       scrollY: '350px',
       scrollX: '1700px',
       deferRender:    true,
