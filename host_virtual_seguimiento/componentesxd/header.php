@@ -31,7 +31,7 @@
 <div class="header-error">
   <h1 style=" color: white; margin-left:30%; display: flex;font-weight: 800;font-size: 60px; ;font-family: 'Montserrat', 'Roboto', sans-serif;">Sistema de Tickets</h1>
   <div class="logo-container">
-    <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
+    <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../images/IPL.png" alt="Logo_IPL_Group"></a>
   </div>
   <div class="cuadroFecha-error">
     <p id="fecha-actual"></p>

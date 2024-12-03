@@ -45,7 +45,7 @@ include("../apertura_sesion.php");
     <!-- Header -->
     <div class="header-error">
       <div class="logo-container">
-        <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/Salida2.gif" alt="Logo_IPL_Group"></a>
+        <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../images/IPL.png" alt="Logo_IPL_Group"></a>
       </div>
       <h1>Daily plan</h1>
       <div class="cuadroFecha">
