@@ -62,14 +62,10 @@ if ($dateCondition && $clientCondition) {
 $query1 = "
 SELECT 
     DATE_FORMAT(UPD_Eta, '%Y-%m-%d') AS mes,
-    Cliente,
-    und_Recibidas,
-    SUM(und_Recibidas) AS total_und_Recibidas,
+    SUM(paletas) AS total_paletas_Recibidas,
     SUM(cajas) AS total_cajas,
     SUM(KG) AS total_KG,
-    SUM(CBM) total_CBM,
-    SUM(SKUs) AS SKUs_total,
-    SUM(und_esperadas) as total_und_esperadas
+    SUM(CBM) total_CBM
 FROM 
     imports
 $whereClause
@@ -78,56 +74,35 @@ mes
 ";
 // echo $query1;
 $result1 = $conn->query($query1);
-$chart1 = [];
-$line1 = [];
-$line2 = [];
-$line3 = [];
-$line4 = [];
-$line5 = [];
-$line6 = [];
+$total_paletas_Recibidas= [];
+$total_cajas = [];
+$total_KG = [];
+$total_CBM = [];
 
 if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
-        $chart1[] = [
+        $total_paletas_Recibidas[] = [
             'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
             'value' => [
-                (int)$row['und_Recibidas'],
-                (int)$row['total_und_Recibidas'],
+                (int)$row['total_paletas_Recibidas'],
             ],
         ];
-        $line1[] = [
+        $total_cajas[] = [
             'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
             'value' => [
-                (int)$row['und_Recibidas'],
-                (int)$row['total_und_esperadas'],
-            ],
-        ];
-        $line2[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
-            'value' => [
-                (int)$row['und_Recibidas'],
                 (int)$row['total_cajas'],
             ],
         ];
-        $line3[] = [
+        $total_KG[] = [
             'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
             'value' => [
-                (int)$row['und_Recibidas'],
                 (int)$row['total_KG'],
             ],
         ];
-        $line4[] = [
+        $total_CBM[] = [
             'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
             'value' => [
-                (int)$row['und_Recibidas'],
                 (int)$row['total_CBM'],
-            ],
-        ];
-        $line5[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
-            'value' => [
-                (int)$row['und_Recibidas'],
-                (int)$row['SKUs_total'],
             ],
         ];
     }
@@ -137,22 +112,32 @@ if ($result1->num_rows > 0) {
 $query2 = "
     SELECT 
         DATE_FORMAT(EJE, '%Y-%m-%d') AS mes,
-        sucursal,
+        Sucursal,
+        SUM(cajas) AS total_cajas,
         SUM(paletas) AS total_paletas
     FROM 
         imports
     $whereClause
 GROUP BY
-mes
+Sucursal
 ";
 $result2 = $conn->query($query2);
 $chart2 = [];
+$line1_2 = [];
 if ($result2->num_rows > 0) {
     while ($row = $result2->fetch_assoc()) {
         $chart2[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'name' => $row['Sucursal'] ? $row['Sucursal'] : 'NO DATA',
             'value' => [
-                $row['sucursal'],
+                $row['total_paletas'],
+                (int)$row['total_cajas'],
+            ],
+        ];
+
+        $line1_2[] = [
+            'name' => $row['Sucursal'] ? $row['Sucursal'] : 'NO DATA',
+            'value' => [
+                $row['total_cajas'],
                 (int)$row['total_paletas'],
             ],
         ];
@@ -162,24 +147,24 @@ if ($result2->num_rows > 0) {
 // Gráfico 3: Total de cajas por Cliente y mes
 $query3 = "
     SELECT 
-        DATE_FORMAT(EJE, '%Y-%m-%d') AS mes,
-        Cliente,
-        SUM(cajas) AS total_cajas
+        DATE_FORMAT(EJE, '%Y-%m') AS mes,
+        Tamaño,
+        COUNT(Tamaño) AS total_tamaño
     FROM 
         imports
     $whereClause
     group BY
-mes
+Tamaño
 ";
 $result3 = $conn->query($query3);
 $chart3 = [];
 if ($result3->num_rows > 0) {
     while ($row = $result3->fetch_assoc()) {
         $chart3[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
+            'name' => $row['Tamaño'] ? $row['Tamaño'] : 'NO DATA',
             'value' => [
-                $row['mes'],
-                (int)$row['total_cajas'],
+                (int)$row['total_tamaño'],
+                (int)$row['total_tamaño'],
             ],
         ];
     }
@@ -543,12 +528,13 @@ while ($row = $result16->fetch_assoc()) {
 // Empaqueta los datos en un solo array
 $data = [
     // imports
-    'chart1' => $chart1,
-    'line1' =>$line1,
-    'line2' =>$line2,
-    'line3' =>$line3,
-    'line4' =>$line4,
-    'line5' =>$line5,
+    // variables del grafico 1
+    'total_paletas_Recibidas' => $total_paletas_Recibidas,
+    'total_cajas' => $total_cajas,
+    'total_KG' => $total_KG,
+    'total_CBM' => $total_CBM,
+    // variables del grafico 1
+
     'chart2' => $chart2,
     'chart3' => $chart3,
     'chart4' => $chart4,

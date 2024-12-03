@@ -107,6 +107,13 @@ try {
   border-radius: 10px;
   border: #a77700;
 }
+
+.custom-card {
+
+    border: 2px solid #61a0a8 !important; /* Equivalente a 'border-primary border-2' */
+
+}
+
 </style>
 
 </head>
@@ -283,7 +290,7 @@ try {
   <div class="offcanvas-body">
     <!-- Categorías de Tarjetas -->
     <div class="card-category mb-4">
-        <h2 class="text-primary">Import</h2>
+        <h2 style="color: #61a0a8">Import</h2>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <?php
             $importData = [
@@ -295,7 +302,7 @@ try {
             foreach ($importData as $titulo => $valor) {
                 echo "
                 <div class='col'>
-                    <div class='card h-100 border-primary border-2'>
+                    <div class='custom-card card h-100' style='border: 2px solid #61a0a8 !important;'>
                         <div class='card-body'>
                             <h6 class='card-title'>$titulo</h6>
                             <p class='card-text fs-4'>$valor</p>
@@ -308,7 +315,7 @@ try {
     </div>
 <hr/>
     <div class="card-category mb-4">
-        <h2 class="text-success">Export</h2>
+        <h2 style="color: #ca8622">Export</h2>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <?php
             $exportData = [
@@ -320,7 +327,7 @@ try {
             foreach ($exportData as $titulo => $valor) {
                 echo "
                 <div class='col'>
-                    <div class='card h-100 border-success border-2'>
+                    <div class='custom-card card h-100' style='border: 2px solid #ca8622 !important;'>
                         <div class='card-body'>
                             <h6 class='card-title'>$titulo</h6>
                             <p class='card-text fs-4'>$valor</p>
@@ -333,7 +340,7 @@ try {
     </div>
     <hr/>
     <div class="card-category mb-4">
-        <h2 class="text-warning">Picking</h2>
+        <h2 style="color: #91c7ae">Picking</h2>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <?php
             $pickingData = [
@@ -345,7 +352,7 @@ try {
             foreach ($pickingData as $titulo => $valor) {
                 echo "
                 <div class='col'>
-                    <div class='card h-100 border-warning border-2'>
+                    <div class='custom-card card h-100' style='border: 2px solid #91c7ae !important;'>
                         <div class='card-body'>
                             <h6 class='card-title'>$titulo</h6>
                             <p class='card-text fs-4'>$valor</p>
@@ -389,123 +396,80 @@ try {
         }
         return await response.json();
     }
-// Función para gráficos de barra
-function createBarChart_multiseries(containerId, chartData1, chartData2, chartData3, chartData4, chartData5, chartData6, title) {
+    function createBarChart_multiseries(containerId, chartData1, chartData2, chartData3, chartData4, title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
-        
-        title: { text: title, left: '0%' },
-
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        xAxis: { type: 'category', bottom:'100%', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
-        yAxis: { type: 'value' },
+        grid: {
+            left: '10%',
+            right: '10%',
+            top: '20%',
+            bottom: '10%',
+            containLabel: true
+        },
+        title: { 
+            text: title, 
+            left: '0%', 
+            textStyle: { fontSize: 14 } 
+        },
+        tooltip: { 
+            trigger: 'axis', 
+            axisPointer: { type: 'shadow' } 
+        },
+        xAxis: { 
+            type: 'category', 
+            data: chartData1.map(item => item.name), 
+            axisLabel: { 
+                fontSize: "12px", 
+                rotate: chartData1.length > 10 ? 45 : 0 // Rotación condicional
+            } 
+        },
+        yAxis: [
+            {
+                type: 'value',
+                alignTicks: true,
+                name: 'Cantidad',
+                axisLabel: { formatter: '{value}' },
+                max: 100
+            },
+            {
+                type: 'value',
+                alignTicks: true,
+                position: 'right',
+                name: 'Medidas',
+                axisLabel: { formatter: '{value}' },
+                max: 1000,
+                splitLine: { show: false }
+            }
+        ],
         series: [
             {
-                data: chartData1.map(item => item.value[1]),
+                data: chartData1.map(item => item.value[0]),
                 type: 'bar',
-                name: 'Unidades recibidas',
-                color: [
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
+                name: 'Paletas recibidas',
+                itemStyle: { color: '#61a0a8' },
+                yAxisIndex: 0 // Asociado al primer eje Y
             },
             {
-                data: chartData2.map(item => item.value[1]),
-                type: 'bar',
-                name: 'unidades esperadas',
-                color: [
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            },            {
-                data: chartData3.map(item => item.value[1]),
-                type: 'bar',
-                name: 'total de cajas',
-                color: [
-                    '#ca8622',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
+                data: chartData2.map(item => item.value[0]),
+                type: 'line',
+                name: 'Cajas recibidas',
+                itemStyle: { color: '#c23531' },
+                yAxisIndex: 0 // Asociado al primer eje Y
             },
             {
-                data: chartData4.map(item => item.value[1]),
-                type: 'bar',
+                data: chartData3.map(item => item.value[0]),
+                type: 'line',
                 name: 'KG totales',
-                color: [
-                    '#2f4554',
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            },            {
-                data: chartData5.map(item => item.value[1]),
+                itemStyle: { color: '#ca8622' },
+                yAxisIndex: 1 // Asociado al segundo eje Y
+            },
+            {
+                data: chartData4.map(item => item.value[0]),
                 type: 'line',
                 name: 'CBM totales',
-                color: [
-                    '#6e7074',
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#546570',
-    '#c4ccd3'
-  ],
-            },
-            {
-                data: chartData6.map(item => item.value[1]),
-                type: 'line',
-                name: 'SKUs totales',
-                color: [
-                    '#ca8622',
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            },          
+                itemStyle: { color: '#2f4554' },
+                yAxisIndex: 1 // Asociado al segundo eje Y
+            }
         ],
         toolbox: {
             feature: {
@@ -516,20 +480,21 @@ function createBarChart_multiseries(containerId, chartData1, chartData2, chartDa
                 dataView: { show: true, readOnly: true }
             }
         },
-        legend:{
+        legend: {
             type: 'scroll',
-    // orient: 'vertical',
-    right: 10,
-    top: 20,
-    bottom: 20,
+            right: 10,
+            top: 20,
+            bottom: 0
         },
     };
     chart.setOption(options);
 }
 
 
+
+
 // Función para gráficos de barra
-function createBarChart(containerId, chartData1, chartData2, title) {
+function createBarChart(containerId, chartData1,  title) {
     const chart = echarts.init(document.getElementById(containerId));
     const options = {
         
@@ -557,24 +522,7 @@ function createBarChart(containerId, chartData1, chartData2, title) {
     '#c4ccd3'
   ],
             },
-            {
-                data: chartData2.map(item => item.value[1]),
-                type: 'line',
-                name: title,
-                color: [
-    '#c4ccd3',
-    '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-  ],
-            }
+
         ],
         toolbox: {
             feature: {
@@ -759,32 +707,32 @@ function createScatterChart(containerId, chartData, title) {
     // Configurar cada gráfico usando los datos recibidos
 
     // import
-    createBarChart_multiseries('chart1', data.chart1,data.line1,data.line2,data.line3,data.line4,data.line5, 'Gráfico 1: Clientes y Unidades');
-    createBarChart('chart2', data.chart2,data.chart3, 'Gráfico 2: Destinos y Paletas');
-    createBarChart('chart3', data.chart3,data.chart4, 'Gráfico 3: Clientes y Cajas');
-    createPieChart('chart4', data.chart4, 'Gráfico 4: Embarques totales recibidos','40%','60%');
+    createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
+    createBarChart('chart2', data.chart2,data.chart2, '2.Cajas por pais');
+    createBarChart('chart3', data.chart3, '3.Embarques totales recibidos');
+    createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
 
     // export
-    createPieChart('chart5', data.chart5, 'Gráfico 5: Clientes y Unidades','40%','60%');
-    createPieChart('chart6', data.chart6, 'Gráfico 6: Destinos y Paletas','50%','60%');
-    createPieChart('chart7', data.chart7, 'Gráfico 7: Clientes y Cajas','20%','30%');
-    createPieChart('chart8', data.chart8, 'Gráfico 8: Repetición de Clientes','40%','60%');
+    createPieChart('chart5', data.chart5, '5.Clientes y Unidades','40%','60%');
+    createPieChart('chart6', data.chart6, '6.Destinos y Paletas','50%','60%');
+    createPieChart('chart7', data.chart7, '7.Clientes y Cajas','20%','30%');
+    createPieChart('chart8', data.chart8, '8.Repetición de Clientes','40%','60%');
     // export
 
     // picking
-    createLineChart('chart9', data.chart9, data.line9, 'Gráfico 9: Clientes y Unidades');
-    createLineChart('chart10', data.chart10, data.line9, 'Gráfico 10: Destinos y Paletas');
-    createLineChart('chart11', data.chart11, data.line9, 'Gráfico 11: Clientes y Cajas');
-    createLineChart('chart12', data.chart12, data.line9,'Gráfico 12: Repetición de Clientes');
+    createLineChart('chart9', data.chart9, data.line9, '9.Clientes y Unidades');
+    createLineChart('chart10', data.chart10, data.line9, '10.Destinos y Paletas');
+    createLineChart('chart11', data.chart11, data.line9, '11Clientes y Cajas');
+    createLineChart('chart12', data.chart12, data.line9,'12Repetición de Clientes');
     // picking
 
     // varios
-    createScatterChart('chart13', data.chart13, 'Gráfico 13: Clientes y Unidades');
-    createLineChart('chart14', data.chart14, 'Gráfico 14: Destinos y Paletas ');
-    createPieChart('chart15', data.chart15, 'Gráfico 15: Clientes y Cajas','40%','60%');
-    createBarChart('chart16', data.chart16, 'Gráfico 16: Repetición de Clientes');
+    createScatterChart('chart13', data.chart13, '13.Clientes y Unidades');
+    createLineChart('chart14', data.chart14, '14.Destinos y Paletas ');
+    createPieChart('chart15', data.chart15, '15.Clientes y Cajas','40%','60%');
+    createBarChart('chart16', data.chart16, '16.Repetición de Clientes');
     // varios
     
 }
