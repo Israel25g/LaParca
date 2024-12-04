@@ -46,7 +46,7 @@ if ($userResult2 && mysqli_num_rows($userResult2) > 0) {
 
 // mostrar modal
 $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $lastVersion;
-$showModal2 = $userForm === null;
+// $showModal2 = $userForm === null;
 
 
 ?>
@@ -348,7 +348,7 @@ $showModal2 = $userForm === null;
                     <iframe width="1140px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx_i4ZMVL7d5Bl3Uid2V54-BURENSSE5RODNRRjRNVDJQVUU1RzdUUkRQMi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh; ::-webkit-scrollbar{width:0px ;}" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
                 </div>
                 <div class="modal-footer">
-                    <p class="text-center"></p>
+                    <p class="text-center"> En caso de no mostrarse el formulario, verifique su sesión en <a href="https://www.office.com/?auth=2">Office 365</a></p>
                     <br>
 
                     <form action="formulario.php" method="post">
