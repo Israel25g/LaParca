@@ -108,39 +108,57 @@ if ($result1->num_rows > 0) {
     }
 }
 
+
 // Gráfico 2: Total de paletas por País y mes
+
 $query2 = "
-    SELECT 
-        DATE_FORMAT(EJE, '%Y-%m-%d') AS mes,
-        Sucursal,
-        SUM(cajas) AS total_cajas,
-        SUM(paletas) AS total_paletas
-    FROM 
-        imports
-    $whereClause
+SELECT 
+    DATE_FORMAT(UPD_Eta, '%Y-%m-%d') AS mes,
+    Sucursal ,
+    SUM(CASE WHEN Tamaño = 'Grande' THEN 1 ELSE 0 END) AS total_grande,
+    SUM(CASE WHEN Tamaño = 'Mediano' THEN 1 ELSE 0 END) AS total_mediano,
+    SUM(CASE WHEN Tamaño = 'Pequeño' THEN 1 ELSE 0 END) AS total_chico
+FROM 
+    imports
+$whereClause
 GROUP BY
-Sucursal
+mes
 ";
+// echo $query1;
 $result2 = $conn->query($query2);
-$chart2 = [];
-$line1_2 = [];
+$total_grande= [];
+$total_mediano=[];
+$total_chico= [];
+
 if ($result2->num_rows > 0) {
     while ($row = $result2->fetch_assoc()) {
-        $chart2[] = [
-            'name' => $row['Sucursal'] ? $row['Sucursal'] : 'NO DATA',
+        $total_grande[] = [
+            'name' => $row['mes'],
             'value' => [
-                $row['total_paletas'],
-                (int)$row['total_cajas'],
+                (int)$row['total_grande'],
+                (int)$row['total_mediano'],
+                (int)$row['total_chico'],
             ],
         ];
 
-        $line1_2[] = [
-            'name' => $row['Sucursal'] ? $row['Sucursal'] : 'NO DATA',
+        $total_mediano[] = [
+            'name' => $row['mes'],
             'value' => [
-                $row['total_cajas'],
-                (int)$row['total_paletas'],
+                (int)$row['total_grande'],
+                (int)$row['total_mediano'],
+                (int)$row['total_chico'],
             ],
         ];
+
+        $total_chico[] = [
+            'name' => $row['mes'],
+            'value' => [
+                (int)$row['total_grande'],
+                (int)$row['total_mediano'],
+                (int)$row['total_chico'],
+            ],
+        ];
+
     }
 }
 
@@ -149,26 +167,32 @@ $query3 = "
     SELECT 
         DATE_FORMAT(EJE, '%Y-%m') AS mes,
         Tamaño,
-        COUNT(Tamaño) AS total_tamaño
+        COUNT(Tamaño) AS total_tamaño,
+        COUNT(Paletas) AS total_paletas
     FROM 
         imports
     $whereClause
     group BY
-Tamaño
+mes
 ";
 $result3 = $conn->query($query3);
-$chart3 = [];
-if ($result3->num_rows > 0) {
+$seriesNames = [];
+$chart3 =[];
+if ($row = $result3->fetch_assoc()) {
     while ($row = $result3->fetch_assoc()) {
+        $seriesName = $row['mes'] ? $row['mes'] : 'NO DATA';
+            $seriesNames[] = $seriesName;
         $chart3[] = [
-            'name' => $row['Tamaño'] ? $row['Tamaño'] : 'NO DATA',
+            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
             'value' => [
                 (int)$row['total_tamaño'],
-                (int)$row['total_tamaño'],
+                (int)$row['total_paletas'],
             ],
+            'seriesNames' => $seriesNames
         ];
     }
-}
+
+}  
 
 // Gráfico 4: Ejemplo adicional de consulta
 $query4 = "
@@ -535,7 +559,9 @@ $data = [
     'total_CBM' => $total_CBM,
     // variables del grafico 1
 
-    'chart2' => $chart2,
+    'total_grande' => $total_grande,
+    'total_mediano' => $total_mediano,
+    'total_chico' => $total_grande,
     'chart3' => $chart3,
     'chart4' => $chart4,
     // imports

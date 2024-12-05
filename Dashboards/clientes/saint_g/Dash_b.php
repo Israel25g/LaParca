@@ -398,6 +398,11 @@ try {
     }
     function createBarChart_multiseries(containerId, chartData1, chartData2, chartData3, chartData4, title) {
     const chart = echarts.init(document.getElementById(containerId));
+
+        // Calculate dynamic max values for yAxes
+    const maxY1 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+    const maxY2 = Math.max(...chartData2.map(item => Math.max(...item.value)));
+
     const options = {
         grid: {
             left: '10%',
@@ -429,7 +434,7 @@ try {
                 alignTicks: true,
                 name: 'Cantidad',
                 axisLabel: { formatter: '{value}' },
-                max: 100
+                max:maxY2+100,
             },
             {
                 type: 'value',
@@ -437,7 +442,7 @@ try {
                 position: 'right',
                 name: 'Medidas',
                 axisLabel: { formatter: '{value}' },
-                max: 1000,
+                max: maxY1+100,
                 splitLine: { show: false }
             }
         ],
@@ -482,7 +487,7 @@ try {
         },
         legend: {
             type: 'scroll',
-            right: 10,
+            right: 150,
             top: 20,
             bottom: 0
         },
@@ -491,38 +496,69 @@ try {
 }
 
 
-
-
-// Función para gráficos de barra
-function createBarChart(containerId, chartData1,  title) {
+function createBarChart(containerId, chartData1, chartData2, chartData3, title) {
     const chart = echarts.init(document.getElementById(containerId));
-    const options = {
-        
-        title: { text: title, left: '0%' },
 
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        xAxis: { type: 'category', bottom:'100%', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
-        yAxis: { type: 'value' },
+    // Calculate dynamic max values for yAxes
+
+    const maxY1 = Math.max(...chartData1.map(item => Math.max(...item.value)));
+    const maxY2 = Math.max(...chartData2.map(item => Math.max(...item.value)));
+    const maxY3 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+
+
+    const options = {
+        grid: {
+            left: '10%',
+            right: '10%',
+            top: '20%',
+            bottom: '10%',
+            containLabel: true
+        },
+        title: { 
+            text: title, 
+            left: '0%', 
+            textStyle: { fontSize: 14 } 
+        },
+        tooltip: { 
+            trigger: 'axis', 
+            axisPointer: { type: 'shadow' } 
+        },
+        xAxis: { 
+            type: 'category', 
+            data: chartData1.map(item => item.name), 
+            axisLabel: { 
+                fontSize: "12px", 
+                rotate: chartData1.length > 10 ? 45 : 0 // Rotación condicional
+            } 
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Cantidad',
+            axisLabel: { formatter: '{value}' },
+            max:( maxY1+maxY2+maxY3 )*1.0
+        },
         series: [
             {
-                data: chartData1.map(item => item.value[1]),
+                data: chartData1.map(item => item.value[0]),
                 type: 'bar',
-                name: title,
-                color: [
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
+                name: 'Grande',
+                itemStyle: { color: '#91c7ae' },
+                stack: 'Total', // Se agrega propiedad para apilar
             },
-
+            {
+                data: chartData2.map(item => item.value[0]),
+                type: 'bar',
+                name: 'Mediano',
+                itemStyle: { color: '#61a0a8' },
+                stack: 'Total', // Se agrega propiedad para apilar
+            },
+            {
+                data: chartData3.map(item => item.value[0]),
+                type: 'bar',
+                name: 'Chico',
+                itemStyle: { color: '#546570' },
+                stack: 'Total', // Se agrega propiedad para apilar
+            },
         ],
         toolbox: {
             feature: {
@@ -532,10 +568,20 @@ function createBarChart(containerId, chartData1,  title) {
                 saveAsImage: { show: true },
                 dataView: { show: true, readOnly: true }
             }
-        }
+        },
+        legend: {
+            type: 'scroll',
+            right: 350,
+            top: 20,
+            bottom: 0
+        },
     };
+
     chart.setOption(options);
 }
+
+
+
 
 // Función para gráficos de línea
 function createLineChart(containerId, chartData1,chartData2, title) {
@@ -708,7 +754,7 @@ function createScatterChart(containerId, chartData, title) {
 
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
-    createBarChart('chart2', data.chart2,data.chart2, '2.Cajas por pais');
+    createBarChart('chart2', data.total_grande, data.total_mediano, data.total_chico, '2.Cajas por pais');
     createBarChart('chart3', data.chart3, '3.Embarques totales recibidos');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
