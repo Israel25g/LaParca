@@ -425,7 +425,7 @@ try {
             data: chartData1.map(item => item.name), 
             axisLabel: { 
                 fontSize: "12px", 
-                rotate: chartData1.length > 10 ? 45 : 0 // Rotación condicional
+                rotate: 90 // Rotación condicional
             } 
         },
         yAxis: [
@@ -452,21 +452,24 @@ try {
                 type: 'bar',
                 name: 'Paletas recibidas',
                 itemStyle: { color: '#61a0a8' },
-                yAxisIndex: 0 // Asociado al primer eje Y
+                yAxisIndex: 0, // Asociado al primer eje Y
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData2.map(item => item.value[0]),
                 type: 'line',
                 name: 'Cajas recibidas',
                 itemStyle: { color: '#c23531' },
-                yAxisIndex: 0 // Asociado al primer eje Y
+                yAxisIndex: 0, // Asociado al primer eje Y
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData3.map(item => item.value[0]),
                 type: 'line',
                 name: 'KG totales',
                 itemStyle: { color: '#ca8622' },
-                yAxisIndex: 1 // Asociado al segundo eje Y
+                yAxisIndex: 1, // Asociado al segundo eje Y
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData4.map(item => item.value[0]),
@@ -496,7 +499,7 @@ try {
 }
 
 
-function createBarChart(containerId, chartData1, chartData2, chartData3, title) {
+function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
     const chart = echarts.init(document.getElementById(containerId));
 
     // Calculate dynamic max values for yAxes
@@ -504,6 +507,7 @@ function createBarChart(containerId, chartData1, chartData2, chartData3, title) 
     const maxY1 = Math.max(...chartData1.map(item => Math.max(...item.value)));
     const maxY2 = Math.max(...chartData2.map(item => Math.max(...item.value)));
     const maxY3 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+
 
 
     const options = {
@@ -528,15 +532,16 @@ function createBarChart(containerId, chartData1, chartData2, chartData3, title) 
             data: chartData1.map(item => item.name), 
             axisLabel: { 
                 fontSize: "12px", 
-                rotate: chartData1.length > 10 ? 45 : 0 // Rotación condicional
+                rotate: 90 
             } 
         },
         yAxis: {
             type: 'value',
             name: 'Cantidad',
             axisLabel: { formatter: '{value}' },
-            max:( maxY1+maxY2+maxY3 )*1.0
+            max:( maxY1)*1.5
         },
+        
         series: [
             {
                 data: chartData1.map(item => item.value[0]),
@@ -544,20 +549,23 @@ function createBarChart(containerId, chartData1, chartData2, chartData3, title) 
                 name: 'Grande',
                 itemStyle: { color: '#91c7ae' },
                 stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData2.map(item => item.value[0]),
                 type: 'bar',
                 name: 'Mediano',
-                itemStyle: { color: '#61a0a8' },
+                itemStyle: { color: '#2f4554' },
                 stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData3.map(item => item.value[0]),
                 type: 'bar',
-                name: 'Chico',
-                itemStyle: { color: '#546570' },
+                name: 'Pequeño',
+                itemStyle: { color: '#ca8622' },
                 stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
             },
         ],
         toolbox: {
@@ -754,8 +762,8 @@ function createScatterChart(containerId, chartData, title) {
 
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
-    createBarChart('chart2', data.total_grande, data.total_mediano, data.total_chico, '2.Cajas por pais');
-    createBarChart('chart3', data.chart3, '3.Embarques totales recibidos');
+    createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
+    createPieChart('chart3', data.chart3, '3.Embarques totales recibidos','40%','60%');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
@@ -776,7 +784,7 @@ function createScatterChart(containerId, chartData, title) {
 
     // varios
     createScatterChart('chart13', data.chart13, '13.Clientes y Unidades');
-    createLineChart('chart14', data.chart14, '14.Destinos y Paletas ');
+    createPieChart('chart14', data.chart14, '14.Destinos y Paletas','40%','60%');
     createPieChart('chart15', data.chart15, '15.Clientes y Cajas','40%','60%');
     createBarChart('chart16', data.chart16, '16.Repetición de Clientes');
     // varios

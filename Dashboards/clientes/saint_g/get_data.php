@@ -61,7 +61,7 @@ if ($dateCondition && $clientCondition) {
 
 $query1 = "
 SELECT 
-    DATE_FORMAT(UPD_Eta, '%Y-%m-%d') AS mes,
+    DATE_FORMAT(Eta, '%Y-%m-%d') AS mes,
     SUM(paletas) AS total_paletas_Recibidas,
     SUM(cajas) AS total_cajas,
     SUM(KG) AS total_KG,
@@ -113,22 +113,21 @@ if ($result1->num_rows > 0) {
 
 $query2 = "
 SELECT 
-    DATE_FORMAT(UPD_Eta, '%Y-%m-%d') AS mes,
-    Sucursal ,
-    SUM(CASE WHEN Tamaño = 'Grande' THEN 1 ELSE 0 END) AS total_grande,
-    SUM(CASE WHEN Tamaño = 'Mediano' THEN 1 ELSE 0 END) AS total_mediano,
-    SUM(CASE WHEN Tamaño = 'Pequeño' THEN 1 ELSE 0 END) AS total_chico
+    DATE_FORMAT(Eta, '%Y-%m-%d') AS mes,
+    SUM(CASE WHEN Tamaño = 'Grande' THEN und_recibidas ELSE 0 END) AS total_grande,
+    SUM(CASE WHEN Tamaño = 'Mediano' THEN und_recibidas ELSE 0 END) AS total_mediano,
+    SUM(CASE WHEN Tamaño = 'Pequeño' THEN und_recibidas ELSE 0 END) AS total_pequeño
 FROM 
     imports
 $whereClause
 GROUP BY
-mes
+    mes
 ";
-// echo $query1;
+
 $result2 = $conn->query($query2);
 $total_grande= [];
 $total_mediano=[];
-$total_chico= [];
+$total_pequeño= [];
 
 if ($result2->num_rows > 0) {
     while ($row = $result2->fetch_assoc()) {
@@ -136,29 +135,20 @@ if ($result2->num_rows > 0) {
             'name' => $row['mes'],
             'value' => [
                 (int)$row['total_grande'],
-                (int)$row['total_mediano'],
-                (int)$row['total_chico'],
             ],
         ];
-
         $total_mediano[] = [
             'name' => $row['mes'],
             'value' => [
-                (int)$row['total_grande'],
                 (int)$row['total_mediano'],
-                (int)$row['total_chico'],
             ],
         ];
-
-        $total_chico[] = [
+        $total_pequeño[] = [
             'name' => $row['mes'],
             'value' => [
-                (int)$row['total_grande'],
-                (int)$row['total_mediano'],
-                (int)$row['total_chico'],
+                (int)$row['total_pequeño'],
             ],
         ];
-
     }
 }
 
@@ -559,9 +549,12 @@ $data = [
     'total_CBM' => $total_CBM,
     // variables del grafico 1
 
+// variables del grafico 2
     'total_grande' => $total_grande,
     'total_mediano' => $total_mediano,
-    'total_chico' => $total_grande,
+    'total_pequeño' => $total_pequeño,
+// variables del grafico 2
+
     'chart3' => $chart3,
     'chart4' => $chart4,
     // imports
