@@ -126,7 +126,7 @@ try {
     <!-- Header -->
     <div class="header" style="background-color: orange !important; box-shadow: -10px 5px 5px #a77700">
         <div class="logo-container">
-            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/Salida2.gif" alt="Logo_IPL_Group"></a>
+            <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
         <a style=" font-size:xxx-large; margin:auto" href="../../dashboard_extern.php" class="link-offset-2 link-underline link-underline-opacity-0 fw-bold link-light ">Reportes externos: <?php echo($Cliente)?></a>
         <div class="cuadroFecha">

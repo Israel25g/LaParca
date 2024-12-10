@@ -245,8 +245,7 @@ $insertSQL_picking_r = "INSERT INTO picking_r (aid_oid, cliente, paletas, cajas,
     if ($filtro == "import") {
         header("Location: ./hoja_m.php?fecha_estimacion_llegada=&filtro=import&status=success");
         exit();
-       
-    } elseif ($filtro ="export"){
+    } elseif ($filtro =="export"){
         header("Location: ./hoja_m.php?fecha_estimacion_llegada=&filtro=export&status=success");
         exit();
     }elseif ($filtro =="picking") {
@@ -264,7 +263,7 @@ $insertSQL_picking_r = "INSERT INTO picking_r (aid_oid, cliente, paletas, cajas,
             header("Location: ./hoja_m.php?fecha_estimacion_llegada=&filtro=import&status=error");
             exit();
            
-        } elseif ($filtro ="export"){
+        } elseif ($filtro =="export"){
             header("Location: ./hoja_m.php?fecha_estimacion_llegada=&filtro=export&status=error");
             exit();
         }elseif ($filtro =="picking") {
