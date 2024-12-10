@@ -1,5 +1,6 @@
 <?php
       session_start();
+      header("Refresh: 10800"); // 10800 segundos = 3 horas
 ?>
 <!DOCTYPE html>
 <html lang="en">
