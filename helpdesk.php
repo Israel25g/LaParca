@@ -134,7 +134,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
 
                 <?php
                 if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
-                    echo '<li class="nav-li"><a href="access_control/index/index_users.php">Control de Usuarios</a></li>';
+                    echo '<li class="nav-li"><a href="access_control/index/index_users2.php">Control de Usuarios</a></li>';
                 }
                 ?>
                 <li class="nav-li"><a class="cierre" href="login/CerrarSesion.php">Cerrar Sesión</a></li>

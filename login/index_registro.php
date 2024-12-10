@@ -31,7 +31,7 @@ include("../apertura_sesion.php");
     </style>
 
     <div class="overlay"></div>
-    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="../access_control/index/index_users.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Registro de usuarios</h1>
+    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="../access_control/index/index_users2.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Registro de usuarios</h1>
 
     <?php
         if(isset($_GET['error'])){

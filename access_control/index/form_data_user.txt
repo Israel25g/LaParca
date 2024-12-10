@@ -1,5 +1,0 @@
-nombrecompleto=Rodrigo lopez
-correo=israel@iplgsc.com
-descripcion=asdbsgbsdfbsdfbsdvqweq
-ubicacion=Auditoria
-urgencia=Urgente
