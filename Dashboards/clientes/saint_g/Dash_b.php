@@ -26,12 +26,14 @@ if (!$Cliente || !$fecha_inicio || !$fecha_final) {
 try {
     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
     $stmt1 = $pdo->prepare("
-        SELECT SUM(piezas) AS suma_caja_pk,
-          SUM(Paletas) AS suma_paletas_pk, 
-          SUM(CBM) AS suma_pedidos_en_proceso_pk,
-          SUM(KG) AS suma_unidad_pk
+        SELECT SUM(Pend) AS suma_caja_pk,
+        SUM(Pend) AS suma_paletas_pk, 
+        SUM(Pend) AS suma_pedidos_en_proceso_pk,
+        SUM(CASE WHEN Categoria = 'Categoría A' THEN Pend ELSE 0 END) AS suma_CBM_finalizado_ex,
+        SUM(CASE WHEN Categoria = 'Categoría B' THEN Pend ELSE 0 END) AS suma_CBM_pendiente_ex,
+        SUM(Pend) AS suma_unidad_pk
         FROM picking
-        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
+        WHERE CIA = :cliente AND Confirmado >= :fecha_inicio AND Confirmado <= :fecha_final
     ");
     $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
@@ -42,35 +44,37 @@ try {
 
     // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
     $stmt2 = $pdo->prepare("
-        SELECT cajas,
-          paletas, 
-          und_recibidas,
-          CBM
+        SELECT 
+        SUM(cajas) AS sum_cajas,
+        SUM(paletas) AS sum_paletas, 
+        SUM(CBM) AS sum_CBM,
+        SUM(SKU) AS sum_SKUs
         FROM imports
-        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
+        WHERE CIA = :cliente AND ETA >= :fecha_inicio AND ETA <= :fecha_final
     ");
     $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_im = $resultado2['paletas'] ?? 0;
-    $suma_paletas_im = $resultado2['und_recibidas'] ?? 0;
-    $suma_pedidos_en_proceso_im = $resultado2['CBM'] ?? 0;
-    $suma_unidad_im = $resultado2['cajas'] ?? 0;
+    $suma_caja_im = $resultado2['sum_cajas'] ?? 0;
+    $suma_CBM_im = $resultado2['sum_CBM'] ?? 0;
+    $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
+    $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
 
     // Consulta para sumar la columna 'pedidos_en_proceso' en la tabla 'export'
     $stmt3 = $pdo->prepare("
-        SELECT SUM(Piezas) AS suma_caja_ex,
-          SUM(paletas) AS suma_paletas_ex, 
-          SUM(CBM) AS suma_pedidos_en_proceso_ex,
-          SUM(KG) AS suma_unidad_ex
+        SELECT
+        SUM(UND) AS suma_Piezas_ex,
+        SUM(paletas) AS suma_paletas_ex, 
+        SUM(Cajas) AS suma_Cajas_ex,
+        SUM(UND_Pick) AS suma_UND_Pick_ex
         FROM exports
-        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
+        WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
     ");
     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_ex = $resultado3['suma_caja_ex'] ?? 0;
+    $suma_caja_ex = $resultado3['suma_Piezas_ex'] ?? 0;
     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
-    $suma_pedidos_en_proceso_ex = $resultado3['suma_pedidos_en_proceso_ex'] ?? 0;
-    $suma_unidad_ex = $resultado3['suma_unidad_ex'] ?? 0;
+    $suma_pedidos_en_proceso_ex = $resultado3['suma_Cajas_ex'] ?? 0;
+    $suma_unidad_ex = $resultado3['suma_UND_Pick_ex'] ?? 0;
 
     // Imprimir resultados
 
@@ -296,8 +300,8 @@ try {
             $importData = [
                 "Cajas totales" => $suma_caja_im,
                 "Paletas totales" => $suma_paletas_im,
-                "Unidades totales" => $suma_unidad_im,
-                "Pedidos totales" => $suma_pedidos_en_proceso_im
+                "Total de SKU recibidos" => $suma_SKU_im,
+                "CBM total recibido" => $suma_CBM_im
             ];
             foreach ($importData as $titulo => $valor) {
                 echo "
@@ -398,6 +402,11 @@ try {
     }
     function createBarChart_multiseries(containerId, chartData1, chartData2, chartData3, chartData4, title) {
     const chart = echarts.init(document.getElementById(containerId));
+
+        // Calculate dynamic max values for yAxes
+    const maxY1 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+    const maxY2 = Math.max(...chartData2.map(item => Math.max(...item.value)));
+
     const options = {
         grid: {
             left: '10%',
@@ -420,7 +429,7 @@ try {
             data: chartData1.map(item => item.name), 
             axisLabel: { 
                 fontSize: "12px", 
-                rotate: chartData1.length > 10 ? 45 : 0 // Rotación condicional
+                rotate: 90 // Rotación condicional
             } 
         },
         yAxis: [
@@ -429,7 +438,7 @@ try {
                 alignTicks: true,
                 name: 'Cantidad',
                 axisLabel: { formatter: '{value}' },
-                max: 100
+                max:maxY2+100,
             },
             {
                 type: 'value',
@@ -437,7 +446,7 @@ try {
                 position: 'right',
                 name: 'Medidas',
                 axisLabel: { formatter: '{value}' },
-                max: 1000,
+                max: maxY1+100,
                 splitLine: { show: false }
             }
         ],
@@ -447,21 +456,24 @@ try {
                 type: 'bar',
                 name: 'Paletas recibidas',
                 itemStyle: { color: '#61a0a8' },
-                yAxisIndex: 0 // Asociado al primer eje Y
+                yAxisIndex: 0, // Asociado al primer eje Y
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData2.map(item => item.value[0]),
                 type: 'line',
                 name: 'Cajas recibidas',
                 itemStyle: { color: '#c23531' },
-                yAxisIndex: 0 // Asociado al primer eje Y
+                yAxisIndex: 0, // Asociado al primer eje Y
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData3.map(item => item.value[0]),
                 type: 'line',
                 name: 'KG totales',
                 itemStyle: { color: '#ca8622' },
-                yAxisIndex: 1 // Asociado al segundo eje Y
+                yAxisIndex: 1, // Asociado al segundo eje Y
+                emphasis: {focus: 'series'},
             },
             {
                 data: chartData4.map(item => item.value[0]),
@@ -482,7 +494,7 @@ try {
         },
         legend: {
             type: 'scroll',
-            right: 10,
+            right: 150,
             top: 20,
             bottom: 0
         },
@@ -491,38 +503,77 @@ try {
 }
 
 
-
-
-// Función para gráficos de barra
-function createBarChart(containerId, chartData1,  title) {
+function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
     const chart = echarts.init(document.getElementById(containerId));
-    const options = {
-        
-        title: { text: title, left: '0%' },
 
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        xAxis: { type: 'category', bottom:'100%', data: chartData1.map(item => item.name), axisLabel: { fontSize: "12px", rotate: 89 } },
-        yAxis: { type: 'value' },
+    // Calculate dynamic max values for yAxes
+
+    const maxY1 = Math.max(...chartData1.map(item => Math.max(...item.value)));
+    const maxY2 = Math.max(...chartData2.map(item => Math.max(...item.value)));
+    const maxY3 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+
+
+
+    const options = {
+        grid: {
+            left: '10%',
+            right: '10%',
+            top: '20%',
+            bottom: '10%',
+            containLabel: true
+        },
+        title: { 
+            text: title, 
+            left: '0%', 
+            textStyle: { fontSize: 14 } 
+        },
+        tooltip: { 
+            trigger: 'axis', 
+            axisPointer: { type: 'shadow' } 
+        },
+        xAxis: { 
+            type: 'category', 
+            data: chartData1.map(item => item.name), 
+            axisLabel: { 
+                fontSize: "12px", 
+                rotate: 90 
+            } 
+        },
+        yAxis: {
+            type: 'value',
+            name: 'Cantidad',
+            axisLabel: { formatter: '{value}' },
+            max:( maxY1)*1.5
+        },
+        
         series: [
             {
-                data: chartData1.map(item => item.value[1]),
+                data: chartData1.map(item => item.value[0]),
                 type: 'bar',
-                name: title,
-                color: [
-            '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#ca8622',
-    '#bda29a',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
+                name: 'Grande',
+                itemStyle: { color: '#91c7ae' },
+                stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 10;}
             },
-
+            {
+                data: chartData2.map(item => item.value[0]),
+                type: 'bar',
+                name: 'Mediano',
+                itemStyle: { color: '#2f4554' },
+                stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 60;}
+            },
+            {
+                data: chartData3.map(item => item.value[0]),
+                type: 'bar',
+                name: 'Pequeño',
+                itemStyle: { color: '#ca8622' },
+                stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 100;}
+            },
         ],
         toolbox: {
             feature: {
@@ -532,10 +583,45 @@ function createBarChart(containerId, chartData1,  title) {
                 saveAsImage: { show: true },
                 dataView: { show: true, readOnly: true }
             }
-        }
+        },
+        legend: {
+            type: 'scroll',
+            right: 350,
+            top: 20,
+            bottom: 0
+        },
     };
+
     chart.setOption(options);
 }
+
+function createBar_dinamic(containerId, chartData1, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+
+    // Calcular el valor máximo dinámico para el eje Y
+
+    // Configurar las opciones del gráfico
+    const options = {
+    grid: { left: '10%', right: '10%', top: '20%', bottom: '10%', containLabel: true },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "12px", rotate: 90 },},
+    yAxis: { type: 'value', name: 'Cantidad' },
+    series: chartData1.series,
+    legend: { type: 'scroll', top: 20 },
+    toolbox: {
+        feature: {
+            saveAsImage: { show: true },
+            restore: { show: true },
+            dataView: { show: true, readOnly: true }
+        }
+    },
+};
+
+    // Establecer las opciones en el gráfico
+    chart.setOption(options);
+}
+
+
 
 // Función para gráficos de línea
 function createLineChart(containerId, chartData1,chartData2, title) {
@@ -561,7 +647,6 @@ function createLineChart(containerId, chartData1,chartData2, title) {
     '#d48265',
     '#91c7ae',
     '#749f83',
-    '#bda29a',
     '#6e7074',
     '#546570',
     '#c4ccd3'
@@ -708,8 +793,8 @@ function createScatterChart(containerId, chartData, title) {
 
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
-    createBarChart('chart2', data.chart2,data.chart2, '2.Cajas por pais');
-    createBarChart('chart3', data.chart3, '3.Embarques totales recibidos');
+    createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
+    createBar_dinamic('chart3', data.chart3, '3.Embarques totales recibidos');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
@@ -730,7 +815,7 @@ function createScatterChart(containerId, chartData, title) {
 
     // varios
     createScatterChart('chart13', data.chart13, '13.Clientes y Unidades');
-    createLineChart('chart14', data.chart14, '14.Destinos y Paletas ');
+    createPieChart('chart14', data.chart14, '14.Destinos y Paletas','40%','60%');
     createPieChart('chart15', data.chart15, '15.Clientes y Cajas','40%','60%');
     createBarChart('chart16', data.chart16, '16.Repetición de Clientes');
     // varios
