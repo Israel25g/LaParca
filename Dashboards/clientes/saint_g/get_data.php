@@ -136,6 +136,7 @@ if ($result2->num_rows > 0) {
             'value' => [
                 (int)$row['total_grande'],
             ],
+
         ];
         $total_mediano[] = [
             'name' => $row['mes'],
@@ -153,36 +154,82 @@ if ($result2->num_rows > 0) {
 }
 
 // Gráfico 3: Total de cajas por Cliente y mes
+// Consulta para obtener los datos
 $query3 = "
-    SELECT 
-        DATE_FORMAT(EJE, '%Y-%m') AS mes,
-        Tamaño,
-        COUNT(Tamaño) AS total_tamaño,
-        COUNT(Paletas) AS total_paletas
-    FROM 
-        imports
-    $whereClause
-    group BY
-mes
+SELECT 
+    DATE_FORMAT(Eta, '%Y-%m-%d') AS mes,
+    Vehículo, 
+    COUNT(*) AS total
+FROM 
+    imports
+$whereClause
+GROUP BY 
+    mes, Vehículo
+ORDER BY 
+    mes DESC;
 ";
+
 $result3 = $conn->query($query3);
-$seriesNames = [];
-$chart3 =[];
-if ($row = $result3->fetch_assoc()) {
-    while ($row = $result3->fetch_assoc()) {
-        $seriesName = $row['mes'] ? $row['mes'] : 'NO DATA';
-            $seriesNames[] = $seriesName;
-        $chart3[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
-            'value' => [
-                (int)$row['total_tamaño'],
-                (int)$row['total_paletas'],
-            ],
-            'seriesNames' => $seriesNames
-        ];
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$seriesData = []; // Series de datos agrupados por vehículo
+$vehicles = []; // Lista de vehículos únicos
+
+// Paleta de colores para las series
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];
+
+
+// Procesar resultados
+while ($row = $result3->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $vehiculo = $row['Vehículo'] ?? 'NO DATA';
+    $total = (int)$row['total'];
+
+    // Agregar la fecha al eje X si no está ya
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
     }
 
-}  
+    // Agregar el vehículo a la lista de vehículos únicos
+    if (!array_key_exists($vehiculo, $seriesData)) {
+        $vehicles[] = $vehiculo;
+        $seriesData[$vehiculo] = [];
+    }
+
+    // Asignar valores al vehículo para esa fecha
+    $seriesData[$vehiculo][$fecha] = $total;
+}
+
+// Preparar los datos para el gráfico
+$series = [];
+foreach ($vehicles as $index => $vehiculo) {
+    $data = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data[] = $seriesData[$vehiculo][$fecha] ?? 0;
+    }
+
+    // Asignar un color basado en el índice
+    $color = $colorPalette[$index % count($colorPalette)];
+
+    $series[] = [
+        'name' => $vehiculo,
+        'type' => 'bar',
+        'stack' => 'total', // Configuración para apilar las barras
+        'data' => $data,
+        'itemStyle' => [
+            'color' => $color, // Color personalizado para la serie
+        ],
+    ];
+}
+
+// Preparar el JSON final
+$chart3 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,         // Datos de las series
+];
+
 
 // Gráfico 4: Ejemplo adicional de consulta
 $query4 = "

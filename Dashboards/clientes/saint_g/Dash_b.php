@@ -27,9 +27,11 @@ try {
     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
     $stmt1 = $pdo->prepare("
         SELECT SUM(piezas) AS suma_caja_pk,
-          SUM(Paletas) AS suma_paletas_pk, 
-          SUM(CBM) AS suma_pedidos_en_proceso_pk,
-          SUM(KG) AS suma_unidad_pk
+        SUM(Paletas) AS suma_paletas_pk, 
+        SUM(CBM) AS suma_pedidos_en_proceso_pk,
+        SUM(CASE WHEN Estado = 'Finalizado' THEN CBM ELSE 0 END) AS suma_CBM_finalizado_ex,
+        SUM(CASE WHEN Estado = 'Pendiente' THEN CBM ELSE 0 END) AS suma_CBM_pendiente_ex,
+        SUM(KG) AS suma_unidad_pk
         FROM picking
         WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
     ");
@@ -42,35 +44,37 @@ try {
 
     // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
     $stmt2 = $pdo->prepare("
-        SELECT cajas,
-          paletas, 
-          und_recibidas,
-          CBM
+        SELECT 
+        SUM(cajas) AS sum_cajas,
+        SUM(paletas) AS sum_paletas, 
+        SUM(CBM) AS sum_CBM,
+        SUM(SKUs) AS sum_SKUs
         FROM imports
         WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
     ");
     $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_im = $resultado2['paletas'] ?? 0;
-    $suma_paletas_im = $resultado2['und_recibidas'] ?? 0;
-    $suma_pedidos_en_proceso_im = $resultado2['CBM'] ?? 0;
-    $suma_unidad_im = $resultado2['cajas'] ?? 0;
+    $suma_caja_im = $resultado2['sum_cajas'] ?? 0;
+    $suma_CBM_im = $resultado2['sum_CBM'] ?? 0;
+    $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
+    $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
 
     // Consulta para sumar la columna 'pedidos_en_proceso' en la tabla 'export'
     $stmt3 = $pdo->prepare("
-        SELECT SUM(Piezas) AS suma_caja_ex,
-          SUM(paletas) AS suma_paletas_ex, 
-          SUM(CBM) AS suma_pedidos_en_proceso_ex,
-          SUM(KG) AS suma_unidad_ex
+        SELECT
+        SUM(Piezas) AS suma_Piezas_ex,
+        SUM(paletas) AS suma_paletas_ex, 
+        SUM(CBM) AS suma_CBM_ex,
+        SUM(KG) AS suma_KG_ex
         FROM exports
         WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
     ");
     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_ex = $resultado3['suma_caja_ex'] ?? 0;
+    $suma_caja_ex = $resultado3['suma_Piezas_ex'] ?? 0;
     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
-    $suma_pedidos_en_proceso_ex = $resultado3['suma_pedidos_en_proceso_ex'] ?? 0;
-    $suma_unidad_ex = $resultado3['suma_unidad_ex'] ?? 0;
+    $suma_pedidos_en_proceso_ex = $resultado3['suma_CBM_ex'] ?? 0;
+    $suma_unidad_ex = $resultado3['suma_KG_ex'] ?? 0;
 
     // Imprimir resultados
 
@@ -296,8 +300,8 @@ try {
             $importData = [
                 "Cajas totales" => $suma_caja_im,
                 "Paletas totales" => $suma_paletas_im,
-                "Unidades totales" => $suma_unidad_im,
-                "Pedidos totales" => $suma_pedidos_en_proceso_im
+                "Total de SKU recibidos" => $suma_SKU_im,
+                "CBM total recibido" => $suma_CBM_im
             ];
             foreach ($importData as $titulo => $valor) {
                 echo "
@@ -550,6 +554,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
                 itemStyle: { color: '#91c7ae' },
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 10;}
             },
             {
                 data: chartData2.map(item => item.value[0]),
@@ -558,6 +563,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
                 itemStyle: { color: '#2f4554' },
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 60;}
             },
             {
                 data: chartData3.map(item => item.value[0]),
@@ -566,6 +572,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
                 itemStyle: { color: '#ca8622' },
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 100;}
             },
         ],
         toolbox: {
@@ -588,6 +595,31 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
     chart.setOption(options);
 }
 
+function createBar_dinamic(containerId, chartData1, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+
+    // Calcular el valor máximo dinámico para el eje Y
+
+    // Configurar las opciones del gráfico
+    const options = {
+    grid: { left: '10%', right: '10%', top: '20%', bottom: '10%', containLabel: true },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "12px", rotate: 90 },},
+    yAxis: { type: 'value', name: 'Cantidad' },
+    series: chartData1.series,
+    legend: { type: 'scroll', top: 20 },
+    toolbox: {
+        feature: {
+            saveAsImage: { show: true },
+            restore: { show: true },
+            dataView: { show: true, readOnly: true }
+        }
+    },
+};
+
+    // Establecer las opciones en el gráfico
+    chart.setOption(options);
+}
 
 
 
@@ -615,7 +647,6 @@ function createLineChart(containerId, chartData1,chartData2, title) {
     '#d48265',
     '#91c7ae',
     '#749f83',
-    '#bda29a',
     '#6e7074',
     '#546570',
     '#c4ccd3'
@@ -763,7 +794,7 @@ function createScatterChart(containerId, chartData, title) {
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
     createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
-    createPieChart('chart3', data.chart3, '3.Embarques totales recibidos','40%','60%');
+    createBar_dinamic('chart3', data.chart3, '3.Embarques totales recibidos','40%','60%');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
