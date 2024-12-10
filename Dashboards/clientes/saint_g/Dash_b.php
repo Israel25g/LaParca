@@ -26,14 +26,14 @@ if (!$Cliente || !$fecha_inicio || !$fecha_final) {
 try {
     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
     $stmt1 = $pdo->prepare("
-        SELECT SUM(piezas) AS suma_caja_pk,
-        SUM(Paletas) AS suma_paletas_pk, 
-        SUM(CBM) AS suma_pedidos_en_proceso_pk,
-        SUM(CASE WHEN Estado = 'Finalizado' THEN CBM ELSE 0 END) AS suma_CBM_finalizado_ex,
-        SUM(CASE WHEN Estado = 'Pendiente' THEN CBM ELSE 0 END) AS suma_CBM_pendiente_ex,
-        SUM(KG) AS suma_unidad_pk
+        SELECT SUM(Pend) AS suma_caja_pk,
+        SUM(Pend) AS suma_paletas_pk, 
+        SUM(Pend) AS suma_pedidos_en_proceso_pk,
+        SUM(CASE WHEN Categoria = 'Categoría A' THEN Pend ELSE 0 END) AS suma_CBM_finalizado_ex,
+        SUM(CASE WHEN Categoria = 'Categoría B' THEN Pend ELSE 0 END) AS suma_CBM_pendiente_ex,
+        SUM(Pend) AS suma_unidad_pk
         FROM picking
-        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
+        WHERE CIA = :cliente AND Confirmado >= :fecha_inicio AND Confirmado <= :fecha_final
     ");
     $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
@@ -48,9 +48,9 @@ try {
         SUM(cajas) AS sum_cajas,
         SUM(paletas) AS sum_paletas, 
         SUM(CBM) AS sum_CBM,
-        SUM(SKUs) AS sum_SKUs
+        SUM(SKU) AS sum_SKUs
         FROM imports
-        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
+        WHERE CIA = :cliente AND ETA >= :fecha_inicio AND ETA <= :fecha_final
     ");
     $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
@@ -62,19 +62,19 @@ try {
     // Consulta para sumar la columna 'pedidos_en_proceso' en la tabla 'export'
     $stmt3 = $pdo->prepare("
         SELECT
-        SUM(Piezas) AS suma_Piezas_ex,
+        SUM(UND) AS suma_Piezas_ex,
         SUM(paletas) AS suma_paletas_ex, 
-        SUM(CBM) AS suma_CBM_ex,
-        SUM(KG) AS suma_KG_ex
+        SUM(Cajas) AS suma_Cajas_ex,
+        SUM(UND_Pick) AS suma_UND_Pick_ex
         FROM exports
-        WHERE CIA = :cliente AND EJE >= :fecha_inicio AND EJE <= :fecha_final
+        WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
     ");
     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
     $suma_caja_ex = $resultado3['suma_Piezas_ex'] ?? 0;
     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
-    $suma_pedidos_en_proceso_ex = $resultado3['suma_CBM_ex'] ?? 0;
-    $suma_unidad_ex = $resultado3['suma_KG_ex'] ?? 0;
+    $suma_pedidos_en_proceso_ex = $resultado3['suma_Cajas_ex'] ?? 0;
+    $suma_unidad_ex = $resultado3['suma_UND_Pick_ex'] ?? 0;
 
     // Imprimir resultados
 
@@ -794,7 +794,7 @@ function createScatterChart(containerId, chartData, title) {
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
     createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
-    createBar_dinamic('chart3', data.chart3, '3.Embarques totales recibidos','40%','60%');
+    createBar_dinamic('chart3', data.chart3, '3.Embarques totales recibidos');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
