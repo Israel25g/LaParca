@@ -222,7 +222,7 @@ $colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#7
 // Procesar resultados
 while ($row = $result3->fetch_assoc()) {
     $fecha = $row['mes'] ?? 'NO DATA';
-    $vehiculo = $row['Vehículo'] ?? 'NO DATA';
+    $vehiculo = $row['Vehiculo'] ?? 'NO DATA';
     $total = (int)$row['total'];
 
     // Agregar la fecha al eje X si no está ya
@@ -300,57 +300,185 @@ if ($result4->num_rows > 0) {
 //Terminan los graficos de imports
 
 // inician los graficos de exports
-// Gráfico 5: Total de und_Recibidas por sucursal y mes
+// Gráfico 5: Paletas empacadas por país
+
+// Consulta para obtener los datos
 $query5 = "
 SELECT 
     DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    sucursal,
-    SUM(UND_Pick) AS total_und_Recibidas
+    Pais, 
+    SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex
 FROM 
     exports
 $whereClause_ex
-GROUP BY
-sucursal
+GROUP BY 
+    mes, Pais
+ORDER BY 
+    mes DESC;
 ";
+
 $result5 = $conn->query($query5);
-$chart5 = [];
-if ($result5->num_rows > 0) {
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$seriesData = []; // Series de datos agrupados por país
+$Paises = []; // Lista de países únicos
+
+// Paleta de colores para las series
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];
+
+// Procesar resultados
 while ($row = $result5->fetch_assoc()) {
-    $chart5[] = [
-        'name' => $row['sucursal'] ? $row['sucursal'] : 'NO DATA',
-        'value' => [
-            $row['mes'],
-            (int)$row['total_und_Recibidas'],
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $Pais = $row['Pais'] ?? 'NO DATA';
+    $suma_paletas_ex = (int)$row['suma_paletas_ex'];
+
+    // Agregar la fecha al eje X si no está ya
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+
+    // Agregar el país a la lista de países únicos
+    if (!array_key_exists($Pais, $seriesData)) {
+        $Paises[] = $Pais;
+        $seriesData[$Pais] = [];
+    }
+
+    // Asignar valores al país para esa fecha
+    $seriesData[$Pais][$fecha] = $suma_paletas_ex;
+}
+
+// Preparar los datos para el gráfico
+$series = [];
+foreach ($Paises as $index => $Pais) {
+    $data = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data[] = $seriesData[$Pais][$fecha] ?? 0;
+    }
+
+    // Asignar un color basado en el índice
+    $color = $colorPalette[$index % count($colorPalette)];
+
+    $series[] = [
+        'name' => $Pais,
+        'type' => 'bar',
+        'stack' => 'total', // Configuración para apilar las barras
+        'data' => $data,
+        'itemStyle' => [
+            'color' => $color, // Color personalizado para la serie
         ],
     ];
 }
-}
+
+// Preparar el JSON final
+$chart5 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,         // Datos de las series
+];
+
+
 
 // Gráfico 6: Total de paletas por pais y mes
+// Consulta para obtener los datos (modificada para incluir las dos sumas)
 $query6 = "
 SELECT 
     DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    Pais,
-    SUM(paletas) AS total_paletas
+    Pais, 
+    SUM(CASE WHEN Despachado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
+    SUM(CASE WHEN Despachado IS NULL THEN Paletas ELSE 0 END) AS suma_paletas_pendientes_ex
 FROM 
     exports
 $whereClause_ex
-GROUP BY
-Pais
+GROUP BY 
+    mes, Pais
+ORDER BY 
+    mes DESC;
 ";
+
 $result6 = $conn->query($query6);
-$chart6 = [];
-if ($result6->num_rows > 0) {
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$seriesData = []; // Series de datos agrupados por país y tipo
+$Paises = []; // Lista de países únicos
+
+// Paleta de colores para las series
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];
+
+// Procesar resultados
 while ($row = $result6->fetch_assoc()) {
-    $chart6[] = [
-        'name' => $row['Pais'] ? $row['Pais'] : 'NO DATA',
-        'value' => [
-            $row['mes'],
-            (int)$row['total_paletas'],
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $Pais = $row['Pais'] ?? 'NO DATA';
+    $suma_paletas_despachadas_ex = (int)$row['suma_paletas_ex'];
+    $suma_paletas_pendientes_ex = (int)$row['suma_paletas_pendientes_ex'];
+
+    // Agregar la fecha al eje X si no está ya
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+
+    // Agregar el país a la lista de países únicos
+    if (!array_key_exists($Pais, $seriesData)) {
+        $Paises[] = $Pais;
+        $seriesData[$Pais] = [
+            'despachadas' => [],
+            'pendientes' => [],
+        ];
+    }
+
+    // Asignar valores para las dos series de paletas (despachadas y pendientes) para ese país y fecha
+    $seriesData[$Pais]['despachadas'][$fecha] = $suma_paletas_despachadas_ex;
+    $seriesData[$Pais]['pendientes'][$fecha] = $suma_paletas_pendientes_ex;
+}
+
+// Preparar los datos para el gráfico
+$series = [];
+foreach ($Paises as $index => $Pais) {
+    // Serie de paletas despachadas
+    $data_despachadas = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data_despachadas[] = $seriesData[$Pais]['despachadas'][$fecha] ?? 0;
+    }
+
+    // Serie de paletas pendientes
+    $data_pendientes = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data_pendientes[] = $seriesData[$Pais]['pendientes'][$fecha] ?? 0;
+    }
+
+    // Asignar colores para las dos series (despachadas y pendientes)
+    $color_despachadas = $colorPalette[$index % count($colorPalette)];
+    $color_pendientes = $colorPalette[($index +3) % count($colorPalette)];
+
+    // Agregar las dos series (despachadas y pendientes) para cada país
+    $series[] = [
+        'name' => $Pais . ' - Despachadas',
+        'type' => 'bar',
+        'data' => $data_despachadas,
+        'itemStyle' => [
+            'color' => $color_despachadas, // Color personalizado para la serie de despachadas
+        ],
+    ];
+
+    $series[] = [
+        'name' => $Pais . ' - Pendientes',
+        'type' => 'line',
+        'data' => $data_pendientes,
+        'itemStyle' => [
+            'color' => $color_pendientes, // Color personalizado para la serie de pendientes
         ],
     ];
 }
-}
+
+// Preparar el JSON final
+$chart6 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,         // Datos de las series
+];
+
 
 // Gráfico 7: Total de cajas por sucursal y mes
 $query7 = "

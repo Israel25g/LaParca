@@ -19,7 +19,7 @@ $fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
 
 // Validar que los parámetros requeridos están presentes
 if (!$Cliente || !$fecha_inicio || !$fecha_final) {
-    die("No cuenta con los parametros necesarios para acceder a este recurso.");
+   die("No cuenta con los permisos o parametros necesarios");
 }
 
 // Consultas SQL
@@ -59,22 +59,22 @@ try {
     $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
     $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
 
-    // Consulta para sumar la columna 'pedidos_en_proceso' en la tabla 'export'
+    // Consulta para obtener datos de la tabla 'export'
     $stmt3 = $pdo->prepare("
         SELECT
-        SUM(UND) AS suma_Piezas_ex,
-        SUM(paletas) AS suma_paletas_ex, 
-        SUM(Cajas) AS suma_Cajas_ex,
-        SUM(UND_Pick) AS suma_UND_Pick_ex
+        COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS suma_Pedidos_empacados_ex,
+        SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
+        SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS suma_Cajas_empacadas_ex,
+        SUM(CASE WHEN Empacado IS NOT NULL THEN UND_Pick ELSE 0 END) AS suma_UND_Pick_empacadas_ex
         FROM exports
         WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
     ");
     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_ex = $resultado3['suma_Piezas_ex'] ?? 0;
+    $suma_Cajas_empacadas_ex = $resultado3['suma_Cajas_empacadas_ex'] ?? 0;
     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
-    $suma_pedidos_en_proceso_ex = $resultado3['suma_Cajas_ex'] ?? 0;
-    $suma_unidad_ex = $resultado3['suma_UND_Pick_ex'] ?? 0;
+    $suma_pedidos_empacados_ex = $resultado3['suma_Pedidos_empacados_ex'] ?? 0;
+    $suma_unidad_pickeada_y_empacada_ex = $resultado3['suma_UND_Pick_empacadas_ex'] ?? 0;
 
     // Imprimir resultados
 
@@ -323,10 +323,10 @@ try {
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <?php
             $exportData = [
-                "Cajas Exportadas" => $suma_caja_ex,
-                "Paletas Exportadas" => $suma_paletas_ex,
-                "Unidades Exportadas" => $suma_unidad_ex,
-                "Exportaciones abiertas" => $suma_pedidos_en_proceso_ex
+                "Cajas Empacadas" => $suma_Cajas_empacadas_ex,
+                "Paletas Exportadas, empacadas" => $suma_paletas_ex,
+                "Unidades exportadas y empacadas" => $suma_unidad_pickeada_y_empacada_ex,
+                "Pedidos empacados" => $suma_pedidos_empacados_ex
             ];
             foreach ($exportData as $titulo => $valor) {
                 echo "
@@ -404,8 +404,10 @@ try {
     const chart = echarts.init(document.getElementById(containerId));
 
         // Calculate dynamic max values for yAxes
-    const maxY1 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+    const maxY1 = Math.max(...chartData1.map(item => Math.max(...item.value)));
     const maxY2 = Math.max(...chartData2.map(item => Math.max(...item.value)));
+    const maxY3 = Math.max(...chartData3.map(item => Math.max(...item.value)));
+    const maxY4 = Math.max(...chartData4.map(item => Math.max(...item.value)));
 
     const options = {
         grid: {
@@ -446,7 +448,7 @@ try {
                 position: 'right',
                 name: 'Medidas',
                 axisLabel: { formatter: '{value}' },
-                max: maxY1+100,
+                max: ((maxY1+maxY2+maxY3+maxY4)+100)*1.5,
                 splitLine: { show: false }
             }
         ],
@@ -458,6 +460,7 @@ try {
                 itemStyle: { color: '#61a0a8' },
                 yAxisIndex: 0, // Asociado al primer eje Y
                 emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 100;}
             },
             {
                 data: chartData2.map(item => item.value[0]),
@@ -466,6 +469,7 @@ try {
                 itemStyle: { color: '#c23531' },
                 yAxisIndex: 0, // Asociado al primer eje Y
                 emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 100;}
             },
             {
                 data: chartData3.map(item => item.value[0]),
@@ -474,13 +478,15 @@ try {
                 itemStyle: { color: '#ca8622' },
                 yAxisIndex: 1, // Asociado al segundo eje Y
                 emphasis: {focus: 'series'},
+                animationDelay: function(idx) { return idx * 100;}
             },
             {
                 data: chartData4.map(item => item.value[0]),
                 type: 'line',
                 name: 'CBM totales',
                 itemStyle: { color: '#2f4554' },
-                yAxisIndex: 1 // Asociado al segundo eje Y
+                yAxisIndex: 1, // Asociado al segundo eje Y
+                animationDelay: function(idx) { return idx * 100;}
             }
         ],
         toolbox: {
@@ -543,7 +549,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
             type: 'value',
             name: 'Cantidad',
             axisLabel: { formatter: '{value}' },
-            max:( maxY1)*1.5
+            max:( maxY1+maxY2+maxY3)+1000
         },
         
         series: [
@@ -554,7 +560,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
                 itemStyle: { color: '#91c7ae' },
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
-                animationDelay: function(idx) { return idx * 10;}
+                animationDelay: function(idx) { return idx *12;}
             },
             {
                 data: chartData2.map(item => item.value[0]),
@@ -563,7 +569,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
                 itemStyle: { color: '#2f4554' },
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
-                animationDelay: function(idx) { return idx * 60;}
+                animationDelay: function(idx) { return idx * 48;}
             },
             {
                 data: chartData3.map(item => item.value[0]),
@@ -572,7 +578,7 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
                 itemStyle: { color: '#ca8622' },
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
-                animationDelay: function(idx) { return idx * 100;}
+                animationDelay: function(idx) { return idx * 60;}
             },
         ],
         toolbox: {
@@ -603,11 +609,12 @@ function createBar_dinamic(containerId, chartData1, title) {
     // Configurar las opciones del gráfico
     const options = {
     grid: { left: '10%', right: '10%', top: '20%', bottom: '10%', containLabel: true },
+    title: { text: title, left: '0%' },
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
     xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "12px", rotate: 90 },},
     yAxis: { type: 'value', name: 'Cantidad' },
     series: chartData1.series,
-    legend: { type: 'scroll', top: 20 },
+    legend: { type: 'scroll', top: '7%' },
     toolbox: {
         feature: {
             saveAsImage: { show: true },
@@ -637,6 +644,8 @@ function createLineChart(containerId, chartData1,chartData2, title) {
                 data: chartData1.map(item => item.value[1]),
                 type: 'line',
                 name: title,
+                stack: 'Total', // Se agrega propiedad para apilar
+                emphasis: {focus: 'series'},
                 smooth: true,
                 areaStyle: {},
                 color: [
@@ -656,6 +665,7 @@ function createLineChart(containerId, chartData1,chartData2, title) {
                 data: chartData2.map(item => item.value[1]),
                 type: 'line',
                 name: title,
+                emphasis: {focus: 'series'},
                 smooth: true,
                 areaStyle: {},
                 color: [
@@ -681,7 +691,13 @@ function createLineChart(containerId, chartData1,chartData2, title) {
                 saveAsImage: { show: true },
                 dataView: { show: true, readOnly: true }
             }
-        }
+        },
+        legend: {
+            type: 'scroll',
+            right: 150,
+            top: 20,
+            bottom: 0
+        },
     };
     chart.setOption(options);
 }
@@ -715,6 +731,7 @@ function createPieChart(containerId, chartData, title,rad1,rad2) {
                 startAngle: 180,
                 endAngle: 4,
                 radius: [rad1, rad2],
+                animationDelay: function(idx) { return idx * 200;},
                 data: chartData.map(item => ({
                     value: item.value[1],
                     name: item.name
@@ -763,7 +780,8 @@ function createScatterChart(containerId, chartData, title) {
             {
                 data: chartData.map(item => item.value),
                 type: 'scatter',
-                name: title
+                name: title,
+                animationDelay: function(idx) { return idx * 100;}
             }
         ],
         toolbox: {
@@ -794,14 +812,14 @@ function createScatterChart(containerId, chartData, title) {
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
     createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
-    createBar_dinamic('chart3', data.chart3, '3.Embarques totales recibidos');
+    createBar_dinamic('chart3', data.chart3, '3.Pedidos recibidos por Veículo');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
 
     // export
-    createPieChart('chart5', data.chart5, '5.Clientes y Unidades','40%','60%');
-    createPieChart('chart6', data.chart6, '6.Destinos y Paletas','50%','60%');
+    createBar_dinamic('chart5', data.chart5, '5.Paletas empacadas por pais');
+    createBar_dinamic('chart6', data.chart6, '6.Paletas Despachadas VS pendientes de despacho');
     createPieChart('chart7', data.chart7, '7.Clientes y Cajas','20%','30%');
     createPieChart('chart8', data.chart8, '8.Repetición de Clientes','40%','60%');
     // export
