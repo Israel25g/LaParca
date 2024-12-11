@@ -223,14 +223,15 @@ JOIN estados ON users.estado_id = estados.id;
                                                                         <!-- Fila 3 -->
 
                                                                         <!-- Fila 4 -->
+
                                                                         <div class="form-row col-md-12 mb3">
                                                                             <div class="col-md-4">
                                                                                 <label for="Creado" class="fs-5 ">Creado: </label>
-                                                                                <input disabled type='date' class='p-1 rounded fs-6' placeholder="<?= $fila["created_at"] ?>"><br>
+                                                                                <input disabled type='date' class='p-1 rounded fs-6' value="<?= $fila["created_at"] ?>"><br>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <label for="Actualizado" class="fs-5 ">Actualizado: </label>
-                                                                                <input disabled type='date' class='p-1 rounded fs-6' cols='30' placeholder="<?= $fila["updated_at"] ?>"><br>
+                                                                                <input disabled type='date' class='p-1 rounded fs-6' cols='30' value="<?= $fila["updated_at"]?>"><br>
                                                                             </div>
                                                                         </div>
                                                                         <!-- Fila 4 -->
@@ -261,7 +262,7 @@ JOIN estados ON users.estado_id = estados.id;
                                                                     <?php
                                                                     if ($_SESSION['rol'] == 'Admin' || $_SESSION['rol'] == 'EEMP') {
                                                                     ?>
-                                                                        <a class="btn btn-warning" href="../indexAdmin/responder_ti.php?id=<?= $fila["id"] ?>" style="color: white; text-decoration: none;">Editar <i class="bi bi-pencil-square"></i> </a>
+                                                                        <a class="btn btn-warning" href="./edicion.php" style="color: white; text-decoration: none;">Editar <i class="bi bi-pencil-square"></i> </a>
                                                                     <?php
                                                                     }
                                                                     ?>
@@ -412,7 +413,7 @@ JOIN estados ON users.estado_id = estados.id;
                         }
                     },
                     scrollX: '170vh',
-                    scrollY: '270px',
+                    scrollY: '480px',
 
                     columnDefs: [{
                         targets: '_all', // Aplica a todas las columnas

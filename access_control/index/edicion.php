@@ -1,5 +1,5 @@
 <?php
-include("../apertura_sesion.php");
+include("../../apertura_sesion.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@ include("../apertura_sesion.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../login/styles.css">
     <link rel="shortcut icon" href="images\ICO.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- <meta http-equiv="refresh" content="5"> -->
@@ -17,21 +17,21 @@ include("../apertura_sesion.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <title>Registro - IPL DIPROP</title>
+    <title>Edición de usuarios - IPL DIPROP</title>
 </head>
 <body>
 
-<style>
+    <style>
         body{
             margin: 0;
             padding: 0;
-            background: linear-gradient(20deg,rgba(12, 121, 72,0.95), rgba(38, 37, 68,0.5)), url('../images/IMG_9533.jpg');
+            background: linear-gradient(195deg,rgba(12, 121, 72,0.5), rgba(38, 37, 68,0.95)), url('../../images/IMG_9533.jpg');
             background-size: cover;
         }
     </style>
 
     <div class="overlay"></div>
-    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="../access_control/index/index_users2.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Registro de usuarios</h1>
+    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="./index_users2.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Edición de usuarios</h1>
 
     <?php
         if(isset($_GET['error'])){
@@ -48,7 +48,7 @@ include("../apertura_sesion.php");
         ?>
 
     <?php
-        include("Conexion.php");
+        include("../../config.php");
     ?>
  
 
@@ -84,15 +84,9 @@ include("../apertura_sesion.php");
                     <?php
                 }
             ?>
-            <label for="password"><i class="fa-solid fa-unlock"></i> Contraseña</label>
-            <input type="password" name="password" id="password" required>
             
-            <label for="password2"><i class="fa-solid fa-unlock"></i> Vuelva a introducir la contraseña</label>
-            <input type="password" name="password2" id="password2" required>
-            
-            <button type="submit" class="edit"><i class="fa-solid fa-pencil"></i> Registrar</button>
+            <button type="submit" class="edit"><i class="bi bi-pencil-square"></i> Editar</button>
         </form>
-        <a class="recuperar" href="../index.php"><button class="btn-recover">Inicio de sesión</button></a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

@@ -7,7 +7,7 @@ if(isset ($_POST['estado'])){
     $estado = $_POST['estado'];
     $id = $_POST['id'];
     
-    $sql = "UPDATE users, updated_at SET estado_id='$estado' WHERE id='$id'";
+    $sql = "UPDATE users SET estado_id='$estado',updated_at=NOW() WHERE id='$id'";
     $result = mysqli_query($conexion, $sql);
     
     if($result){
