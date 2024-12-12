@@ -95,8 +95,8 @@ include("../../apertura_sesion.php");
             ?>
                 <label for="text"><i class="fa-solid fa-user-group"></i> Departamento</label>
                 <br>
-                <select type="text" name="departamento" id="departamento" required>
-                    <option value="">Actual: <?php echo $departamento ?></option>
+                <select type="text" name="departamento" id="departamento">
+                    <option value="<?php echo $id_departamento ?>">Actual: <?php echo $departamento ?></option>
                     <?php
                     while ($row = mysqli_fetch_assoc($result)) {
                     ?>

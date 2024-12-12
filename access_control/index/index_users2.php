@@ -1,13 +1,18 @@
 <?php
-include("../../apertura_sesion.php")
+include("../../apertura_sesion.php");
 ?>
+
+<script>
+    console.log("<?php echo date_default_timezone_get(); ?>")
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de Usuarios</title>
+    <title>Control de Usuarios</title>a
     <link rel="shortcut icon" href="../../images/ICO.png">
     <!-- estilo bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -70,29 +75,43 @@ JOIN estados ON users.estado_id = estados.id;
 
     <div class="tabla-container">
         <div class="espacio">
+
+            <!-- Error -->
             <?php
-            if ($error) {
+            if (isset($_GET['error'])) {
             ?>
-                <div class="container mt-2">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-danger" role="alert">
-                                <?= $error ?>
-                                <p>hola mundo esta es una prueba de texto</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        setTimeout(function() {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 7000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: "error",
+                                text: "<?php echo $_GET["error"] ?>"
+                            });
+                        }, 700)
+                    });
+                </script>
             <?php
             }
             ?>
 
+            <!-- Success -->
             <?php
             if (isset($_GET['success'])) {
             ?>
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
-                        setTimeout(function(){
+                        setTimeout(function() {
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: "top-end",
@@ -110,7 +129,6 @@ JOIN estados ON users.estado_id = estados.id;
                             });
                         }, 700)
                     });
-                   
                 </script>
             <?php
             }
@@ -256,12 +274,6 @@ JOIN estados ON users.estado_id = estados.id;
 
                                                                         <!-- Fila 3 -->
 
-
-
-                                                                        <!-- Fila 3 -->
-
-                                                                        <!-- Fila 4 -->
-
                                                                         <div class="form-row col-md-12 mb3">
                                                                             <div class="col-md-5">
                                                                                 <label for="Creado" class="fs-5 ">Creado: </label>
@@ -272,6 +284,15 @@ JOIN estados ON users.estado_id = estados.id;
                                                                                 <input disabled type='datetime-local' class='p-1 rounded fs-6' cols='30' value="<?= $fila["updated_at_fechahora"] ?>"><br>
                                                                             </div>
                                                                         </div>
+                                                                        <!-- Fila 3 -->
+
+                                                                        <!-- Fila 4 -->
+                                                                        <!-- <div class="form-row col-md-12 mb3">
+                                                                            <div class="col-md-5">
+                                                                                <label for="Creado" class="fs-5 ">Editado por: </label>
+                                                                                <input disabled type='text' class='p-1 rounded fs-6' value=" "><br>
+                                                                            </div>
+                                                                        </div> -->
                                                                         <!-- Fila 4 -->
                                                                         <?php
                                                                         ?>
