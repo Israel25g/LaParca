@@ -21,6 +21,10 @@ include("../../apertura_sesion.php")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.css" rel="stylesheet">
     <!--estilos ccs-->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js" integrity="sha256-1m4qVbsdcSU19tulVTbeQReg0BjZiW6yGffnlr/NJu4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" integrity="sha256-qWVM38RAVYHA4W8TAlDdszO1hRaAq0ME7y2e9aab354=" crossorigin="anonymous">
+
 </head>
 
 <body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
@@ -36,7 +40,7 @@ include("../../apertura_sesion.php")
     try {
         $dsn = 'mysql:host=' . $config['db']['host'] . ';dbname=' . $config['db']['name'];
         $conexion = new PDO($dsn, $config['db']['user'], $config['db']['pass'], $config['db']['options']);
-        $consultaSQL = "SELECT *,users.id, roles.nombre_rol, estados.estado, DATE(users.created_at) created_at, DATE(users.updated_at) updated_at 
+        $consultaSQL = "SELECT *,users.id, roles.nombre_rol, estados.estado, (users.created_at) created_at_fechahora, (users.updated_at) updated_at_fechahora, DATE(users.created_at) created_at, DATE(users.updated_at) updated_at
 FROM users
 JOIN roles ON users.rol_id = roles.id
 JOIN estados ON users.estado_id = estados.id;
@@ -64,27 +68,63 @@ JOIN estados ON users.estado_id = estados.id;
     <!-- Fin del Header -->
 
     <div class="tabla-container">
-        <?php
-        if ($error) {
-        ?>
-            <div class="container mt-2">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="alert alert-danger" role="alert">
-                            <?= $error ?> 
-                            <p>hola mundo esta es una prueba de texto</p>
+        <div class="espacio">
+            <?php
+            if ($error) {
+            ?>
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger" role="alert">
+                                <?= $error ?>
+                                <p>hola mundo esta es una prueba de texto</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php
-        }
-        ?>
-        <br>
-        <div class="espacio">
+            <?php
+            }
+            ?>
+
+            <?php
+            if (isset($_GET['success'])) {
+            ?>
+                <div class="alert alert-success" role="alert">
+                    <div class="success">
+                        <?php
+                        echo $_GET['success'];
+                        ?>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+
+
+            <script>
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "Signed in successfully"
+                });
+            </script>
+
+
+            <br>
             <div class="row">
                 <div class="col-md-12">
-                    <h2><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de Usuarios</h2>
+                    <h2 class="lista"><a href="../../helpdesk.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Listado de Usuarios</h2>
                     <div class="col-md-12">
                         <a href="../../login/index_registro.php" class="btn btn-success " disabled><i class="bi bi-pen-fill"></i> Crear usuario</a>
                     </div>
@@ -225,13 +265,13 @@ JOIN estados ON users.estado_id = estados.id;
                                                                         <!-- Fila 4 -->
 
                                                                         <div class="form-row col-md-12 mb3">
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-5">
                                                                                 <label for="Creado" class="fs-5 ">Creado: </label>
-                                                                                <input disabled type='date' class='p-1 rounded fs-6' value="<?= $fila["created_at"] ?>"><br>
+                                                                                <input disabled type='datetime-local' class='p-1 rounded fs-6' value="<?= $fila["created_at_fechahora"] ?>"><br>
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-2">
                                                                                 <label for="Actualizado" class="fs-5 ">Actualizado: </label>
-                                                                                <input disabled type='date' class='p-1 rounded fs-6' cols='30' value="<?= $fila["updated_at"]?>"><br>
+                                                                                <input disabled type='datetime-local' class='p-1 rounded fs-6' cols='30' value="<?= $fila["updated_at_fechahora"] ?>"><br>
                                                                             </div>
                                                                         </div>
                                                                         <!-- Fila 4 -->
@@ -259,10 +299,18 @@ JOIN estados ON users.estado_id = estados.id;
                                                                     ?>
 
 
+
                                                                     <?php
+                                                                    $id = $fila["id"];
+                                                                    $nombre = $fila["usuario"];
+                                                                    $usuario = $fila["user"];
+                                                                    $correo = $fila["email"];
+                                                                    $departamento = $fila["nombre_rol"];
+                                                                    $id_departamento = $fila["rol_id"];
+
                                                                     if ($_SESSION['rol'] == 'Admin' || $_SESSION['rol'] == 'EEMP') {
                                                                     ?>
-                                                                        <a class="btn btn-warning" href="./edicion.php" style="color: white; text-decoration: none;">Editar <i class="bi bi-pencil-square"></i> </a>
+                                                                        <a class="btn btn-warning" href="./edicion.php?id=<?php echo ($id) ?>&nombre=<?php echo ($nombre) ?>&correo=<?php echo ($correo) ?>&usuario=<?php echo $usuario ?>&departamento=<?php echo $departamento ?>&id_departamento=<?php echo ($id_departamento) ?>" style="color: white; text-decoration: none;">Editar <i class="bi bi-pencil-square"></i> </a>
                                                                     <?php
                                                                     }
                                                                     ?>
@@ -271,7 +319,6 @@ JOIN estados ON users.estado_id = estados.id;
                                                         </div>
                                                     </div>
                                                     <!-- Modal trigger button -->
-
                                                     <!-- Modal Body -->
                                                     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
                                                     <div
@@ -389,6 +436,7 @@ JOIN estados ON users.estado_id = estados.id;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
         <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
+        <!-- <script src="sweetalert2.min.js"></script> -->
 
         <script>
             $(document).ready(function() {
@@ -413,7 +461,7 @@ JOIN estados ON users.estado_id = estados.id;
                         }
                     },
                     scrollX: '170vh',
-                    scrollY: '480px',
+                    scrollY: '270px',
 
                     columnDefs: [{
                         targets: '_all', // Aplica a todas las columnas

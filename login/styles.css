@@ -108,11 +108,10 @@ h1{
     padding: 10px;
     width: 100%;
     border-radius: 5px;
-    background-color: var(--verde);
     display: block;
     font-family: var(--montserrat);
     font-weight: 600;
-    color: #fff;
+    color: #000000;
     border: solid 1px rgba(0, 0, 0, 0.226);
 }
 
@@ -165,11 +164,9 @@ h1{
     padding: 10px;
     width: 100%;
     border-radius: 5px;
-    background-color: var(--verde);
     display: block;
     font-family: var(--montserrat);
     font-weight: 600;
-    color: #fff;
     border: solid 1px rgba(0, 0, 0, 0.226);
 }
 
@@ -182,7 +179,7 @@ h1{
 }
 
 .form-container select{
-    color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.534);
     font-family: var(--montserrat);
     font-weight: 600;
     text-decoration: none;
@@ -211,7 +208,7 @@ h1{
 
 /* reset pass */
 .disclaimer{
-    max-width: fit-content;
-    margin: 0 auto;
+    max-width: 275px;
+    margin: 20 auto;
     background-color: rgb(255, 255, 255);
 }

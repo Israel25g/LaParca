@@ -25,7 +25,7 @@ include("../apertura_sesion.php");
         body{
             margin: 0;
             padding: 0;
-            background: linear-gradient(20deg,rgba(12, 121, 72,0.95), rgba(38, 37, 68,0.5)), url('../images/IMG_9533.jpg');
+            background: linear-gradient(20deg,rgba(12, 121, 72,0.95), rgba(38, 37, 68,0.8)), url('../images/IMG_9533.jpg');
             background-size: cover;
         }
     </style>
