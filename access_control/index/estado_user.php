@@ -11,7 +11,7 @@ if(isset ($_POST['estado'])){
     $result = mysqli_query($conexion, $sql);
     
     if($result){
-        header("Location: ./index_users2.php?error=Estado actualizado correctamente");
+        header("Location: ./index_users2.php?success=Estado actualizado correctamente");
         exit();
     }else{
         header("Location: ./index/index_users2.php?error=Error al actualizar el estado");

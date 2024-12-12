@@ -2,10 +2,6 @@
 include("../../apertura_sesion.php");
 ?>
 
-<script>
-    console.log("<?php echo date_default_timezone_get(); ?>")
-</script>
-
 <!DOCTYPE html>
 <html lang="en">
 
