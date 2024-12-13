@@ -270,6 +270,13 @@ JOIN estados ON users.estado_id = estados.id;
 
                                                                         <!-- Fila 3 -->
 
+                                                                        <?php 
+                                                                        date_default_timezone_set("America/Panama");
+                                                                        $updatedAt = $fila['updated_at_fechahora']; // Ejemplo de fecha obtenida de la BD en UTC
+                                                                        $localTime = new DateTime($updatedAt, new DateTimeZone('UTC'));
+                                                                        $localTime->setTimezone(new DateTimeZone('America/Panama'));
+                                                                        ?>
+
                                                                         <div class="form-row col-md-12 mb3">
                                                                             <div class="col-md-5">
                                                                                 <label for="Creado" class="fs-5 ">Creado: </label>
@@ -277,7 +284,7 @@ JOIN estados ON users.estado_id = estados.id;
                                                                             </div>
                                                                             <div class="col-md-2">
                                                                                 <label for="Actualizado" class="fs-5 ">Actualizado: </label>
-                                                                                <input disabled type='datetime-local' class='p-1 rounded fs-6' cols='30' value="<?= $fila["updated_at_fechahora"] ?>"><br>
+                                                                                <input disabled type='datetime-local' class='p-1 rounded fs-6' cols='30' value="<?php echo $localTime->format('Y-m-d H:i:s');?>"><br>
                                                                             </div>
                                                                         </div>
                                                                         <!-- Fila 3 -->

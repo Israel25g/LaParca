@@ -10,7 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] = "POST"){
     $correo = $_POST['email'];
     $departamento = $_POST['departamento'];
 
-    $sql = "UPDATE users SET id='$id', usuario='$nombre', user='$usuario', email='$correo', rol_id='$departamento', updated_at = CONVERT_TZ(NOW(), '+00:00', '-05:00') WHERE id='$id'";
+    $sql = "UPDATE users SET id='$id', usuario='$nombre', user='$usuario', email='$correo', rol_id='$departamento', updated_at = UTC_TIMESTAMP()
+    WHERE id='$id'";
     
     $result = mysqli_query($conexion, $sql);
     if ($result) {
