@@ -205,7 +205,7 @@ $whereClause_im
 GROUP BY 
     mes, Vehiculo
 ORDER BY 
-    mes DESC;
+    mes;
 ";
 
 $result3 = $conn->query($query3);
@@ -266,7 +266,8 @@ foreach ($vehicles as $index => $vehiculo) {
 // Preparar el JSON final
 $chart3 = [
     'categories' => $categories, // Eje X
-    'series' => $series,         // Datos de las series
+    'series' => $series,
+
 ];
 
 
@@ -282,7 +283,6 @@ $query4 = "
     $whereClause_im
 GROUP BY
 Tamano
-
 ";
 $result4 = $conn->query($query4);
 $chart4 = [];
@@ -314,7 +314,7 @@ $whereClause_ex
 GROUP BY 
     mes, Pais
 ORDER BY 
-    mes DESC;
+    mes;
 ";
 
 $result5 = $conn->query($query5);
@@ -374,8 +374,10 @@ foreach ($Paises as $index => $Pais) {
 // Preparar el JSON final
 $chart5 = [
     'categories' => $categories, // Eje X
-    'series' => $series,         // Datos de las series
+    'series' => $series,
+
 ];
+
 
 
 
@@ -383,24 +385,24 @@ $chart5 = [
 // Consulta para obtener los datos (modificada para incluir las dos sumas)
 $query6 = "
 SELECT 
-    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    Pais, 
+DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
+Pais, 
     SUM(CASE WHEN Despachado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
     SUM(CASE WHEN Despachado IS NULL THEN Paletas ELSE 0 END) AS suma_paletas_pendientes_ex
 FROM 
     exports
-$whereClause_ex
-GROUP BY 
+    $whereClause_ex
+    GROUP BY 
     mes, Pais
-ORDER BY 
-    mes DESC;
-";
+    ORDER BY 
+    mes ;
+    ";
 
-$result6 = $conn->query($query6);
-
-// Inicializar arrays para almacenar los datos estructurados
-$categories = []; // Fechas para el eje X
-$seriesData = []; // Series de datos agrupados por país y tipo
+    $result6 = $conn->query($query6);
+    
+    // Inicializar arrays para almacenar los datos estructurados
+    $categories = []; // Fechas para el eje X
+    $seriesData = []; // Series de datos agrupados por país y tipo
 $Paises = []; // Lista de países únicos
 
 // Paleta de colores para las series
@@ -417,7 +419,7 @@ while ($row = $result6->fetch_assoc()) {
     if (!in_array($fecha, $categories)) {
         $categories[] = $fecha;
     }
-
+    
     // Agregar el país a la lista de países únicos
     if (!array_key_exists($Pais, $seriesData)) {
         $Paises[] = $Pais;
@@ -455,7 +457,7 @@ foreach ($Paises as $index => $Pais) {
 
     // Agregar las dos series (despachadas y pendientes) para cada país
     $series[] = [
-        'name' => $Pais . ' - Despachadas',
+        'name' => $Pais . ' - Paletas Despachadas',
         'type' => 'bar',
         'data' => $data_despachadas,
         'itemStyle' => [
@@ -464,7 +466,7 @@ foreach ($Paises as $index => $Pais) {
     ];
 
     $series[] = [
-        'name' => $Pais . ' - Pendientes',
+        'name' => $Pais . ' - Paletas Pendientes',
         'type' => 'line',
         'data' => $data_pendientes,
         'itemStyle' => [
@@ -476,160 +478,510 @@ foreach ($Paises as $index => $Pais) {
 // Preparar el JSON final
 $chart6 = [
     'categories' => $categories, // Eje X
-    'series' => $series,         // Datos de las series
+    'series' => $series,
+
 ];
 
 
 // Gráfico 7: Total de cajas por sucursal y mes
 $query7 = "
 SELECT 
-    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    sucursal,
-    SUM(UND_pick) AS total_cajas
-FROM 
-    exports
-$whereClause_ex
-GROUP BY
-sucursal
-";
-$result7 = $conn->query($query7);
-$chart7= [];
-if ($result7->num_rows > 0) {
-while ($row = $result7->fetch_assoc()) {
-    $chart7[] = [
-        'name' => $row['sucursal'] ? $row['sucursal'] : 'NO DATA',
-        'value' => [
-            $row['mes'],
-            (int)$row['total_cajas'],
-        ],
-    ];
-}
-}
-
-// Gráfico 8: Ejemplo adicional de consulta
-$query8 = "
-SELECT 
-    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    Sucursal,
-    pais,
-    SUM(Cajas) AS total_cajas_Recibidas
+DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
+Pais, 
+COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS suma_Pedidos_ex,
+SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS suma_Pedidos_ex
 FROM 
     exports
 $whereClause_ex
 GROUP BY 
-pais
+mes, Pais
+ORDER BY 
+mes;
 ";
-$result8 = $conn->query($query8);
-$chart8 = [];
-if ($result8->num_rows > 0) {
-while ($row = $result8->fetch_assoc()) {
-    $chart8[] = [
-        'name' => $row['pais'] ? $row['pais'] : 'NO DATA',
-        'value' => [
-            $row['pais'],
-            (int)$row['total_cajas_Recibidas'],
+
+$result7 = $conn->query($query7);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$seriesData = []; // Series de datos agrupados por país y tipo
+$Paises = []; // Lista de países únicos
+
+// Paleta de colores para las series
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];
+$colorPalette2 = ['#a06b1b','#4d8086','#9b2a28','#24363f','#aa6851','#738f8b','#5d7f6a','#56585b','#424c5a','#9ba3a8'];
+
+
+// Procesar resultados
+while ($row = $result7->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $Pais = $row['Pais'] ?? 'NO DATA';
+    $suma_paletas_despachadas_ex = (int)$row['suma_Pedidos_ex'];
+    $suma_paletas_pendientes_ex = (int)$row['suma_Pedidos_ex'];
+    
+    // Agregar la fecha al eje X si no está ya
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+
+    // Agregar el país a la lista de países únicos
+    if (!array_key_exists($Pais, $seriesData)) {
+        $Paises[] = $Pais;
+        $seriesData[$Pais] = [
+            'despachadas' => [],
+            'pendientes' => [],
+        ];
+    }
+
+    // Asignar valores para las dos series de paletas (despachadas y pendientes) para ese país y fecha
+    $seriesData[$Pais]['despachadas'][$fecha] = $suma_paletas_despachadas_ex;
+    $seriesData[$Pais]['pendientes'][$fecha] = $suma_paletas_pendientes_ex;
+}
+
+// Preparar los datos para el gráfico
+$series = [];
+foreach ($Paises as $index => $Pais) {
+    // Serie de paletas despachadas
+    $data_despachadas = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data_despachadas[] = $seriesData[$Pais]['despachadas'][$fecha] ?? 0;
+    }
+
+    // Serie de paletas pendientes
+    $data_pendientes = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data_pendientes[] = $seriesData[$Pais]['pendientes'][$fecha] ?? 0;
+    }
+    
+    // Asignar colores para las dos series (despachadas y pendientes)
+    $color_despachadas = $colorPalette[$index % count($colorPalette)];
+    $color_pendientes = $colorPalette2[$index % count($colorPalette2)];
+    
+    // Agregar las dos series (despachadas y pendientes) para cada país
+    $series[] = [
+        'name' => $Pais . ' - Pedidos empacados',
+        'type' => 'bar',
+        'data' => $data_despachadas,
+        'itemStyle' => [
+            'color' => $color_despachadas, // Color personalizado para la serie de despachadas
+        ],
+    ];
+    
+    $series[] = [
+        'name' => $Pais . ' - Cajas empacadas',
+        'type' => 'bar',
+        'data' => $data_pendientes,
+        'itemStyle' => [
+            'color' => $color_pendientes, // Color personalizado para la serie de pendientes
         ],
     ];
 }
+        
+        // Preparar el JSON final
+$chart7 =[
+    'categories' => $categories, // Eje X
+    'series' => $series,
+
+];
+
+
+// Gráfico 8: Ejemplo adicional de consulta
+$query8 = "
+SELECT
+    OID,
+    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS total_cajas_empacadas,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS total_paletas_empacadas
+    FROM 
+    exports
+    $whereClause_ex
+    GROUP BY 
+    mes, OID
+    ";
+
+// Realizando las conexiones
+$result8 = $conn->query($query8);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$seriesData = []; // Series de datos agrupados por OID
+$OIDs = []; // Lista de OIDs únicos
+
+// Paleta de colores para las series
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];
+$colorPalette2 = ['#a06b1b','#4d8086','#9b2a28','#24363f','#aa6851','#738f8b','#5d7f6a','#56585b','#424c5a','#9ba3a8'];
+
+// Procesar resultados
+while ($row = $result8->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $OID = $row['OID'] ?? 'NO DATA';
+    $total_cajas_empacadas = (int)$row['total_cajas_empacadas'];
+    $total_paletas_empacadas = (int)$row['total_paletas_empacadas'];
+    
+    // Agregar la fecha al eje X si no está ya
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+
+    // Agregar el OID a la lista de OIDs únicos
+    if (!array_key_exists($OID, $seriesData)) {
+        $OIDs[] = $OID;
+        $seriesData[$OID] = [
+            'cajas' => [],
+            'paletas' => [],
+        ];
+    }
+
+    // Asignar valores para las dos series de cajas y paletas para ese OID y fecha
+    $seriesData[$OID]['cajas'][$fecha] = $total_cajas_empacadas;
+    $seriesData[$OID]['paletas'][$fecha] = $total_paletas_empacadas;
 }
+
+// Preparar los datos para el gráfico
+$series = [];
+foreach ($OIDs as $index => $OID) {
+    // Serie de cajas empacadas
+    $data_cajas = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data_cajas[] = $seriesData[$OID]['cajas'][$fecha] ?? 0;
+    }
+
+    // Serie de paletas empacadas
+    $data_paletas = [];
+    foreach ($categories as $fecha) {
+        // Usar 0 si no hay datos para esa fecha
+        $data_paletas[] = $seriesData[$OID]['paletas'][$fecha] ?? 0;
+    }
+
+    // Asignar colores para las dos series
+    $color_cajas = $colorPalette[$index % count($colorPalette)];
+    $color_paletas = $colorPalette2[$index % count($colorPalette2)];
+    
+    // Agregar las dos series (cajas y paletas) para cada OID
+    $series[] = [
+        'name' => $OID . ' - Cajas empacadas',
+        'type' => 'bar',
+        'data' => $data_cajas,
+        'itemStyle' => [
+            'color' => $color_cajas, // Color personalizado para la serie de cajas
+        ],
+    ];
+    
+    $series[] = [
+        'name' => $OID . ' - Paletas empacadas',
+        'type' => 'bar',
+        'data' => $data_paletas,
+        'itemStyle' => [
+            'color' => $color_paletas, // Color personalizado para la serie de paletas
+        ],
+    ];
+}
+
+
+// Preparar el JSON final
+$chart8 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,
+
+];
+
+
+
+// Gráfico 9: Total de und_Recibidas por Sucursal y mes
+$query9 = "
+SELECT
+Sucursal,
+DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
+SUM(CASE WHEN Empacado IS NOT NULL THEN Avance_porcentaje ELSE 0 END) AS total_porcentaje_avance,
+SUM(CASE WHEN Empacado IS NOT NULL THEN UND ELSE 0 END) AS total_unidades
+FROM 
+exports
+$whereClause_ex
+GROUP BY 
+    mes, Sucursal
+";
+
+// Realizando las conexiones
+$result9 = $conn->query($query9);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$seriesData = []; // Series de datos agrupados por Sucursal
+$sucursales = []; // Lista de sucursales únicas
+
+// Paleta de colores para las series
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];
+$colorPalette2 = ['#a06b1b','#4d8086','#9b2a28','#24363f','#aa6851','#738f8b','#5d7f6a','#56585b','#424c5a','#9ba3a8'];
+
+// Función para inicializar datos
+function initializeSeriesData($categories, $values) {
+    return array_map(fn($category) => $values[$category] ?? 0, $categories);
+}
+
+// Procesar resultados
+while ($row = $result9->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $sucursal = $row['Sucursal'] ?? 'NO DATA';
+    
+    // Inicializar sucursal y fecha si no existen
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+    
+    if (!array_key_exists($sucursal, $seriesData)) {
+        $sucursales[] = $sucursal;
+        $seriesData[$sucursal] = [
+            'avance' => [],
+            'unidades' => [],
+        ];
+    }
+    
+    // Asignar valores
+    $seriesData[$sucursal]['avance'][$fecha] = (int)$row['total_porcentaje_avance'];
+    $seriesData[$sucursal]['unidades'][$fecha] = (int)$row['total_unidades'];
+}
+
+// Preparar los datos para el gráfico
+$series = [];
+foreach ($sucursales as $index => $sucursal) {
+    // Generar datos para ambas series
+    $data_avance = initializeSeriesData($categories, $seriesData[$sucursal]['avance']);
+    $data_unidades = initializeSeriesData($categories, $seriesData[$sucursal]['unidades']);
+    
+    // Agregar series con colores personalizados
+    $series[] = [
+        'name' => "$sucursal - Porcentaje de avance",
+        'type' => 'line',
+        'stack' => 'total', // Configuración para apilar las barras
+        'data' => $data_avance,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+    
+    $series[] = [
+        'name' => "$sucursal - Suma de unidades",
+        'type' => 'bar',
+        'stack' => 'total', // Configuración para apilar las barras
+        'data' => $data_unidades,
+        'itemStyle' => ['color' => $colorPalette2[$index % count($colorPalette2)]],
+    ];
+}
+
+// Preparar el JSON final
+$chart9 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,
+
+];
 // Termonan los graficos de exports
 
-// Inician los graficos de picking
-// Gráfico 9: Total de und_Recibidas por Cliente y mes
-$query9 = "
-    SELECT 
-        DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
-        Cliente,
-            Pend
-    FROM 
-        picking
-    $whereClause_pk
-GROUP BY
-mes
-";
-$result9 = $conn->query($query9);
-$chart9 = [];
-$line9 = [];
-if ($result9->num_rows > 0) {
-    while ($row = $result9->fetch_assoc()) {
-        $chart9[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
-            'value' => [
-                $row['mes'],
-                (int)$row['Pend'],
-            ],
-        ];
-        $line9[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
-            'value' => [
-                $row['mes'],
-                (int)$row['Pend'],
-            ],
-        ];
-    }
-}
 
+
+
+// Inician los graficos de picking
 // Gráfico 10: Total de paletas por pais y mes
 $query10 = "
-    SELECT 
-        DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
-        Categoria,
-        SUM(Pend) AS total_paletas
-    FROM 
-        picking
-    $whereClause_pk
-GROUP BY
-mes
+SELECT
+OID,
+    DATE_FORMAT(FRD, '%Y-%m') AS mes,
+    COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS total_pedido_empacado,
+    COUNT(CASE WHEN Despachado IS NOT NULL THEN OID ELSE 0 END) AS total_pedido_despachado,
+    (COUNT(Empacado) * 1.0 / COUNT(Despachado)) * 100 AS porcentaje_de_avance
+FROM 
+    exports
+    $whereClause_ex
+    GROUP BY 
+    mes, OID
 ";
+
+// Realizando las conexiones
 $result10 = $conn->query($query10);
-$chart10 = [];
-if ($result10->num_rows > 0) {
-    while ($row = $result10->fetch_assoc()) {
-        $chart10[] = [
-            'name' => $row['mes'] ? $row['mes'] : 'NO DATA',
-            'value' => [
-                $row['mes'],
-                (int)$row['total_paletas'],
-            ],
+
+// Ejecutar la consulta
+$query10 = str_replace('$whereClause_ex', '', $query10); // Aquí se puede agregar un filtro adicional si es necesario
+$result = $conn->query($query10);
+
+// Inicialización de arrays
+$categories = [];  // Para almacenar las fechas (eje X)
+$seriesData = [];  // Datos agrupados por OID
+$oids = [];  // Lista de OIDs únicos
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];  // Paleta de colores
+
+// Procesar los resultados de la consulta
+while ($row = $result->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $oid = $row['OID'] ?? 'NO DATA';
+    
+    // Agregar fechas a las categorías si no están presentes
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+
+    // Agregar OID a la lista de OIDs si no está
+    if (!array_key_exists($oid, $seriesData)) {
+        $oids[] = $oid;
+        $seriesData[$oid] = [
+            'empacado' => [],
+            'despachado' => [],
+            'porcentaje_avance' => [],
         ];
     }
+    
+    // Asignar los valores correspondientes
+    $seriesData[$oid]['empacado'][$fecha] = (int)$row['total_pedido_empacado'];
+    $seriesData[$oid]['despachado'][$fecha] = (int)$row['total_pedido_despachado'];
+    $seriesData[$oid]['porcentaje_avance'][$fecha] = (float)$row['porcentaje_de_avance'];
 }
+
+// Función para inicializar los datos de las series
+$initializeSeriesData = function($categories, $values) {
+    return array_map(fn($category) => $values[$category] ?? 0, $categories);
+};
+
+// Preparar las series de datos para el gráfico
+$series = [];
+foreach ($oids as $index => $oid) {
+    // Inicializar los datos para cada OID
+    $data_empacado = $initializeSeriesData($categories, $seriesData[$oid]['empacado']);
+    $data_despachado = $initializeSeriesData($categories, $seriesData[$oid]['despachado']);
+    $data_porcentaje_avance = $initializeSeriesData($categories, $seriesData[$oid]['porcentaje_avance']);
+    
+    // Generar las series para los gráficos
+    $series[] = [
+        'name' => "$oid - Total Pedido Empacado",
+        'type' => 'bar',
+        'data' => $data_empacado,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+    
+    $series[] = [
+        'name' => "$oid - Total Pedido Despachado",
+        'type' => 'bar',
+        'data' => $data_despachado,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+    
+    $series[] = [
+        'name' => "$oid - Porcentaje de Avance",
+        'type' => 'bar',
+        'data' => $data_porcentaje_avance,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+}
+
+// Devolver los datos en formato JSON para ser utilizados en el gráfico
+$chart10 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,
+];
+
 
 // Gráfico 11: Total de cajas por Cliente y mes
 $query11 = "
-    SELECT 
-        DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
-        Cliente,
-        SUM(Pend) AS total_und_Recibidas
-    FROM 
-        picking
-    $whereClause_pk
-GROUP BY
-cliente
+SELECT
+OID,
+    DATE_FORMAT(FRD, '%Y-%m') AS mes,
+    COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS total_pedido_empacado,
+    COUNT(CASE WHEN Despachado IS NOT NULL THEN OID ELSE 0 END) AS total_pedido_despachado,
+    (COUNT(Empacado) * 1.0 / COUNT(Despachado)) * 100 AS porcentaje_de_avance
+FROM 
+    exports
+    $whereClause_ex
+    GROUP BY 
+    mes, OID
 ";
-$result11 = $conn->query($query11);
-$chart11 = [];
-if ($result11->num_rows > 0) {
-    while ($row = $result11->fetch_assoc()) {
-        $chart11[] = [
-            'name' => $row['Cliente'] ? $row['Cliente'] : 'NO DATA',
-            'value' => [
-                $row['mes'],
-                (int)$row['total_und_Recibidas'],
-            ],
+
+// Realizando las conexiones
+$result10 = $conn->query($query11);
+
+// Ejecutar la consulta
+$query11 = str_replace('$whereClause_ex', '', $query11); // Aquí se puede agregar un filtro adicional si es necesario
+$result = $conn->query($query11);
+
+// Inicialización de arrays
+$categories = [];  // Para almacenar las fechas (eje X)
+$seriesData = [];  // Datos agrupados por OID
+$oids = [];  // Lista de OIDs únicos
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];  // Paleta de colores
+
+// Procesar los resultados de la consulta
+while ($row = $result->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $oid = $row['OID'] ?? 'NO DATA';
+    
+    // Agregar fechas a las categorías si no están presentes
+    if (!in_array($fecha, $categories)) {
+        $categories[] = $fecha;
+    }
+
+    // Agregar OID a la lista de OIDs si no está
+    if (!array_key_exists($oid, $seriesData)) {
+        $oids[] = $oid;
+        $seriesData[$oid] = [
+            'empacado' => [],
+            'despachado' => [],
+            'porcentaje_avance' => [],
         ];
     }
+    
+    // Asignar los valores correspondientes
+    $seriesData[$oid]['empacado'][$fecha] = (int)$row['total_pedido_empacado'];
+    $seriesData[$oid]['despachado'][$fecha] = (int)$row['total_pedido_despachado'];
+    $seriesData[$oid]['porcentaje_avance'][$fecha] = (float)$row['porcentaje_de_avance'];
 }
+
+// Función para inicializar los datos de las series
+$initializeSeriesData = function($categories, $values) {
+    return array_map(fn($category) => $values[$category] ?? 0, $categories);
+};
+
+// Preparar las series de datos para el gráfico
+$series = [];
+foreach ($oids as $index => $oid) {
+    // Inicializar los datos para cada OID
+    $data_empacado = $initializeSeriesData($categories, $seriesData[$oid]['empacado']);
+    $data_despachado = $initializeSeriesData($categories, $seriesData[$oid]['despachado']);
+    $data_porcentaje_avance = $initializeSeriesData($categories, $seriesData[$oid]['porcentaje_avance']);
+    
+    // Generar las series para los gráficos
+    $series[] = [
+        'name' => "$oid - Total Pedido Empacado",
+        'type' => 'bar',
+        'data' => $data_empacado,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+    
+    $series[] = [
+        'name' => "$oid - Total Pedido Despachado",
+        'type' => 'bar',
+        'data' => $data_despachado,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+    
+    $series[] = [
+        'name' => "$oid - Porcentaje de Avance",
+        'type' => 'bar',
+        'data' => $data_porcentaje_avance,
+        'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
+    ];
+}
+
+// Devolver los datos en formato JSON para ser utilizados en el gráfico
+$chart11 = [
+    'categories' => $categories, // Eje X
+    'series' => $series,
+];
 
 // Gráfico 12: Ejemplo adicional de consulta
 $query12 = "
-    SELECT 
-        DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
-        Cliente,
-        SUM(Pend) AS total_cajas
-    FROM 
-        picking
-    $whereClause_pk
+SELECT 
+DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
+Cliente,
+SUM(Pend) AS total_cajas
+FROM 
+picking
+$whereClause_pk
 GROUP BY
 cliente
 ";
@@ -659,31 +1011,31 @@ SELECT
     UND_Pick
 FROM 
     exports
-$whereClause_ex
-
-";
+    $whereClause_ex
+    
+    ";
 $result13 = $conn->query($query13);
 $chart13 = [];
 if ($result13->num_rows > 0) {
-while ($row = $result13->fetch_assoc()) {
-    $chart13[] = [
-        'name' => $row['sucursal'] ? $row['sucursal'] : 'NO DATA',
-        'value' => [
-            (int)$row['UND_Pick'],
-            (int)$row['UND'],
-        ],
-    ];
+    while ($row = $result13->fetch_assoc()) {
+        $chart13[] = [
+            'name' => $row['sucursal'] ? $row['sucursal'] : 'NO DATA',
+            'value' => [
+                (int)$row['UND_Pick'],
+                (int)$row['UND'],
+            ],
+        ];
 }
 }
 
 // Gráfico 14: Total de paletas por pais y mes
 $query14 = "
 SELECT 
-    DATE_FORMAT(ETA, '%Y-%m-%d') AS mes,
-    pais,
-    SUM(paletas) AS total_paletas
+DATE_FORMAT(ETA, '%Y-%m-%d') AS mes,
+pais,
+SUM(paletas) AS total_paletas
 FROM 
-    imports
+imports
 $whereClause_im
 
 ";
@@ -704,10 +1056,10 @@ while ($row = $result14->fetch_assoc()) {
 // Gráfico 15: Total de cajas por Cliente y mes
 $query15 = "
 SELECT 
-    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    pais,
+DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
+pais,
     SUM(Cajas) AS total_cajas
-FROM 
+    FROM 
     exports
 $whereClause_ex
 
@@ -715,25 +1067,25 @@ $whereClause_ex
 $result15 = $conn->query($query15);
 $chart15= [];
 if ($result15->num_rows > 0) {
-while ($row = $result15->fetch_assoc()) {
-    $chart15[] = [
-        'name' => $row['pais'] ? $row['pais'] : 'NO DATA',
-        'value' => [
-            $row['mes'],
-            (int)$row['total_cajas'],
-        ],
-    ];
-}
+    while ($row = $result15->fetch_assoc()) {
+        $chart15[] = [
+            'name' => $row['pais'] ? $row['pais'] : 'NO DATA',
+            'value' => [
+                $row['mes'],
+                (int)$row['total_cajas'],
+            ],
+        ];
+    }
 }
 
 // Gráfico 16: Ejemplo adicional de consulta
 $query16 = "
 SELECT 
-    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    pais,
-    SUM(paletas) AS total_und_Recibidas
+DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
+pais,
+SUM(paletas) AS total_und_Recibidas
 FROM 
-    exports
+exports
 $whereClause_ex
 
 ";
@@ -760,32 +1112,31 @@ $data = [
     'total_KG' => $total_KG,
     'total_CBM' => $total_CBM,
     // variables del grafico 1
-
-// variables del grafico 2
+    
+    // variables del grafico 2
     'total_grande' => $total_grande,
     'total_mediano' => $total_mediano,
     'total_pequeño' => $total_pequeño,
-// variables del grafico 2
-
+    // variables del grafico 2
+    
     'chart3' => $chart3,
     'chart4' => $chart4,
     // imports
-
+    
     // exports
     'chart5' => $chart5,
     'chart6' => $chart6,
     'chart7' => $chart7,
     'chart8' => $chart8,
     // exports
-
+    
     // picking
     'chart9' => $chart9,
-    'line9' => $line9,
     'chart10' => $chart10,
     'chart11' => $chart11,
     'chart12' => $chart12,
     // picking
-
+    
     // varios
     'chart13' => $chart13,
     'chart14' => $chart14,
@@ -799,5 +1150,6 @@ $conn->close();
 
 // Devuelve los datos en formato JSON
 echo json_encode($data);
+
 ?>
 

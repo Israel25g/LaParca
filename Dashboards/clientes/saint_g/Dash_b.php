@@ -113,16 +113,18 @@ try {
 }
 
 .custom-card {
-
     border: 2px solid #61a0a8 !important; /* Equivalente a 'border-primary border-2' */
-
 }
-
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(20deg, rgba(1, 23, 45, 0.8), rgba(1, 23, 45, 0.2));
+}
 </style>
 
 </head>
 
-<body style="background-color:lightslategray">
+<body >
     <!-- Header -->
     <div class="header" style="background-color: orange !important; box-shadow: -10px 5px 5px #a77700">
         <div class="logo-container">
@@ -172,15 +174,12 @@ try {
 </div>
 
 <div class="carousel-item">
-              <div class="container mt-5">
+    <div class="container mt-5">
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
-          <!--  Quinto gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center" >
-              <div id="chart5" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color:aliceblue; overflow: hidden;"></div>
-          </div>
-          <!-- Sexto gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart6" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px;background-color:aliceblue; overflow: hidden;"></div>
+          <!--  Quinto y sexto grafico-->
+          <div class="col-12 col-md-6 col-lg-6 d-flex flex-column align-items-center" >
+              <div id="chart5" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 314px; background-color: white; overflow: hidden;"></div>
+              <div id="chart6" class="border border-dark border-4 rounded bg-light mt-1" style="width: 628px; max-width: 628px; height: 314px; background-color: white; overflow: hidden;"></div>
           </div>
           <!-- septimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
@@ -188,9 +187,22 @@ try {
           </div>
           <!-- octavo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color:white; overflow: hidden;"></div>
-          </div>
-      </div>
+              <div id="chart8" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color:aliceblue ; overflow: hidden;"></div>
+              </div>
+              <!-- noveno gráfico -->
+              <div class="col-12 col-md-6 col-lg-6 d-flex flex-column align-items-center">
+                  <div id="chart9" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 628px; background-color: white; overflow: hidden;"></div>
+                </div> 
+            </div>
+                <!-- Decimo grafico y undecimo grafico-->
+        <div class="container mt-6">
+            <div class="row gy-4 justify-content-center align-items-center" style="margin-top: -20px;">
+                <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                    <div id="chart10" class="border border-dark border-4 rounded bg-light  mt-0" style="width: 1296px; max-width: 1296px; height: 628px; background-color: white; overflow: hidden;"></div>
+                    <div id="chart11" class="border border-dark border-4 rounded bg-light  mt-2" style="width: 1296px; max-width: 1296px; height: 628px; background-color: white; overflow: hidden;"></div>
+                </div>
+            </div>
+        </div>
   </div>
 </div>
 <div class="carousel-item">
@@ -198,19 +210,19 @@ try {
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- noveno gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart9" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
+              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- decimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart10" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
+              <div id="chart11" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- undecimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart11" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
+              <div id="chart12" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
           <!-- duodecimo gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart12" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
+              <div id="chart13" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
           </div>
       </div>
   </div>
@@ -220,19 +232,19 @@ try {
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- decimo tercero gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart13" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
+              <div id="chart14" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- decimocuarto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart14" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
+              <div id="chart15" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
           </div>
           <!-- decimoquinto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart15" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
+              <div id="chart16" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
           <!-- decimo sexto gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart16" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
+              <div id="chart17" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
           </div>
       </div>
   </div>
@@ -490,14 +502,16 @@ try {
             }
         ],
         toolbox: {
-            feature: {
-                dataZoom: { yAxisIndex: 'none' },
-                magicType: { type: ['line', 'bar'] },
-                restore: { show: true },
-                saveAsImage: { show: true },
-                dataView: { show: true, readOnly: true }
-            }
-        },
+        right: '1%',
+        orient: 'vertical',
+        feature: {
+            restore: { show: true },
+            saveAsImage: { show: true },
+            dataZoom: { show: true },
+            magicType: { type: ['line', 'bar','stack','scatter'] },
+            dataView: { show: true, readOnly: true }
+        }
+    },
         legend: {
             type: 'scroll',
             right: 150,
@@ -582,14 +596,16 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
             },
         ],
         toolbox: {
-            feature: {
-                dataZoom: { yAxisIndex: 'none' },
-                magicType: { type: ['line', 'bar'] },
-                restore: { show: true },
-                saveAsImage: { show: true },
-                dataView: { show: true, readOnly: true }
-            }
-        },
+        right: '1%',
+        orient: 'vertical',
+        feature: {
+            restore: { show: true },
+            saveAsImage: { show: true },
+            dataZoom: { show: true },
+            magicType: { type: ['line', 'bar','stack','scatter'] },
+            dataView: { show: true, readOnly: true }
+        }
+    },
         legend: {
             type: 'scroll',
             right: 350,
@@ -604,25 +620,30 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
 function createBar_dinamic(containerId, chartData1, title) {
     const chart = echarts.init(document.getElementById(containerId));
 
-    // Calcular el valor máximo dinámico para el eje Y
+    // Calcular el valor máximo dinámico para el eje Y si lo deseas (aunque no está incluido en el ejemplo)
+    // ...
 
     // Configurar las opciones del gráfico
     const options = {
-    grid: { left: '10%', right: '10%', top: '20%', bottom: '10%', containLabel: true },
-    title: { text: title, left: '0%' },
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "12px", rotate: 90 },},
-    yAxis: { type: 'value', name: 'Cantidad' },
-    series: chartData1.series,
-    legend: { type: 'scroll', top: '7%' },
-    toolbox: {
+        grid: { left: '10%', right: '10%', top: '25%', bottom: '0%', containLabel: true },
+        title: { text: title, left: '0%' },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+        xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "12px", rotate: 25 } },
+        yAxis: { type: 'value', name: 'Cantidad' },
+        series: chartData1.series,
+        legend: { type: 'scroll', top: '7%', right: '20%' },
+        toolbox: {
+        right: '1%',
+        orient: 'vertical',
         feature: {
-            saveAsImage: { show: true },
             restore: { show: true },
+            saveAsImage: { show: true },
+            dataZoom: { show: true },
+            magicType: { type: ['line', 'bar','stack','scatter'] },
             dataView: { show: true, readOnly: true }
         }
-    },
-};
+    }, // Usamos la configuración de toolbox que se recibe como parámetro
+    };
 
     // Establecer las opciones en el gráfico
     chart.setOption(options);
@@ -647,19 +668,18 @@ function createLineChart(containerId, chartData1,chartData2, title) {
                 stack: 'Total', // Se agrega propiedad para apilar
                 emphasis: {focus: 'series'},
                 smooth: true,
-                areaStyle: {},
+
                 color: [
             '#ca8622',
             '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#6e7074',
-    '#546570',
-    '#c4ccd3'
-  ],
+            '#c23531',
+            '#2f4554',
+            '#d48265',
+            '#91c7ae',
+            '#749f83',
+            '#6e7074',
+            '#546570',
+            '#c4ccd3'],
             },
             {
                 data: chartData2.map(item => item.value[1]),
@@ -667,19 +687,18 @@ function createLineChart(containerId, chartData1,chartData2, title) {
                 name: title,
                 emphasis: {focus: 'series'},
                 smooth: true,
-                areaStyle: {},
                 color: [
             '#546570',
             '#ca8622',
             '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#c4ccd3'
+            '#c23531',
+            '#2f4554',
+            '#d48265',
+            '#91c7ae',
+            '#749f83',
+            '#bda29a',
+            '#6e7074',
+            '#c4ccd3'
   ],
             }
         ],
@@ -691,12 +710,6 @@ function createLineChart(containerId, chartData1,chartData2, title) {
                 saveAsImage: { show: true },
                 dataView: { show: true, readOnly: true }
             }
-        },
-        legend: {
-            type: 'scroll',
-            right: 150,
-            top: 20,
-            bottom: 0
         },
     };
     chart.setOption(options);
@@ -711,14 +724,14 @@ function createPieChart(containerId, chartData, title,rad1,rad2) {
             '#546570',
             '#ca8622',
             '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#6e7074',
-    '#c4ccd3'
+            '#c23531',
+            '#2f4554',
+            '#d48265',
+            '#91c7ae',
+            '#749f83',
+            '#bda29a',
+            '#6e7074',
+            '#c4ccd3'
   ],
         legend: {
             top: '5%',
@@ -765,13 +778,13 @@ function createScatterChart(containerId, chartData, title) {
             '#546570',
             '#ca8622',
             '#61a0a8',
-    '#c23531',
-    '#2f4554',
-    '#d48265',
-    '#91c7ae',
-    '#749f83',
-    '#bda29a',
-    '#c4ccd3'
+            '#c23531',
+            '#2f4554',
+            '#d48265',
+            '#91c7ae',
+            '#749f83',
+            '#bda29a',
+            '#c4ccd3'
   ],
         tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
         xAxis: { type: 'value' },
@@ -810,25 +823,25 @@ function createScatterChart(containerId, chartData, title) {
     // Configurar cada gráfico usando los datos recibidos
 
     // import
-    createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES');
+    createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES'); 
     createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
-    createBar_dinamic('chart3', data.chart3, '3.Pedidos recibidos por Veículo');
+    createBar_dinamic('chart3', data.chart3,data.toolbox3, '3.Pedidos recibidos por Veículo');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
 
     // export
-    createBar_dinamic('chart5', data.chart5, '5.Paletas empacadas por pais');
+    createBar_dinamic('chart5', data.chart5, '5.Paletas empacadas por país');
     createBar_dinamic('chart6', data.chart6, '6.Paletas Despachadas VS pendientes de despacho');
-    createPieChart('chart7', data.chart7, '7.Clientes y Cajas','20%','30%');
-    createPieChart('chart8', data.chart8, '8.Repetición de Clientes','40%','60%');
+    createBar_dinamic('chart7', data.chart7, '7.Pedidos empacados VS Cajas empacadas por País');
+    createBar_dinamic('chart8', data.chart8, '8.Proceso de empoaque por fecha y pedido (Cajas y paletas)');
+    createBar_dinamic('chart9', data.chart9, '9.Proceso de empoaque por fecha y pedido (CBM y KG)');
+    createBar_dinamic('chart10', data.chart10, '10.Pedidos empacados Vs Despachados');
+    createBar_dinamic('chart11', data.chart11,'11.Paletas empacadas Vs despachadas');
     // export
-
+    
     // picking
-    createLineChart('chart9', data.chart9, data.line9, '9.Clientes y Unidades');
-    createLineChart('chart10', data.chart10, data.line9, '10.Destinos y Paletas');
-    createLineChart('chart11', data.chart11, data.line9, '11Clientes y Cajas');
-    createLineChart('chart12', data.chart12, data.line9,'12Repetición de Clientes');
+    // createLineChart('chart12', data.chart12, data.line9,'12Repetición de Clientes');
     // picking
 
     // varios
@@ -845,18 +858,18 @@ function createScatterChart(containerId, chartData, title) {
     loadCharts();
 
     
-
     // Capturar el evento de envío del formulario
     document.getElementById('filterForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Evitar el envío normal del formulario
-
+        
         // Obtener los valores de los campos
         const fechaInicio = document.getElementById('fechaInicio').value;
         const fechaFinal = document.getElementById('fechaFinal').value;
         const Cliente = document.getElementById('Cliente').value;
-
+        
         // Recargar la página con los nuevos parámetros en la URL
         window.location.href = `?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}&Cliente=${Cliente}`;
+        console.log(data.chart3);
     });
     
     document.write(<?php $fechaInicio; $fechaFinal; $Cliente;?>)
