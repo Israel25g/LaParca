@@ -8,7 +8,7 @@ include("../../apertura_sesion.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de Usuarios</title>a
+    <title>Control de Usuarios</title>
     <link rel="shortcut icon" href="../../images/ICO.png">
     <!-- estilo bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -29,7 +29,7 @@ include("../../apertura_sesion.php");
 
 </head>
 
-<body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
+
 
     <?php
     function escapar($html)
@@ -55,7 +55,7 @@ JOIN estados ON users.estado_id = estados.id;
         $error = $error->getMessage();
     }
     ?>
-
+<body style="background-image: url('../../host_virtual_TI/images/Motivo2.png'); overflow: visible">
     <!-- Header -->
     <div class="header-error">
         <div class="logo-container">
