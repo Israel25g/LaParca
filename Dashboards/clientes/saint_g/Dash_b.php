@@ -450,7 +450,6 @@ body {
             {
                 type: 'value',
                 alignTicks: true,
-                name: 'Cantidad',
                 axisLabel: { formatter: '{value}' },
                 max:maxY2+100,
             },
@@ -458,7 +457,6 @@ body {
                 type: 'value',
                 alignTicks: true,
                 position: 'right',
-                name: 'Medidas',
                 axisLabel: { formatter: '{value}' },
                 max: ((maxY1+maxY2+maxY3+maxY4)+100)*1.5,
                 splitLine: { show: false }
@@ -508,7 +506,7 @@ body {
             restore: { show: true },
             saveAsImage: { show: true },
             dataZoom: { show: true },
-            magicType: { type: ['line', 'bar','stack','scatter'] },
+            magicType: { type: ['line', 'bar','stack'] },
             dataView: { show: true, readOnly: true }
         }
     },
@@ -561,7 +559,6 @@ function createBarChart(containerId, chartData1,chartData2,chartData3,title) {
         },
         yAxis: {
             type: 'value',
-            name: 'Cantidad',
             axisLabel: { formatter: '{value}' },
             max:( maxY1+maxY2+maxY3)+1000
         },
@@ -629,9 +626,42 @@ function createBar_dinamic(containerId, chartData1, title) {
         title: { text: title, left: '0%' },
         tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
         xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "12px", rotate: 25 } },
-        yAxis: { type: 'value', name: 'Cantidad' },
+        yAxis: { type: 'value' },
         series: chartData1.series,
         legend: { type: 'scroll', top: '7%', right: '20%' },
+        toolbox: {
+        right: '1%',
+        orient: 'vertical',
+        feature: {
+            restore: { show: true },
+            saveAsImage: { show: true },
+            dataZoom: { show: true },
+            magicType: { type: ['line', 'bar','stack','scatter'] },
+            dataView: { show: true, readOnly: true }
+        }
+    }, // Usamos la configuración de toolbox que se recibe como parámetro
+    };
+
+    // Establecer las opciones en el gráfico
+    chart.setOption(options);
+}
+
+
+function createBar_dinamic_XL_size(containerId, chartData1, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+
+    // Calcular el valor máximo dinámico para el eje Y si lo deseas (aunque no está incluido en el ejemplo)
+    // ...
+
+    // Configurar las opciones del gráfico
+    const options = {
+        grid: { left: '10%', right: '10%', top: '25%', bottom: '0%', containLabel: true },
+        title: { text: title, left: '0%' },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+        xAxis: { type: 'category', data: chartData1.categories, axisLabel: { fontSize: "15px", rotate: 25 } },
+        yAxis: { type: 'value' },
+        series: chartData1.series,
+        legend: { type: 'scroll', top: '7%', right: '28%' },
         toolbox: {
         right: '1%',
         orient: 'vertical',
@@ -825,7 +855,7 @@ function createScatterChart(containerId, chartData, title) {
     // import
     createBarChart_multiseries('chart1', data.total_paletas_Recibidas,data.total_cajas,data.total_KG,data.total_CBM,'1.CAJAS/CBM/KG/PALETAS MENSUALES'); 
     createBarChart('chart2', data.total_grande, data.total_mediano, data.total_pequeño,'2.Tamaño y cantidad de unidades por dia');
-    createBar_dinamic('chart3', data.chart3,data.toolbox3, '3.Pedidos recibidos por Veículo');
+    createBar_dinamic('chart3', data.chart3,'3.Pedidos recibidos por Veículo');
     createPieChart('chart4', data.chart4, '4.Embarques totales recibidos','40%','60%');
 
     // import
@@ -836,8 +866,8 @@ function createScatterChart(containerId, chartData, title) {
     createBar_dinamic('chart7', data.chart7, '7.Pedidos empacados VS Cajas empacadas por País');
     createBar_dinamic('chart8', data.chart8, '8.Proceso de empoaque por fecha y pedido (Cajas y paletas)');
     createBar_dinamic('chart9', data.chart9, '9.Proceso de empoaque por fecha y pedido (CBM y KG)');
-    createBar_dinamic('chart10', data.chart10, '10.Pedidos empacados Vs Despachados');
-    createBar_dinamic('chart11', data.chart11,'11.Paletas empacadas Vs despachadas');
+    createBar_dinamic_XL_size('chart10', data.chart10, '10.Pedidos empacados Vs Despachados');
+    createBar_dinamic_XL_size('chart11', data.chart11,'11.Paletas empacadas Vs despachadas');
     // export
     
     // picking

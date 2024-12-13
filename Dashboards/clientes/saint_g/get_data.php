@@ -882,8 +882,8 @@ $query11 = "
 SELECT
 OID,
     DATE_FORMAT(FRD, '%Y-%m') AS mes,
-    COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS total_pedido_empacado,
-    COUNT(CASE WHEN Despachado IS NOT NULL THEN OID ELSE 0 END) AS total_pedido_despachado,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN paletas ELSE 0 END) AS total_pedido_empacado,
+    SUM(CASE WHEN Despachado IS NOT NULL THEN Paletas ELSE 0 END) AS total_pedido_despachado,
     (COUNT(Empacado) * 1.0 / COUNT(Despachado)) * 100 AS porcentaje_de_avance
 FROM 
     exports
