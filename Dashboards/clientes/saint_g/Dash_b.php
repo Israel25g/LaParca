@@ -149,8 +149,10 @@ body {
     <!-- Carrusel -->
     <div id="carouselExampleCaptions" class="carousel slide mt-4" style="margin-bottom: 100px;">
         <div class="carousel-inner" style="margin-top: -70px;">
-              <div class="carousel-item active ">
-              <div class="container mt-5">
+
+            <!-- import -->
+<div class="carousel-item active ">
+    <div class="container mt-5">
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
           <!-- Primer gráfico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
@@ -172,7 +174,9 @@ body {
       </div>
   </div>
 </div>
+<!-- fin Import -->
 
+<!-- Exports -->
 <div class="carousel-item">
     <div class="container mt-5">
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
@@ -205,50 +209,62 @@ body {
         </div>
   </div>
 </div>
+<!-- fin export -->
+
+<!-- picking -->
 <div class="carousel-item">
               <div class="container mt-5">
       <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
-          <!-- noveno gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
+          <!-- Duodecimo  y Decimotercer grafico -->
+          <div class="col-12 col-md-6 col-lg-6 d-flex flex-column align-items-center" >
+              <div id="chart12" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 314px; background-color: white; overflow: hidden;"></div>
+              <div id="chart13" class="border border-dark border-4 rounded bg-light mt-1" style="width: 628px; max-width: 628px; height: 314px; background-color: white; overflow: hidden;"></div>
           </div>
-          <!-- decimo gráfico -->
+          <!-- Decimo cuarto grafico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart11" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
+              <div id="chart14" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 632px;background-color:aliceblue ; overflow: hidden;"></div>
           </div>
-          <!-- undecimo gráfico -->
+          <!-- Decimo quinto grafico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart12" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
+              <div id="chart15" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 632px;background-color:white ; overflow: hidden;"></div>
           </div>
-          <!-- duodecimo gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart13" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
+          <!-- Decimo sexto y Decimo semtimo grafico -->
+          <div class="col-12 col-md-6 col-lg-6 d-flex flex-column align-items-center" >
+              <div id="chart16" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 314px; background-color: white; overflow: hidden;"></div>
+              <div id="chart17" class="border border-dark border-4 rounded bg-light mt-1" style="width: 628px; max-width: 628px; height: 314px; background-color: white; overflow: hidden;"></div>
           </div>
       </div>
   </div>
 </div>
+<!-- fin picking -->
+
+
+<!-- detalles varios -->
 <div class="carousel-item">
-              <div class="container mt-5">
-      <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 140px;">
-          <!-- decimo tercero gráfico -->
+    <!-- Decimo octavo grafico -->
+    <div class="container mt-6">
+            <div class="row gy-4 justify-content-center align-items-center" style="margin-top: 160px;">
+                <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
+                    <div id="chart18" class="border border-dark border-4 rounded bg-light  mt-1" style="width: 1296px; max-width: 1296px; height: 628px; background-color: white; overflow: hidden;"></div>
+                </div>
+            </div>
+        </div>
+
+    <div class="container mt-5">
+                  <div class="row gy-4 justify-content-center align-items-center" style="margin-top: -50px;">
+          <!-- Decimo noveno grafico -->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart14" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:aliceblue ; overflow: hidden;"></div>
+              <div id="chart19" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
           </div>
-          <!-- decimocuarto gráfico -->
+          <!-- Vigesimo grafico-->
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart15" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:aliceblue ; overflow: hidden;"></div>
-          </div>
-          <!-- decimoquinto gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart16" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px;background-color:white ; overflow: hidden;"></div>
-          </div>
-          <!-- decimo sexto gráfico -->
-          <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-              <div id="chart17" class="border border-dark border-4 rounded bg-light" style="width: 628px; max-width: 628px; height: 600px; background-color:white ; overflow: hidden;"></div>
+              <div id="chart20" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
       </div>
   </div>
 </div>
+<!-- fin detalles varios -->
+
 </div>
 </div>
 
@@ -636,7 +652,6 @@ function createBar_dinamic(containerId, chartData1, title) {
             restore: { show: true },
             saveAsImage: { show: true },
             dataZoom: { show: true },
-            magicType: { type: ['line', 'bar','stack','scatter'] },
             dataView: { show: true, readOnly: true }
         }
     }, // Usamos la configuración de toolbox que se recibe como parámetro
@@ -745,38 +760,37 @@ function createLineChart(containerId, chartData1,chartData2, title) {
     chart.setOption(options);
 }
 
-// Función para gráficos de pastel
-function createPieChart(containerId, chartData, title,rad1,rad2) {
+function createPieChart(containerId, chartData, title, rad1, rad2) {
     const chart = echarts.init(document.getElementById(containerId));
+
+    // Validar datos
+    if (!chartData || chartData.length === 0) {
+        chart.showLoading({ text: 'No data available' });
+        return;
+    }
+
     const options = {
-        title: { text: title, left: '0%' },
+        title: { 
+            text: title, 
+            left: '0%' 
+        },
         color: [
-            '#546570',
-            '#ca8622',
-            '#61a0a8',
-            '#c23531',
-            '#2f4554',
-            '#d48265',
-            '#91c7ae',
-            '#749f83',
-            '#bda29a',
-            '#6e7074',
+            '#546570', '#ca8622', '#61a0a8', '#c23531', '#2f4554', 
+            '#d48265', '#91c7ae', '#749f83', '#bda29a', '#6e7074', 
             '#c4ccd3'
-  ],
+        ],
         legend: {
             top: '5%',
             left: 'center'
-          },
+        },
         tooltip: { trigger: 'item' },
         series: [
             {
                 type: 'pie',
-                startAngle: 180,
-                endAngle: 4,
                 radius: [rad1, rad2],
-                animationDelay: function(idx) { return idx * 200;},
+                animationDelay: idx => idx * 200,
                 data: chartData.map(item => ({
-                    value: item.value[1],
+                    value: item.value,
                     name: item.name
                 })),
                 emphasis: {
@@ -795,8 +809,10 @@ function createPieChart(containerId, chartData, title,rad1,rad2) {
             }
         }
     };
+
     chart.setOption(options);
 }
+
 
 // Función para gráficos de dispersión
 function createScatterChart(containerId, chartData, title) {
@@ -871,14 +887,18 @@ function createScatterChart(containerId, chartData, title) {
     // export
     
     // picking
-    // createLineChart('chart12', data.chart12, data.line9,'12Repetición de Clientes');
+    createBar_dinamic('chart12', data.chart12,'12. Pedidos trabajados por día');
+    createBar_dinamic('chart13', data.chart13, '13.SKU"s seleccionado por día');
+    createBar_dinamic('chart14', data.chart14, '14.Ubicaciones recorridas por día');
+    createBar_dinamic('chart15', data.chart15, '15.Piezas seleccionadas por día');
+    createBar_dinamic('chart16', data.chart16, '16.Categorias más frecuantes');
+    createBar_dinamic('chart17', data.chart17, '17.Ranking de Operadores');
     // picking
 
     // varios
-    createScatterChart('chart13', data.chart13, '13.Clientes y Unidades');
-    createPieChart('chart14', data.chart14, '14.Destinos y Paletas','40%','60%');
-    createPieChart('chart15', data.chart15, '15.Clientes y Cajas','40%','60%');
-    createBarChart('chart16', data.chart16, '16.Repetición de Clientes');
+    createBar_dinamic('chart18', data.chart18, '18.Top Clientes(cajas despachadas)');
+    createBar_dinamic('chart19', data.chart19, '19.Paletas pendientes por despacho');
+    createPieChart('chart20', data.chart20, '20.Vias de despacho por equipos','40%','60%');
     // varios
     
 }

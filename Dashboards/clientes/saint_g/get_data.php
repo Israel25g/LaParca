@@ -111,7 +111,7 @@ $whereClause_im
 GROUP BY
 mes
 ";
-// echo $query1;
+
 $result1 = $conn->query($query1);
 $total_paletas_Recibidas= [];
 $total_cajas = [];
@@ -257,6 +257,7 @@ foreach ($vehicles as $index => $vehiculo) {
         'type' => 'bar',
         'stack' => 'total', // Configuración para apilar las barras
         'data' => $data,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => [
             'color' => $color, // Color personalizado para la serie
         ],
@@ -365,6 +366,7 @@ foreach ($Paises as $index => $Pais) {
         'type' => 'bar',
         'stack' => 'total', // Configuración para apilar las barras
         'data' => $data,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => [
             'color' => $color, // Color personalizado para la serie
         ],
@@ -460,6 +462,7 @@ foreach ($Paises as $index => $Pais) {
         'name' => $Pais . ' - Paletas Despachadas',
         'type' => 'bar',
         'data' => $data_despachadas,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => [
             'color' => $color_despachadas, // Color personalizado para la serie de despachadas
         ],
@@ -469,6 +472,7 @@ foreach ($Paises as $index => $Pais) {
         'name' => $Pais . ' - Paletas Pendientes',
         'type' => 'line',
         'data' => $data_pendientes,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => [
             'color' => $color_pendientes, // Color personalizado para la serie de pendientes
         ],
@@ -562,6 +566,7 @@ foreach ($Paises as $index => $Pais) {
     $series[] = [
         'name' => $Pais . ' - Pedidos empacados',
         'type' => 'bar',
+        'emphasis'=>[ 'focus'=>'series'],
         'data' => $data_despachadas,
         'itemStyle' => [
             'color' => $color_despachadas, // Color personalizado para la serie de despachadas
@@ -571,6 +576,7 @@ foreach ($Paises as $index => $Pais) {
     $series[] = [
         'name' => $Pais . ' - Cajas empacadas',
         'type' => 'bar',
+        'emphasis'=>[ 'focus'=>'series'],
         'data' => $data_pendientes,
         'itemStyle' => [
             'color' => $color_pendientes, // Color personalizado para la serie de pendientes
@@ -664,6 +670,7 @@ foreach ($OIDs as $index => $OID) {
         'name' => $OID . ' - Cajas empacadas',
         'type' => 'bar',
         'data' => $data_cajas,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => [
             'color' => $color_cajas, // Color personalizado para la serie de cajas
         ],
@@ -673,6 +680,7 @@ foreach ($OIDs as $index => $OID) {
         'name' => $OID . ' - Paletas empacadas',
         'type' => 'bar',
         'data' => $data_paletas,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => [
             'color' => $color_paletas, // Color personalizado para la serie de paletas
         ],
@@ -756,6 +764,7 @@ foreach ($sucursales as $index => $sucursal) {
         'type' => 'line',
         'stack' => 'total', // Configuración para apilar las barras
         'data' => $data_avance,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
     ];
     
@@ -764,6 +773,7 @@ foreach ($sucursales as $index => $sucursal) {
         'type' => 'bar',
         'stack' => 'total', // Configuración para apilar las barras
         'data' => $data_unidades,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette2[$index % count($colorPalette2)]],
     ];
 }
@@ -852,6 +862,7 @@ foreach ($oids as $index => $oid) {
         'name' => "$oid - Total Pedido Empacado",
         'type' => 'bar',
         'data' => $data_empacado,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
     ];
     
@@ -859,6 +870,7 @@ foreach ($oids as $index => $oid) {
         'name' => "$oid - Total Pedido Despachado",
         'type' => 'bar',
         'data' => $data_despachado,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
     ];
     
@@ -866,6 +878,7 @@ foreach ($oids as $index => $oid) {
         'name' => "$oid - Porcentaje de Avance",
         'type' => 'bar',
         'data' => $data_porcentaje_avance,
+        'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
     ];
 }
@@ -893,7 +906,7 @@ FROM
 ";
 
 // Realizando las conexiones
-$result10 = $conn->query($query11);
+$result11 = $conn->query($query11);
 
 // Ejecutar la consulta
 $query11 = str_replace('$whereClause_ex', '', $query11); // Aquí se puede agregar un filtro adicional si es necesario
@@ -973,31 +986,70 @@ $chart11 = [
     'series' => $series,
 ];
 
-// Gráfico 12: Ejemplo adicional de consulta
+
+// Gráfico 12: Consulta para una única categoría
 $query12 = "
 SELECT 
-DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
-Cliente,
-SUM(Pend) AS total_cajas
+    DATE_FORMAT(Confirmado, '%Y-%m') AS mes,
+    COUNT(CASE WHEN Confirmado IS NOT NULL THEN OID ELSE NULL END) AS total_pedido_Confirmado
 FROM 
-picking
+    picking
 $whereClause_pk
-GROUP BY
-cliente
+GROUP BY 
+    mes
 ";
+
 $result12 = $conn->query($query12);
-$chart12 = [];
-if ($result12->num_rows > 0) {
-    while ($row = $result12->fetch_assoc()) {
-        $chart12[] = [
-            'name' => $row['Cliente'] ? $row['Cliente'] : 'NO DATA',
-            'value' => [
-                $row['mes'],
-                (int)$row['total_cajas'],
-            ],
-        ];
-    }
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+
+
+// Procesar resultados
+while ($row = $result12->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $total = $row['total_pedido_Confirmado'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
 }
+
+// Preparar el JSON para el gráfico
+$chart12 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => 'Total Confirmado', // Nombre de la serie
+        'type' => 'line',             // Tipo de gráfico
+        'smooth' => true,
+        'data' => $dataSeries,       // Datos de la serie
+        'areaStyle' => [
+            'opacity' => 0.8,
+            'color' => [
+                'type' => 'linear',
+                'x' => 0,
+                'y' => 0,
+                'x2' => 0,
+                'y2' => 1,
+                'colorStops' => [
+                    [
+                        'offset' => 0,
+                        'color' => 'rgba(255, 222, 102, 0.53)', // Color inicial
+                    ],
+                    [
+                        'offset' => 1,
+                        'color' => 'rgb(255, 153, 102)',  // Color final
+                    ]
+                ]
+            ]
+        ]
+    ]],
+];
+
+
 
 // terminan los graficos de Picking
 
@@ -1005,107 +1057,436 @@ if ($result12->num_rows > 0) {
 // Gráfico 13: Total de und_Recibidas por Cliente y mes
 $query13 = "
 SELECT 
-    DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-    sucursal,
-    UND,
-    UND_Pick
+    DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
+    SUM(CASE WHEN Confirmado IS NOT NULL THEN Pend ELSE NULL END) AS total_SKU_Confirmado
 FROM 
-    exports
-    $whereClause_ex
-    
+    picking
+    $whereClause_pk
+GROUP BY 
+    mes
     ";
-$result13 = $conn->query($query13);
-$chart13 = [];
-if ($result13->num_rows > 0) {
+
+    $result13 = $conn->query($query13);
+
+    // Inicializar arrays para almacenar los datos estructurados
+    $categories = []; // Fechas para el eje X
+    $dataSeries = []; // Datos de la única categoría
+    
+
+    
+    // Procesar resultados
     while ($row = $result13->fetch_assoc()) {
-        $chart13[] = [
-            'name' => $row['sucursal'] ? $row['sucursal'] : 'NO DATA',
-            'value' => [
-                (int)$row['UND_Pick'],
-                (int)$row['UND'],
-            ],
-        ];
-}
-}
+        $fecha = $row['mes'] ?? 'NO DATA';
+        $total = $row['total_SKU_Confirmado'] ?? 0;
+    
+        // Agregar la fecha y el dato correspondiente
+        $categories[] = $fecha;
+        $dataSeries[] = $total;
+    }
+    
+    // Preparar el JSON para el gráfico
+    $chart13 = [
+        'categories' => $categories, // Eje X
+        'series' => [[
+            'name' => ' Stock Keeping Unit', // Nombre de la serie
+            'type' => 'line',             // Tipo de gráfico
+            'smooth' => true,
+            'data' => $dataSeries,       // Datos de la serie
+            'areaStyle' => [
+                'opacity' => 0.8,
+                'color' => [
+                    'type' => 'linear',
+                    'x' => 0,
+                    'y' => 0,
+                    'x2' => 0,
+                    'y2' => 1,
+                    'colorStops' => [
+                        [
+                            'offset' => 0,
+                            'color' => 'rgb(255, 221, 102)', // Color inicial
+                        ],
+                        [
+                            'offset' => 1,
+                            'color' => 'rgb(102, 51, 153)',  // Color final
+                        ]
+                    ]
+                ]
+            ]
+        ]],
+    ];
 
 // Gráfico 14: Total de paletas por pais y mes
 $query14 = "
 SELECT 
-DATE_FORMAT(ETA, '%Y-%m-%d') AS mes,
-pais,
-SUM(paletas) AS total_paletas
+DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
+COUNT(CASE WHEN Confirmado IS NOT NULL THEN Ubic ELSE NULL END) AS Ubic_rec
 FROM 
-imports
-$whereClause_im
-
+picking
+$whereClause_pk
+GROUP BY 
+    mes
 ";
 $result14 = $conn->query($query14);
-$chart14 = [];
-if ($result14->num_rows > 0) {
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+$colorPalette = ['#c4ccd3'];
+
+// Procesar resultados
 while ($row = $result14->fetch_assoc()) {
-    $chart14[] = [
-        'name' => $row['pais'] ? $row['pais'] : 'NO DATA',
-        'value' => [
-            $row['mes'],
-            (int)$row['total_paletas'],
-        ],
-    ];
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $total = $row['Ubic_rec'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
 }
-}
+
+// Preparar el JSON para el gráfico
+$chart14 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => ' Conteo de ubicaciones recorridas', // Nombre de la serie
+        'type' => 'line',             // Tipo de gráfico
+        'smooth' => true,
+        'data' => $dataSeries,       // Datos de la serie
+        'areaStyle' => [
+            'opacity' => 0.8,
+            'color' => [
+                'type' => 'linear',
+                'x' => 0,
+                'y' => 0,
+                'x2' => 0,
+                'y2' => 1,
+                'colorStops' => [
+                    [
+                        'offset' => 0,
+                        'color' => 'rgb(102, 204, 255)', // Color inicial
+                    ],
+                    [
+                        'offset' => 1,
+                        'color' => 'rgb(0, 102, 204)',  // Color final
+                    ]
+                ]
+            ]
+        ]
+    ]],
+];
 
 // Gráfico 15: Total de cajas por Cliente y mes
 $query15 = "
 SELECT 
-DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-pais,
-    SUM(Cajas) AS total_cajas
-    FROM 
-    exports
-$whereClause_ex
-
+DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
+SUM(CASE WHEN Confirmado IS NOT NULL THEN Pend ELSE NULL END) AS Ubic_rec
+FROM 
+picking
+$whereClause_pk
+GROUP BY 
+    mes
 ";
 $result15 = $conn->query($query15);
-$chart15= [];
-if ($result15->num_rows > 0) {
-    while ($row = $result15->fetch_assoc()) {
-        $chart15[] = [
-            'name' => $row['pais'] ? $row['pais'] : 'NO DATA',
-            'value' => [
-                $row['mes'],
-                (int)$row['total_cajas'],
-            ],
-        ];
-    }
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+$colorPalette = ['#2f4554'];
+
+// Procesar resultados
+while ($row = $result15->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $total = $row['Ubic_rec'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
 }
+
+// Preparar el JSON para el gráfico
+$chart15 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => 'Total de Piezas', // Nombre de la serie
+        'type' => 'line',             // Tipo de gráfico
+        'smooth' => true,
+        'data' => $dataSeries,       // Datos de la serie
+        'areaStyle' => [
+            'opacity' => 0.8,
+            'color' => [
+                'type' => 'linear',
+                'x' => 0,
+                'y' => 0,
+                'x2' => 0,
+                'y2' => 1,
+                'colorStops' => [
+                    [
+                        'offset' => 0,
+                        'color' => 'rgb(153, 102, 255)', // Color inicial
+                    ],
+                    [
+                        'offset' => 1,
+                        'color' => 'rgb(102, 51, 153)',  // Color final
+                    ]
+                ]
+            ]
+        ]
+    ]],
+];
 
 // Gráfico 16: Ejemplo adicional de consulta
 $query16 = "
 SELECT 
-DATE_FORMAT(FRD, '%Y-%m-%d') AS mes,
-pais,
-SUM(paletas) AS total_und_Recibidas
+DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
+Categoria,
+SUM(CASE WHEN Confirmado IS NOT NULL THEN CIA ELSE NULL END) AS Ubic_rec
+FROM 
+picking
+$whereClause_pk
+GROUP BY 
+    mes
+";
+$result16 = $conn->query($query16);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+$colorPalette = ['#91c7ae'];
+
+// Procesar resultados
+while ($row = $result16->fetch_assoc()) {
+    $fecha = $row['Categoria'] ?? 'NO DATA';
+    $total = $row['Ubic_rec'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
+}
+
+// Preparar el JSON para el gráfico
+$chart16 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => 'Series Name',  // Nombre de la serie
+        'type' => 'line',         // Tipo de gráfico
+        'smooth' => true,
+        'data' => $dataSeries,    // Datos de la serie
+        'areaStyle' => [
+            'opacity' => 0.8,
+            'color' => [
+                'type' => 'linear',
+                'x' => 0,
+                'y' => 0,
+                'x2' => 0,
+                'y2' => 1,
+                'colorStops' => [
+                    [
+                        'offset' => 0,
+                        'color' => 'rgb(200, 200, 200)', // Color inicial
+                    ],
+                    [
+                        'offset' => 1,
+                        'color' => 'rgb(128, 128, 128)',  // Color final
+                    ]
+                ]
+            ]
+        ]
+    ]]
+];
+
+
+
+// Gráfico 17: Ejemplo adicional de consulta
+$query17 = "
+SELECT 
+DATE_FORMAT(Confirmado, '%Y-%m-%d') AS mes,
+Usuario,
+COUNT(CASE WHEN Confirmado IS NOT NULL THEN Usuario ELSE NULL END) AS Ubic_rec
+FROM 
+picking
+$whereClause_pk
+GROUP BY 
+    Usuario
+";
+$result17 = $conn->query($query17);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+$colorPalette = ['#61a0a8'];
+
+// Procesar resultados
+while ($row = $result17->fetch_assoc()) {
+    $fecha = $row['Usuario'] ?? 'NO DATA';
+    $total = $row['Ubic_rec'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
+}
+
+// Preparar el JSON para el gráfico
+$chart17 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => $categories, // Nombre de la serie
+        'type' => 'line', 
+        'smooth' => true,            // Tipo de gráfico
+        'data' => $dataSeries,       // Datos de la serie
+        'areaStyle' => [
+            'opacity' => 0.8,
+            'color' => [
+                'type' => 'linear',
+                'x' => 0,
+                'y' => 0,
+                'x2' => 0,
+                'y2' => 1,
+                'colorStops' => [
+                    [
+                        'offset' => 0,
+                        'color' => 'rgb(128, 255, 165)', // Color inicial
+                    ],
+                    [
+                        'offset' => 1,
+                        'color' => 'rgb(1, 191, 236)',  // Color final
+                    ]
+                ]
+            ]
+        ]
+    ]],
+];
+
+
+
+// Gráfico 18: Ejemplo adicional de consulta
+$query18 = "
+SELECT 
+DATE_FORMAT(FRD, '%Y-%m') AS mes,
+Cliente,
+Sum(CASE WHEN FRD IS NOT NULL THEN Cajas ELSE NULL END) AS Ubic_rec
 FROM 
 exports
 $whereClause_ex
-
+GROUP BY 
+    mes
 ";
-$result16 = $conn->query($query16);
-$chart16 = [];
-if ($result16->num_rows > 0) {
-while ($row = $result16->fetch_assoc()) {
-    $chart16[] = [
-        'name' => $row['pais'] ? $row['pais'] : 'NO DATA',
-        'value' => [
-            $row['mes'],
-            (int)$row['total_und_Recibidas'],
+$result18 = $conn->query($query18);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];  // Paleta de colores
+
+// Procesar resultados
+while ($row = $result18->fetch_assoc()) {
+    $fecha = $row['Cliente'] ?? 'NO DATA';
+    $total = $row['Ubic_rec'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
+}
+
+// Preparar el JSON para el gráfico
+$chart18 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => $categories, // Nombre de la serie
+        'type' => 'bar',             // Tipo de gráfico
+        'data' => $dataSeries,       // Datos de la serie
+        'itemStyle' => [
+            'color' => $colorPalette[4], // Color de la serie
         ],
-    ];
+    ]],
+];
+
+// Gráfico 19: Ejemplo adicional de consulta
+$query19 = "
+SELECT 
+DATE_FORMAT(FRD, '%Y-%m') AS mes,
+COUNT(CASE WHEN Despachado IS NULL THEN Paletas ELSE NULL END) AS Ubic_rec
+FROM 
+exports
+$whereClause_ex
+GROUP BY 
+    mes
+";
+$result19 = $conn->query($query19);
+
+// Inicializar arrays para almacenar los datos estructurados
+$categories = []; // Fechas para el eje X
+$dataSeries = []; // Datos de la única categoría
+
+// Paleta de colores para la serie (puedes cambiar si necesitas)
+$colorPalette = ['#61a0a8'];
+
+// Procesar resultados
+while ($row = $result19->fetch_assoc()) {
+    $fecha = $row['mes'] ?? 'NO DATA';
+    $total = $row['Ubic_rec'] ?? 0;
+
+    // Agregar la fecha y el dato correspondiente
+    $categories[] = $fecha;
+    $dataSeries[] = $total;
 }
+
+// Preparar el JSON para el gráfico
+$chart19 = [
+    'categories' => $categories, // Eje X
+    'series' => [[
+        'name' => $categories, // Nombre de la serie
+        'type' => 'line',             // Tipo de gráfico
+        'data' => $dataSeries,       // Datos de la serie
+        'itemStyle' => [
+            'color' => $colorPalette[0], // Color de la serie
+        ],
+    ]],
+];
+
+
+// Gráfico 20: Ejemplo adicional de consulta
+$query20 = "
+    SELECT 
+        Via,
+        COUNT(*) * 100.0 / (SELECT COUNT(*) FROM imports $whereClause_im) AS total_carga
+    FROM 
+        imports
+    $whereClause_im
+    GROUP BY 
+        Via
+    ORDER BY 
+        Via
+";
+$result20 = $conn->query($query20);
+$chart20 = [];
+if ($result20->num_rows > 0) {
+    while ($row = $result20->fetch_assoc()) {
+        $chart20[] = [
+            'name' => $row['Via'] ? $row['Via'] : 'NO DATA',
+            'value' => round((float)$row['total_carga'], 2),
+        ];
+    }
 }
+
+
 // Terminan  los graficos de varios
+
+
+
+
 // Empaqueta los datos en un solo array
 $data = [
     // imports
+
     // variables del grafico 1
     'total_paletas_Recibidas' => $total_paletas_Recibidas,
     'total_cajas' => $total_cajas,
@@ -1118,7 +1499,7 @@ $data = [
     'total_mediano' => $total_mediano,
     'total_pequeño' => $total_pequeño,
     // variables del grafico 2
-    
+
     'chart3' => $chart3,
     'chart4' => $chart4,
     // imports
@@ -1128,20 +1509,24 @@ $data = [
     'chart6' => $chart6,
     'chart7' => $chart7,
     'chart8' => $chart8,
-    // exports
-    
-    // picking
     'chart9' => $chart9,
     'chart10' => $chart10,
     'chart11' => $chart11,
-    'chart12' => $chart12,
-    // picking
+    // exports
     
-    // varios
+    // picking
+    'chart12' => $chart12,
     'chart13' => $chart13,
     'chart14' => $chart14,
     'chart15' => $chart15,
     'chart16' => $chart16,
+    'chart17' => $chart17,
+    // picking
+    
+    // varios
+    'chart18' => $chart18,
+    'chart19' => $chart19,
+    'chart20' => $chart20,
     // varios
 ];
 
