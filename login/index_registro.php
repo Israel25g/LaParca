@@ -21,17 +21,17 @@ include("../apertura_sesion.php");
 </head>
 <body>
 
-    <style>
+<style>
         body{
-            background-image: url('../images/IMG_9533.JPG');
             margin: 0;
             padding: 0;
+            background: linear-gradient(20deg,rgba(12, 121, 72,0.95), rgba(38, 37, 68,0.8)), url('../images/IMG_9533.jpg');
             background-size: cover;
         }
     </style>
 
     <div class="overlay"></div>
-    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="../access_control/index/index_users.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Registro de usuarios</h1>
+    <h1 class="mt-3 nombre-tabla" style="margin: 10px;"><a href="../access_control/index/index_users2.php"><i class="bi bi-caret-left-fill arrow-back"></i></a>Registro de usuarios</h1>
 
     <?php
         if(isset($_GET['error'])){

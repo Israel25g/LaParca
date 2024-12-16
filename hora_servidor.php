@@ -124,7 +124,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             <ul class="my-nav" id="detallesOps">
                 <!-- <li class="nav-li"><a href="Index.html">Inicio</a></li> -->
                 <!-- <li class="nav-li"><a href="#">Capacitaciones</a></li> -->
-                <li class="nav-li"><a class="active" href="#">Mesa de Ayuda (Tickets)</a></li>
+                <li class="nav-li"><a href="./helpdesk.php">Mesa de Ayuda (Tickets)</a></li>
                 <li class="nav-li"><a href="./daily_plan/index_DP.php<?php session_id() ?>">Daily Plan</a></li>
                 <?php
                 if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
@@ -139,7 +139,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                 ?>
                 <?php
                 if ($_SESSION['rol'] === 'Admin' || $_SESSION['rol'] === 'EEMP') {
-                    echo '<li class="nav-li"><a href="./hora_servidor.php">Hora del Servidor</a></li>';
+                    echo '<li class="nav-li"><a class="active" href="./hora_servidor.php">Hora del Servidor</a></li>';
                 }
                 ?>
                 <li class="nav-li"><a class="cierre" href="login/CerrarSesion.php">Cerrar Sesión</a></li>
@@ -152,8 +152,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
     <!-- Links -->
     <div class="container-descripcion">
         <div class="bloque-descripcion">
-            <h2>¿En qué podemos ayudarte?</h2>
-            <h4>Selecciona una de las siguientes opciones para generar un ticket de soporte.</h4>
+            <h2>Esta es la Fecha y hora actual del servidor:</h2>
         </div>
     </div>
 
@@ -164,87 +163,16 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                 <div class="bloque" id="bloque_mantenimiento">
                     <img loading="lazy" class="img_helpdesk" id="img_mantenimiento" src="images\Mantenimiento.webp" alt="">
                     <div class="my-text-overlay">
-                        <h3>Soporte de mantenimiento</h3>
-                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna reparación en la infraestructura de la empresa y/o departamento.</p>
+                        <p>
+                            <?php
+                            echo "Zona horaria (php): ".date_default_timezone_get();
+                            echo "<br>";
+                            echo "Fecha y hora del servidor: " . date('Y-m-d H:i:s');
+                            ?>
+                        </p>
                     </div>
                 </div>
             </a>
-            <!-- Fin de Mantenimiento -->
-
-            <!-- IT -->
-            <a href="host_virtual_TI/index/index_ti.php">
-                <div class="bloque" id="bloque_IT">
-                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="images\Tecnología.jpg" alt="">
-                    <div class="my-text-overlay">
-                        <h3>Soporte de Tecnología</h3>
-                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna reparación en el apartado de IT (Reparaciones y mantenimiento de equipos, reparación de software interno, etc...).</p>
-                    </div>
-                </div>
-            </a>
-            <!-- Fin de IT -->
-
-            <!-- EEMP -->
-            <a href="host_virtual_EEMP/index/index_eemp.php">
-                <div class="bloque" id="bloque_EEMP">
-                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://cdn.udax.edu.mx/blog/la-clave-del-exito-en-los-negocios-mejora-continua-y-optimizacion-de-procesos_1.jpg" alt="">
-                    <div class="my-text-overlay">
-                        <h3>Soporte de Mejoras</h3>
-                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar solicitudes de mejora/DEPIC's en cuanto al sistema DIPROP</p>
-                    </div>
-                </div>
-            </a>
-            <!-- Fin de EEMP -->
-            <!-- Seguimiento de temas -->
-            <?php
-            $usuarios_admitidos = ['igondola', 'agaray', 'nrivas', 'wlemos', 'riromero', 'kdelgado', 'ssalazar', 'abethancourt', 'jgrant', 'rolivero', 'igondola01'];
-            if (in_array($_SESSION['user'], $usuarios_admitidos)) {
-                echo '<a href="host_virtual_seguimiento/index/index_seguimiento.php">
-                                <div class="bloque" id="bloque_seguimiento">
-                                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
-                                    <div class="my-text-overlay">
-                                        <h3>Seguimiento de temas pendientes</h3>
-                                        <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
-                                    </div>
-                                </div>
-                              </a>';
-            }
-            ?>
-
-            <!-- <a href="host_virtual_seguimiento/index/index_seguimiento.php">
-                <div class="bloque" id="bloque_seguimiento">
-                    <img loading="lazy" class="img_helpdesk" id="img_IT" src="https://www.marketingdirecto.com/wp-content/uploads/2021/09/atencion-al-cliente.png" alt="">
-                    <div class="my-text-overlay">
-                        <h3>Seguimiento de temas pendientes</h3>
-                        <p>Este formulario es para darle seguimiento a los temas pendientes referentes al flujo de comunicación entre los departamentos de Operaciones y SAC</p>
-                    </div>
-                </div>
-            </a> -->
-            <!-- Fin de Seguimiento de temas -->
-
-            <!-- Sobre tiempo -->
-            <a target="https://forms.office.com/Pages/ShareFormPage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u&sharetoken=NhdNt0HuLG7WFd5Sc9QH" href="https://forms.office.com/Pages/ResponsePage.aspx?id=1za0vDzJD0-phmo__OXrx2b99J_0mT9Gmm12a6wX-nhUNU9NN0lCUTY0RzFENE1WRU5USFJEOE4zWC4u">
-                <div class="bloque" id="bloque_sobretiempo">
-
-                    <img loading="lazy" class="img_helpdesk" id="img_overtime" src="images\Sobretiempo.jpg" alt="">
-                    <div class="my-text-overlay">
-                        <h3>Solicitud de Sobretiempo</h3>
-                        <p>Este formulario es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud de sobretiempo.</p>
-                    </div>
-                </div>
-            </a>
-            <!-- Fín de sobretiempo -->
-
-            <!-- Compras -->
-            <a href="https://forms.office.com/r/JSRrVt475n" target="_blank" rel="noopener noreferrer">
-                <div class="bloque" id="bloque_cotización">
-                    <img loading="lazy" class="img_helpdesk" id="img_cotizacion" src="https://consultorfinancontable.com/wp-content/uploads/2024/03/mujer-asiatica-trabajando-traves-papeleo_53876-138148.jpg" alt="">
-                    <div class="my-text-overlay">
-                        <h3>Solicitud de orden de compra</h3>
-                        <p>Este helpdesk es exclusivamente para la generación de tickets con el objetivo de realizar alguna solicitud cotizaciones.</p>
-                    </div>
-                </div>
-            </a>
-            <!-- Fin de Compras -->
         </div>
     </div>
 
