@@ -18,9 +18,8 @@ $fecha_inicio = isset($_GET['fecha_inicio']) ? $_GET['fecha_inicio'] : null;
 $fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
 
 // Validar que los parámetros requeridos están presentes
-if (!$Cliente || !$fecha_inicio || !$fecha_final) {
-//    die("No cuenta con los permisos o parametros necesarios");
-$Cliente = '';
+if (!$fecha_inicio || !$fecha_final) {
+   die("No cuenta con los permisos o parametros necesarios");
 $fecha_inicio ='2000-01-01';
 $fecha_final='2000-01-01';
 }
