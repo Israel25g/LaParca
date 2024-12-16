@@ -83,8 +83,8 @@ JOIN estados ON users.estado_id = estados.id;
                                 toast: true,
                                 position: "top-end",
                                 showConfirmButton: false,
-                                timer: 7000,
-                                timerProgressBar: true,
+                                timer: 6000,
+                                timerProgressBar: false,
                                 didOpen: (toast) => {
                                     toast.onmouseenter = Swal.stopTimer;
                                     toast.onmouseleave = Swal.resumeTimer;
@@ -94,7 +94,7 @@ JOIN estados ON users.estado_id = estados.id;
                                 icon: "error",
                                 text: "<?php echo $_GET["error"] ?>"
                             });
-                        }, 700)
+                        }, 1000)
                     });
                 </script>
             <?php
