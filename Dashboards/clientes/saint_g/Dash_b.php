@@ -19,7 +19,10 @@ $fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
 
 // Validar que los parámetros requeridos están presentes
 if (!$Cliente || !$fecha_inicio || !$fecha_final) {
-   die("No cuenta con los permisos o parametros necesarios");
+//    die("No cuenta con los permisos o parametros necesarios");
+$Cliente = '';
+$fecha_inicio ='2000-01-01';
+$fecha_final='2000-01-01';
 }
 
 // Consultas SQL
@@ -260,6 +263,10 @@ body {
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
               <div id="chart20" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
+            <!-- vigesimo primer grafico -->
+          <!-- <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+              <div id="chart21" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
+          </div> -->
       </div>
   </div>
 </div>
@@ -853,7 +860,45 @@ function createScatterChart(containerId, chartData, title) {
     chart.setOption(options);
 }
 
+function createTreemapChart(containerId, chartData, title) {
+    const chart = echarts.init(document.getElementById(containerId));
+    
+    const options = {
+        title: { text: title, left: 'center' },
+        tooltip: { 
+            trigger: 'item',
+            formatter: (params) => 
+                `${params.name}<br/>Valor: ${params.value}<br/>Unidades: ${params.data?.extra?.unidades ?? 'N/A'}`
+        },
+        series: [
+            {
+                type: 'treemap',
+                data: chartData, // Datos jerárquicos
+                roam: true, // Permite desplazarse y hacer zoom
+                label: {
+                    show: true,
+                    formatter: '{b}' // Mostrar solo el nombre del nodo
+                },
+                breadcrumb: {
+                    show: true // Mostrar la navegación jerárquica
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    gapWidth: 1
+                }
+            }
+        ],
+        toolbox: {
+            feature: {
+                saveAsImage: { show: true },
+                dataView: { show: true, readOnly: true }
+            }
+        }
+    };
 
+    chart.setOption(options);
+}
 
     // Función para cargar y renderizar los gráficos
     async function loadCharts() {
@@ -901,6 +946,10 @@ function createScatterChart(containerId, chartData, title) {
     createPieChart('chart20', data.chart20, '20.Vias de despacho por equipos','40%','60%');
     // varios
     
+
+    // grafico de prueba
+    // createTreemapChart('chart21',data.chatr21,'21. grafico de prueba');
+    // grafioc de prueba
 }
     
 

@@ -1229,7 +1229,7 @@ $chart15 = [
                     ],
                     [
                         'offset' => 1,
-                        'color' => 'rgb(102, 51, 153)',  // Color final
+                        'color' => 'rgba(221, 25, 25, 0.78)',  // Color final
                     ]
                 ]
             ]
@@ -1351,7 +1351,7 @@ $chart17 = [
                 'colorStops' => [
                     [
                         'offset' => 0,
-                        'color' => 'rgb(128, 255, 165)', // Color inicial
+                        'color' => 'rgba(108, 78, 179, 0.39)', // Color inicial
                     ],
                     [
                         'offset' => 1,
@@ -1478,6 +1478,52 @@ if ($result20->num_rows > 0) {
 }
 
 
+// grafico de prueba, este es solo una prueba 
+
+$query21 = "
+SELECT
+    Sucursal,
+    DATE_FORMAT(FRD, '%Y-%m') AS mes,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN Avance_porcentaje ELSE 0 END) AS total_porcentaje_avance,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN UND ELSE 0 END) AS total_unidades
+FROM 
+    exports
+$whereClause_ex
+GROUP BY 
+    mes, Sucursal
+";
+
+$result21 = $conn->query($query9);
+
+// Inicializar datos jerárquicos
+$data = [];
+
+while ($row = $result21->fetch_assoc()) {
+    $sucursal = $row['Sucursal'] ?? 'NO DATA';
+    $mes = $row['mes'] ?? 'NO DATA';
+    $avance = (int)$row['total_porcentaje_avance'];
+    $unidades = (int)$row['total_unidades'];
+
+    // Buscar o inicializar la sucursal en el array
+    if (!isset($data[$sucursal])) {
+        $data[$sucursal] = [
+            'name' => $sucursal,
+            'children' => []
+        ];
+    }
+
+    // Agregar el mes como hijo de la sucursal
+    $data[$sucursal]['children'][] = [
+        'name' => $mes,
+        'value' => $avance, // Puedes usar total_unidades si prefieres
+        'extra' => ['unidades' => $unidades]
+    ];
+}
+
+// Convertir a formato JSON compatible con ECharts
+$treeData = array_values($data);
+
+
 // Terminan  los graficos de varios
 
 
@@ -1528,6 +1574,10 @@ $data = [
     'chart19' => $chart19,
     'chart20' => $chart20,
     // varios
+
+    // pruebas 
+    'treeData'=>$treeData,
+    // pruebas
 ];
 
 // Cierra la conexión
@@ -1535,6 +1585,4 @@ $conn->close();
 
 // Devuelve los datos en formato JSON
 echo json_encode($data);
-
 ?>
-
