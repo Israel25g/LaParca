@@ -28,6 +28,7 @@ if ($result2 && mysqli_num_rows($result2) > 0) {
 // version del usuario
 $getUserVersion = "SELECT last_seen_version_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_version_id DESC LIMIT 1";
 $getUserForm = "SELECT last_seen_form_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_form_id DESC LIMIT 1";
+$getUserNotis = "SELECT last_seen_notis_id FROM u366386740_versions_user WHERE user_id = '$id_usuario' ORDER BY last_seen_notis_id DESC LIMIT 1";
 
 $userResult = mysqli_query($conexion, $getUserVersion);
 $userResult2 = mysqli_query($conexion, $getUserForm);
@@ -47,11 +48,23 @@ if ($userResult2 && mysqli_num_rows($userResult2) > 0) {
 // mostrar modal
 $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $lastVersion;
 // $showModal2 = $userForm === null;
+$showModal3 = $userForm === null;
 
 
 ?>
 
+<script>
+    Notification.requestPermission().then(function(result) {
+        console.log(result);
+    });
 
+    var img = 'https://iplgsc.com/images/ADOC.jpg';
+    var text = 'Esta es una notificación push de IPL Group';
+    var notificacion = new Notification('IPL Group', {
+        body: text,
+        icon: img
+    });
+</script>
 
 
 <!DOCTYPE html>
@@ -89,7 +102,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
             }
         });
     </script>
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var showModal2 = <?php echo $showModal2 ? 'true' : 'false'; ?>;
             if (showModal2) {
@@ -97,6 +110,20 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                     keyboard: false
                 });
                 myModal2.show();
+            } else {
+                console.log('No se muestra el modal');
+            }
+        });
+    </script> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado completamente');
+            var showModal3 = <?php echo $showModal3 ? 'true' : 'false'; ?>;
+            if (showModal3) {
+                var myModal = new bootstrap.Modal(document.getElementById('notificaciones'), {
+                    keyboard: false
+                });
+                myModal.show();
             } else {
                 console.log('No se muestra el modal');
             }
@@ -142,6 +169,7 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
                     echo '<li class="nav-li"><a href="./hora_servidor.php">Hora del Servidor</a></li>';
                 }
                 ?>
+                <li class="nav-li" onclick="push();"><a href="#" class="cierre">Notificación push</a></li>
                 <li class="nav-li"><a class="cierre" href="login/CerrarSesion.php">Cerrar Sesión</a></li>
             </ul>
             <div class="sessid"><span class="id_sesion">Usuario: <?php echo ($_SESSION['usuario']) ?></span></div>
@@ -409,10 +437,56 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
         );
     </script> -->
 
+    <!-- ========================================================================================================================================== -->
+
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div
+        class="modal fade"
+        id="notificaciones"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-hidden="true">
+        <div
+            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md"
+            role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitleId">
+                        Implementación de notificaciones push
+                    </h3>
+                </div>
+                <div class="modal-body" style="::-webkit-scrollbar{width:0px ;}">
+                    <p>
+                        A partir de la fecha, el sistema DIPROP cuenta con la implementación de notificaciones push directamente integradas en el equipo esto con el objetivo de mejorar la trazabilidad de tareas y mejorar la comunicación dentro de las operaciones que se realicen dentro de la plataforma. Para esto, es necesario que el usuario autorice las notificaciones push haciendo click en este boton.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button id="habilitarNotificaciones" class="btn btn-primary">Hablitar Notificaciones</button>
+                        <script>
+                            window.addEventListener('load', () => {
+                                document.getElementById('habilitarNotificaciones').addEventListener('click', () =>{
+                                    Notification.requestPermission().then(function(permiso){
+                                        if(permiso === 'granted'){
+                                         console.log('Notificaciones habilitadas');
+                                        }
+                                    })
+                                })
+                            })
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="./host_virtual_TI/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
     <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/2.1.8/dataRender/datetime.js"></script>
@@ -420,6 +494,10 @@ $showModal = $userVersion !== null && $lastVersion !== null && $userVersion < $l
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.js"></script>
+
+
+
+
 </body>
 
 </html>
