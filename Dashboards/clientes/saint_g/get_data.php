@@ -1384,7 +1384,7 @@ $categories = []; // Fechas para el eje X
 $dataSeries = []; // Datos de la única categoría
 
 // Paleta de colores para la serie (puedes cambiar si necesitas)
-$colorPalette = ['#ca8622','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];  // Paleta de colores
+$colorPalette = ['#c4ccd3','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];  // Paleta de colores
 
 // Procesar resultados
 while ($row = $result18->fetch_assoc()) {
@@ -1404,7 +1404,7 @@ $chart18 = [
         'type' => 'bar',             // Tipo de gráfico
         'data' => $dataSeries,       // Datos de la serie
         'itemStyle' => [
-            'color' => $colorPalette[4], // Color de la serie
+            'color' => $colorPalette[1], // Color de la serie
         ],
     ]],
 ];
@@ -1574,10 +1574,6 @@ $data = [
     'chart19' => $chart19,
     'chart20' => $chart20,
     // varios
-
-    // pruebas 
-    'treeData'=>$treeData,
-    // pruebas
 ];
 
 // Cierra la conexión

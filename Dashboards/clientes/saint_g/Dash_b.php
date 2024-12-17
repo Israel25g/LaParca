@@ -20,8 +20,6 @@ $fecha_final = isset($_GET['fecha_final']) ? $_GET['fecha_final'] : null;
 // Validar que los parámetros requeridos están presentes
 if (!$fecha_inicio || !$fecha_final) {
    die("No cuenta con los permisos o parametros necesarios");
-$fecha_inicio ='2000-01-01';
-$fecha_final='2000-01-01';
 }
 
 // Consultas SQL
@@ -132,7 +130,7 @@ body {
         <div class="logo-container">
             <a href="https://iplgsc.com" target="_blank"><img class="logo" src="../../../images/IPL.png" alt="Logo_IPL_Group"></a>
         </div>
-        <a style=" font-size:xxx-large; margin:auto" href="../../dashboard_extern.php" class="link-offset-2 link-underline link-underline-opacity-0 fw-bold link-light ">Reportes externos: <?php echo($Cliente)?></a>
+        <a style=" font-size:xxx-large; margin:auto" href="../../dashboards.php" class="link-offset-2 link-underline link-underline-opacity-0 fw-bold link-light ">Reportes externos: <?php echo($Cliente)?></a>
         <div class="cuadroFecha">
             <p id="fecha-actual"></p>
             <p id="hora-actual">prueba</p>
