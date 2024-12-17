@@ -42,14 +42,14 @@
     <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/seguridad.png"  alt="Seguridad" style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
-    <div class="carousel-item" data-bs-interval="7500">
+    <!-- <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/cumpleaños_nov_1.jpg"  alt="cumpleaños 1"  style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
       <img src="../daily_plan/imagenes/cumpleaños_nov_2.jpg"  alt="cumpleaños 2"  style="width: 100%; height: 90%;display: flex;;margin-top:1%;z-index: 999;">
     </div>
     <div class="carousel-item" data-bs-interval="7500">
-      <img src="../daily_plan/imagenes/cumpleaños_nov_3.jpg" alt="cumpleaños 3"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;">
+      <img src="../daily_plan/imagenes/cumpleaños_nov_3.jpg" alt="cumpleaños 3"   style="width: 100%; height: 90%;display: flex;margin-top:1%;z-index: 999;"> -->
     </div>
   </div>
   <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide="prev">
