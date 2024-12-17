@@ -461,7 +461,7 @@ $showModal3 = $userForm === null;
                 </div>
                 <div class="modal-body" style="::-webkit-scrollbar{width:0px ;}">
                     <p>
-                        A partir de la fecha, el sistema DIPROP cuenta con la implementación de notificaciones push directamente integradas en el equipo esto con el objetivo de mejorar la trazabilidad de tareas y mejorar la comunicación dentro de las operaciones que se realicen dentro de la plataforma. Para esto, es necesario que el usuario autorice las notificaciones push haciendo click en este boton.
+                        A partir de la fecha, el sistema DIPROP cuenta con la implementación de notificaciones push directamente integradas en el equipo esto con el objetivo de mejorar la trazabilidad de tareas y mejorar la comunicación dentro de las operaciones que se realicen dentro de la plataforma. Para esto, es necesario que el usuario autorice las notificaciones push.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -471,7 +471,7 @@ $showModal3 = $userForm === null;
                                 document.getElementById('habilitarNotificaciones').addEventListener('click', () =>{
                                     Notification.requestPermission().then(function(permiso){
                                         if(permiso === 'granted'){
-                                         console.log('Notificaciones habilitadas');
+                                         document.getElementById('notificaciones').innerText = 'Se han habilitado las notificaciones push';
                                         }
                                     })
                                 })
@@ -481,6 +481,9 @@ $showModal3 = $userForm === null;
                 </div>
             </div>
         </div>
+    </div>
+    <div class="footer">
+        <p id="notificaciones"></p>
     </div>
 
     <script src="./host_virtual_TI/js/script.js"></script>
