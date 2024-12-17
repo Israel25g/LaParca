@@ -88,7 +88,6 @@ if (isset($_POST['submit'])) {
             // Configuración del correo
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento de TI');
             $mail->addAddress($info['correo'], $info['nombrecompleto']);  // Enviar al correo del solicitante
-            $mail->addCC('garayaalcibiades@gmail.com');  // Copia a un correo adicional si es necesario
 
             // Contenido del correo
             $mail->isHTML(true);
