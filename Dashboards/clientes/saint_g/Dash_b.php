@@ -1,13 +1,29 @@
 <?php
 
-// Incluir la configuración
-$config = include './config_dash.php'; 
+// Construir la URL para solicitar a get_dataM.php
+$conexion = 'PDO'; // O 'MySQLi'
+$baseD = 'default';
+$url = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=estandar";
 
-// Crear conexión PDO usando la configuración
+// Obtener la respuesta de get_dataM.php
+$response = file_get_contents($url);
+if ($response === false) {
+    die("Error al solicitar la configuración de la base de datos.");
+}
+
+// Convertir la respuesta JSON en un array PHP (si se devuelve en ese formato)
+$config = json_decode($response, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    die("Error al decodificar la respuesta: " . json_last_error_msg());
+}
+
+// Crear conexión PDO usando la configuración obtenida
 try {
-    $dbConfig = $config['db'];
-    $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['name']};charset=utf8mb4";
-    $pdo = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $dbConfig['options']);
+    $dsn = "mysql:host={$config['host']};dbname={$config['name']};charset=utf8mb4";
+    $pdo = new PDO($dsn, $config['user'], $config['pass'], $config['options']);
+    // echo "Conexión establecida con éxito.";
+
+
 } catch (PDOException $e) {
     die("Error de conexión: " . $e->getMessage());
 }

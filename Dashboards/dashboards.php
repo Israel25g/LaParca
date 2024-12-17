@@ -78,7 +78,7 @@
 
             </a>
 
-            <a href="#" rel="noopener noreferrer">
+            <a href="./clientes/saint_g/Dash_b.php?fecha_inicio=2000-01-01&fecha_final=2000-01-01&Cliente=" rel="noopener noreferrer">
                 <div class="bloque" id="bloque_mantenimiento">
                 <img loading="lazy" class="img_helpdesk  bg-success" id="logo-stg" alt="">
                     <div class="text-overlay">
