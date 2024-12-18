@@ -120,6 +120,7 @@
                     </div>
                 </div>
             <?php } ?>
+
         </span>
         <div class="fondo-tickets">
             <div class="">
@@ -167,14 +168,61 @@
                         </select>
                         <input type="text" name="estado" id="estado" value="Recibido" hidden>
                     </div>
+
                     <div class="form-group">
-                        <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">
+                        <input type="submit" id="submitBtn" name="submit" class="btn btn-primary btn-lg" value="Enviar">
+                            <div id="spinner" class="spinner-border text-secondary" role="status" style="display:none;">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                        </imput>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../../host_virtual_TI/js/script.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../../host_virtual_TI/js/script.js"></script> 
+    
+    <script>
+    // Seleccionar elementos clave
+    const form = document.querySelector("form");
+    const submitBtn = document.getElementById("submitBtn");
+    const spinner = document.getElementById("spinner");
+
+    // Tiempo en milisegundos para reactivar el botón (por ejemplo, 10 segundos)
+    const REACTIVATION_TIME = 100000;
+
+    // Evento para manejar el envío del formulario
+    form.addEventListener("submit", function (event) {
+        // Deshabilitar el botón de envío
+        submitBtn.classList.add("disabled"); // Clase visual de Bootstrap
+        submitBtn.setAttribute("disabled", "true"); // Deshabilitar funcionalmente
+
+        // Mostrar el spinner
+        spinner.classList.remove("d-none"); // Mostrar spinner usando clase Bootstrap
+
+        // Reactivar el botón después del tiempo especificado
+        setTimeout(() => {
+            spinner.classList.add("d-none"); // Ocultar el spinner
+            submitBtn.classList.remove("disabled");
+            submitBtn.removeAttribute("disabled");
+        }, REACTIVATION_TIME);
+    });
+
+    // Evento para manejar la recarga de la página
+    window.addEventListener("load", function () {
+        const mensajeAlerta = document.querySelector(".alerta-enviado");
+        if (mensajeAlerta && mensajeAlerta.innerText.trim() !== "") {
+            // Si hay un mensaje de alerta, ocultar el spinner y habilitar el botón
+            spinner.classList.add("d-none");
+            submitBtn.classList.remove("disabled");
+            submitBtn.removeAttribute("disabled");
+        }
+    });
+</script>
+
+
+    
     <?php include "../templates/footer.php"; ?>
 </body>
 
