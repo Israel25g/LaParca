@@ -142,7 +142,7 @@
     </div>
     </div>
 
-    <div class="carousel-item" data-bs-interval="7500">
+    <!-- <div class="carousel-item" data-bs-interval="7500">
       <div >
       <img loading="lazy" src="../daily_plan/imagenes/Cumpleaños_dic_1.png"  alt="cumpleaños 1" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
@@ -158,7 +158,7 @@
       <div >
       <img loading="lazy" src="../daily_plan/imagenes/Cumpleaños_dic_3.png"  alt="cumpleaños 3" style="width: 100%; height: 90%;display: flex;z-index: 999;">
       </div>
-    </div>
+    </div> -->
 
     <div class="carousel-item" data-bs-interval="7500">
       <div >
