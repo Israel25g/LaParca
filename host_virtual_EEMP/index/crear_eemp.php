@@ -182,28 +182,37 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../../host_virtual_TI/js/script.js"></script> 
-<script>
-    document.getElementById("submitBtn").addEventListener("click", function() {
-        // Deshabilitar el botón para que no pueda ser clickeado nuevamente
-        this.disabled = true;
+    
+    <script>
+    // Selecciona el formulario y el botón
+    const form = document.querySelector("form");
+    const submitBtn = document.getElementById("submitBtn");
+    const spinner = document.getElementById("spinner");
 
-        // Mostrar el spinner de carga
-        document.getElementById("spinner").style.display = "inline-block";
+    // Evento para manejar el envío del formulario
+    form.addEventListener("submit", function(event) {
+        // Deshabilitar el botón para prevenir múltiples envíos
+        submitBtn.disabled = true;
+
+        // Mostrar el spinner
+        spinner.style.display = "inline-block";
+
+        // No hacemos event.preventDefault(); porque queremos que el formulario se envíe normalmente
+
+        // El spinner y el botón se reanudarán después de que la página se recargue
     });
 
-    // Verifica si hay un mensaje en la alerta al recargar (indicando que el formulario fue procesado)
+    // Evento para manejar el estado al cargar la página (verificar si ya se procesó)
     window.addEventListener("load", function() {
         const mensajeAlerta = document.querySelector(".alerta-enviado");
         if (mensajeAlerta && mensajeAlerta.innerText.trim() !== "") {
-            // Si hay un mensaje, deshabilita el spinner y habilita el botón
-            document.getElementById("spinner").style.display = "none";
-            const submitBtn = document.getElementById("submitBtn");
-            if (submitBtn) {
-                submitBtn.disabled = false;
-            }
+            // Si hay un mensaje, el proceso se completó
+            spinner.style.display = "none";
+            submitBtn.disabled = false;
         }
     });
 </script>
+
     
     <?php include "../templates/footer.php"; ?>
 </body>
