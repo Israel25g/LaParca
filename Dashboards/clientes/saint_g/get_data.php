@@ -2,15 +2,24 @@
 <?php
 header('Content-Type: application/json');
 
-// Conexión a la base de datos
-$servername = "localhost";
-$username = "u366386740_IPLGroup";
-$password = "1plGr0up01*";
-$dbname = "u366386740_dataWarehouse";
+// URL del script dinámico que devuelve las credenciales
+$apiUrl = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashMySQLi.php?conexion=MySQLi&BaseD=estandar";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Realizar la solicitud HTTP para obtener las credenciales
+$response = file_get_contents($apiUrl);
 
-// Verifica la conexión
+// Decodificar la respuesta JSON
+$config = json_decode($response, true);
+
+// Verificar si ocurrió un error en la respuesta
+if (isset($config['error'])) {
+    die(json_encode(["error" => "No se pudieron obtener las credenciales: " . $config['error']]));
+}
+
+// Establecer la conexión a la base de datos usando las credenciales dinámicas
+$conn = new mysqli($config['host'], $config['user'], $config['pass'], $config['name']);
+
+// Verificar la conexión
 if ($conn->connect_error) {
     die(json_encode(["error" => "Conexión fallida: " . $conn->connect_error]));
 }
@@ -275,15 +284,15 @@ $chart3 = [
 // Gráfico 4: Ejemplo adicional de consulta
 $query4 = "
     SELECT 
-        DATE_FORMAT(ETA, '%Y-%m-%d') AS mes,
-        Pais,
         Tamano,
-        COUNT(Tamano) AS total_carga
+        COUNT(CASE WHEN Tamano IS NOT NULL THEN Tamano ELSE 0 END) AS total_carga
     FROM 
         imports
     $whereClause_im
-GROUP BY
-Tamano
+    GROUP BY 
+        Tamano
+    ORDER BY 
+        Tamano
 ";
 $result4 = $conn->query($query4);
 $chart4 = [];
@@ -291,10 +300,7 @@ if ($result4->num_rows > 0) {
     while ($row = $result4->fetch_assoc()) {
         $chart4[] = [
             'name' => $row['Tamano'] ? $row['Tamano'] : 'NO DATA',
-            'value' => [
-                (int)$row['mes'],
-                (int)$row['total_carga'],
-            ],
+            'value' => round((float)$row['total_carga'], 2),
         ];
     }
 }
@@ -1272,7 +1278,7 @@ while ($row = $result16->fetch_assoc()) {
 $chart16 = [
     'categories' => $categories, // Eje X
     'series' => [[
-        'name' => 'Series Name',  // Nombre de la serie
+        'name' => $fecha,  // Nombre de la serie
         'type' => 'line',         // Tipo de gráfico
         'smooth' => true,
         'data' => $dataSeries,    // Datos de la serie
@@ -1320,7 +1326,7 @@ $categories = []; // Fechas para el eje X
 $dataSeries = []; // Datos de la única categoría
 
 // Paleta de colores para la serie (puedes cambiar si necesitas)
-$colorPalette = ['#61a0a8'];
+$colorPalette = ['#91c7ae','#61a0a8','#c23531','#2f4554','#d48265','#91c7ae','#749f83','#6e7074','#546570','#c4ccd3'];  // Paleta de colores
 
 // Procesar resultados
 while ($row = $result17->fetch_assoc()) {
@@ -1337,29 +1343,10 @@ $chart17 = [
     'categories' => $categories, // Eje X
     'series' => [[
         'name' => $categories, // Nombre de la serie
-        'type' => 'line', 
+        'type' => 'bar', 
         'smooth' => true,            // Tipo de gráfico
         'data' => $dataSeries,       // Datos de la serie
-        'areaStyle' => [
-            'opacity' => 0.8,
-            'color' => [
-                'type' => 'linear',
-                'x' => 0,
-                'y' => 0,
-                'x2' => 0,
-                'y2' => 1,
-                'colorStops' => [
-                    [
-                        'offset' => 0,
-                        'color' => 'rgba(108, 78, 179, 0.39)', // Color inicial
-                    ],
-                    [
-                        'offset' => 1,
-                        'color' => 'rgb(1, 191, 236)',  // Color final
-                    ]
-                ]
-            ]
-        ]
+        'itemStyle' => ['color' => $colorPalette[$row % count($colorPalette)]],
     ]],
 ];
 

@@ -120,6 +120,7 @@
                     </div>
                 </div>
             <?php } ?>
+
         </span>
         <div class="fondo-tickets">
             <div class="">
@@ -167,14 +168,43 @@
                         </select>
                         <input type="text" name="estado" id="estado" value="Recibido" hidden>
                     </div>
+
                     <div class="form-group">
-                        <input type="submit" name="submit" class="btn btn-primary btn-lg" value="Enviar">
+                        <input type="submit" id="submitBtn" name="submit" class="btn btn-primary btn-lg" value="Enviar">
+                            <div id="spinner" class="spinner-border text-secondary" role="status" style="display:none;">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                        </imput>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../../host_virtual_TI/js/script.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../../host_virtual_TI/js/script.js"></script> 
+<script>
+    document.getElementById("submitBtn").addEventListener("click", function() {
+        // Deshabilitar el botón para que no pueda ser clickeado nuevamente
+        this.disabled = true;
+
+        // Mostrar el spinner de carga
+        document.getElementById("spinner").style.display = "inline-block";
+    });
+
+    // Verifica si hay un mensaje en la alerta al recargar (indicando que el formulario fue procesado)
+    window.addEventListener("load", function() {
+        const mensajeAlerta = document.querySelector(".alerta-enviado");
+        if (mensajeAlerta && mensajeAlerta.innerText.trim() !== "") {
+            // Si hay un mensaje, deshabilita el spinner y habilita el botón
+            document.getElementById("spinner").style.display = "none";
+            const submitBtn = document.getElementById("submitBtn");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+            }
+        }
+    });
+</script>
+    
     <?php include "../templates/footer.php"; ?>
 </body>
 

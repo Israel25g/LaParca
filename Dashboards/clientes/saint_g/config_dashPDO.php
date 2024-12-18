@@ -30,7 +30,8 @@ class DBConnection {
     // Método para obtener configuración según parámetros
     public static function getConfig($dbName) {
         if (!isset(self::$dbConfigs[$dbName])) {
-            throw new Exception("No existe configuración para la base de datos: '$dbName'");
+            http_response_code(400); // BAD conn
+            throw new Exception("No existe configuracion para la base de datos");
         }
 
         return self::$dbConfigs[$dbName];
@@ -38,22 +39,31 @@ class DBConnection {
 }
 
 // Obtener parámetros de la URL
-$conexionType = isset($_GET['conexion']) ? strtoupper($_GET['conexion']) : null; // Valores posibles: 'PDO', 'MySQLi'
-$dbName = isset($_GET['BaseD']) ? $_GET['BaseD'] : null;
+$conexionType = isset($_GET['conexion']) ? strtoupper(trim($_GET['conexion'])) : null;
+$dbName = isset($_GET['BaseD']) ? trim($_GET['BaseD']) : null;
+$ipl = isset($_GET['IPL']) ? trim($_GET['IPL']) : null;
 
 // Validar parámetros
-if (!$conexionType || !$dbName) {
-    http_response_code(400); // Bad Request
+if (!$conexionType || !$dbName || !$ipl) {
+    http_response_code(403); // Forbidden
     echo json_encode([
-        "error" => "Faltan parámetros necesarios: 'conexion' o 'BaseD'."
+        "error" => "No cuenta con los accesos necesarios. Faltan parametros."
     ]);
     exit;
 }
 
-if (!in_array($conexionType, ['PDO', 'MySQLi'])) {
+if (!in_array($conexionType, ['PDO'], true)) {
     http_response_code(400); // Bad Request
     echo json_encode([
-        "error" => "Tipo de conexión inválido. Use 'PDO' o 'MySQLi'."
+        "error" => "Tipo de conexión inválido."
+    ]);
+    exit;
+}
+
+if (!in_array($ipl, ['VALOR1', 'VALOR2'], true)) {
+    http_response_code(403); // Forbidden
+    echo json_encode([
+        "error" => "Valor de IPL invalido."
     ]);
     exit;
 }

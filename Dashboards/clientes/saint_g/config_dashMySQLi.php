@@ -1,7 +1,7 @@
 <?php
 
-class DBConnectionMySQLi {
-    // Configuraciones de conexión MySQLi
+class DBConnection {
+    // Configuraciones de conexión
     private static $dbConfigs = [
         'estandar' => [
             'host' => 'localhost',
@@ -26,50 +26,44 @@ class DBConnectionMySQLi {
         return self::$dbConfigs[$dbName];
     }
 
-    // Método para crear la conexión MySQLi
+    // Método para crear conexión MySQLi
     public static function createConnection($config) {
-        $mysqli = new mysqli($config['host'], $config['user'], $config['pass'], $config['name']);
+        $connection = new mysqli($config['host'], $config['user'], $config['pass'], $config['name']);
 
-        // Verificar si hay errores de conexión
-        if ($mysqli->connect_error) {
-            throw new Exception("Error en la conexión MySQLi: " . $mysqli->connect_error);
+        // Verificar conexión
+        if ($connection->connect_error) {
+            throw new Exception("Error de conexión MySQLi: " . $connection->connect_error);
         }
 
-        return $mysqli;
+        return $connection;
     }
 }
 
 // Obtener parámetros de la URL
-$conexionType = isset($_GET['conexion']) ? strtoupper($_GET['conexion']) : null; // Valores posibles: 'MySQLi'
 $dbName = isset($_GET['BaseD']) ? $_GET['BaseD'] : null;
 
 // Validar parámetros
-if (!$conexionType || !$dbName) {
+if (!$dbName) {
     http_response_code(400); // Bad Request
     echo json_encode([
-        "error" => "Faltan parámetros necesarios: 'conexion' o 'BaseD'."
-    ]);
-    exit;
-}
-
-if ($conexionType !== 'MySQLi') {
-    http_response_code(400); // Bad Request
-    echo json_encode([
-        "error" => "Tipo de conexión inválido. Use 'MySQLi'."
+        "error" => "Falta el parámetro necesario: 'BaseD'."
     ]);
     exit;
 }
 
 try {
     // Obtener la configuración de la base de datos
-    $config = DBConnectionMySQLi::getConfig($dbName);
+    $config = DBConnection::getConfig($dbName);
 
-    // Crear la conexión con MySQLi
-    $db = DBConnectionMySQLi::createConnection($config);
+    // Crear la conexión MySQLi
+    $connection = DBConnection::createConnection($config);
 
-    // Establecer encabezado JSON y devolver respuesta
+    // Responder con éxito
     header('Content-Type: application/json');
     echo json_encode($config);
+
+    // Cerrar la conexión
+    $connection->close();
 } catch (Exception $e) {
     http_response_code(500); // Internal Server Error
     echo json_encode([

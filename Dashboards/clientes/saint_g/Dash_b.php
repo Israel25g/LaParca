@@ -1,11 +1,9 @@
 <?php
 
-// Construir la URL para solicitar a get_dataM.php
-$conexion = 'PDO'; // O 'MySQLi'
-$baseD = 'default';
+// Construir la URL para solicitar a config_dashPDO.php
 $url = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=estandar";
 
-// Obtener la respuesta de get_dataM.php
+// Obtener la respuesta de config_dashPDO.php
 $response = file_get_contents($url);
 if ($response === false) {
     die("Error al solicitar la configuración de la base de datos.");
@@ -42,12 +40,12 @@ if (!$fecha_inicio || !$fecha_final) {
 try {
     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
     $stmt1 = $pdo->prepare("
-        SELECT SUM(Pend) AS suma_caja_pk,
-        SUM(Pend) AS suma_paletas_pk, 
-        SUM(Pend) AS suma_pedidos_en_proceso_pk,
-        SUM(CASE WHEN Categoria = 'Categoría A' THEN Pend ELSE 0 END) AS suma_CBM_finalizado_ex,
+        SELECT SUM(Cajas_Pick) AS suma_caja_pk,
+        SUM(Paletas) AS suma_paletas_pk, 
+        COUNT(CASE WHEN Liberado IS NOT NULL AND Pickeado IS NULL THEN OID ELSE 0 END) AS suma_pedidos_en_proceso_pk,
+        SUM(CASE WHEN Pickeado IS NOT NULL THEN KG ELSE 0 END) AS suma_CBM_finalizado_ex,
         SUM(CASE WHEN Categoria = 'Categoría B' THEN Pend ELSE 0 END) AS suma_CBM_pendiente_ex,
-        SUM(Pend) AS suma_unidad_pk
+        SUM(Und) AS suma_unidad_pk
         FROM picking
         WHERE CIA = :cliente AND Confirmado >= :fecha_inicio AND Confirmado <= :fecha_final
     ");
