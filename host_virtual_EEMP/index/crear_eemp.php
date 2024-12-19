@@ -11,15 +11,15 @@ require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 // Inicializamos la variable de control de envío rápido
-if (!isset($_SESSION['is_disabled'])) {
-    $_SESSION['is_disabled'] = false; // Inicialmente, el botón está habilitado
+if (!isset($button['is_disabled'])) {
+    $button['is_disabled'] = false; // Inicialmente, el botón está habilitado
 }
 
 $resultado = ['mensaje' => ''];
 
 // Verificar si se ha enviado el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['is_disabled'] = true; // Deshabilitamos el botón al enviar
+    $button['is_disabled'] = true; // Deshabilitamos el botón al enviar
 
     $config = include '../config.php';
 
@@ -74,18 +74,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->send();
 
         $resultado['mensaje'] = 'El Ticket ha sido agregado con éxito y el correo se envió correctamente.';
-        $_SESSION['is_disabled'] = false; // Reactivamos el botón
+        $button['is_disabled'] = false; // Reactivamos el botón
     } catch (PDOException $error) {
         $resultado['error'] = true;
         $resultado['mensaje'] = 'Error en la base de datos: ' . $error->getMessage();
-        $_SESSION['is_disabled'] = false; // Reactivamos el botón
+        $button['is_disabled'] = false; // Reactivamos el botón
     } catch (Exception $e) {
         $resultado['error'] = true;
         $resultado['mensaje'] = 'Error al enviar el correo: ' . $e->getMessage();
-        $_SESSION['is_disabled'] = false; // Reactivamos el botón
+        $button['is_disabled'] = false; // Reactivamos el botón
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -189,10 +190,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="hidden" name="estado" value="Recibido">
                 </div>
                 <div class="form-group">
-                    <button type="submit" id="submitBtn" class="btn btn-primary btn-lg" <?= $_SESSION['is_disabled'] ? 'disabled' : '' ?>>Enviar</button>
-                    <div id="spinner" class="spinner-border text-secondary" role="status" style="display: none;">
+                    <button type="submit" id="submitBtn" class="btn btn-primary btn-lg" <?= $button['is_disabled'] ? 'disabled' : '' ?>>Enviar
+                    <div id="spinner" class="spinner-border text-light" role="status" style="display: none;">
                         <span class="visually-hidden">Cargando...</span>
                     </div>
+                    </button>
                 </div>
             </form>
         </div>
