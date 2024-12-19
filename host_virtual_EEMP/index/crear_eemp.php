@@ -25,9 +25,12 @@
     // Inicializamos resultado con un valor predeterminado para evitar el error
     $resultado = ['mensaje' => ''];
 
-    if (isset($_POST['submit'])) {
-        // echo "Formulario enviado.<br>"; // Debug
 
+
+// Verificar si se ha enviado el formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Registrar el tiempo actual en una variable de sesión
+    $_SESSION['form_last_submit_time'] = time();
         $config = include '../config.php';
 
         try {
@@ -77,7 +80,7 @@
 
             $mail->setFrom('ticketpruebas1@gmail.com', 'Departamento EEMP');
             $mail->addAddress($tickets['correo']);
-            $mail->addAddress('israel@iplgsc.com'); // Correo adicional
+            // $mail->addAddress('israel@iplgsc.com'); // Correo adicional
             $mail->addAddress('alcibiades@iplgsc.com'); //correo adicional si es necesario
 
             $mail->isHTML(false);
@@ -101,6 +104,18 @@
             $resultado['mensaje'] = 'Error al enviar el correo: ' . $e->getMessage();
         }
     }
+
+    // Determinar si el botón debe estar deshabilitado
+$is_disabled = false;
+if (isset($_SESSION['form_last_submit_time'])) {
+    $elapsed_time = time() - $_SESSION['form_last_submit_time'];
+    if ($elapsed_time <= 5) { // Si han pasado menos de 10 segundos
+        $is_disabled = true;
+    } else {
+        // Restablecer el estado cuando pasa el tiempo
+        unset($_SESSION['form_last_submit_time']);
+    }
+}
     ?>
 
     <?php include "../../host_virtual_EEMP/componentesxd/header.php"; ?>
@@ -170,11 +185,20 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" id="submitBtn" name="submit" class="btn btn-primary btn-lg" value="Enviar">
-                            <div id="spinner" class="spinner-border text-secondary" role="status" style="display:none;">
+                        <?php if ($is_disabled) { ?>
+                            <!-- Mostrar botón deshabilitado y spinner -->
+                            <button type="button" class="btn btn-secondary btn-lg" disabled>
+                                Enviando...
+                            </button>
+                            <div id="spinner" class="spinner-border text-secondary" role="status">
                                 <span class="visually-hidden">Cargando...</span>
                             </div>
-                        </imput>
+                        <?php } else { ?>
+                            <!-- Mostrar botón activo -->
+                            <button type="submit" id="submitBtn" name="submit" class="btn btn-primary btn-lg">
+                                Enviar
+                            </button>
+                        <?php } ?>
                     </div>
                 </form>
             </div>
@@ -183,43 +207,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../../host_virtual_TI/js/script.js"></script> 
     
-    <script>
-    // Seleccionar elementos clave
-    const form = document.querySelector("form");
-    const submitBtn = document.getElementById("submitBtn");
-    const spinner = document.getElementById("spinner");
-
-    // Tiempo en milisegundos para reactivar el botón (por ejemplo, 10 segundos)
-    const REACTIVATION_TIME = 100000;
-
-    // Evento para manejar el envío del formulario
-    form.addEventListener("submit", function (event) {
-        // Deshabilitar el botón de envío
-        submitBtn.classList.add("disabled"); // Clase visual de Bootstrap
-        submitBtn.setAttribute("disabled", "true"); // Deshabilitar funcionalmente
-
-        // Mostrar el spinner
-        spinner.classList.remove("d-none"); // Mostrar spinner usando clase Bootstrap
-
-        // Reactivar el botón después del tiempo especificado
-        setTimeout(() => {
-            spinner.classList.add("d-none"); // Ocultar el spinner
-            submitBtn.classList.remove("disabled");
-            submitBtn.removeAttribute("disabled");
-        }, REACTIVATION_TIME);
-    });
-
-    // Evento para manejar la recarga de la página
-    window.addEventListener("load", function () {
-        const mensajeAlerta = document.querySelector(".alerta-enviado");
-        if (mensajeAlerta && mensajeAlerta.innerText.trim() !== "") {
-            // Si hay un mensaje de alerta, ocultar el spinner y habilitar el botón
-            spinner.classList.add("d-none");
-            submitBtn.classList.remove("disabled");
-            submitBtn.removeAttribute("disabled");
-        }
-    });
-</script>
+    
 
 
     
