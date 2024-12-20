@@ -1,7 +1,7 @@
 <?php
 
 // Construir la URL para solicitar a config_dashPDO.php
-$url = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=estandar&IPL=VALOR1";
+$url = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=estandar";
 
 // Obtener la respuesta de config_dashPDO.php
 $response = file_get_contents($url);
@@ -274,15 +274,11 @@ body {
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
               <div id="chart20" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
-        </div>
-        <!-- vigesimo primer grafico -->
-        <!-- <div class="container mt-6">
-            <div class="row gy-4 justify-content-center align-items-center" style="margin-top: -30px;">
-                <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
-                    <div id="chart21" class="border border-dark border-4 rounded bg-light  mt-1" style="width: 1296px; max-width: 1296px; height: 628px; background-color: white; overflow: hidden;"></div>
-                </div>
-            </div>
-        </div> -->
+            <!-- vigesimo primer grafico -->
+          <!-- <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+              <div id="chart21" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
+          </div> -->
+      </div>
   </div>
 </div>
 <!-- fin detalles varios -->
@@ -915,75 +911,6 @@ function createTreemapChart(containerId, chartData, title) {
     chart.setOption(options);
 }
 
-// function createTimelineChart(containerId, chartData) {
-//         const chart = echarts.init(document.getElementById(containerId));
-
-//         const options = {
-//             tooltip: {
-//                 formatter: function (params) {
-//                     const start = new Date(params.value[1]);
-//                     const end = new Date(params.value[2]);
-//                     const duration = params.value[3];
-
-//                     return `
-//                         <b>${params.name}</b><br>
-//                         Llegada: ${start.toLocaleString()}<br>
-//                         Salida: ${end.toLocaleString()}<br>
-//                         Duración: ${Math.floor(duration / 3600)} h ${Math.floor((duration % 3600) / 60)} m
-//                     `;
-//                 }
-//             },
-//             grid: { left: '10%', right: '10%', top: '15%', bottom: '10%', containLabel: true },
-//             xAxis: {
-//                 type: 'time',
-//                 axisLabel: {
-//                     formatter: function (value) {
-//                         const date = new Date(value);
-//                         return `${date.getHours()}:00`;
-//                     }
-//                 },
-//                 splitLine: { show: true },
-//             },
-//             yAxis: {
-//                 type: 'category',
-//                 data: chartData.categories,
-//             },
-//             series: [
-//                 {
-//                     type: 'custom',
-//                     renderItem: function (params, api) {
-//                         const categoryIndex = api.value(0);
-//                         const start = api.coord([api.value(1), categoryIndex]);
-//                         const end = api.coord([api.value(2), categoryIndex]);
-//                         const height = api.size([0, 1])[1] * 0.6;
-
-//                         return {
-//                             type: 'rect',
-//                             shape: {
-//                                 x: start[0],
-//                                 y: start[1] - height / 1,
-//                                 width: end[0] - start[0],
-//                                 height: height,
-//                             },
-//                             style: api.style(),
-//                         };
-//                     },
-//                     itemStyle: {
-//                         opacity: 0.8,
-//                         color: '#61a0a8',
-//                     },
-//                     encode: {
-//                         x: [1, 2],
-//                         y: 0,
-//                     },
-//                     data: chartData.data,
-//                 },
-//             ],
-//         };
-
-//         chart.setOption(options);
-//     }
-
     // Función para cargar y renderizar los gráficos
     async function loadCharts() {
         // Construir la URL con las variables persistentes
@@ -1028,7 +955,6 @@ function createTreemapChart(containerId, chartData, title) {
     createBar_dinamic('chart18', data.chart18, '18.Top Clientes(cajas despachadas)');
     createBar_dinamic('chart19', data.chart19, '19.Paletas pendientes por despacho');
     createPieChart('chart20', data.chart20, '20.Vias de despacho por equipos','40%','60%');
-    // createTimelineChart('chart21', data.chart21);
     // varios
     
 

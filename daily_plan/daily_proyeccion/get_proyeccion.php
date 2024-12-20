@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // URL del script dinámico que devuelve las credenciales
-$apiUrl = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashMySQLi.php?conexion=MySQLi&BaseD=estandar&ipl=VALOR1";
+$apiUrl = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashMySQLi.php?conexion=MySQLi&BaseD=estandar";
 
 // Realizar la solicitud HTTP para obtener las credenciales
 $response = file_get_contents($apiUrl);
@@ -768,7 +768,7 @@ foreach ($sucursales as $index => $sucursal) {
     $series[] = [
         'name' => "$sucursal - Porcentaje de avance",
         'type' => 'line',
-        // 'stack' => 'total', // Configuración para apilar las barras
+        'stack' => 'total', // Configuración para apilar las barras
         'data' => $data_avance,
         'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette[$index % count($colorPalette)]],
@@ -777,7 +777,7 @@ foreach ($sucursales as $index => $sucursal) {
     $series[] = [
         'name' => "$sucursal - Suma de unidades",
         'type' => 'bar',
-        // 'stack' => 'total', // Configuración para apilar las barras
+        'stack' => 'total', // Configuración para apilar las barras
         'data' => $data_unidades,
         'emphasis'=>[ 'focus'=>'series'],
         'itemStyle' => ['color' => $colorPalette2[$index % count($colorPalette2)]],
@@ -1263,7 +1263,7 @@ $dataSeries = []; // Datos de la única categoría
 
 // Paleta de colores para la serie (puedes cambiar si necesitas)
 $colorPalette = ['#91c7ae'];
-$fecha =[];
+
 // Procesar resultados
 while ($row = $result16->fetch_assoc()) {
     $fecha = $row['Categoria'] ?? 'NO DATA';
@@ -1304,6 +1304,8 @@ $chart16 = [
         ]
     ]]
 ];
+
+
 
 // Gráfico 17: Ejemplo adicional de consulta
 $query17 = "
@@ -1452,11 +1454,9 @@ $query20 = "
         Via
 ";
 $result20 = $conn->query($query20);
-
 $chart20 = [];
 if ($result20->num_rows > 0) {
     while ($row = $result20->fetch_assoc()) {
-        
         $chart20[] = [
             'name' => $row['Via'] ? $row['Via'] : 'NO DATA',
             'value' => round((float)$row['total_carga'], 2),
@@ -1467,55 +1467,48 @@ if ($result20->num_rows > 0) {
 
 // grafico de prueba, este es solo una prueba 
 
-// $query21 = "
-// SELECT
-//     cliente,
-//     DATE_FORMAT(FRD, '%Y-%m-%d') AS llegada,
-//     DATE_FORMAT(Despachado, '%Y-%m-%d') AS salida
-// FROM 
-//     exports
-//         $whereClause_ex
-// ORDER BY FRD
-// ";
+$query21 = "
+SELECT
+    Sucursal,
+    DATE_FORMAT(FRD, '%Y-%m') AS mes,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN Avance_porcentaje ELSE 0 END) AS total_porcentaje_avance,
+    SUM(CASE WHEN Empacado IS NOT NULL THEN UND ELSE 0 END) AS total_unidades
+FROM 
+    exports
+$whereClause_ex
+GROUP BY 
+    mes, Sucursal
+";
 
-// // Ejecutar la consulta
-// $result21 = $conn->query($query21);
+$result21 = $conn->query($query9);
 
-// // Inicializar arrays para almacenar datos
-// $categories = []; // Clientes
-// $data = []; // Datos procesados
-// $chart21 = [];
+// Inicializar datos jerárquicos
+$data = [];
 
-// // Procesar los resultados
-// while ($row = $result21->fetch_assoc()) {
-//     $cliente = $row['cliente'] ?? 'NO DATA';
-//     $fechaLlegada = strtotime($row['llegada']);
-//     $fechaSalida = strtotime($row['salida']);
+while ($row = $result21->fetch_assoc()) {
+    $sucursal = $row['Sucursal'] ?? 'NO DATA';
+    $mes = $row['mes'] ?? 'NO DATA';
+    $avance = (int)$row['total_porcentaje_avance'];
+    $unidades = (int)$row['total_unidades'];
 
-//     // Agregar al eje Y (clientes) si no existe
-//     if (!in_array($cliente, $categories)) {
-//         $categories[] = $cliente;
-//     }
+    // Buscar o inicializar la sucursal en el array
+    if (!isset($data[$sucursal])) {
+        $data[$sucursal] = [
+            'name' => $sucursal,
+            'children' => []
+        ];
+    }
 
-//     // Calcular duración
-//     $duracion = $fechaSalida - $fechaLlegada;
+    // Agregar el mes como hijo de la sucursal
+    $data[$sucursal]['children'][] = [
+        'name' => $mes,
+        'value' => $avance, // Puedes usar total_unidades si prefieres
+        'extra' => ['unidades' => $unidades]
+    ];
+}
 
-//     // Almacenar datos
-//     $data[] = [
-//         'name' => $cliente,
-//         'value' => [
-//             array_search($cliente, $categories), // Índice del cliente en el eje Y
-//             $fechaLlegada , // Fecha de llegada en milisegundos
-//             $fechaSalida , // Fecha de salida en milisegundos
-//             $duracion // Duración en segundos
-//         ]
-//     ];
-
-//     $chart21 =[
-//         'categories'=> $categories,
-//         'data'=> $data,
-//     ];
-// }
+// Convertir a formato JSON compatible con ECharts
+$treeData = array_values($data);
 
 
 // Terminan  los graficos de varios
@@ -1567,7 +1560,6 @@ $data = [
     'chart18' => $chart18,
     'chart19' => $chart19,
     'chart20' => $chart20,
-    // 'chart21' => $chart21,
     // varios
 ];
 
