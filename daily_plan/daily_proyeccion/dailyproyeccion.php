@@ -1,7 +1,7 @@
 <?php
 
 // Construir la URL para solicitar a config_dashPDO.php
-$url = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=estandar";
+$url = "http://localhost//sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=alternative&IPL=VALOR2";
 
 // Obtener la respuesta de config_dashPDO.php
 $response = file_get_contents($url);
@@ -21,7 +21,6 @@ try {
     $pdo = new PDO($dsn, $config['user'], $config['pass'], $config['options']);
     // echo "Conexión establecida con éxito.";
 
-
 } catch (PDOException $e) {
     die("Error de conexión: " . $e->getMessage());
 }
@@ -37,64 +36,64 @@ if (!$fecha_inicio || !$fecha_final) {
 }
 
 // Consultas SQL
-try {
-    // Consulta para sumar la columna 'cajas' en la tabla 'picking'
-    $stmt1 = $pdo->prepare("
-        SELECT SUM(Cajas_Pick) AS suma_caja_pk,
-        SUM(Paletas) AS suma_paletas_pk, 
-        COUNT(CASE WHEN Liberado IS NOT NULL AND Pickeado IS NULL THEN OID ELSE 0 END) AS suma_pedidos_en_proceso_pk,
-        SUM(CASE WHEN Pickeado IS NOT NULL THEN KG ELSE 0 END) AS suma_CBM_finalizado_ex,
-        SUM(CASE WHEN Categoria = 'Categoría B' THEN Pend ELSE 0 END) AS suma_CBM_pendiente_ex,
-        SUM(Und) AS suma_unidad_pk
-        FROM picking
-        WHERE CIA = :cliente AND Confirmado >= :fecha_inicio AND Confirmado <= :fecha_final
-    ");
-    $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
-    $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_pk = $resultado1['suma_caja_pk'] ?? 0;
-    $suma_paletas_pk = $resultado1['suma_paletas_pk'] ?? 0;
-    $suma_pedidos_en_proceso_pk = $resultado1['suma_pedidos_en_proceso_pk'] ?? 0;
-    $suma_unidad_pk = $resultado1['suma_unidad_pk'] ?? 0;
+// try {
+//     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
+//     $stmt1 = $pdo->prepare("
+//         SELECT SUM(cajas) AS suma_caja_pk,
+//         SUM(paletas) AS suma_paletas_pk, 
+//         COUNT(CASE WHEN fecha_sal_rampa IS NOT NULL AND fecha_lleg_rampa IS NULL THEN aid_oid ELSE 0 END) AS suma_pedidos_en_proceso_pk,
+//         SUM(CASE WHEN fecha_lleg_rampa IS NOT NULL THEN paletas ELSE 0 END) AS suma_CBM_finalizado_ex,
+//         SUM(CASE WHEN division_dp < 1 THEN cajas ELSE 0 END) AS suma_CBM_pendiente_ex,
+//         SUM(paletas) AS suma_unidad_pk
+//         FROM picking
+//         WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+//     ");
+//     $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_objetivo' => $fecha_final]);
+//     $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+//     $suma_caja_pk = $resultado1['suma_caja_pk'] ?? 0;
+//     $suma_paletas_pk = $resultado1['suma_paletas_pk'] ?? 0;
+//     $suma_pedidos_en_proceso_pk = $resultado1['suma_pedidos_en_proceso_pk'] ?? 0;
+//     $suma_unidad_pk = $resultado1['suma_unidad_pk'] ?? 0;
 
-    // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
-    $stmt2 = $pdo->prepare("
-        SELECT 
-        SUM(cajas) AS sum_cajas,
-        SUM(paletas) AS sum_paletas, 
-        SUM(CBM) AS sum_CBM,
-        SUM(SKU) AS sum_SKUs
-        FROM imports
-        WHERE CIA = :cliente AND ETA >= :fecha_inicio AND ETA <= :fecha_final
-    ");
-    $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
-    $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_im = $resultado2['sum_cajas'] ?? 0;
-    $suma_CBM_im = $resultado2['sum_CBM'] ?? 0;
-    $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
-    $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
+//     // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
+//     $stmt2 = $pdo->prepare("
+//         SELECT 
+//         SUM(cajas) AS sum_cajas,
+//         SUM(paletas) AS sum_paletas, 
+//         SUM(unidades) AS sum_CBM,
+//         SUM(cajas) AS sum_SKUs
+//         FROM imports
+//         WHERE CIA = :cliente AND ETA >= :fecha_inicio AND ETA <= :fecha_final
+//     ");
+//     $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+//     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+//     $suma_caja_im = $resultado2['sum_cajas'] ?? 0;
+//     $suma_CBM_im = $resultado2['sum_CBM'] ?? 0;
+//     $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
+//     $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
 
-    // Consulta para obtener datos de la tabla 'export'
-    $stmt3 = $pdo->prepare("
-        SELECT
-        COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS suma_Pedidos_empacados_ex,
-        SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
-        SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS suma_Cajas_empacadas_ex,
-        SUM(CASE WHEN Empacado IS NOT NULL THEN UND_Pick ELSE 0 END) AS suma_UND_Pick_empacadas_ex
-        FROM exports
-        WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
-    ");
-    $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
-    $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
-    $suma_Cajas_empacadas_ex = $resultado3['suma_Cajas_empacadas_ex'] ?? 0;
-    $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
-    $suma_pedidos_empacados_ex = $resultado3['suma_Pedidos_empacados_ex'] ?? 0;
-    $suma_unidad_pickeada_y_empacada_ex = $resultado3['suma_UND_Pick_empacadas_ex'] ?? 0;
+//     // Consulta para obtener datos de la tabla 'export'
+//     $stmt3 = $pdo->prepare("
+//         SELECT
+//         COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS suma_Pedidos_empacados_ex,
+//         SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
+//         SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS suma_Cajas_empacadas_ex,
+//         SUM(CASE WHEN Empacado IS NOT NULL THEN UND_Pick ELSE 0 END) AS suma_UND_Pick_empacadas_ex
+//         FROM exports
+//         WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
+//     ");
+//     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+//     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
+//     $suma_Cajas_empacadas_ex = $resultado3['suma_Cajas_empacadas_ex'] ?? 0;
+//     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
+//     $suma_pedidos_empacados_ex = $resultado3['suma_Pedidos_empacados_ex'] ?? 0;
+//     $suma_unidad_pickeada_y_empacada_ex = $resultado3['suma_UND_Pick_empacadas_ex'] ?? 0;
 
-    // Imprimir resultados
+//     // Imprimir resultados
 
-} catch (PDOException $e) {
-    die("Error al ejecutar las consultas: " . $e->getMessage());
-}
+// } catch (PDOException $e) {
+//     die("Error al ejecutar las consultas: " . $e->getMessage());
+// }
 ?>
 
 
