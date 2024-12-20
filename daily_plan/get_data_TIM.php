@@ -36,4 +36,7 @@ try {
 } catch (\PDOException $e) {
     echo json_encode(["error" => "Error en la consulta SQL: " . $e->getMessage()]);
 }
+
+
+
 ?>

@@ -13,10 +13,9 @@ session_start();
 
         $user = validate($_POST['user']);
         $password = $_POST['password'];
-        
 
         // $sql = "SELECT * FROM users WHERE user='$user'";
-        $sql = "SELECT u.id, r.nombre_rol, usuario, pass  FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
+        $sql = "SELECT u.id, r.nombre_rol, usuario, pass, estado_id  FROM users u INNER JOIN roles r ON r.id = u.rol_id WHERE user = '$user';";
         $result = mysqli_query($conexion, $sql);
         
 
@@ -30,6 +29,7 @@ session_start();
                         $_SESSION['usuario'] = $row['usuario'];
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
+                        $_SESSION['estado'] = $row['estado_id'];
                         header("Location: ../helpdesk.php");
                     }
                     elseif ($row['nombre_rol'] == 'TV'){
@@ -37,19 +37,25 @@ session_start();
                         $_SESSION['usuario'] = $row['usuario'];
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
+                        $_SESSION['estado'] = $row['estado_id'];
                         header("Location: ../daily_plan/grafico.php");
+                    }
+                    elseif ($row['estado_id'] == 2){
+                        header("Location: ../index.php?error=Usuario bloqueado");
+                        exit();
                     }
                     else{
                         $_SESSION['user'] = $user;
                         $_SESSION['usuario'] = $row['usuario'];
                         $_SESSION['rol'] = $row['nombre_rol'];
                         $_SESSION['id'] = $row['id'];
+                        $_SESSION['estado'] = $row['estado_id'];
                         header("Location: ../helpdesk.php");
                         echo session_id();
                     }
                 }
                 else{
-                    header("Location: ../index.php?error=Usuario o contraseña incorrectos");
+                    header("Location: ../index.php?error=Usuario o contraseña incorrectos");	
                     exit();
                 }
             }

@@ -357,4 +357,4 @@ CREATE TABLE `db_dashboards`.`Exports`
 `peso` DECIMAL NOT NULL ,
 `cajas` INT(255) NOT NULL ,	
 `paletas` INT(255) NOT NULL ,
-PRIMARY KEY (`id`)) ENGINE = InnoDB;
+PRIMARY KEY (`id`)) ENGINE = InnoDB; 

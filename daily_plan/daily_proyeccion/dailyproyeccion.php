@@ -1,7 +1,7 @@
 <?php
 
 // Construir la URL para solicitar a config_dashPDO.php
-$url = "http://localhost/sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=estandar&IPL=VALOR1";
+$url = "http://localhost//sistema_de_tickets/Dashboards/clientes/saint_g/config_dashPDO.php?conexion=PDO&BaseD=alternative&IPL=VALOR2";
 
 // Obtener la respuesta de config_dashPDO.php
 $response = file_get_contents($url);
@@ -21,7 +21,6 @@ try {
     $pdo = new PDO($dsn, $config['user'], $config['pass'], $config['options']);
     // echo "Conexión establecida con éxito.";
 
-
 } catch (PDOException $e) {
     die("Error de conexión: " . $e->getMessage());
 }
@@ -37,64 +36,64 @@ if (!$fecha_inicio || !$fecha_final) {
 }
 
 // Consultas SQL
-try {
-    // Consulta para sumar la columna 'cajas' en la tabla 'picking'
-    $stmt1 = $pdo->prepare("
-        SELECT SUM(Cajas_Pick) AS suma_caja_pk,
-        SUM(Paletas) AS suma_paletas_pk, 
-        COUNT(CASE WHEN Liberado IS NOT NULL AND Pickeado IS NULL THEN OID ELSE 0 END) AS suma_pedidos_en_proceso_pk,
-        SUM(CASE WHEN Pickeado IS NOT NULL THEN KG ELSE 0 END) AS suma_CBM_finalizado_ex,
-        SUM(CASE WHEN Categoria = 'Categoría B' THEN Pend ELSE 0 END) AS suma_CBM_pendiente_ex,
-        SUM(Und) AS suma_unidad_pk
-        FROM picking
-        WHERE CIA = :cliente AND Confirmado >= :fecha_inicio AND Confirmado <= :fecha_final
-    ");
-    $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
-    $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_pk = $resultado1['suma_caja_pk'] ?? 0;
-    $suma_paletas_pk = $resultado1['suma_paletas_pk'] ?? 0;
-    $suma_pedidos_en_proceso_pk = $resultado1['suma_pedidos_en_proceso_pk'] ?? 0;
-    $suma_unidad_pk = $resultado1['suma_unidad_pk'] ?? 0;
+// try {
+//     // Consulta para sumar la columna 'cajas' en la tabla 'picking'
+//     $stmt1 = $pdo->prepare("
+//         SELECT SUM(cajas) AS suma_caja_pk,
+//         SUM(paletas) AS suma_paletas_pk, 
+//         COUNT(CASE WHEN fecha_sal_rampa IS NOT NULL AND fecha_lleg_rampa IS NULL THEN aid_oid ELSE 0 END) AS suma_pedidos_en_proceso_pk,
+//         SUM(CASE WHEN fecha_lleg_rampa IS NOT NULL THEN paletas ELSE 0 END) AS suma_CBM_finalizado_ex,
+//         SUM(CASE WHEN division_dp < 1 THEN cajas ELSE 0 END) AS suma_CBM_pendiente_ex,
+//         SUM(paletas) AS suma_unidad_pk
+//         FROM picking
+//         WHERE cliente = :cliente AND fecha_objetivo >= :fecha_inicio AND fecha_objetivo <= :fecha_final
+//     ");
+//     $stmt1->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_objetivo' => $fecha_final]);
+//     $resultado1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+//     $suma_caja_pk = $resultado1['suma_caja_pk'] ?? 0;
+//     $suma_paletas_pk = $resultado1['suma_paletas_pk'] ?? 0;
+//     $suma_pedidos_en_proceso_pk = $resultado1['suma_pedidos_en_proceso_pk'] ?? 0;
+//     $suma_unidad_pk = $resultado1['suma_unidad_pk'] ?? 0;
 
-    // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
-    $stmt2 = $pdo->prepare("
-        SELECT 
-        SUM(cajas) AS sum_cajas,
-        SUM(paletas) AS sum_paletas, 
-        SUM(CBM) AS sum_CBM,
-        SUM(SKU) AS sum_SKUs
-        FROM imports
-        WHERE CIA = :cliente AND ETA >= :fecha_inicio AND ETA <= :fecha_final
-    ");
-    $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
-    $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-    $suma_caja_im = $resultado2['sum_cajas'] ?? 0;
-    $suma_CBM_im = $resultado2['sum_CBM'] ?? 0;
-    $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
-    $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
+//     // Consulta para sumar las columnas 'paletas', 'cajas', y 'unidades' en la tabla 'import'
+//     $stmt2 = $pdo->prepare("
+//         SELECT 
+//         SUM(cajas) AS sum_cajas,
+//         SUM(paletas) AS sum_paletas, 
+//         SUM(unidades) AS sum_CBM,
+//         SUM(cajas) AS sum_SKUs
+//         FROM imports
+//         WHERE CIA = :cliente AND ETA >= :fecha_inicio AND ETA <= :fecha_final
+//     ");
+//     $stmt2->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+//     $resultado2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+//     $suma_caja_im = $resultado2['sum_cajas'] ?? 0;
+//     $suma_CBM_im = $resultado2['sum_CBM'] ?? 0;
+//     $suma_paletas_im = $resultado2['sum_paletas'] ?? 0;
+//     $suma_SKU_im = $resultado2['sum_SKUs'] ?? 0;
 
-    // Consulta para obtener datos de la tabla 'export'
-    $stmt3 = $pdo->prepare("
-        SELECT
-        COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS suma_Pedidos_empacados_ex,
-        SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
-        SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS suma_Cajas_empacadas_ex,
-        SUM(CASE WHEN Empacado IS NOT NULL THEN UND_Pick ELSE 0 END) AS suma_UND_Pick_empacadas_ex
-        FROM exports
-        WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
-    ");
-    $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
-    $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
-    $suma_Cajas_empacadas_ex = $resultado3['suma_Cajas_empacadas_ex'] ?? 0;
-    $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
-    $suma_pedidos_empacados_ex = $resultado3['suma_Pedidos_empacados_ex'] ?? 0;
-    $suma_unidad_pickeada_y_empacada_ex = $resultado3['suma_UND_Pick_empacadas_ex'] ?? 0;
+//     // Consulta para obtener datos de la tabla 'export'
+//     $stmt3 = $pdo->prepare("
+//         SELECT
+//         COUNT(CASE WHEN Empacado IS NOT NULL THEN OID ELSE 0 END) AS suma_Pedidos_empacados_ex,
+//         SUM(CASE WHEN Empacado IS NOT NULL THEN Paletas ELSE 0 END) AS suma_paletas_ex,
+//         SUM(CASE WHEN Empacado IS NOT NULL THEN Cajas ELSE 0 END) AS suma_Cajas_empacadas_ex,
+//         SUM(CASE WHEN Empacado IS NOT NULL THEN UND_Pick ELSE 0 END) AS suma_UND_Pick_empacadas_ex
+//         FROM exports
+//         WHERE CIA = :cliente AND FRD >= :fecha_inicio AND FRD <= :fecha_final
+//     ");
+//     $stmt3->execute(['cliente' => $Cliente, 'fecha_inicio' => $fecha_inicio, 'fecha_final' => $fecha_final]);
+//     $resultado3 = $stmt3->fetch(PDO::FETCH_ASSOC);
+//     $suma_Cajas_empacadas_ex = $resultado3['suma_Cajas_empacadas_ex'] ?? 0;
+//     $suma_paletas_ex = $resultado3['suma_paletas_ex'] ?? 0;
+//     $suma_pedidos_empacados_ex = $resultado3['suma_Pedidos_empacados_ex'] ?? 0;
+//     $suma_unidad_pickeada_y_empacada_ex = $resultado3['suma_UND_Pick_empacadas_ex'] ?? 0;
 
-    // Imprimir resultados
+//     // Imprimir resultados
 
-} catch (PDOException $e) {
-    die("Error al ejecutar las consultas: " . $e->getMessage());
-}
+// } catch (PDOException $e) {
+//     die("Error al ejecutar las consultas: " . $e->getMessage());
+// }
 ?>
 
 
@@ -274,15 +273,11 @@ body {
           <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
               <div id="chart20" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
           </div>
-        </div>
-        <!-- vigesimo primer grafico -->
-        <!-- <div class="container mt-6">
-            <div class="row gy-4 justify-content-center align-items-center" style="margin-top: -30px;">
-                <div class="col-12 col-md-12 col-lg-12 d-flex flex-column align-items-center">
-                    <div id="chart21" class="border border-dark border-4 rounded bg-light  mt-1" style="width: 1296px; max-width: 1296px; height: 628px; background-color: white; overflow: hidden;"></div>
-                </div>
-            </div>
-        </div> -->
+            <!-- vigesimo primer grafico -->
+          <!-- <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
+              <div id="chart21" class="border border-dark border-4 rounded bg-light" style="width: 634px; max-width: 634px; height: 600px;background-color:white ; overflow: hidden;"></div>
+          </div> -->
+      </div>
   </div>
 </div>
 <!-- fin detalles varios -->
@@ -915,75 +910,6 @@ function createTreemapChart(containerId, chartData, title) {
     chart.setOption(options);
 }
 
-// function createTimelineChart(containerId, chartData) {
-//         const chart = echarts.init(document.getElementById(containerId));
-
-//         const options = {
-//             tooltip: {
-//                 formatter: function (params) {
-//                     const start = new Date(params.value[1]);
-//                     const end = new Date(params.value[2]);
-//                     const duration = params.value[3];
-
-//                     return `
-//                         <b>${params.name}</b><br>
-//                         Llegada: ${start.toLocaleString()}<br>
-//                         Salida: ${end.toLocaleString()}<br>
-//                         Duración: ${Math.floor(duration / 3600)} h ${Math.floor((duration % 3600) / 60)} m
-//                     `;
-//                 }
-//             },
-//             grid: { left: '10%', right: '10%', top: '15%', bottom: '10%', containLabel: true },
-//             xAxis: {
-//                 type: 'time',
-//                 axisLabel: {
-//                     formatter: function (value) {
-//                         const date = new Date(value);
-//                         return `${date.getHours()}:00`;
-//                     }
-//                 },
-//                 splitLine: { show: true },
-//             },
-//             yAxis: {
-//                 type: 'category',
-//                 data: chartData.categories,
-//             },
-//             series: [
-//                 {
-//                     type: 'custom',
-//                     renderItem: function (params, api) {
-//                         const categoryIndex = api.value(0);
-//                         const start = api.coord([api.value(1), categoryIndex]);
-//                         const end = api.coord([api.value(2), categoryIndex]);
-//                         const height = api.size([0, 1])[1] * 0.6;
-
-//                         return {
-//                             type: 'rect',
-//                             shape: {
-//                                 x: start[0],
-//                                 y: start[1] - height / 1,
-//                                 width: end[0] - start[0],
-//                                 height: height,
-//                             },
-//                             style: api.style(),
-//                         };
-//                     },
-//                     itemStyle: {
-//                         opacity: 0.8,
-//                         color: '#61a0a8',
-//                     },
-//                     encode: {
-//                         x: [1, 2],
-//                         y: 0,
-//                     },
-//                     data: chartData.data,
-//                 },
-//             ],
-//         };
-
-//         chart.setOption(options);
-//     }
-
     // Función para cargar y renderizar los gráficos
     async function loadCharts() {
         // Construir la URL con las variables persistentes
@@ -1028,7 +954,6 @@ function createTreemapChart(containerId, chartData, title) {
     createBar_dinamic('chart18', data.chart18, '18.Top Clientes(cajas despachadas)');
     createBar_dinamic('chart19', data.chart19, '19.Paletas pendientes por despacho');
     createPieChart('chart20', data.chart20, '20.Vias de despacho por equipos','40%','60%');
-    // createTimelineChart('chart21', data.chart21);
     // varios
     
 

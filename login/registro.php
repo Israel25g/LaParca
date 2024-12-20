@@ -31,7 +31,7 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
             $result = mysqli_query($conexion, $sql);
     
             if ($result) {
-                header("Location: ../access_control/index/index_users.php?success=Usuario registrado correctamente");
+                header("Location: ../access_control/index/index_users2.php?success=Usuario registrado correctamente");
     
                 exit();
             } else {

@@ -25,7 +25,7 @@ if ($_SESSION['rol'] !== 'Admin' && $_SESSION['rol'] !== 'EEMP') {
   <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/jszip-3.10.1/dt-2.1.7/b-3.1.2/b-html5-3.1.2/b-print-3.1.2/cr-2.0.4/date-1.5.4/fc-5.0.2/kt-2.12.1/r-3.0.3/rg-1.5.0/rr-1.5.0/sc-2.4.3/sb-1.8.0/sp-2.3.2/sl-2.1.0/sr-1.4.1/datatables.min.css" rel="stylesheet">
   <!--estilos ccs-->
   <!-- Librerías de la modal -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -53,7 +53,6 @@ JOIN estados ON users.estado_id = estados.id;
     $sentencia = $conexion->prepare($consultaSQL);
     $sentencia->execute();
     $tickets = $sentencia->fetchAll();
-
   } catch (PDOException $error) {
     $error = $error->getMessage();
   }
@@ -71,8 +70,9 @@ JOIN estados ON users.estado_id = estados.id;
     </div>
   </div>
   <!-- Fin del Header -->
-  
-  <!-- <?php #include "../templates/header.php"; ?> -->
+
+  <!-- <?php #include "../templates/header.php"; 
+        ?> -->
 
   <?php
   if ($error) {
@@ -108,7 +108,7 @@ JOIN estados ON users.estado_id = estados.id;
               <th class="border-end">Correo</th>
               <th class="border-end">Departamento</th>
               <th class="border-end">Estado</th>
-              <th class="border-end">Acciones</th>
+              <!-- <th class="border-end">Acciones</th> -->
               <!-- <th class="border-end">Descripción del problema</th>
               <th class="border-end">Nivel de urgencia</th>
               <th class="border-end">Respuesta</th>
@@ -121,53 +121,34 @@ JOIN estados ON users.estado_id = estados.id;
             <?php
             if ($sentencia->rowCount() > 0) {
               foreach ($tickets as $fila) {
-                ?>
+            ?>
                 <tr>
                   <td class="text-break"><?php echo escapar($fila["id"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["user"]); ?></td>
-                  <td class="text-break"><?php echo escapar($fila["usuario"]);?></td>
-                  <td class="text-break"><?php echo escapar($fila["email"]);?></td>
+                  <td class="text-break"><?php echo escapar($fila["usuario"]); ?></td>
+                  <td class="text-break"><?php echo escapar($fila["email"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["nombre_rol"]); ?></td>
                   <td class="text-break"><?php echo escapar($fila["estado"]); ?></td>
-                  <!-- <td class="text-break"><?php #echo escapar($fila["descripcion"]); ?></td> -->
-                  <!-- <td class="text-break"><?php #echo escapar($fila["urgencia"]); ?></td> -->
-                  <!-- <td class="text-break"><?php #echo escapar($fila["respuesta"]); ?></td> -->
-                  <!-- <td class="text-break"><?php #echo escapar($fila["estado"]); ?></td> -->
-                  <!-- <td class="text-break"><?php #echo escapar($fila["created_at"]); ?></td> -->
-                  <!-- <td class="text-break"><?php #echo escapar($fila["updated_at"]); ?></td> -->
-                  <td>  
-                <a type="button" class="btn btn-outline-warning d-block m-1" data-toggle="modal" data-target="#login<?= $fila["id"] ?>"><i class="bi bi-gear-fill"></i></a>
-                <form class="form-inline">
-                    <!-- Modal -->
-                        <div id="login<?= $fila["id"] ?>" class="modal fade" role="dialog">
-                          <div class="modal-dialog modal-sm modal-dialog-centered">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title">Modificación del usuario <?= $fila["user"]?></h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <div class="modal-body">
-                                <p>Nota: no es necesario llenar todos los campos, solo actualice lo que requiera.</p>
-                                <?php include ("editar_user.php")?>
-                              </div>
-                              <div class="modal-footer">
-                                <a class="btn btn-default" role="button" data-dismiss="modal">Cerrar</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    <!--modal -->
-                </form>
-                </td>
+                  <!-- <td class="text-break"><?php #echo escapar($fila["descripcion"]); 
+                                              ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["urgencia"]); 
+                                              ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["respuesta"]); 
+                                              ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["estado"]); 
+                                              ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["created_at"]); 
+                                              ?></td> -->
+                  <!-- <td class="text-break"><?php #echo escapar($fila["updated_at"]); 
+                                              ?></td> -->
                 </tr>
-              <?php
+            <?php
               }
             }
             ?>
           </tbody>
           <tfoot>
-          <tr>
+            <tr>
               <th class="border-end">UID</th>
               <th class="border-end">Usuario</th>
               <th class="border-end">Nombre de usuario</th>
@@ -183,6 +164,8 @@ JOIN estados ON users.estado_id = estados.id;
             </tr>
           </tfoot>
         </table>
+
+
       </div>
     </div>
   </div>
@@ -221,12 +204,12 @@ JOIN estados ON users.estado_id = estados.id;
           .every(function() {
             let column = this;
             let title = column.footer().textContent;
-  
+
             // Create input element
             let input = document.createElement('input');
             input.placeholder = title;
             column.footer().replaceChildren(input);
-  
+
             // Event listener for user input
             input.addEventListener('keyup', () => {
               if (column.search() !== this.value) {
